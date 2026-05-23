@@ -2,16 +2,17 @@
 
 # Echo
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-1.1.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green)
 
 Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
 ## Features
 
+- Branded splash screen on launch
 - Live microphone recording with real-time transcription and waveform feedback
 - File transcription — drag and drop on macOS, browse Files on iOS
 - 12 languages — auto-detect or force a specific language
-- Model selection: Whisper tiny / base / small
+- Auto model selection — picks tiny / base / small based on device RAM
 - Persistent transcription history (capped at 50 entries)
 - Export / share transcriptions natively
 - Copy to clipboard
@@ -33,7 +34,7 @@ xcodegen generate
 open echo.xcodeproj
 ```
 
-Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39MB tiny, ~150MB base, ~500MB small).
+Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39MB tiny, ~150MB base, ~500MB small). Auto mode picks the right size for your device.
 
 ## License
 

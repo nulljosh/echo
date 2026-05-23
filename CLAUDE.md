@@ -1,6 +1,6 @@
 # Echo — CLAUDE.md
 
-On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM.
+v1.1.0. On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM.
 
 ## Structure
 
