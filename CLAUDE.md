@@ -10,7 +10,8 @@ Sources/
   macOS/        EchoApp.swift, Info.plist, echo-mac.entitlements, Assets.xcassets
   Models/       TranscriptionEntry (Codable — id, text, date, duration, model)
   Services/     TranscriptionEngine, AudioCapture
-  Views/        ContentView, RecordButton, TranscriptionView, HistoryView, ModelPickerView
+  Views/        ContentView, RecordButton, TranscriptionView, WaveformBarsView,
+                HistoryView, ModelPickerView
 ```
 
 ## Key types
@@ -18,24 +19,38 @@ Sources/
 **TranscriptionEngine** (`@MainActor ObservableObject`)
 - `init()` — loads persisted history from `Documents/echo-history.json`
 - `loadModel()` / `reloadModel()` — initializes WhisperKit, sets `modelState`
-- `startRecording()` — starts AudioCapture, launches 4s batch loop (transcribes immediately then sleeps)
-- `stopRecording()` — cancels task, final pass, saves entry + persists
-- `transcribeFile(url:)` — security-scoped URL, `whisperKit.transcribe(audioPath:)`
-- `copyToClipboard()` — `UIPasteboard` on iOS, `NSPasteboard` on macOS
-- `saveHistory()` — atomic write of `[TranscriptionEntry]` JSON to Documents
+- `startRecording()` — starts AudioCapture (samples + level callbacks), launches 4s batch loop (transcribe immediately then sleep)
+- `stopRecording()` — final pass, saves entry, zeroes audioLevel
+- `transcribeFile(url:)` — reads real duration via AVAudioFile, security-scoped URL, `whisperKit.transcribe(audioPath:decodeOptions:)`
+- `decodingOptions()` — returns `DecodingOptions(language:)` using `selectedLanguage` ("auto" maps to nil)
+- `addEntry` / `saveHistory` — atomic JSON write, history capped at 50
 - `[TranscriptionResult].text()` extension deduplicates map/join/trim
 
 **AudioCapture**
-- AVAudioEngine tap at native sample rate → AVAudioConverter → 16kHz mono Float32
-- `startCapture(onSamples:)` / `stopCapture()`
+- AVAudioEngine tap → AVAudioConverter → 16kHz mono Float32
+- `startCapture(onSamples:onLevel:)` — RMS computed per buffer, normalized to 0–1
+- `stopCapture()`
+
+**WaveformBarsView**
+- 5 animated bars, heights randomized ±0.25 around current `level`
+- `.easeInOut(0.1)` animation on each level update
+
+**TranscriptionView**
+- `isRecording: Bool` + `audioLevel: Float` — shows WaveformBarsView + "Listening..." when recording and text is empty
+- `onRetry: (() -> Void)?` — shows Retry button in `.error` model state
 
 **ContentView**
-- `InputMode` enum: `.record` / `.file` — segment control
-- iOS: `fileImporter` + history sheet; macOS: `NavigationSplitView` + `.onDrop`
-- Cmd+R keyboard shortcut (macOS) on record button
-- `TranscriptionView(onRetry:)` — shows retry button on `.error` model state
-- `static let audioTypes` — avoids recreating UTType array on each render
-- All colors semantic: `systemBackground`, `.primary`, `.secondary`, `.tertiary`, `.regularMaterial`
+- `InputMode` enum: `.record` / `.file`
+- `retryAction()` — plain function, no closure allocation on render
+- `ShareLink` in bottom bar — both platforms
+- iOS bottom bar: copy | share | record/file | history
+- macOS bottom bar: copy | share | record/file
+- Cmd+R shortcut on record button (macOS)
+- `static let audioTypes` — avoids UTType alloc per render
+
+**ModelPickerView**
+- Two menus: model (tiny/base/small) + language (auto + 11 languages)
+- Changing model triggers `onReload`; changing language takes effect on next transcription
 
 ## Build
 
@@ -52,16 +67,9 @@ open echo.xcodeproj
 
 ## Notes
 
-- Icons generated via `/tmp/render_icon.swift` (Swift/NSImage) — qlmanage pads SVG, don't use it for icons
+- Icons generated via Swift/NSImage — do not use qlmanage (pads SVG content)
 - `NSLock` guards `audioBuffer` between AVAudioEngine tap thread and `@MainActor`
 - macOS drag-and-drop copies to temp before transcription (security scope limitation)
+- File transcriptions show real duration (AVAudioFile.length / sampleRate)
+- History capped at 50, persisted atomically on every insert/delete
 - DEVELOPMENT_TEAM: QMM486NPYC
-
-## Next steps
-
-- Language picker (WhisperKit `DecodingOptions(language:)`)
-- Live waveform — RMS from buffer tap, animate bars
-- Export / share sheet — `.shareLink` on `.txt`
-- Timestamp segments — `TranscriptionSegment` start/end times
-- iCloud sync — `NSUbiquitousKeyValueStore` or CloudKit
-- Menu bar quick-record (macOS) — `MenuBarExtra` scene

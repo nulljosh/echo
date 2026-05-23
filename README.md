@@ -8,10 +8,12 @@ Native on-device speech transcription using [WhisperKit](https://github.com/argm
 
 ## Features
 
-- Live microphone recording with real-time transcription
+- Live microphone recording with real-time transcription and waveform feedback
 - File transcription — drag and drop on macOS, browse Files on iOS
+- 12 languages — auto-detect or force a specific language
 - Model selection: Whisper tiny / base / small
-- Persistent transcription history across launches
+- Persistent transcription history (capped at 50 entries)
+- Export / share transcriptions natively
 - Copy to clipboard
 - Retry on model load failure
 - Cmd+R keyboard shortcut (macOS)
@@ -22,7 +24,7 @@ Native on-device speech transcription using [WhisperKit](https://github.com/argm
 
 ![Architecture](architecture.svg)
 
-`AVAudioEngine` captures mic input at the native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:)` for local CoreML inference. File mode calls `WhisperKit.transcribe(audioPath:)` directly. History persists to `Documents/echo-history.json`.
+`AVAudioEngine` captures mic input at native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. RMS level is computed per buffer and drives the waveform indicator. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:decodeOptions:)` for local CoreML inference. File mode reads actual audio duration via `AVAudioFile` then calls `WhisperKit.transcribe(audioPath:)`. History persists atomically to `Documents/echo-history.json`.
 
 ## Build
 

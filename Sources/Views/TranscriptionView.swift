@@ -3,6 +3,8 @@ import SwiftUI
 struct TranscriptionView: View {
     let text: String
     let modelState: ModelState
+    var isRecording: Bool = false
+    var audioLevel: Float = 0
     var onRetry: (() -> Void)? = nil
 
     var body: some View {
@@ -12,8 +14,7 @@ struct TranscriptionView: View {
                 statusLabel("Tap to load model")
             case .loading:
                 VStack(spacing: 12) {
-                    ProgressView()
-                        .scaleEffect(1.2)
+                    ProgressView().scaleEffect(1.2)
                     Text("Loading Whisper model...")
                         .font(.system(size: 14))
                         .foregroundStyle(.secondary)
@@ -36,7 +37,16 @@ struct TranscriptionView: View {
                 .padding()
             case .ready:
                 if text.isEmpty {
-                    statusLabel("Press record to start transcribing")
+                    if isRecording {
+                        VStack(spacing: 10) {
+                            WaveformBarsView(level: audioLevel)
+                            Text("Listening...")
+                                .font(.system(size: 14))
+                                .foregroundStyle(.secondary)
+                        }
+                    } else {
+                        statusLabel("Press record to start transcribing")
+                    }
                 } else {
                     ScrollView {
                         Text(text)

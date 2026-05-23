@@ -3,10 +3,12 @@ import AVFoundation
 class AudioCapture {
     private var engine: AVAudioEngine?
     private var onSamples: (([Float]) -> Void)?
+    private var onLevel: ((Float) -> Void)?
 
-    func startCapture(onSamples: @escaping ([Float]) -> Void) throws {
+    func startCapture(onSamples: @escaping ([Float]) -> Void, onLevel: @escaping (Float) -> Void) throws {
         stopCapture()
         self.onSamples = onSamples
+        self.onLevel = onLevel
 
         let engine = AVAudioEngine()
         self.engine = engine
@@ -26,8 +28,9 @@ class AudioCapture {
         guard let converter = AVAudioConverter(from: inputFormat, to: targetFormat) else {
             throw AudioCaptureError.converterUnavailable
         }
+
         inputNode.installTap(onBus: 0, bufferSize: 4096, format: inputFormat) { [weak self] buffer, _ in
-            self?.convert(buffer: buffer, from: inputFormat, to: targetFormat, using: converter)
+            self?.process(buffer: buffer, inputFormat: inputFormat, targetFormat: targetFormat, converter: converter)
         }
 
         engine.prepare()
@@ -39,13 +42,14 @@ class AudioCapture {
         engine?.stop()
         engine = nil
         onSamples = nil
+        onLevel = nil
     }
 
-    private func convert(
+    private func process(
         buffer: AVAudioPCMBuffer,
-        from inputFormat: AVAudioFormat,
-        to targetFormat: AVAudioFormat,
-        using converter: AVAudioConverter
+        inputFormat: AVAudioFormat,
+        targetFormat: AVAudioFormat,
+        converter: AVAudioConverter
     ) {
         let ratio = targetFormat.sampleRate / inputFormat.sampleRate
         let frameCapacity = AVAudioFrameCount(Double(buffer.frameLength) * ratio)
@@ -68,6 +72,9 @@ class AudioCapture {
               let channelData = outBuffer.floatChannelData else { return }
 
         let samples = Array(UnsafeBufferPointer(start: channelData[0], count: Int(outBuffer.frameLength)))
+
+        let rms = sqrt(samples.map { $0 * $0 }.reduce(0, +) / Float(samples.count))
+        onLevel?(min(rms * 15, 1.0))
         onSamples?(samples)
     }
 }
