@@ -41,6 +41,18 @@ class TranscriptionEngine: ObservableObject {
     private var recordingTask: Task<Void, Never>?
     private var recordingStart: Date?
 
+    private static let historyURL: URL = {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("echo-history.json")
+    }()
+
+    init() {
+        if let data = try? Data(contentsOf: Self.historyURL),
+           let saved = try? JSONDecoder().decode([TranscriptionEntry].self, from: data) {
+            entries = saved
+        }
+    }
+
     func loadModel() async {
         guard modelState != .loading && modelState != .ready else { return }
         modelState = .loading
@@ -78,9 +90,9 @@ class TranscriptionEngine: ObservableObject {
 
         recordingTask = Task {
             while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(4))
-                if Task.isCancelled { break }
                 await transcribeCurrentBuffer()
+                if Task.isCancelled { break }
+                try? await Task.sleep(for: .seconds(4))
             }
         }
     }
@@ -93,28 +105,11 @@ class TranscriptionEngine: ObservableObject {
         await transcribeCurrentBuffer()
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
-        if !transcribedText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            let entry = TranscriptionEntry(
-                text: transcribedText,
-                duration: duration,
-                model: selectedModel
-            )
-            entries.insert(entry, at: 0)
+        let trimmed = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmed.isEmpty {
+            addEntry(TranscriptionEntry(text: trimmed, duration: duration, model: selectedModel))
         }
         recordingStart = nil
-    }
-
-    private func transcribeCurrentBuffer() async {
-        let samples: [Float] = bufferLock.withLock { audioBuffer }
-        guard samples.count > 16000, let whisperKit else { return }
-
-        isTranscribing = true
-        defer { isTranscribing = false }
-
-        do {
-            let text = try await whisperKit.transcribe(audioArray: samples).text()
-            if !text.isEmpty { transcribedText = text }
-        } catch {}
     }
 
     func transcribeFile(url: URL) async {
@@ -130,7 +125,7 @@ class TranscriptionEngine: ObservableObject {
             let text = try await whisperKit.transcribe(audioPath: url.path).text()
             transcribedText = text
             if !text.isEmpty {
-                entries.insert(TranscriptionEntry(text: text, duration: 0, model: selectedModel), at: 0)
+                addEntry(TranscriptionEntry(text: text, duration: 0, model: selectedModel))
             }
         } catch {
             transcribedText = "Transcription failed: \(error.localizedDescription)"
@@ -148,5 +143,28 @@ class TranscriptionEngine: ObservableObject {
 
     func deleteEntry(_ entry: TranscriptionEntry) {
         entries.removeAll { $0.id == entry.id }
+        saveHistory()
+    }
+
+    private func addEntry(_ entry: TranscriptionEntry) {
+        entries.insert(entry, at: 0)
+        saveHistory()
+    }
+
+    private func transcribeCurrentBuffer() async {
+        let samples: [Float] = bufferLock.withLock { audioBuffer }
+        guard samples.count > 16000, let whisperKit else { return }
+
+        isTranscribing = true
+        defer { isTranscribing = false }
+
+        do {
+            let text = try await whisperKit.transcribe(audioArray: samples).text()
+            if !text.isEmpty { transcribedText = text }
+        } catch {}
+    }
+
+    private func saveHistory() {
+        try? JSONEncoder().encode(entries).write(to: Self.historyURL, options: .atomic)
     }
 }

@@ -8,19 +8,21 @@ Native on-device speech transcription using [WhisperKit](https://github.com/argm
 
 ## Features
 
-- Live microphone recording with real-time transcription (4s batch cadence)
-- File transcription — drag and drop audio onto macOS, browse Files on iOS
-- Model selection: Whisper tiny / base / small (downloads from HuggingFace on first use)
-- Transcription history with timestamps and duration
+- Live microphone recording with real-time transcription
+- File transcription — drag and drop on macOS, browse Files on iOS
+- Model selection: Whisper tiny / base / small
+- Persistent transcription history across launches
 - Copy to clipboard
+- Retry on model load failure
+- Cmd+R keyboard shortcut (macOS)
 - Adaptive light/dark mode
-- iOS + macOS native SwiftUI (single XcodeGen project)
+- iOS + macOS native SwiftUI
 
 ## Architecture
 
 ![Architecture](architecture.svg)
 
-`AVAudioEngine` captures mic input at native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:)` for local CoreML inference. File mode calls `WhisperKit.transcribe(audioPath:)` directly. Results are trimmed and written to `@Published transcribedText`.
+`AVAudioEngine` captures mic input at the native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:)` for local CoreML inference. File mode calls `WhisperKit.transcribe(audioPath:)` directly. History persists to `Documents/echo-history.json`.
 
 ## Build
 
@@ -29,7 +31,7 @@ xcodegen generate
 open echo.xcodeproj
 ```
 
-Select `Echo-iOS` (iPhone 17 Pro simulator or device) or `Echo-macOS` (My Mac) and run. First launch downloads the selected Whisper model (~39MB tiny, ~150MB base, ~500MB small).
+Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39MB tiny, ~150MB base, ~500MB small).
 
 ## License
 

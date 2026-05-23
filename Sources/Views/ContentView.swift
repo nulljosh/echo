@@ -70,7 +70,7 @@ struct ContentView: View {
         }
         .fileImporter(
             isPresented: $showFilePicker,
-            allowedContentTypes: audioTypes,
+            allowedContentTypes: Self.audioTypes,
             allowsMultipleSelection: false
         ) { result in
             if case .success(let urls) = result, let url = urls.first {
@@ -123,7 +123,7 @@ struct ContentView: View {
         }
         .fileImporter(
             isPresented: $showFilePicker,
-            allowedContentTypes: audioTypes,
+            allowedContentTypes: Self.audioTypes,
             allowsMultipleSelection: false
         ) { result in
             if case .success(let urls) = result, let url = urls.first {
@@ -147,17 +147,19 @@ struct ContentView: View {
     }
 
     @ViewBuilder
+    private var retryAction: () -> Void {{ Task { await engine.reloadModel() } }}
+
     private var transcriptionArea: some View {
         if inputMode == .file {
             fileDropZone
         } else {
-            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState, onRetry: retryAction)
         }
     }
 
     private var fileDropZone: some View {
         ZStack {
-            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState, onRetry: retryAction)
 
             if engine.transcribedText.isEmpty && !engine.isTranscribing {
                 VStack(spacing: 12) {
@@ -183,7 +185,7 @@ struct ContentView: View {
             }
         }
         #if os(macOS)
-        .onDrop(of: audioTypes, isTargeted: $isDropTargeted) { providers in
+        .onDrop(of: Self.audioTypes, isTargeted: $isDropTargeted) { providers in
             handleDrop(providers: providers)
         }
         #endif
@@ -239,6 +241,9 @@ struct ContentView: View {
                     }
                 }
                 .disabled(engine.modelState != .ready)
+                #if os(macOS)
+                .keyboardShortcut("r", modifiers: .command)
+                #endif
             } else {
                 fileActionButton
             }
@@ -285,9 +290,7 @@ struct ContentView: View {
 
     // MARK: - Helpers
 
-    private var audioTypes: [UTType] {
-        [.audio, .mp3, .wav, .aiff, .mpeg4Audio, UTType("public.audio")].compactMap { $0 }
-    }
+    private static let audioTypes: [UTType] = [.audio, .mp3, .wav, .aiff, .mpeg4Audio].compactMap { $0 }
 
     #if os(macOS)
     private func handleDrop(providers: [NSItemProvider]) -> Bool {

@@ -3,6 +3,7 @@ import SwiftUI
 struct TranscriptionView: View {
     let text: String
     let modelState: ModelState
+    var onRetry: (() -> Void)? = nil
 
     var body: some View {
         Group {
@@ -18,7 +19,7 @@ struct TranscriptionView: View {
                         .foregroundStyle(.secondary)
                 }
             case .error(let msg):
-                VStack(spacing: 8) {
+                VStack(spacing: 10) {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.system(size: 28))
                         .foregroundStyle(.orange)
@@ -26,6 +27,11 @@ struct TranscriptionView: View {
                         .font(.system(size: 13))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                    if let onRetry {
+                        Button("Retry", action: onRetry)
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.small)
+                    }
                 }
                 .padding()
             case .ready:
