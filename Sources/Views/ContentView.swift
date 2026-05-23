@@ -55,9 +55,14 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 topBar.padding(.horizontal, 16).padding(.top, 16).padding(.bottom, 12)
                 modeSegment.padding(.horizontal, 16).padding(.bottom, 12)
-                transcriptionArea.padding(.horizontal, 16)
-                bottomBar.padding(.horizontal, 24).padding(.vertical, 24)
+                transcriptionArea
+                    .frame(maxHeight: .infinity)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
             }
+        }
+        .safeAreaInset(edge: .bottom) {
+            bottomBar.padding(.horizontal, 24).padding(.vertical, 16)
         }
         .sheet(isPresented: $showHistory) {
             ZStack {
