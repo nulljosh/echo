@@ -80,7 +80,8 @@ struct ModelPickerView: View {
     }
 
     private func modelLabel(_ model: String) -> String {
-        model.replacingOccurrences(of: "openai_whisper-", with: "").capitalized
+        if model == "auto" { return "Auto" }
+        return model.replacingOccurrences(of: "openai_whisper-", with: "").capitalized
     }
 
     private let languageNames: [String: String] = [

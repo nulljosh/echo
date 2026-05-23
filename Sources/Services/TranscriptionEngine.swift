@@ -27,11 +27,11 @@ class TranscriptionEngine: ObservableObject {
     @Published var isTranscribing = false
     @Published var audioLevel: Float = 0
     @Published var modelState: ModelState = .unloaded
-    @Published var selectedModel = "openai_whisper-base"
+    @Published var selectedModel = "auto"
     @Published var selectedLanguage = "auto"
     @Published var entries: [TranscriptionEntry] = []
 
-    let availableModels = ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"]
+    let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"]
     let availableLanguages = ["auto", "en", "fr", "es", "de", "zh", "ja", "ko", "ar", "pt", "ru", "it"]
 
     private var whisperKit: WhisperKit?
@@ -53,11 +53,19 @@ class TranscriptionEngine: ObservableObject {
         }
     }
 
+    private var resolvedModel: String {
+        guard selectedModel == "auto" else { return selectedModel }
+        let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
+        if gb >= 8 { return "openai_whisper-small" }
+        if gb >= 4 { return "openai_whisper-base" }
+        return "openai_whisper-tiny"
+    }
+
     func loadModel() async {
         guard modelState != .loading && modelState != .ready else { return }
         modelState = .loading
         do {
-            whisperKit = try await WhisperKit(model: selectedModel)
+            whisperKit = try await WhisperKit(model: resolvedModel)
             modelState = .ready
         } catch {
             modelState = .error(error.localizedDescription)

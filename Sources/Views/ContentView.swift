@@ -19,13 +19,19 @@ struct ContentView: View {
     @State private var inputMode: InputMode = .record
     @State private var showFilePicker = false
     @State private var isDropTargeted = false
+    @State private var showSplash = true
 
     var body: some View {
-        #if os(iOS)
-        iOSLayout
-        #else
-        macOSLayout
-        #endif
+        ZStack {
+            #if os(iOS)
+            iOSLayout
+            #else
+            macOSLayout
+            #endif
+            if showSplash {
+                SplashView { showSplash = false }
+            }
+        }
     }
 
     // MARK: - iOS

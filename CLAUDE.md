@@ -11,7 +11,7 @@ Sources/
   Models/       TranscriptionEntry (Codable — id, text, date, duration, model)
   Services/     TranscriptionEngine, AudioCapture
   Views/        ContentView, RecordButton, TranscriptionView, WaveformBarsView,
-                HistoryView, ModelPickerView
+                HistoryView, ModelPickerView, SplashView
 ```
 
 ## Key types
@@ -22,6 +22,7 @@ Sources/
 - `startRecording()` — starts AudioCapture (samples + level callbacks), launches 4s batch loop (transcribe immediately then sleep)
 - `stopRecording()` — final pass, saves entry, zeroes audioLevel
 - `transcribeFile(url:)` — reads real duration via AVAudioFile, security-scoped URL, `whisperKit.transcribe(audioPath:decodeOptions:)`
+- `resolvedModel` — computed; if `selectedModel == "auto"`, picks tiny/base/small based on `ProcessInfo.physicalMemory` (≥8GB=small, ≥4GB=base, else tiny)
 - `decodingOptions()` — returns `DecodingOptions(language:)` using `selectedLanguage` ("auto" maps to nil)
 - `addEntry` / `saveHistory` — atomic JSON write, history capped at 50
 - `[TranscriptionResult].text()` extension deduplicates map/join/trim
@@ -48,8 +49,14 @@ Sources/
 - Cmd+R shortcut on record button (macOS)
 - `static let audioTypes` — avoids UTType alloc per render
 
+**SplashView**
+- Shows on cold launch: large waveform icon + "Echo" text
+- Fades out after 1.2s with 0.5s ease-out; onDismiss removes from ZStack
+- Overlaid in ContentView body via `@State var showSplash = true`
+
 **ModelPickerView**
-- Two menus: model (tiny/base/small) + language (auto + 11 languages)
+- Two menus: model (Auto/tiny/base/small) + language (auto + 11 languages)
+- "Auto" selects model based on device RAM at load time (see `resolvedModel`)
 - Changing model triggers `onReload`; changing language takes effect on next transcription
 
 ## Build
