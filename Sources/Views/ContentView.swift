@@ -20,6 +20,7 @@ struct ContentView: View {
     @State private var showFilePicker = false
     @State private var isDropTargeted = false
     @State private var showSplash = true
+    @State private var showSettings = false
 
     var body: some View {
         ZStack {
@@ -31,6 +32,17 @@ struct ContentView: View {
             if showSplash {
                 SplashView { showSplash = false }
             }
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView(
+                selectedModel: $engine.selectedModel,
+                selectedLanguage: $engine.selectedLanguage,
+                models: engine.availableModels,
+                languages: engine.availableLanguages,
+                modelState: engine.modelState,
+                resolvedModel: engine.resolvedModel,
+                onReload: { await engine.reloadModel() }
+            )
         }
     }
 
@@ -177,18 +189,31 @@ struct ContentView: View {
     }
 
     private var topBar: some View {
-        HStack {
+        HStack(spacing: 12) {
             Image(systemName: "waveform").font(.system(size: 16, weight: .semibold)).foregroundStyle(.primary)
             Text("Echo").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
             Spacer()
-            ModelPickerView(
-                selectedModel: $engine.selectedModel,
-                selectedLanguage: $engine.selectedLanguage,
-                models: engine.availableModels,
-                languages: engine.availableLanguages,
-                modelState: engine.modelState,
-                onReload: { await engine.reloadModel() }
-            )
+            statusDot
+            Button { showSettings = true } label: {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    @ViewBuilder
+    private var statusDot: some View {
+        switch engine.modelState {
+        case .loading:
+            ProgressView().scaleEffect(0.7).frame(width: 20, height: 20)
+        case .ready:
+            Circle().fill(Color.green).frame(width: 7, height: 7)
+        case .error:
+            Circle().fill(Color.orange).frame(width: 7, height: 7)
+        case .unloaded:
+            Circle().fill(Color.secondary).frame(width: 7, height: 7)
         }
     }
 
