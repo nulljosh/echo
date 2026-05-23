@@ -1,8 +1,24 @@
 import SwiftUI
+import UniformTypeIdentifiers
+
+enum InputMode: String, CaseIterable {
+    case record = "Record"
+    case file = "File"
+
+    var icon: String {
+        switch self {
+        case .record: return "mic.fill"
+        case .file: return "doc.fill"
+        }
+    }
+}
 
 struct ContentView: View {
     @StateObject private var engine = TranscriptionEngine()
     @State private var showHistory = false
+    @State private var inputMode: InputMode = .record
+    @State private var showFilePicker = false
+    @State private var isDropTargeted = false
 
     var body: some View {
         #if os(iOS)
@@ -17,7 +33,7 @@ struct ContentView: View {
     #if os(iOS)
     private var iOSLayout: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color(.systemBackground).ignoresSafeArea()
 
             VStack(spacing: 0) {
                 topBar
@@ -25,7 +41,11 @@ struct ContentView: View {
                     .padding(.top, 16)
                     .padding(.bottom, 12)
 
-                TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+                modeSegment
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
+
+                transcriptionArea
                     .padding(.horizontal, 16)
 
                 bottomBar
@@ -35,11 +55,11 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showHistory) {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(.systemBackground).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("History")
                         .font(.system(size: 22, weight: .semibold))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                         .padding(.horizontal, 20)
                         .padding(.top, 24)
                         .padding(.bottom, 12)
@@ -47,6 +67,15 @@ struct ContentView: View {
                 }
             }
             .presentationDetents([.medium, .large])
+        }
+        .fileImporter(
+            isPresented: $showFilePicker,
+            allowedContentTypes: audioTypes,
+            allowsMultipleSelection: false
+        ) { result in
+            if case .success(let urls) = result, let url = urls.first {
+                Task { await engine.transcribeFile(url: url) }
+            }
         }
         .task { await engine.loadModel() }
     }
@@ -58,11 +87,11 @@ struct ContentView: View {
     private var macOSLayout: some View {
         NavigationSplitView {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(.windowBackgroundColor).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("History")
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundStyle(.secondary)
                         .padding(.horizontal, 16)
                         .padding(.top, 16)
                         .padding(.bottom, 8)
@@ -72,14 +101,18 @@ struct ContentView: View {
             .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(.windowBackgroundColor).ignoresSafeArea()
                 VStack(spacing: 0) {
                     topBar
                         .padding(.horizontal, 20)
                         .padding(.top, 20)
                         .padding(.bottom, 12)
 
-                    TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+                    modeSegment
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 12)
+
+                    transcriptionArea
                         .padding(.horizontal, 20)
 
                     bottomBar
@@ -88,20 +121,90 @@ struct ContentView: View {
                 }
             }
         }
+        .fileImporter(
+            isPresented: $showFilePicker,
+            allowedContentTypes: audioTypes,
+            allowsMultipleSelection: false
+        ) { result in
+            if case .success(let urls) = result, let url = urls.first {
+                Task { await engine.transcribeFile(url: url) }
+            }
+        }
         .task { await engine.loadModel() }
     }
     #endif
 
-    // MARK: - Shared
+    // MARK: - Shared subviews
+
+    private var modeSegment: some View {
+        Picker("Mode", selection: $inputMode) {
+            ForEach(InputMode.allCases, id: \.self) { mode in
+                Label(mode.rawValue, systemImage: mode.icon).tag(mode)
+            }
+        }
+        .pickerStyle(.segmented)
+        .disabled(engine.isRecording || engine.isTranscribing)
+    }
+
+    @ViewBuilder
+    private var transcriptionArea: some View {
+        if inputMode == .file {
+            fileDropZone
+        } else {
+            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+        }
+    }
+
+    private var fileDropZone: some View {
+        ZStack {
+            TranscriptionView(text: engine.transcribedText, modelState: engine.modelState)
+
+            if engine.transcribedText.isEmpty && !engine.isTranscribing {
+                VStack(spacing: 12) {
+                    Image(systemName: isDropTargeted ? "arrow.down.doc.fill" : "arrow.down.doc")
+                        .font(.system(size: 36))
+                        .foregroundStyle(isDropTargeted ? AnyShapeStyle(.tint) : AnyShapeStyle(.tertiary))
+                        .scaleEffect(isDropTargeted ? 1.1 : 1.0)
+                        .animation(.interpolatingSpring(stiffness: 300, damping: 15), value: isDropTargeted)
+
+                    Text(dropZoneLabel)
+                        .font(.system(size: 14))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+
+                    Button("Browse Files") {
+                        showFilePicker = true
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+                    .disabled(engine.modelState != .ready)
+                }
+                .padding()
+            }
+        }
+        #if os(macOS)
+        .onDrop(of: audioTypes, isTargeted: $isDropTargeted) { providers in
+            handleDrop(providers: providers)
+        }
+        #endif
+    }
+
+    private var dropZoneLabel: String {
+        #if os(macOS)
+        return "Drop an audio file here, or browse"
+        #else
+        return "Browse for an audio file to transcribe"
+        #endif
+    }
 
     private var topBar: some View {
         HStack {
             Image(systemName: "waveform")
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             Text("Echo")
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             Spacer()
             ModelPickerView(
                 selectedModel: $engine.selectedModel,
@@ -119,22 +222,26 @@ struct ContentView: View {
             } label: {
                 Image(systemName: "doc.on.doc")
                     .font(.system(size: 20))
-                    .foregroundColor(engine.transcribedText.isEmpty ? .white.opacity(0.2) : .white.opacity(0.7))
+                    .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
             }
             .buttonStyle(.plain)
             .disabled(engine.transcribedText.isEmpty)
 
-            RecordButton(
-                isRecording: engine.isRecording,
-                isTranscribing: engine.isTranscribing
-            ) {
-                if engine.isRecording {
-                    Task { await engine.stopRecording() }
-                } else {
-                    engine.startRecording()
+            if inputMode == .record {
+                RecordButton(
+                    isRecording: engine.isRecording,
+                    isTranscribing: engine.isTranscribing
+                ) {
+                    if engine.isRecording {
+                        Task { await engine.stopRecording() }
+                    } else {
+                        engine.startRecording()
+                    }
                 }
+                .disabled(engine.modelState != .ready)
+            } else {
+                fileActionButton
             }
-            .disabled(engine.modelState != .ready)
 
             #if os(iOS)
             Button {
@@ -142,7 +249,7 @@ struct ContentView: View {
             } label: {
                 Image(systemName: "clock.arrow.circlepath")
                     .font(.system(size: 20))
-                    .foregroundColor(engine.entries.isEmpty ? .white.opacity(0.2) : .white.opacity(0.7))
+                    .foregroundStyle(engine.entries.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
             }
             .buttonStyle(.plain)
             .disabled(engine.entries.isEmpty)
@@ -151,6 +258,51 @@ struct ContentView: View {
             #endif
         }
     }
+
+    private var fileActionButton: some View {
+        Button {
+            showFilePicker = true
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(Color.primary)
+                    .frame(width: 72, height: 72)
+
+                if engine.isTranscribing {
+                    ProgressView()
+                        .tint(Color(.systemBackground))
+                        .scaleEffect(0.85)
+                } else {
+                    Image(systemName: "folder.fill")
+                        .font(.system(size: 26, weight: .medium))
+                        .foregroundStyle(Color(.systemBackground))
+                }
+            }
+        }
+        .buttonStyle(SpringButtonStyle())
+        .disabled(engine.modelState != .ready || engine.isTranscribing)
+    }
+
+    // MARK: - Helpers
+
+    private var audioTypes: [UTType] {
+        [.audio, .mp3, .wav, .aiff, .mpeg4Audio, UTType("public.audio")].compactMap { $0 }
+    }
+
+    #if os(macOS)
+    private func handleDrop(providers: [NSItemProvider]) -> Bool {
+        guard let provider = providers.first else { return false }
+        provider.loadFileRepresentation(forTypeIdentifier: UTType.audio.identifier) { url, _ in
+            guard let url else { return }
+            let local = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+            try? FileManager.default.copyItem(at: url, to: local)
+            Task { @MainActor in
+                await engine.transcribeFile(url: local)
+            }
+        }
+        return true
+    }
+    #endif
 }
 
 extension Color {

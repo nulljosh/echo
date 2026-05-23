@@ -27,27 +27,27 @@ struct RecordButton: View {
                 }
 
                 Circle()
-                    .fill(isRecording ? Color.red : Color.white)
+                    .fill(isRecording ? Color.red : Color.primary)
                     .frame(width: 72, height: 72)
 
                 if isTranscribing && isRecording {
                     ProgressView()
-                        .tint(Color.white)
+                        .tint(Color(.systemBackground))
                         .scaleEffect(0.85)
                 } else if isRecording {
                     RoundedRectangle(cornerRadius: 5)
-                        .fill(Color.white)
+                        .fill(Color(.systemBackground))
                         .frame(width: 22, height: 22)
                 } else {
                     Image(systemName: "mic.fill")
                         .font(.system(size: 28, weight: .medium))
-                        .foregroundColor(.black)
+                        .foregroundStyle(Color(.systemBackground))
                 }
             }
         }
         .buttonStyle(SpringButtonStyle())
         .onAppear { pulse = isRecording }
-        .onChange(of: isRecording) { pulse = $0 }
+        .onChange(of: isRecording) { _, newValue in pulse = newValue }
     }
 }
 

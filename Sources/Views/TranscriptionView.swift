@@ -12,20 +12,19 @@ struct TranscriptionView: View {
             case .loading:
                 VStack(spacing: 12) {
                     ProgressView()
-                        .tint(.white)
                         .scaleEffect(1.2)
                     Text("Loading Whisper model...")
                         .font(.system(size: 14))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundStyle(.secondary)
                 }
             case .error(let msg):
                 VStack(spacing: 8) {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.system(size: 28))
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                     Text(msg)
                         .font(.system(size: 13))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
                 .padding()
@@ -36,7 +35,7 @@ struct TranscriptionView: View {
                     ScrollView {
                         Text(text)
                             .font(.system(size: 18, weight: .regular))
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(20)
                             .textSelection(.enabled)
@@ -45,17 +44,17 @@ struct TranscriptionView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.white.opacity(0.08), lineWidth: 1)
+                .stroke(.primary.opacity(0.06), lineWidth: 1)
         )
     }
 
     private func statusLabel(_ message: String) -> some View {
         Text(message)
             .font(.system(size: 15))
-            .foregroundColor(.white.opacity(0.3))
+            .foregroundStyle(.tertiary)
             .multilineTextAlignment(.center)
             .padding()
     }

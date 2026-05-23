@@ -10,18 +10,17 @@ struct HistoryView: View {
                 VStack(spacing: 8) {
                     Image(systemName: "waveform")
                         .font(.system(size: 28))
-                        .foregroundColor(.white.opacity(0.2))
+                        .foregroundStyle(.tertiary)
                     Text("No transcriptions yet")
                         .font(.system(size: 13))
-                        .foregroundColor(.white.opacity(0.3))
+                        .foregroundStyle(.tertiary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
                     ForEach(entries) { entry in
                         HistoryRow(entry: entry)
-                            .listRowBackground(Color.white.opacity(0.04))
-                            .listRowSeparatorTint(.white.opacity(0.08))
+                            .listRowBackground(Color.clear)
                     }
                     .onDelete { indexSet in
                         indexSet.map { entries[$0] }.forEach(onDelete)
@@ -42,16 +41,16 @@ struct HistoryRow: View {
             HStack {
                 Text(entry.formattedDate)
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.white.opacity(0.4))
+                    .foregroundStyle(.secondary)
                 Spacer()
                 Text(entry.formattedDuration)
                     .font(.system(size: 11))
-                    .foregroundColor(.white.opacity(0.3))
+                    .foregroundStyle(.tertiary)
             }
 
             Text(entry.text)
                 .font(.system(size: 13))
-                .foregroundColor(.white.opacity(0.8))
+                .foregroundStyle(.primary)
                 .lineLimit(expanded ? nil : 2)
 
             if entry.text.count > 120 {
@@ -59,7 +58,7 @@ struct HistoryRow: View {
                     expanded.toggle()
                 }
                 .font(.system(size: 11, weight: .medium))
-                .foregroundColor(Color(hex: "#0071e3"))
+                .foregroundStyle(.tint)
                 .buttonStyle(.plain)
             }
         }

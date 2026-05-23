@@ -1,5 +1,10 @@
 import Foundation
 import WhisperKit
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 enum ModelState: Equatable {
     case unloaded
@@ -111,6 +116,31 @@ class TranscriptionEngine: ObservableObject {
             }
         } catch {
             // keep existing text on transient error
+        }
+    }
+
+    func transcribeFile(url: URL) async {
+        guard let whisperKit, modelState == .ready else { return }
+        let accessing = url.startAccessingSecurityScopedResource()
+        defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+
+        isTranscribing = true
+        transcribedText = ""
+        defer { isTranscribing = false }
+
+        do {
+            let results = try await whisperKit.transcribe(audioPath: url.path)
+            let text = results
+                .map(\.text)
+                .joined(separator: " ")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            transcribedText = text
+            if !text.isEmpty {
+                let entry = TranscriptionEntry(text: text, duration: 0, model: selectedModel)
+                entries.insert(entry, at: 0)
+            }
+        } catch {
+            transcribedText = "Transcription failed: \(error.localizedDescription)"
         }
     }
 

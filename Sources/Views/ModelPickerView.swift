@@ -19,15 +19,15 @@ struct ModelPickerView: View {
                 HStack(spacing: 6) {
                     Text(displayName(selectedModel))
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     Image(systemName: "chevron.down")
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundStyle(.secondary)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(.ultraThinMaterial, in: Capsule())
-                .overlay(Capsule().stroke(Color.white.opacity(0.1), lineWidth: 1))
+                .background(.regularMaterial, in: Capsule())
+                .overlay(Capsule().stroke(.primary.opacity(0.08), lineWidth: 1))
             }
             .buttonStyle(.plain)
 
@@ -39,7 +39,7 @@ struct ModelPickerView: View {
         HStack(spacing: 5) {
             switch modelState {
             case .loading:
-                ProgressView().scaleEffect(0.7).tint(.white)
+                ProgressView().scaleEffect(0.7)
                 Text("Loading")
             case .ready:
                 Circle().fill(Color.green).frame(width: 6, height: 6)
@@ -48,12 +48,12 @@ struct ModelPickerView: View {
                 Circle().fill(Color.orange).frame(width: 6, height: 6)
                 Text("Error")
             case .unloaded:
-                Circle().fill(Color.gray).frame(width: 6, height: 6)
+                Circle().fill(Color.secondary).frame(width: 6, height: 6)
                 Text("Unloaded")
             }
         }
         .font(.system(size: 11))
-        .foregroundColor(.white.opacity(0.5))
+        .foregroundStyle(.secondary)
     }
 
     private func displayName(_ model: String) -> String {
