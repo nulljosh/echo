@@ -53,7 +53,7 @@ class TranscriptionEngine: ObservableObject {
         }
     }
 
-    private var resolvedModel: String {
+    var resolvedModel: String {
         guard selectedModel == "auto" else { return selectedModel }
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
         if gb >= 8 { return "openai_whisper-small" }

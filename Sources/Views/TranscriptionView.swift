@@ -6,6 +6,7 @@ struct TranscriptionView: View {
     var isRecording: Bool = false
     var audioLevel: Float = 0
     var onRetry: (() -> Void)? = nil
+    var placeholder: String = "Press record to start transcribing"
 
     var body: some View {
         Group {
@@ -44,8 +45,8 @@ struct TranscriptionView: View {
                                 .font(.system(size: 14))
                                 .foregroundStyle(.secondary)
                         }
-                    } else {
-                        statusLabel("Press record to start transcribing")
+                    } else if !placeholder.isEmpty {
+                        statusLabel(placeholder)
                     }
                 } else {
                     ScrollView {

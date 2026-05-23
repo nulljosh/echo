@@ -153,7 +153,8 @@ struct ContentView: View {
             TranscriptionView(
                 text: engine.transcribedText,
                 modelState: engine.modelState,
-                onRetry: retryAction
+                onRetry: retryAction,
+                placeholder: ""
             )
 
             if engine.transcribedText.isEmpty && !engine.isTranscribing {

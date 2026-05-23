@@ -11,7 +11,7 @@ Sources/
   Models/       TranscriptionEntry (Codable — id, text, date, duration, model)
   Services/     TranscriptionEngine, AudioCapture
   Views/        ContentView, RecordButton, TranscriptionView, WaveformBarsView,
-                HistoryView, ModelPickerView, SplashView
+                HistoryView, SettingsView, SplashView
 ```
 
 ## Key types
@@ -48,16 +48,20 @@ Sources/
 - macOS bottom bar: copy | share | record/file
 - Cmd+R shortcut on record button (macOS)
 - `static let audioTypes` — avoids UTType alloc per render
+- Top bar: waveform icon + "Echo" title + status dot + gear button (opens SettingsView sheet)
+- `fileDropZone` passes `placeholder: ""` to TranscriptionView to suppress "Press record" text bleed-through
 
 **SplashView**
 - Shows on cold launch: large waveform icon + "Echo" text
 - Fades out after 1.2s with 0.5s ease-out; onDismiss removes from ZStack
 - Overlaid in ContentView body via `@State var showSplash = true`
 
-**ModelPickerView**
-- Two menus: model (Auto/tiny/base/small) + language (auto + 11 languages)
-- "Auto" selects model based on device RAM at load time (see `resolvedModel`)
-- Changing model triggers `onReload`; changing language takes effect on next transcription
+**SettingsView**
+- Sheet with model + language pickers in NavigationStack List layout
+- Model rows: Auto (shows resolved name), Tiny, Base, Small — checkmark on selected
+- Language rows: Auto-detect + 11 languages — checkmark on selected
+- Changing model triggers `onReload` immediately; language takes effect on next transcription
+- Status section shows live model state (loading spinner / green dot / error text)
 
 ## Build
 
