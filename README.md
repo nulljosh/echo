@@ -4,21 +4,23 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green)
 
-Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no internet required after model download.
+Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
 ## Features
 
-- Real-time transcription via Whisper AI (CoreML + Neural Engine)
-- Model selection: tiny / base / small
+- Live microphone recording with real-time transcription (4s batch cadence)
+- File transcription — drag and drop audio onto macOS, browse Files on iOS
+- Model selection: Whisper tiny / base / small (downloads from HuggingFace on first use)
 - Transcription history with timestamps and duration
 - Copy to clipboard
-- iOS + macOS native SwiftUI
+- Adaptive light/dark mode
+- iOS + macOS native SwiftUI (single XcodeGen project)
 
 ## Architecture
 
 ![Architecture](architecture.svg)
 
-AVAudioEngine captures microphone input, converts to 16kHz mono Float32, and batches audio every 4 seconds to WhisperKit for local inference.
+`AVAudioEngine` captures mic input at native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:)` for local CoreML inference. File mode calls `WhisperKit.transcribe(audioPath:)` directly. Results are trimmed and written to `@Published transcribedText`.
 
 ## Build
 
@@ -27,7 +29,7 @@ xcodegen generate
 open echo.xcodeproj
 ```
 
-Select `Echo-iOS` or `Echo-macOS` target and run.
+Select `Echo-iOS` (iPhone 17 Pro simulator or device) or `Echo-macOS` (My Mac) and run. First launch downloads the selected Whisper model (~39MB tiny, ~150MB base, ~500MB small).
 
 ## License
 

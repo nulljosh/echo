@@ -6,6 +6,12 @@ import UIKit
 import AppKit
 #endif
 
+extension [TranscriptionResult] {
+    func text() -> String {
+        map(\.text).joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
 enum ModelState: Equatable {
     case unloaded
     case loading
@@ -106,17 +112,9 @@ class TranscriptionEngine: ObservableObject {
         defer { isTranscribing = false }
 
         do {
-            let results = try await whisperKit.transcribe(audioArray: samples)
-            let text = results
-                .map(\.text)
-                .joined(separator: " ")
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-            if !text.isEmpty {
-                transcribedText = text
-            }
-        } catch {
-            // keep existing text on transient error
-        }
+            let text = try await whisperKit.transcribe(audioArray: samples).text()
+            if !text.isEmpty { transcribedText = text }
+        } catch {}
     }
 
     func transcribeFile(url: URL) async {
@@ -129,15 +127,10 @@ class TranscriptionEngine: ObservableObject {
         defer { isTranscribing = false }
 
         do {
-            let results = try await whisperKit.transcribe(audioPath: url.path)
-            let text = results
-                .map(\.text)
-                .joined(separator: " ")
-                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let text = try await whisperKit.transcribe(audioPath: url.path).text()
             transcribedText = text
             if !text.isEmpty {
-                let entry = TranscriptionEntry(text: text, duration: 0, model: selectedModel)
-                entries.insert(entry, at: 0)
+                entries.insert(TranscriptionEntry(text: text, duration: 0, model: selectedModel), at: 0)
             }
         } catch {
             transcribedText = "Transcription failed: \(error.localizedDescription)"

@@ -2,7 +2,6 @@ import AVFoundation
 
 class AudioCapture {
     private var engine: AVAudioEngine?
-    private var converter: AVAudioConverter?
     private var onSamples: (([Float]) -> Void)?
 
     func startCapture(onSamples: @escaping ([Float]) -> Void) throws {
@@ -27,8 +26,6 @@ class AudioCapture {
         guard let converter = AVAudioConverter(from: inputFormat, to: targetFormat) else {
             throw AudioCaptureError.converterUnavailable
         }
-        self.converter = converter
-
         inputNode.installTap(onBus: 0, bufferSize: 4096, format: inputFormat) { [weak self] buffer, _ in
             self?.convert(buffer: buffer, from: inputFormat, to: targetFormat, using: converter)
         }
@@ -41,7 +38,6 @@ class AudioCapture {
         engine?.inputNode.removeTap(onBus: 0)
         engine?.stop()
         engine = nil
-        converter = nil
         onSamples = nil
     }
 
