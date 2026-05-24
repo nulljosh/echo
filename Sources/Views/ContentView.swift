@@ -49,6 +49,10 @@ struct ContentView: View {
     // MARK: - iOS
 
     #if os(iOS)
+    private var shouldShowRecent: Bool {
+        !engine.entries.isEmpty && !engine.isRecording && !engine.isTranscribing && engine.transcribedText.isEmpty
+    }
+
     private var iOSLayout: some View {
         ZStack {
             Color(.systemBackground).ignoresSafeArea()
@@ -59,7 +63,14 @@ struct ContentView: View {
                     .frame(maxHeight: .infinity)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 12)
+                if shouldShowRecent {
+                    recentEntryPreview
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 12)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
+            .animation(.easeInOut(duration: 0.2), value: shouldShowRecent)
         }
         .safeAreaInset(edge: .bottom) {
             bottomBar.padding(.horizontal, 24).padding(.vertical, 16)
@@ -83,6 +94,38 @@ struct ContentView: View {
             }
         }
         .task { await engine.loadModel() }
+    }
+
+    private var recentEntryPreview: some View {
+        Button { showHistory = true } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Recent")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    if let entry = engine.entries.first {
+                        Text(entry.formattedDate)
+                            .font(.system(size: 11))
+                            .foregroundStyle(.tertiary)
+                    }
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundStyle(.tertiary)
+                }
+                if let entry = engine.entries.first {
+                    Text(entry.text)
+                        .font(.system(size: 13))
+                        .foregroundStyle(.primary)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                }
+            }
+            .padding(12)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(.primary.opacity(0.06), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
     }
     #endif
 
@@ -200,6 +243,15 @@ struct ContentView: View {
             Text("Echo").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
             Spacer()
             statusDot
+            #if os(iOS)
+            Button { showHistory = true } label: {
+                Image(systemName: "clock.arrow.circlepath")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(engine.entries.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
+            }
+            .buttonStyle(.plain)
+            .disabled(engine.entries.isEmpty)
+            #endif
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape")
                     .font(.system(size: 16, weight: .medium))
@@ -253,15 +305,6 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .disabled(engine.transcribedText.isEmpty)
-            #if os(iOS)
-            Button { showHistory = true } label: {
-                Image(systemName: "clock.arrow.circlepath")
-                    .font(.system(size: 20))
-                    .foregroundStyle(engine.entries.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
-            }
-            .buttonStyle(.plain)
-            .disabled(engine.entries.isEmpty)
-            #endif
         }
     }
 

@@ -22,9 +22,9 @@ struct SplashView: View {
         }
         .opacity(opacity)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                withAnimation(.easeOut(duration: 0.5)) { opacity = 0 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { onDismiss() }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation(.easeOut(duration: 0.3)) { opacity = 0 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { onDismiss() }
             }
         }
     }
