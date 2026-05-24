@@ -274,7 +274,7 @@ struct ContentView: View {
                 } else {
                     Image(systemName: "folder.fill")
                         .font(.system(size: 26, weight: .medium))
-                        .foregroundStyle(Color(.systemBackground))
+                        .foregroundStyle(Color.white)
                 }
             }
         }

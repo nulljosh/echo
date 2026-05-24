@@ -7,6 +7,14 @@ struct RecordButton: View {
 
     @State private var pulse = false
 
+    private var iconColor: Color {
+        #if os(iOS)
+        Color(.systemBackground)
+        #else
+        Color(.windowBackgroundColor)
+        #endif
+    }
+
     var body: some View {
         Button(action: action) {
             ZStack {
@@ -32,16 +40,16 @@ struct RecordButton: View {
 
                 if isTranscribing && isRecording {
                     ProgressView()
-                        .tint(Color(.systemBackground))
+                        .tint(iconColor)
                         .scaleEffect(0.85)
                 } else if isRecording {
                     RoundedRectangle(cornerRadius: 5)
-                        .fill(Color(.systemBackground))
+                        .fill(iconColor)
                         .frame(width: 22, height: 22)
                 } else {
                     Image(systemName: "mic.fill")
                         .font(.system(size: 28, weight: .medium))
-                        .foregroundStyle(Color(.systemBackground))
+                        .foregroundStyle(iconColor)
                 }
             }
         }

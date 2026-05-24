@@ -208,7 +208,7 @@ class TranscriptionEngine: ObservableObject {
     private func liveDecodingOptions() -> DecodingOptions {
         DecodingOptions(
             language: selectedLanguage == "auto" ? nil : selectedLanguage,
-            temperature: [0.0],
+            temperature: 0,
             usePrefillPrompt: false,
             usePrefillCache: false,
             skipSpecialTokens: true,
