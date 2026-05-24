@@ -46,6 +46,11 @@ class TranscriptionEngine: ObservableObject {
             .appendingPathComponent("echo-history.json")
     }()
 
+    // Keyed by model name → local folder path, avoids HuggingFace on every launch
+    private static let modelFolderKey = "echo.modelFolders"
+    // Cap live transcription at 30s (Whisper max context); full buffer used on stop
+    private static let liveWindowSamples = 16_000 * 30
+
     init() {
         if let data = try? Data(contentsOf: Self.historyURL),
            let saved = try? JSONDecoder().decode([TranscriptionEntry].self, from: data) {
@@ -65,7 +70,18 @@ class TranscriptionEngine: ObservableObject {
         guard modelState != .loading && modelState != .ready else { return }
         modelState = .loading
         do {
-            whisperKit = try await WhisperKit(model: resolvedModel)
+            let model = resolvedModel
+            // Use cached local path first — no network required
+            if let cached = cachedFolder(for: model),
+               let wk = try? await WhisperKit(model: model, modelFolder: cached, download: false) {
+                whisperKit = wk
+            } else {
+                clearCachedFolder(for: model)
+                whisperKit = try await WhisperKit(model: model)
+                if let folder = whisperKit?.modelFolder?.path {
+                    cacheFolder(folder, for: model)
+                }
+            }
             modelState = .ready
         } catch {
             modelState = .error(error.localizedDescription)
@@ -103,7 +119,7 @@ class TranscriptionEngine: ObservableObject {
             while !Task.isCancelled {
                 await transcribeCurrentBuffer()
                 if Task.isCancelled { break }
-                try? await Task.sleep(for: .seconds(4))
+                try? await Task.sleep(for: .seconds(2))
             }
         }
     }
@@ -114,7 +130,7 @@ class TranscriptionEngine: ObservableObject {
         recordingTask?.cancel()
         recordingTask = nil
         capture.stopCapture()
-        await transcribeCurrentBuffer()
+        await transcribeCurrentBuffer(full: true)
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
         let trimmed = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -137,8 +153,7 @@ class TranscriptionEngine: ObservableObject {
             .map { Double($0.length) / $0.fileFormat.sampleRate } ?? 0
 
         do {
-            let options = decodingOptions()
-            let text = try await whisperKit.transcribe(audioPath: url.path, decodeOptions: options).text()
+            let text = try await whisperKit.transcribe(audioPath: url.path, decodeOptions: decodingOptions()).text()
             transcribedText = text
             if !text.isEmpty {
                 addEntry(TranscriptionEntry(text: text, duration: duration, model: selectedModel))
@@ -162,23 +177,67 @@ class TranscriptionEngine: ObservableObject {
         saveHistory()
     }
 
-    private func transcribeCurrentBuffer() async {
-        let samples: [Float] = bufferLock.withLock { audioBuffer }
-        guard samples.count > 16000, let whisperKit else { return }
+    // MARK: - Private
+
+    private func transcribeCurrentBuffer(full: Bool = false) async {
+        let samples: [Float] = bufferLock.withLock {
+            let total = audioBuffer.count
+            if !full && total > Self.liveWindowSamples {
+                return Array(audioBuffer[(total - Self.liveWindowSamples)...])
+            }
+            return audioBuffer
+        }
+        guard samples.count > 16_000, let whisperKit else { return }
 
         isTranscribing = true
         defer { isTranscribing = false }
 
         do {
-            let options = decodingOptions()
-            let text = try await whisperKit.transcribe(audioArray: samples, decodeOptions: options).text()
+            let opts = full ? decodingOptions() : liveDecodingOptions()
+            let text = try await whisperKit.transcribe(audioArray: samples, decodeOptions: opts).text()
             if !text.isEmpty { transcribedText = text }
         } catch {}
     }
 
+    // Accurate options for final pass and file transcription
     private func decodingOptions() -> DecodingOptions {
         DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
     }
+
+    // Greedy options for live batches — much faster, good enough for preview
+    private func liveDecodingOptions() -> DecodingOptions {
+        DecodingOptions(
+            language: selectedLanguage == "auto" ? nil : selectedLanguage,
+            temperature: [0.0],
+            usePrefillPrompt: false,
+            usePrefillCache: false,
+            skipSpecialTokens: true,
+            withoutTimestamps: true
+        )
+    }
+
+    // MARK: - Model folder cache
+
+    private func cachedFolder(for model: String) -> String? {
+        guard let dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String],
+              let folder = dict[model],
+              FileManager.default.fileExists(atPath: folder) else { return nil }
+        return folder
+    }
+
+    private func cacheFolder(_ folder: String, for model: String) {
+        var dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
+        dict[model] = folder
+        UserDefaults.standard.set(dict, forKey: Self.modelFolderKey)
+    }
+
+    private func clearCachedFolder(for model: String) {
+        var dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
+        dict.removeValue(forKey: model)
+        UserDefaults.standard.set(dict, forKey: Self.modelFolderKey)
+    }
+
+    // MARK: - History
 
     private func addEntry(_ entry: TranscriptionEntry) {
         entries.insert(entry, at: 0)

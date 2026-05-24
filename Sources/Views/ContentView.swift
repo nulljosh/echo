@@ -270,7 +270,7 @@ struct ContentView: View {
             ZStack {
                 Circle().fill(Color.primary).frame(width: 72, height: 72)
                 if engine.isTranscribing {
-                    ProgressView().tint(Color(.systemBackground)).scaleEffect(0.85)
+                    ProgressView().tint(Color.white).scaleEffect(0.85)
                 } else {
                     Image(systemName: "folder.fill")
                         .font(.system(size: 26, weight: .medium))

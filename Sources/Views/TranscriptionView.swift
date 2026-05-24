@@ -14,12 +14,7 @@ struct TranscriptionView: View {
             case .unloaded:
                 statusLabel("Tap to load model")
             case .loading:
-                VStack(spacing: 12) {
-                    ProgressView().scaleEffect(1.2)
-                    Text("Loading Whisper model...")
-                        .font(.system(size: 14))
-                        .foregroundStyle(.secondary)
-                }
+                statusLabel(placeholder.isEmpty ? "Preparing..." : placeholder)
             case .error(let msg):
                 VStack(spacing: 10) {
                     Image(systemName: "exclamationmark.triangle")

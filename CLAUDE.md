@@ -2,6 +2,13 @@
 
 v1.1.0. On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM.
 
+## v1.1.0 Changes
+- Offline-first model loading: caches `modelFolder` path in UserDefaults after first download; subsequent launches use `WhisperKit(modelFolder:download:false)` — no network needed
+- Live transcription interval: 4s → 2s
+- Live batches use greedy decoding (`temperature:[0]`, `withoutTimestamps:true`, no prefill) for speed
+- Live buffer capped at 30s (Whisper max); final pass on stop uses full buffer + accurate options
+- Removed "Loading Whisper model..." from main content area; loading state shows placeholder text
+
 ## Structure
 
 ```

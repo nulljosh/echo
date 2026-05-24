@@ -6,7 +6,11 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
+            #if os(iOS)
             Color(.systemBackground).ignoresSafeArea()
+            #else
+            Color(.windowBackgroundColor).ignoresSafeArea()
+            #endif
             VStack(spacing: 12) {
                 Image(systemName: "waveform")
                     .font(.system(size: 56, weight: .light))
