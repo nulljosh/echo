@@ -22,7 +22,7 @@ struct RecordButton: View {
                     ForEach(0..<3, id: \.self) { i in
                         Circle()
                             .stroke(Color.red.opacity(0.25), lineWidth: 1.5)
-                            .frame(width: 72 + CGFloat(i * 22), height: 72 + CGFloat(i * 22))
+                            .frame(width: 56 + CGFloat(i * 18), height: 56 + CGFloat(i * 18))
                             .scaleEffect(pulse ? 1.0 : 0.85)
                             .opacity(pulse ? 0.0 : 1.0)
                             .animation(
@@ -36,19 +36,19 @@ struct RecordButton: View {
 
                 Circle()
                     .fill(isRecording ? Color.red : Color.primary)
-                    .frame(width: 72, height: 72)
+                    .frame(width: 56, height: 56)
 
                 if isTranscribing && isRecording {
                     ProgressView()
                         .tint(iconColor)
                         .scaleEffect(0.85)
                 } else if isRecording {
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 4)
                         .fill(iconColor)
-                        .frame(width: 22, height: 22)
+                        .frame(width: 16, height: 16)
                 } else {
                     Image(systemName: "mic.fill")
-                        .font(.system(size: 28, weight: .medium))
+                        .font(.system(size: 22, weight: .medium))
                         .foregroundStyle(iconColor)
                 }
             }

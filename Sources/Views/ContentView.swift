@@ -49,28 +49,16 @@ struct ContentView: View {
     // MARK: - iOS
 
     #if os(iOS)
-    private var shouldShowRecent: Bool {
-        !engine.entries.isEmpty && !engine.isRecording && !engine.isTranscribing && engine.transcribedText.isEmpty
-    }
-
     private var iOSLayout: some View {
         ZStack {
             Color(.systemBackground).ignoresSafeArea()
             VStack(spacing: 0) {
                 topBar.padding(.horizontal, 16).padding(.top, 16).padding(.bottom, 12)
-                modeSegment.padding(.horizontal, 16).padding(.bottom, 12)
                 transcriptionArea
                     .frame(maxHeight: .infinity)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 12)
-                if shouldShowRecent {
-                    recentEntryPreview
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 12)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
             }
-            .animation(.easeInOut(duration: 0.2), value: shouldShowRecent)
         }
         .safeAreaInset(edge: .bottom) {
             bottomBar.padding(.horizontal, 24).padding(.vertical, 16)
@@ -95,38 +83,6 @@ struct ContentView: View {
         }
         .task { await engine.loadModel() }
     }
-
-    private var recentEntryPreview: some View {
-        Button { showHistory = true } label: {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("Recent")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    if let entry = engine.entries.first {
-                        Text(entry.formattedDate)
-                            .font(.system(size: 11))
-                            .foregroundStyle(.tertiary)
-                    }
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(.tertiary)
-                }
-                if let entry = engine.entries.first {
-                    Text(entry.text)
-                        .font(.system(size: 13))
-                        .foregroundStyle(.primary)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                }
-            }
-            .padding(12)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
-            .overlay(RoundedRectangle(cornerRadius: 12).stroke(.primary.opacity(0.06), lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-    }
     #endif
 
     // MARK: - macOS
@@ -150,7 +106,6 @@ struct ContentView: View {
                 Color(.windowBackgroundColor).ignoresSafeArea()
                 VStack(spacing: 0) {
                     topBar.padding(.horizontal, 20).padding(.top, 20).padding(.bottom, 12)
-                    modeSegment.padding(.horizontal, 20).padding(.bottom, 12)
                     transcriptionArea.padding(.horizontal, 20)
                     bottomBar.padding(.horizontal, 24).padding(.vertical, 20)
                 }
@@ -166,16 +121,6 @@ struct ContentView: View {
     #endif
 
     // MARK: - Shared subviews
-
-    private var modeSegment: some View {
-        Picker("Mode", selection: $inputMode) {
-            ForEach(InputMode.allCases, id: \.self) { mode in
-                Label(mode.rawValue, systemImage: mode.icon).tag(mode)
-            }
-        }
-        .pickerStyle(.segmented)
-        .disabled(engine.isRecording || engine.isTranscribing)
-    }
 
     @ViewBuilder
     private var transcriptionArea: some View {
@@ -239,10 +184,23 @@ struct ContentView: View {
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Image(systemName: "waveform").font(.system(size: 16, weight: .semibold)).foregroundStyle(.primary)
             Text("Echo").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
             Spacer()
             statusDot
+            Button { inputMode = .record } label: {
+                Image(systemName: "mic.fill")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(inputMode == .record ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
+            }
+            .buttonStyle(.plain)
+            .disabled(engine.isRecording || engine.isTranscribing)
+            Button { inputMode = .file } label: {
+                Image(systemName: "doc.fill")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(inputMode == .file ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
+            }
+            .buttonStyle(.plain)
+            .disabled(engine.isRecording || engine.isTranscribing)
             #if os(iOS)
             Button { showHistory = true } label: {
                 Image(systemName: "clock.arrow.circlepath")
@@ -277,14 +235,6 @@ struct ContentView: View {
 
     private var bottomBar: some View {
         HStack(spacing: 32) {
-            Button { engine.copyToClipboard() } label: {
-                Image(systemName: "doc.on.doc")
-                    .font(.system(size: 20))
-                    .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
-            }
-            .buttonStyle(.plain)
-            .disabled(engine.transcribedText.isEmpty)
-
             if inputMode == .record {
                 RecordButton(isRecording: engine.isRecording, isTranscribing: engine.isTranscribing) {
                     if engine.isRecording { Task { await engine.stopRecording() } }
@@ -311,12 +261,12 @@ struct ContentView: View {
     private var fileActionButton: some View {
         Button { showFilePicker = true } label: {
             ZStack {
-                Circle().fill(Color.primary).frame(width: 72, height: 72)
+                Circle().fill(Color.primary).frame(width: 56, height: 56)
                 if engine.isTranscribing {
                     ProgressView().tint(Color.white).scaleEffect(0.85)
                 } else {
                     Image(systemName: "folder.fill")
-                        .font(.system(size: 26, weight: .medium))
+                        .font(.system(size: 20, weight: .medium))
                         .foregroundStyle(Color.white)
                 }
             }
