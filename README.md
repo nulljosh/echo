@@ -36,6 +36,12 @@ open echo.xcodeproj
 
 Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39MB tiny, ~150MB base, ~500MB small). Auto mode picks the right size for your device.
 
+## Roadmap
+
+- [ ] Write XCTest suite — unit tests for `TranscriptionEngine`, audio resampling pipeline, history persistence
+- [ ] Create Apple Shortcut / Shortcuts workflow that triggers Claude to reload the app
+- [ ] UI snapshot tests for waveform indicator and history list
+
 ## License
 
 MIT 2026, Joshua Trommel
