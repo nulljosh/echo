@@ -14,13 +14,16 @@
 		274659B7333C131AC1CC0367 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCD7720D9EF544DEEDED047 /* AudioCapture.swift */; };
 		30E186F7A14BAE39E990624E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17CA5F10C842014B9A19CF /* SettingsView.swift */; };
 		3D92213202C20E0D49708B34 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = ADF9C91EA667BD318F9ABC85 /* WhisperKit */; };
+		4AD596C34D798F3AF414CF5A /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0FAC1D9D36524511797C8 /* StoreManager.swift */; };
 		59D72B54B7EDEB20B42991A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18B5F439ED332417DCD1BF02 /* Assets.xcassets */; };
+		73133A225921E8B4B66DBA61 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB9B1F5911399965FC26D6 /* PaywallView.swift */; };
 		77DC9B9D659A5E2858AA398D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80B33C956F81D9354F28456 /* ContentView.swift */; };
 		7DC0F8053C2CF32B65F2B24E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84527CE0B8C331B7289C134E /* SplashView.swift */; };
 		81AC9BAC3FBBF473249F843F /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AFD7789837FEA3C52A7204 /* TranscriptionEntry.swift */; };
 		90FCD92473D488AA8A15DE89 /* EchoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53023BFC315D6444EF169D63 /* EchoApp.swift */; };
 		93A3E9015AD6EF079A53D6CB /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AFD7789837FEA3C52A7204 /* TranscriptionEntry.swift */; };
 		A72B73EF94622D4E77D68064 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20102E362D9629D6C62AD520 /* HistoryView.swift */; };
+		A7958BD2B9D09137F019436F /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0FAC1D9D36524511797C8 /* StoreManager.swift */; };
 		B295F3FA896DFC24F9B81110 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */; };
 		B75521B8D33F296DCC37157D /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913ECF351F4CCBF9BAD05594 /* TranscriptionView.swift */; };
 		C9D1A2D867E3B3C52B34178D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20102E362D9629D6C62AD520 /* HistoryView.swift */; };
@@ -30,6 +33,7 @@
 		DF28379F5684E80B69D74C35 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1693BD2FD93080D04DD4B /* RecordButton.swift */; };
 		E2C05113C2E80DCF0A0146D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80B33C956F81D9354F28456 /* ContentView.swift */; };
 		E2EFEFFBD71211BBEB160084 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAB153B348CC3A01A7B79BF /* WaveformBarsView.swift */; };
+		ECAE3ABE45483A2C8D5085C4 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB9B1F5911399965FC26D6 /* PaywallView.swift */; };
 		F1A70C1D6DBE1753403DEA23 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84527CE0B8C331B7289C134E /* SplashView.swift */; };
 		F5BF8295E3BF6C8E1A9D2680 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913ECF351F4CCBF9BAD05594 /* TranscriptionView.swift */; };
 		FE7144D2DD6BA488140CC97D /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAB153B348CC3A01A7B79BF /* WaveformBarsView.swift */; };
@@ -49,8 +53,10 @@
 		9197FC4E81513A985E65F435 /* Echo-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Echo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DCD7720D9EF544DEEDED047 /* AudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCapture.swift; sourceTree = "<group>"; };
 		A71337A073BDCF7395E77F9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B3CB9B1F5911399965FC26D6 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		C80B33C956F81D9354F28456 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CFCEC89B8D25BCDE315B68B8 /* Echo-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Echo-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4D0FAC1D9D36524511797C8 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		D9A88ECD95824AFCD87C3B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E15C5064096F33C08847CB15 /* EchoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoApp.swift; sourceTree = "<group>"; };
 		FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			children = (
 				C80B33C956F81D9354F28456 /* ContentView.swift */,
 				20102E362D9629D6C62AD520 /* HistoryView.swift */,
+				B3CB9B1F5911399965FC26D6 /* PaywallView.swift */,
 				22F1693BD2FD93080D04DD4B /* RecordButton.swift */,
 				2F17CA5F10C842014B9A19CF /* SettingsView.swift */,
 				84527CE0B8C331B7289C134E /* SplashView.swift */,
@@ -153,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				9DCD7720D9EF544DEEDED047 /* AudioCapture.swift */,
+				D4D0FAC1D9D36524511797C8 /* StoreManager.swift */,
 				FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */,
 			);
 			path = Services;
@@ -269,9 +277,11 @@
 				E2C05113C2E80DCF0A0146D3 /* ContentView.swift in Sources */,
 				90FCD92473D488AA8A15DE89 /* EchoApp.swift in Sources */,
 				A72B73EF94622D4E77D68064 /* HistoryView.swift in Sources */,
+				73133A225921E8B4B66DBA61 /* PaywallView.swift in Sources */,
 				DF28379F5684E80B69D74C35 /* RecordButton.swift in Sources */,
 				25378DA2396A60E609EBA01E /* SettingsView.swift in Sources */,
 				F1A70C1D6DBE1753403DEA23 /* SplashView.swift in Sources */,
+				A7958BD2B9D09137F019436F /* StoreManager.swift in Sources */,
 				B295F3FA896DFC24F9B81110 /* TranscriptionEngine.swift in Sources */,
 				81AC9BAC3FBBF473249F843F /* TranscriptionEntry.swift in Sources */,
 				F5BF8295E3BF6C8E1A9D2680 /* TranscriptionView.swift in Sources */,
@@ -287,9 +297,11 @@
 				77DC9B9D659A5E2858AA398D /* ContentView.swift in Sources */,
 				D8927F7E0D227BCF6609F2AA /* EchoApp.swift in Sources */,
 				C9D1A2D867E3B3C52B34178D /* HistoryView.swift in Sources */,
+				ECAE3ABE45483A2C8D5085C4 /* PaywallView.swift in Sources */,
 				04A143B56B09361C8ECF0F9F /* RecordButton.swift in Sources */,
 				30E186F7A14BAE39E990624E /* SettingsView.swift in Sources */,
 				7DC0F8053C2CF32B65F2B24E /* SplashView.swift in Sources */,
+				4AD596C34D798F3AF414CF5A /* StoreManager.swift in Sources */,
 				16725859731DE4B4DFACE4BA /* TranscriptionEngine.swift in Sources */,
 				93A3E9015AD6EF079A53D6CB /* TranscriptionEntry.swift in Sources */,
 				B75521B8D33F296DCC37157D /* TranscriptionView.swift in Sources */,
@@ -369,7 +381,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -390,7 +402,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -453,7 +465,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -468,7 +480,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -17,7 +17,9 @@ struct SettingsView: View {
                 Section("Whisper Model") {
                     ForEach(models, id: \.self) { model in
                         Button {
-                            if selectedModel != model {
+                            if store.isModelLocked(model) {
+                                store.showPaywall = true
+                            } else if selectedModel != model {
                                 selectedModel = model
                                 Task { await onReload() }
                             }
@@ -31,11 +33,36 @@ struct SettingsView: View {
                                         .foregroundStyle(.secondary)
                                 }
                                 Spacer()
-                                if selectedModel == model {
+                                if store.isModelLocked(model) {
+                                    Image(systemName: "lock.fill").font(.caption).foregroundStyle(.secondary)
+                                } else if selectedModel == model {
                                     Image(systemName: "checkmark").foregroundStyle(.tint)
                                 }
                             }
                         }
+                    }
+                }
+
+                Section("Echo Pro") {
+                    if store.isPro {
+                        Label("Unlocked", systemImage: "checkmark.seal.fill")
+                            .foregroundStyle(.primary)
+                    } else {
+                        Button {
+                            store.showPaywall = true
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Unlock Echo Pro").foregroundStyle(.primary)
+                                    Text("\(store.freeFilesRemaining) free file transcriptions left")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right").font(.caption).foregroundStyle(.tertiary)
+                            }
+                        }
+                        Button("Restore Purchase") { Task { await store.restore() } }
+                            .foregroundStyle(.secondary)
                     }
                 }
 
