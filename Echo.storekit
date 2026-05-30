@@ -1,0 +1,30 @@
+{
+  "identifier" : "echo-pro-config",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "7.99",
+      "familyShareable" : false,
+      "internalID" : "echo.pro.001",
+      "localizations" : [
+        {
+          "description" : "Unlimited audio file transcription, the most accurate model, all on device. One payment, no subscription.",
+          "displayName" : "Echo Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.nulljosh.echo.pro",
+      "referenceName" : "Echo Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "echo",
+    "_developerTeamID" : "QMM486NPYC"
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

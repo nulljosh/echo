@@ -15,6 +15,7 @@ enum InputMode: String, CaseIterable {
 
 struct ContentView: View {
     @StateObject private var engine = TranscriptionEngine()
+    @StateObject private var store = StoreManager()
     @State private var showHistory = false
     @State private var inputMode: InputMode = .record
     @State private var showFilePicker = false
@@ -41,8 +42,33 @@ struct ContentView: View {
                 languages: engine.availableLanguages,
                 modelState: engine.modelState,
                 resolvedModel: engine.resolvedModel,
+                store: store,
                 onReload: { await engine.reloadModel() }
             )
+        }
+        .sheet(isPresented: $store.showPaywall) {
+            PaywallView(store: store)
+        }
+    }
+
+    /// File transcription is the paid workflow. Allow it while free runs remain or Pro
+    /// is owned, otherwise surface the paywall instead of starting the picker.
+    private func requestFile() {
+        if store.canTranscribeFile() {
+            showFilePicker = true
+        } else {
+            store.showPaywall = true
+        }
+    }
+
+    /// Runs the transcription, then consumes a free run only if it actually produced text.
+    private func transcribe(_ url: URL) {
+        Task {
+            await engine.transcribeFile(url: url)
+            let out = engine.transcribedText
+            if !out.isEmpty && !out.hasPrefix("Transcription failed") {
+                store.recordFileTranscription()
+            }
         }
     }
 
@@ -78,7 +104,7 @@ struct ContentView: View {
         }
         .fileImporter(isPresented: $showFilePicker, allowedContentTypes: Self.audioTypes, allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first {
-                Task { await engine.transcribeFile(url: url) }
+                transcribe(url)
             }
         }
         .task { await engine.loadModel() }
@@ -113,7 +139,7 @@ struct ContentView: View {
         }
         .fileImporter(isPresented: $showFilePicker, allowedContentTypes: Self.audioTypes, allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first {
-                Task { await engine.transcribeFile(url: url) }
+                transcribe(url)
             }
         }
         .task { await engine.loadModel() }
@@ -161,7 +187,7 @@ struct ContentView: View {
                         .font(.system(size: 14))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
-                    Button("Browse Files") { showFilePicker = true }
+                    Button("Browse Files") { requestFile() }
                         .buttonStyle(.borderedProminent)
                         .controlSize(.small)
                         .disabled(engine.modelState != .ready)
@@ -259,7 +285,7 @@ struct ContentView: View {
     }
 
     private var fileActionButton: some View {
-        Button { showFilePicker = true } label: {
+        Button { requestFile() } label: {
             ZStack {
                 Circle().fill(Color.primary).frame(width: 56, height: 56)
                 if engine.isTranscribing {
@@ -283,12 +309,13 @@ struct ContentView: View {
 
     #if os(macOS)
     private func handleDrop(providers: [NSItemProvider]) -> Bool {
+        guard store.canTranscribeFile() else { store.showPaywall = true; return false }
         guard let provider = providers.first else { return false }
         provider.loadFileRepresentation(forTypeIdentifier: UTType.audio.identifier) { url, _ in
             guard let url else { return }
             let local = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
             try? FileManager.default.copyItem(at: url, to: local)
-            Task { @MainActor in await engine.transcribeFile(url: local) }
+            Task { @MainActor in transcribe(local) }
         }
         return true
     }

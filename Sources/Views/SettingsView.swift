@@ -7,6 +7,7 @@ struct SettingsView: View {
     let languages: [String]
     let modelState: ModelState
     let resolvedModel: String
+    @ObservedObject var store: StoreManager
     let onReload: () async -> Void
     @Environment(\.dismiss) private var dismiss
 
