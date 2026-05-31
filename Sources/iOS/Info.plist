@@ -11,9 +11,11 @@
     <key>CFBundleIdentifier</key>
     <string>com.nulljosh.echo</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>$(MARKETING_VERSION)</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
     <key>NSMicrophoneUsageDescription</key>
     <string>Echo transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
     <key>NSAppTransportSecurity</key>

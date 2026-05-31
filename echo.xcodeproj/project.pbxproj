@@ -10,6 +10,7 @@
 		0345C8F88A07A2B9D7D22F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71337A073BDCF7395E77F9C /* Assets.xcassets */; };
 		04A143B56B09361C8ECF0F9F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1693BD2FD93080D04DD4B /* RecordButton.swift */; };
 		16725859731DE4B4DFACE4BA /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */; };
+		20F5C141B844C8497C4FA5A0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF5DF68CAB347836E5EA3C19 /* PrivacyInfo.xcprivacy */; };
 		25378DA2396A60E609EBA01E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17CA5F10C842014B9A19CF /* SettingsView.swift */; };
 		274659B7333C131AC1CC0367 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCD7720D9EF544DEEDED047 /* AudioCapture.swift */; };
 		30E186F7A14BAE39E990624E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17CA5F10C842014B9A19CF /* SettingsView.swift */; };
@@ -24,6 +25,7 @@
 		93A3E9015AD6EF079A53D6CB /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AFD7789837FEA3C52A7204 /* TranscriptionEntry.swift */; };
 		A72B73EF94622D4E77D68064 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20102E362D9629D6C62AD520 /* HistoryView.swift */; };
 		A7958BD2B9D09137F019436F /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0FAC1D9D36524511797C8 /* StoreManager.swift */; };
+		A7AD460DEBAEFE22C766E859 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF5DF68CAB347836E5EA3C19 /* PrivacyInfo.xcprivacy */; };
 		B295F3FA896DFC24F9B81110 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */; };
 		B75521B8D33F296DCC37157D /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913ECF351F4CCBF9BAD05594 /* TranscriptionView.swift */; };
 		C9D1A2D867E3B3C52B34178D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20102E362D9629D6C62AD520 /* HistoryView.swift */; };
@@ -58,6 +60,7 @@
 		CFCEC89B8D25BCDE315B68B8 /* Echo-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Echo-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D0FAC1D9D36524511797C8 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		D9A88ECD95824AFCD87C3B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF5DF68CAB347836E5EA3C19 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E15C5064096F33C08847CB15 /* EchoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoApp.swift; sourceTree = "<group>"; };
 		FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
 		FDC118EF795042F003B3BF33 /* echo-mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "echo-mac.entitlements"; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 		33C1B9FBA28FC817E7EBF21A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DF5DF68CAB347836E5EA3C19 /* PrivacyInfo.xcprivacy */,
 				3C4F795B07DFAD592E8B37D0 /* iOS */,
 				68FBF7A3948D7D38E8885942 /* macOS */,
 				45B396DBAE03D3D2C4248A3B /* Models */,
@@ -255,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0345C8F88A07A2B9D7D22F00 /* Assets.xcassets in Resources */,
+				20F5C141B844C8497C4FA5A0 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59D72B54B7EDEB20B42991A8 /* Assets.xcassets in Resources */,
+				A7AD460DEBAEFE22C766E859 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

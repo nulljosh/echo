@@ -1,6 +1,9 @@
 # Echo — CLAUDE.md
 
-v1.1.0. On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM.
+v1.2.0 (build 3). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
+
+## App Store submission state (2026-05-30)
+Both targets build clean (Release). `PrivacyInfo.xcprivacy` bundled in both. `ITSAppUsesNonExemptEncryption=false` set. macOS now has `app-sandbox` (required for Mac App Store IAP) — needs a runtime smoke test under sandbox before submitting. See `project_echo_monetization` memory for the App Store Connect checklist.
 
 ## v1.1.0 Changes
 - Offline-first model loading: caches `modelFolder` path in UserDefaults after first download; subsequent launches use `WhisperKit(modelFolder:download:false)` — no network needed

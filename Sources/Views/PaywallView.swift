@@ -57,7 +57,7 @@ struct PaywallView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
                 .background(Color.primary)
-                .foregroundStyle(Color(.systemBackground))
+                .foregroundStyle(Self.invertedLabel)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
             }
             .buttonStyle(.plain)
@@ -83,4 +83,12 @@ struct PaywallView: View {
         if let price = store.product?.displayPrice { return "Unlock for \(price)" }
         return "Unlock Echo Pro"
     }
+
+    /// System background color (inverse of `Color.primary`) so the button label
+    /// stays legible on both platforms. `UIColor.systemBackground` is iOS-only.
+    #if os(macOS)
+    private static let invertedLabel = Color(nsColor: .textBackgroundColor)
+    #else
+    private static let invertedLabel = Color(uiColor: .systemBackground)
+    #endif
 }
