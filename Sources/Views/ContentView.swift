@@ -34,6 +34,9 @@ struct ContentView: View {
                 SplashView { showSplash = false }
             }
         }
+        .task {
+            await engine.loadModel()
+        }
         .sheet(isPresented: $showSettings) {
             SettingsView(
                 selectedModel: $engine.selectedModel,

@@ -46,6 +46,13 @@ class TranscriptionEngine: ObservableObject {
             .appendingPathComponent("echo-history.json")
     }()
 
+    private static let modelCacheURL: URL = {
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let modelDir = appSupport.appendingPathComponent("echo-models")
+        try? FileManager.default.createDirectory(at: modelDir, withIntermediateDirectories: true)
+        return modelDir
+    }()
+
     // Keyed by model name → local folder path, avoids HuggingFace on every launch
     private static let modelFolderKey = "echo.modelFolders"
     // Cap live transcription at 30s (Whisper max context); full buffer used on stop
@@ -71,17 +78,17 @@ class TranscriptionEngine: ObservableObject {
         modelState = .loading
         do {
             let model = resolvedModel
-            // Use cached local path first — no network required
-            if let cached = cachedFolder(for: model),
-               let wk = try? await WhisperKit(model: model, modelFolder: cached, download: false) {
-                whisperKit = wk
-            } else {
-                clearCachedFolder(for: model)
-                whisperKit = try await WhisperKit(model: model)
-                if let folder = whisperKit?.modelFolder?.path {
-                    cacheFolder(folder, for: model)
+            let modelPath = Self.modelCacheURL.appendingPathComponent(model).path
+            // Try loading from persistent cache first
+            if FileManager.default.fileExists(atPath: modelPath) {
+                if let wk = try? await WhisperKit(model: model, modelFolder: modelPath, download: false) {
+                    whisperKit = wk
+                    modelState = .ready
+                    return
                 }
             }
+            // Download to persistent cache
+            whisperKit = try await WhisperKit(model: model, modelFolder: Self.modelCacheURL.path, download: true)
             modelState = .ready
         } catch {
             modelState = .error(error.localizedDescription)
