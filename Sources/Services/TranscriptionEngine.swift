@@ -78,17 +78,7 @@ class TranscriptionEngine: ObservableObject {
         modelState = .loading
         do {
             let model = resolvedModel
-            let modelPath = Self.modelCacheURL.appendingPathComponent(model).path
-            // Try loading from persistent cache first
-            if FileManager.default.fileExists(atPath: modelPath) {
-                if let wk = try? await WhisperKit(model: model, modelFolder: modelPath, download: false) {
-                    whisperKit = wk
-                    modelState = .ready
-                    return
-                }
-            }
-            // Download to persistent cache
-            whisperKit = try await WhisperKit(model: model, modelFolder: Self.modelCacheURL.path, download: true)
+            whisperKit = try await WhisperKit(model: model)
             modelState = .ready
         } catch {
             modelState = .error(error.localizedDescription)
@@ -208,7 +198,9 @@ class TranscriptionEngine: ObservableObject {
 
     // Accurate options for final pass and file transcription
     private func decodingOptions() -> DecodingOptions {
-        DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
+        var options = DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
+        options.suppressTokens = ["[song]", "[fun music]", "[music]"]
+        return options
     }
 
     // Greedy options for live batches — much faster, good enough for preview

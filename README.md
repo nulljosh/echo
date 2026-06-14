@@ -4,13 +4,14 @@
 
 ![Version](https://img.shields.io/badge/version-1.1.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green)
 
-Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
+Universal audio transcription—speech, music, podcasts, lectures—entirely on-device using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs locally — no cloud, no API keys, no data leaves the device.
 
 ## Features
 
 - Branded splash screen on launch
 - Live microphone recording with real-time transcription and waveform feedback
 - File transcription — drag and drop on macOS, browse Files on iOS
+- Music & lyrics transcription — transcribe vocals and song lyrics from audio
 - 12 languages — auto-detect or force a specific language
 - Auto model selection — picks tiny / base / small based on device RAM
 - Persistent transcription history (capped at 50 entries)

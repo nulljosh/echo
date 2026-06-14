@@ -35,12 +35,13 @@ Everything below is paste-ready. Account-side steps are the only thing blocking 
 
 **Description**
 ```
-Echo turns speech into text right on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
+Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
+Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
 FREE, FOREVER
 - Unlimited live microphone transcription
+- Transcribe music and lyrics
 - Auto, Tiny, and Base models
 - Full history, copy, and share
 - 12 languages with auto-detect
@@ -55,7 +56,7 @@ WHY ECHO
 - No account, no sign-up, no tracking.
 - No monthly fee. Own it once.
 
-Echo is built for people who want their words transcribed without handing them to a server.
+Echo is built for people who want their words, music, and audio transcribed without uploading to a server.
 ```
 
 **What's New** (first version)

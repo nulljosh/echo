@@ -86,6 +86,14 @@ struct SettingsView: View {
                     HStack(spacing: 10) {
                         statusIndicator
                         Text(statusText).foregroundStyle(.secondary)
+                        Spacer()
+                        if case .error = modelState {
+                            Button("Retry") {
+                                Task { await onReload() }
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                        }
                     }
                 }
             }
