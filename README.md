@@ -4,29 +4,26 @@
 
 ![Version](https://img.shields.io/badge/version-1.1.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green)
 
-Universal audio transcription—speech, music, podcasts, lectures—entirely on-device using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs locally — no cloud, no API keys, no data leaves the device.
+Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
 ## Features
 
-- Branded splash screen on launch
-- Live microphone recording with real-time transcription and waveform feedback
-- File transcription — drag and drop on macOS, browse Files on iOS
-- Music & lyrics transcription — transcribe vocals and song lyrics from audio
-- 12 languages — auto-detect or force a specific language
-- Auto model selection — picks tiny / base / small based on device RAM
-- Persistent transcription history (capped at 50 entries)
-- Export / share transcriptions natively
-- Copy to clipboard
+- Live microphone recording with real-time transcription and waveform
+- File transcription — drag/drop on macOS, browse on iOS
+- 12 languages — auto-detect or force specific
+- Auto model selection based on device RAM
+- Persistent history (max 50 entries)
+- Export / share / copy to clipboard
 - Retry on model load failure
-- Cmd+R keyboard shortcut (macOS)
-- Adaptive light/dark mode
-- iOS + macOS native SwiftUI
+- Cmd+R shortcut (macOS)
+- Light/dark mode
+- iOS + macOS SwiftUI
 
 ## Architecture
 
 ![Architecture](architecture.svg)
 
-`AVAudioEngine` captures mic input at native sample rate. `AVAudioConverter` resamples to 16kHz mono Float32. RMS level is computed per buffer and drives the waveform indicator. `TranscriptionEngine` batches audio every 4 seconds and calls `WhisperKit.transcribe(audioArray:decodeOptions:)` for local CoreML inference. File mode reads actual audio duration via `AVAudioFile` then calls `WhisperKit.transcribe(audioPath:)`. History persists atomically to `Documents/echo-history.json`.
+`AVAudioEngine` captures mic at native sample rate, resampled to 16kHz mono Float32. Waveform driven by RMS per buffer. Batches transcribe every 2 seconds via `WhisperKit` CoreML inference. File mode uses `AVAudioFile` for duration. History (max 50) persists to `Documents/echo-history.json`.
 
 ## Build
 
@@ -39,9 +36,7 @@ Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39
 
 ## Roadmap
 
-- [ ] Write XCTest suite — unit tests for `TranscriptionEngine`, audio resampling pipeline, history persistence
-- [ ] Create Apple Shortcut / Shortcuts workflow that triggers Claude to reload the app
-- [ ] UI snapshot tests for waveform indicator and history list
+XCTest suite, snapshot tests, Apple Shortcut integration.
 
 ## License
 
