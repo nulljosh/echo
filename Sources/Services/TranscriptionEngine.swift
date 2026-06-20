@@ -57,6 +57,8 @@ class TranscriptionEngine: ObservableObject {
     private static let modelFolderKey = "echo.modelFolders"
     // Cap live transcription at 30s (Whisper max context); full buffer used on stop
     private static let liveWindowSamples = 16_000 * 30
+    // Live preview only re-decodes a short trailing window so cost stays flat as recording grows
+    private static let livePreviewSamples = 16_000 * 8
 
     init() {
         let args = CommandLine.arguments
@@ -100,9 +102,18 @@ class TranscriptionEngine: ObservableObject {
         modelState = .loading
         do {
             let model = resolvedModel
-            whisperKit = try await WhisperKit(model: model)
+            if let folder = cachedFolder(for: model) {
+                whisperKit = try await WhisperKit(modelFolder: folder)
+            } else {
+                let kit = try await WhisperKit(model: model)
+                if let folder = kit.modelFolder?.path {
+                    cacheFolder(folder, for: model)
+                }
+                whisperKit = kit
+            }
             modelState = .ready
         } catch {
+            clearCachedFolder(for: resolvedModel)
             modelState = .error(error.localizedDescription)
         }
     }
@@ -201,8 +212,11 @@ class TranscriptionEngine: ObservableObject {
     private func transcribeCurrentBuffer(full: Bool = false) async {
         let samples: [Float] = bufferLock.withLock {
             let total = audioBuffer.count
-            if !full && total > Self.liveWindowSamples {
-                return Array(audioBuffer[(total - Self.liveWindowSamples)...])
+            if !full {
+                let window = min(Self.liveWindowSamples, Self.livePreviewSamples)
+                if total > window {
+                    return Array(audioBuffer[(total - window)...])
+                }
             }
             return audioBuffer
         }

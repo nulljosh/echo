@@ -1,9 +1,14 @@
 # Echo — CLAUDE.md
 
-v1.2.0 (build 3). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
+v1.3.0 (build 4). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
 
 ## App Store submission state (2026-05-30)
 Both targets build clean (Release). `PrivacyInfo.xcprivacy` bundled in both. `ITSAppUsesNonExemptEncryption=false` set. macOS now has `app-sandbox` (required for Mac App Store IAP) — needs a runtime smoke test under sandbox before submitting. See `project_echo_monetization` memory for the App Store Connect checklist.
+
+## Recent Changes (v1.3.0)
+- Fixed model-folder cache actually being used in `loadModel()` (was dead code — every launch re-resolved via HuggingFace)
+- Live transcription now only re-decodes a trailing ~8s window instead of the full rolling 30s buffer every 2s tick (was getting slower as recordings got longer)
+- App icon redone as a full-bleed opaque PNG (old one had alpha transparency, causing a white halo behind the icon on iOS)
 
 ## Recent Changes (v1.1+)
 - Offline-first model loading, cached in UserDefaults
