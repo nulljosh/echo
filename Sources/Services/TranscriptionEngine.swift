@@ -59,6 +59,24 @@ class TranscriptionEngine: ObservableObject {
     private static let liveWindowSamples = 16_000 * 30
 
     init() {
+        let args = CommandLine.arguments
+        if args.contains("UITEST_RECORDING") {
+            isRecording = true
+            transcribedText = "the quick brown fox jumps over the lazy dog and keeps talking while the model listens in real time"
+            return
+        }
+        if args.contains("UITEST_FINISHED") {
+            transcribedText = "This is a sample finished transcript that demonstrates how Echo captures and displays spoken words with high accuracy, entirely on-device."
+            return
+        }
+        if args.contains("UITEST_HISTORY") {
+            entries = [
+                TranscriptionEntry(text: "Meeting notes from this morning's standup.", duration: 42, model: "base"),
+                TranscriptionEntry(text: "Voice memo about the new feature ideas.", duration: 18, model: "small"),
+                TranscriptionEntry(text: "Quick reminder to call back later today.", duration: 9, model: "tiny")
+            ]
+            return
+        }
         if let data = try? Data(contentsOf: Self.historyURL),
            let saved = try? JSONDecoder().decode([TranscriptionEntry].self, from: data) {
             entries = saved
@@ -74,6 +92,10 @@ class TranscriptionEngine: ObservableObject {
     }
 
     func loadModel() async {
+        if CommandLine.arguments.contains(where: { $0.hasPrefix("UITEST_") }) {
+            modelState = .ready
+            return
+        }
         guard modelState != .loading && modelState != .ready else { return }
         modelState = .loading
         do {

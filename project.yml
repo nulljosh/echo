@@ -55,3 +55,26 @@ targets:
         CODE_SIGN_ENTITLEMENTS: Sources/macOS/echo-mac.entitlements
         ENABLE_HARDENED_RUNTIME: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+
+  EchoUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - UITests
+    dependencies:
+      - target: Echo-iOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.uitests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  EchoUITests:
+    build:
+      targets:
+        Echo-iOS: all
+        EchoUITests: all
+    test:
+      targets:
+        - EchoUITests
+    shared: true

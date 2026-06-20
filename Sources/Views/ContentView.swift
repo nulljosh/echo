@@ -238,6 +238,7 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .disabled(engine.entries.isEmpty)
+            .accessibilityIdentifier("history-button")
             #endif
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape")
@@ -245,6 +246,7 @@ struct ContentView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier("settings-button")
         }
     }
 

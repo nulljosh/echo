@@ -22,6 +22,9 @@ final class StoreManager: ObservableObject {
     private var updatesTask: Task<Void, Never>?
 
     init() {
+        if CommandLine.arguments.contains("UITEST_PAYWALL") {
+            showPaywall = true
+        }
         updatesTask = listenForTransactions()
         Task {
             await loadProduct()

@@ -1,0 +1,24 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Regenerate App Store screenshots"
+  lane :screenshots do
+    sh("xcodegen generate")
+    snapshot
+  end
+
+  desc "Build and upload a TestFlight beta"
+  lane :beta do
+    app_store_connect_api_key(
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key_filepath: ENV["ASC_KEY_PATH"]
+    )
+    sh("xcodegen generate")
+    gym(
+      scheme: "Echo-iOS",
+      export_method: "app-store"
+    )
+    pilot(skip_waiting_for_build_processing: true)
+  end
+end

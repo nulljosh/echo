@@ -6,6 +6,14 @@
 
 Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
+<p align="center">
+  <img src="screenshots/appstore/1-live-recording.png" width="180">
+  <img src="screenshots/appstore/2-finished-transcript.png" width="180">
+  <img src="screenshots/appstore/3-history.png" width="180">
+  <img src="screenshots/appstore/4-paywall.png" width="180">
+  <img src="screenshots/appstore/5-settings.png" width="180">
+</p>
+
 ## Features
 
 - Live microphone recording with real-time transcription and waveform
