@@ -69,6 +69,24 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:
+  Echo-iOS:
+    build:
+      targets:
+        Echo-iOS: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+    shared: true
+  Echo-macOS:
+    build:
+      targets:
+        Echo-macOS: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+    shared: true
   EchoUITests:
     build:
       targets:
