@@ -3,21 +3,23 @@ default_platform(:ios)
 platform :ios do
   desc "Regenerate App Store screenshots"
   lane :screenshots do
-    sh("xcodegen generate")
+    sh("cd .. && xcodegen generate")
     snapshot
   end
 
   desc "Build and upload a TestFlight beta"
   lane :beta do
     app_store_connect_api_key(
-      key_id: ENV["ASC_KEY_ID"],
-      issuer_id: ENV["ASC_ISSUER_ID"],
-      key_filepath: ENV["ASC_KEY_PATH"]
+      key_id: "MUJM3PFMT4",
+      issuer_id: "56091958-7499-4e11-b1e6-a101531bcb26",
+      key_filepath: File.expand_path("~/.appstoreconnect/private_keys/AuthKey_MUJM3PFMT4.p8")
     )
-    sh("xcodegen generate")
+    sh("cd .. && xcodegen generate")
     gym(
       scheme: "Echo-iOS",
-      export_method: "app-store"
+      export_method: "app-store",
+      xcargs: "-allowProvisioningUpdates",
+      clean: true
     )
     pilot(skip_waiting_for_build_processing: true)
   end
