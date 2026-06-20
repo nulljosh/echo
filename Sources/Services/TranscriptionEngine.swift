@@ -198,9 +198,7 @@ class TranscriptionEngine: ObservableObject {
 
     // Accurate options for final pass and file transcription
     private func decodingOptions() -> DecodingOptions {
-        var options = DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
-        options.suppressTokens = ["[song]", "[fun music]", "[music]"]
-        return options
+        DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
     }
 
     // Greedy options for live batches — much faster, good enough for preview
