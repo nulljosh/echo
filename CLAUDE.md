@@ -63,3 +63,8 @@ open echo.xcodeproj
 - macOS drag-drop copies to temp (security scope)
 - History: max 50, atomic JSON persistence
 - DEVELOPMENT_TEAM: QMM486NPYC
+
+## Imported from echo.pdf (2026-06-21)
+- [x] Mac screenshots — fixed and verified during this pass (Screen Recording permission granted, `fastlane mac_screenshots` now captures the real app window).
+- [ ] Push IPA/upload to TestFlight via `fastlane beta`/`mac_beta` — go-ahead given, not yet run.
+- [ ] Watch companion app — net-new watchOS target, not started.
