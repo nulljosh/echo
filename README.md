@@ -50,8 +50,7 @@ Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39
 
 XCTest suite, snapshot tests, Apple Shortcut integration.
 
-## Known issues / next session
-- macOS UI has a visible background-color seam between the sidebar and content panel — should be one solid color, currently two slightly different shades of white/grey.
+- [ ] Fix macOS NavigationSplitView background seam — sidebar vibrancy material renders a visibly different shade than the detail pane despite both using `Color(.windowBackgroundColor)`. Needs a real styling pass (e.g. `.navigationSplitViewStyle` override or custom sidebar background), not a one-line value fix.
 
 ## License
 
