@@ -12,7 +12,9 @@ final class MacScreenshot: XCTestCase {
         app.launch()
         sleep(3)
 
-        let screenshot = XCUIScreen.main.screenshot()
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10), "App window never appeared")
+        let screenshot = window.screenshot()
         let dir = NSTemporaryDirectory() + "echo-mac-screenshots"
         do {
             try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
