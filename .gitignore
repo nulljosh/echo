@@ -1,0 +1,5 @@
+*.xcuserstate
+xcuserdata/
+build/
+fastlane/README.md
+fastlane/report.xml
