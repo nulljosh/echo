@@ -241,9 +241,9 @@ struct ContentView: View {
             .accessibilityIdentifier("history-button")
             #endif
             Button { showSettings = true } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(.secondary)
+                Image(systemName: "gearshape.fill")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(.primary)
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("settings-button")

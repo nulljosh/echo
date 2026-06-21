@@ -50,7 +50,7 @@ struct TranscriptionView: View {
                         statusLabel(placeholder)
                     }
                 } else {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         Text(text)
                             .font(.system(size: 18, weight: .regular))
                             .foregroundStyle(.primary)
@@ -58,6 +58,7 @@ struct TranscriptionView: View {
                             .padding(20)
                             .textSelection(.enabled)
                     }
+                    .scrollBounceBehavior(.basedOnSize)
                 }
             }
         }
