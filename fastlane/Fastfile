@@ -46,6 +46,6 @@ platform :ios do
       xcargs: "-allowProvisioningUpdates",
       clean: true
     )
-    pilot(skip_waiting_for_build_processing: true)
+    pilot(skip_waiting_for_build_processing: true, app_platform: "osx", pkg: "./Echo-macOS.pkg")
   end
 end
