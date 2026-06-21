@@ -120,7 +120,7 @@ struct ContentView: View {
     private var macOSLayout: some View {
         NavigationSplitView {
             ZStack {
-                Color(.windowBackgroundColor).ignoresSafeArea()
+                Rectangle().fill(.thinMaterial).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("History")
                         .font(.system(size: 13, weight: .semibold))
@@ -131,15 +131,15 @@ struct ContentView: View {
             }
             .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
-            ZStack {
-                Color(.windowBackgroundColor).ignoresSafeArea()
-                VStack(spacing: 0) {
-                    topBar.padding(.horizontal, 20).padding(.top, 20).padding(.bottom, 12)
-                    transcriptionArea.padding(.horizontal, 20)
-                    bottomBar.padding(.horizontal, 24).padding(.vertical, 20)
-                }
+            VStack(spacing: 0) {
+                topBar.padding(.horizontal, 20).padding(.top, 20).padding(.bottom, 12)
+                transcriptionArea.padding(.horizontal, 20)
+                bottomBar.padding(.horizontal, 24).padding(.vertical, 20)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.regularMaterial)
         }
+        .navigationSplitViewStyle(.balanced)
         .fileImporter(isPresented: $showFilePicker, allowedContentTypes: Self.audioTypes, allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first {
                 transcribe(url)
