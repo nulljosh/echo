@@ -12,6 +12,8 @@ final class MacScreenshot: XCTestCase {
         app.launch()
         sleep(3)
 
+        app.activate()
+        sleep(1)
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10), "App window never appeared")
         let screenshot = window.screenshot()
