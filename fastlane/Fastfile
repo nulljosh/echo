@@ -5,6 +5,7 @@ platform :ios do
   lane :screenshots do
     sh("cd .. && xcodegen generate")
     snapshot
+    frameit(white: true)
   end
 
   desc "Capture macOS screenshot"
@@ -24,6 +25,23 @@ platform :ios do
     sh("cd .. && xcodegen generate")
     gym(
       scheme: "Echo-iOS",
+      export_method: "app-store",
+      xcargs: "-allowProvisioningUpdates",
+      clean: true
+    )
+    pilot(skip_waiting_for_build_processing: true)
+  end
+
+  desc "Build and upload a macOS TestFlight beta"
+  lane :mac_beta do
+    app_store_connect_api_key(
+      key_id: "MUJM3PFMT4",
+      issuer_id: "56091958-7499-4e11-b1e6-a101531bcb26",
+      key_filepath: File.expand_path("~/.appstoreconnect/private_keys/AuthKey_MUJM3PFMT4.p8")
+    )
+    sh("cd .. && xcodegen generate")
+    gym(
+      scheme: "Echo-macOS",
       export_method: "app-store",
       xcargs: "-allowProvisioningUpdates",
       clean: true

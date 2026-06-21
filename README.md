@@ -51,6 +51,7 @@ Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39
 XCTest suite, snapshot tests, Apple Shortcut integration.
 
 - [ ] Fix macOS NavigationSplitView background seam — sidebar vibrancy material renders a visibly different shade than the detail pane despite both using `Color(.windowBackgroundColor)`. Needs a real styling pass (e.g. `.navigationSplitViewStyle` override or custom sidebar background), not a one-line value fix.
+- [ ] Mac TestFlight: `fastlane mac_beta` lane added 2026-06-21. Fixed missing `CFBundlePackageType` in `Sources/macOS/Info.plist` (confirmed `APPL` in the built archive), but `pilot` upload still fails with the same "Invalid Bundle OS Type code" error from `altool` — points to the export/.pkg step, not the source Info.plist. Needs further debugging before this can ship to TestFlight.
 
 ## License
 
