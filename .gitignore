@@ -3,3 +3,8 @@ xcuserdata/
 build/
 fastlane/README.md
 fastlane/report.xml
+*.ipa
+*.dSYM.zip
+*.pkg
+Echo-macOS.app/
+.DS_Store

@@ -1,0 +1,11 @@
+Echo transcribes speech to text entirely on your device using WhisperKit — no cloud, no accounts, no data leaving your Mac or iPhone.
+
+Tap record and watch your words appear in real time. When you're done, copy or share the transcript instantly. Works completely offline once the model is downloaded, so your audio never touches a server.
+
+Features:
+- Live transcription with on-device Whisper models
+- Auto-selects the best model for your device
+- Transcribe existing audio files
+- History of past transcriptions
+- Multiple language support
+- No internet connection required after setup
