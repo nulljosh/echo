@@ -14,10 +14,6 @@ Native on-device speech transcription using [WhisperKit](https://github.com/argm
   <img src="screenshots/appstore/5-settings.png" width="180">
 </p>
 
-<p align="center">
-  <img src="fastlane/screenshots/mac/1-main.png" width="320">
-</p>
-
 ## Features
 
 - Live microphone recording with real-time transcription and waveform
