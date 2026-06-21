@@ -50,6 +50,9 @@ Select `Echo-iOS` or `Echo-macOS`. First launch downloads the Whisper model (~39
 
 XCTest suite, snapshot tests, Apple Shortcut integration.
 
+## Known issues / next session
+- macOS UI has a visible background-color seam between the sidebar and content panel — should be one solid color, currently two slightly different shades of white/grey.
+
 ## License
 
 MIT 2026, Joshua Trommel
