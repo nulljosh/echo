@@ -68,6 +68,18 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.uitests
         GENERATE_INFOPLIST_FILE: YES
 
+  EchoMacUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - UITests-mac
+    dependencies:
+      - target: Echo-macOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.mac.uitests
+        GENERATE_INFOPLIST_FILE: YES
+
 schemes:
   Echo-iOS:
     build:
@@ -95,4 +107,13 @@ schemes:
     test:
       targets:
         - EchoUITests
+    shared: true
+  EchoMacUITests:
+    build:
+      targets:
+        Echo-macOS: all
+        EchoMacUITests: all
+    test:
+      targets:
+        - EchoMacUITests
     shared: true

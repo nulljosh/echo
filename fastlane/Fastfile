@@ -7,6 +7,13 @@ platform :ios do
     snapshot
   end
 
+  desc "Capture macOS screenshot"
+  lane :mac_screenshots do
+    sh("cd .. && xcodegen generate")
+    scan(scheme: "EchoMacUITests")
+    sh("mkdir -p ../fastlane/screenshots/mac && cp ~/Library/Containers/com.nulljosh.echo.mac.uitests.xctrunner/Data/tmp/echo-mac-screenshots/*.png ../fastlane/screenshots/mac/")
+  end
+
   desc "Build and upload a TestFlight beta"
   lane :beta do
     app_store_connect_api_key(
