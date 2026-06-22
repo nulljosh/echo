@@ -10,6 +10,8 @@
     <string>Echo</string>
     <key>CFBundleIdentifier</key>
     <string>com.nulljosh.echo</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>CFBundleShortVersionString</key>
