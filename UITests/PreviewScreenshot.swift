@@ -16,14 +16,9 @@ final class PreviewScreenshot: XCTestCase {
     }
 
     func testCaptureAppStoreScreenshots() throws {
-        var app = launch(extraArgs: ["UITEST_RECORDING"])
+        var app = launch(extraArgs: ["UITEST_FINISHED"])
         sleep(3)
-        snapshot("1-live-recording")
-        app.terminate()
-
-        app = launch(extraArgs: ["UITEST_FINISHED"])
-        sleep(3)
-        snapshot("2-finished-transcript")
+        snapshot("1-finished-transcript")
         app.terminate()
 
         app = launch(extraArgs: ["UITEST_HISTORY"])
@@ -32,13 +27,13 @@ final class PreviewScreenshot: XCTestCase {
         if historyButton.waitForExistence(timeout: 5) {
             historyButton.tap()
             sleep(2)
-            snapshot("3-history")
+            snapshot("2-history")
         }
         app.terminate()
 
         app = launch(extraArgs: ["UITEST_PAYWALL"])
         sleep(3)
-        snapshot("4-paywall")
+        snapshot("3-paywall")
         app.terminate()
 
         app = launch(extraArgs: [])
@@ -47,7 +42,12 @@ final class PreviewScreenshot: XCTestCase {
         if settingsButton.waitForExistence(timeout: 5) {
             settingsButton.tap()
             sleep(2)
-            snapshot("5-settings")
+            snapshot("4-settings")
         }
+        app.terminate()
+
+        app = launch(extraArgs: ["UITEST_RECORDING"])
+        sleep(3)
+        snapshot("5-live-recording")
     }
 }

@@ -19,3 +19,6 @@ Code is done. Full paste-ready submission package: **`AppStore.md`**.
 
 ## Pricing (locked 2026-05-29)
 $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competitor data in memory `project_echo_monetization.md`.
+
+## Stashed 2026-06-21
+- [ ] macOS `AppIcon.appiconset` (`Sources/macOS/Assets.xcassets/AppIcon.appiconset/`) is missing its 1024x1024 icon — only goes up to 512x512 currently. Export 1024 from repo-root `icon.svg`, add the `mac` idiom 1024 entry to `Contents.json`. This is why App Store Connect shows a placeholder icon for the "Echo Transcribe" listing.
