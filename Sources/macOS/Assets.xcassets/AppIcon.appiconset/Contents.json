@@ -9,8 +9,7 @@
     { "filename": "AppIcon-256.png",    "idiom": "mac", "scale": "1x", "size": "256x256" },
     { "filename": "AppIcon-256@2x.png", "idiom": "mac", "scale": "2x", "size": "256x256" },
     { "filename": "AppIcon-512.png",    "idiom": "mac", "scale": "1x", "size": "512x512" },
-    { "filename": "AppIcon-512@2x.png", "idiom": "mac", "scale": "2x", "size": "512x512" },
-    { "filename": "AppIcon-1024.png",   "idiom": "mac", "scale": "1x", "size": "1024x1024" }
+    { "filename": "AppIcon-512@2x.png", "idiom": "mac", "scale": "2x", "size": "512x512" }
   ],
   "info" : {
     "author" : "xcode",
