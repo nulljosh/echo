@@ -15,7 +15,7 @@ extension [TranscriptionResult] {
 
 enum ModelState: Equatable {
     case unloaded
-    case loading
+    case loading(progress: Double = 0)
     case ready
     case error(String)
 }
@@ -98,17 +98,25 @@ class TranscriptionEngine: ObservableObject {
             modelState = .ready
             return
         }
-        guard modelState != .loading && modelState != .ready else { return }
-        modelState = .loading
+        if case .loading = modelState { return }
+        guard modelState != .ready else { return }
+        modelState = .loading(progress: 0)
         do {
             let model = resolvedModel
             if let folder = cachedFolder(for: model) {
                 whisperKit = try await WhisperKit(modelFolder: folder)
             } else {
-                let kit = try await WhisperKit(model: model)
-                if let folder = kit.modelFolder?.path {
-                    cacheFolder(folder, for: model)
-                }
+                let downloadedFolder = try await WhisperKit.download(
+                    variant: model,
+                    progressCallback: { [weak self] progress in
+                        let fraction = progress.fractionCompleted
+                        Task { @MainActor in
+                            self?.modelState = .loading(progress: fraction)
+                        }
+                    }
+                )
+                let kit = try await WhisperKit(modelFolder: downloadedFolder.path)
+                cacheFolder(downloadedFolder.path, for: model)
                 whisperKit = kit
             }
             modelState = .ready

@@ -13,13 +13,22 @@ struct TranscriptionView: View {
             switch modelState {
             case .unloaded:
                 statusLabel("Tap to load model")
-            case .loading:
+            case .loading(let progress):
                 VStack(spacing: 12) {
-                    ProgressView()
-                        .tint(.secondary)
-                    Text(placeholder.isEmpty ? "Downloading Whisper model..." : placeholder)
-                        .font(.system(size: 14))
-                        .foregroundStyle(.secondary)
+                    if progress > 0 {
+                        ProgressView(value: progress)
+                            .tint(.secondary)
+                            .frame(width: 160)
+                        Text("Downloading model… \(Int(progress * 100))%")
+                            .font(.system(size: 14))
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ProgressView()
+                            .tint(.secondary)
+                        Text("Downloading Whisper model...")
+                            .font(.system(size: 14))
+                            .foregroundStyle(.secondary)
+                    }
                 }
             case .error(let msg):
                 VStack(spacing: 10) {
