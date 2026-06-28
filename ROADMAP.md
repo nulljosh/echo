@@ -28,5 +28,10 @@ Code is done. Full paste-ready submission package: **`AppStore.md`**.
 ## Pricing (locked 2026-05-29)
 $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competitor data in memory `project_echo_monetization.md`.
 
+## From Echo Transcribe.pdf (imported 2026-06-28)
+- [ ] Onboarding: add Echo logo more prominently around the app
+- [ ] Onboarding: let user choose Whisper model on first load
+- [ ] Onboarding: request all permissions on first load
+
 ## Stashed 2026-06-21
 - [x] macOS `AppIcon.appiconset` 1024x1024 icon added (`AppIcon-1024.png`, copied from existing 1024px `AppIcon-512@2x.png` source, `mac` idiom 1x entry added to `Contents.json`) — verified 1024x1024 pixel dims and valid JSON.

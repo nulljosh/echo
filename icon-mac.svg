@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#bgGradient)"/>
+
+  <!-- Microphone body -->
+  <g id="microphone">
+    <circle cx="100" cy="75" r="18" fill="#ffffff"/>
+    <rect x="88" y="93" width="24" height="28" rx="12" fill="#ffffff"/>
+    <line x1="100" y1="121" x2="100" y2="135" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Waveform bars -->
+  <g id="waveform" opacity="0.95">
+    <rect x="30" y="100" width="7" height="14" rx="3.5" fill="#ffffff" opacity="0.7"/>
+    <rect x="42" y="88" width="7" height="38" rx="3.5" fill="#ffffff" opacity="0.85"/>
+    <rect x="54" y="76" width="7" height="50" rx="3.5" fill="#ffffff"/>
+    <rect x="139" y="76" width="7" height="50" rx="3.5" fill="#ffffff"/>
+    <rect x="151" y="88" width="7" height="38" rx="3.5" fill="#ffffff" opacity="0.85"/>
+    <rect x="163" y="100" width="7" height="14" rx="3.5" fill="#ffffff" opacity="0.7"/>
+  </g>
+</svg>
