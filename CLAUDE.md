@@ -1,9 +1,9 @@
 # Echo — CLAUDE.md
 
-v1.3.0 (build 4). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
+v1.3.0 (macOS build 6). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
 
-## App Store submission state (2026-05-30)
-Both targets build clean (Release). `PrivacyInfo.xcprivacy` bundled in both. `ITSAppUsesNonExemptEncryption=false` set. macOS now has `app-sandbox` (required for Mac App Store IAP) — needs a runtime smoke test under sandbox before submitting. See `project_echo_monetization` memory for the App Store Connect checklist.
+## App Store submission state (2026-06-23)
+Recent commits focused on getting the macOS app icon to render correctly in App Store Connect (squircle-mask clipping, low-res compiling, missing 1024x1024 entry) and added a macOS `ExportOptions.plist` for ASC upload — macOS build bumped to 6. `PrivacyInfo.xcprivacy` bundled in both targets. `ITSAppUsesNonExemptEncryption=false` set. macOS has `app-sandbox` (required for Mac App Store IAP). Working tree currently has uncommitted changes to `echo.xcodeproj/project.pbxproj` plus untracked `.asc/`, `ExportOptions-iOS.plist`, and `fastlane/test_output/`.
 
 ## Open design question (2026-06-20)
 A task note asked whether to switch the whole app to the clrs.cc color palette (and use it as the design system across all apps, not just Echo) — that's a cross-repo design decision, not applied. Settings icon made more obvious (`gearshape.fill`, larger, `.primary`) and transcript view's scroll indicators/bounce tuned down per the same note; both verified via `xcodebuild build -scheme Echo-macOS` (BUILD SUCCEEDED).
