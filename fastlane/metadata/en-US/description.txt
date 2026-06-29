@@ -1,11 +1,22 @@
-Echo transcribes speech to text entirely on your device using WhisperKit — no cloud, no accounts, no data leaving your Mac or iPhone.
+Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Tap record and watch your words appear in real time. When you're done, copy or share the transcript instantly. Works completely offline once the model is downloaded, so your audio never touches a server.
+Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
-Features:
-- Live transcription with on-device Whisper models
-- Auto-selects the best model for your device
-- Transcribe existing audio files
-- History of past transcriptions
-- Multiple language support
-- No internet connection required after setup
+FREE, FOREVER
+- Unlimited live microphone transcription
+- Transcribe music and lyrics
+- Auto, Tiny, and Base models
+- Full history, copy, and share
+- 12 languages with auto-detect
+
+ECHO PRO, ONE PAYMENT
+- Unlimited audio file transcription
+- The Small model, the most accurate
+- One purchase. Not a subscription, ever.
+
+WHY ECHO
+- On device. Your voice stays yours.
+- No account, no sign-up, no tracking.
+- No monthly fee. Own it once.
+
+Echo is built for people who want their words, music, and audio transcribed without uploading to a server.

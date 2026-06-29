@@ -1,1 +1,1 @@
-
+transcribe,voice to text,whisper,dictation,audio to text,speech,recorder,offline,private,notes,memo

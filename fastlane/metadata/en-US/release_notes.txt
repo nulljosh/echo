@@ -1,1 +1,1 @@
-
+First release. On-device transcription for iPhone. Live mic and file import, 12 languages, full history, all running locally. Echo Pro unlocks unlimited file transcription and the most accurate model for one payment.
