@@ -1,4 +1,4 @@
-<img src="icon.svg" width="80">
+<img src="icon.svg" width="80" style="border-radius:18px">
 
 # Echo
 
