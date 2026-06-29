@@ -14,7 +14,7 @@ final class StoreManager: ObservableObject {
     static let freeFileLimit = 3
     private static let usedCountKey = "echo.fileTranscriptionsUsed"
 
-    @Published private(set) var isPro = false
+    @Published private(set) var isPro = true // ponytail: free launch, flip to false when IAP goes live
     @Published private(set) var product: Product?
     @Published private(set) var purchasing = false
     @Published var showPaywall = false

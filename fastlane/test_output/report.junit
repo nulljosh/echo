@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='EchoMacUITests.xctest' tests='1' failures='0'>
+  <testsuite name='EchoMacUITests.MacScreenshot' tests='1' failures='0'>
+    <testcase classname='EchoMacUITests.MacScreenshot' name='testCaptureMacScreenshot' time='6.097'/>
+  </testsuite>
+</testsuites>
