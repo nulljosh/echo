@@ -176,7 +176,7 @@ private struct AppearancePicker: View {
                             )
                         Text(label)
                             .font(.caption.weight(.medium))
-                            .foregroundStyle(rawTheme == id ? .accentColor : .secondary)
+                            .foregroundStyle(rawTheme == id ? Color.accentColor : Color.secondary)
                     }
                 }
                 .buttonStyle(.plain)
