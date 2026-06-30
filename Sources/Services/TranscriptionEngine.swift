@@ -115,8 +115,15 @@ class TranscriptionEngine: ObservableObject {
                         }
                     }
                 )
-                let kit = try await WhisperKit(modelFolder: downloadedFolder.path)
-                cacheFolder(downloadedFolder.path, for: model)
+                // ponytail: copy to App Support so iOS cache purges don't force re-download
+                let stableFolder = Self.modelCacheURL.appendingPathComponent(model)
+                if !FileManager.default.fileExists(atPath: stableFolder.path) {
+                    try? FileManager.default.copyItem(at: downloadedFolder, to: stableFolder)
+                }
+                let finalPath = FileManager.default.fileExists(atPath: stableFolder.path)
+                    ? stableFolder.path : downloadedFolder.path
+                let kit = try await WhisperKit(modelFolder: finalPath)
+                cacheFolder(finalPath, for: model)
                 whisperKit = kit
             }
             modelState = .ready
