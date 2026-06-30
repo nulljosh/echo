@@ -1,6 +1,6 @@
 # Echo — CLAUDE.md
 
-v1.3.0 (macOS build 6). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
+v1.3.1 (macOS build 6). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
 
 ## App Store submission state (2026-06-23)
 Recent commits focused on getting the macOS app icon to render correctly in App Store Connect (squircle-mask clipping, low-res compiling, missing 1024x1024 entry) and added a macOS `ExportOptions.plist` for ASC upload — macOS build bumped to 6. `PrivacyInfo.xcprivacy` bundled in both targets. `ITSAppUsesNonExemptEncryption=false` set. macOS has `app-sandbox` (required for Mac App Store IAP). Working tree currently has uncommitted changes to `echo.xcodeproj/project.pbxproj` plus untracked `.asc/`, `ExportOptions-iOS.plist`, and `fastlane/test_output/`.
