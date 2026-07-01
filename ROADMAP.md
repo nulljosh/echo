@@ -33,5 +33,8 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [ ] Onboarding: let user choose Whisper model on first load
 - [ ] Onboarding: request all permissions on first load
 
+## From icons-bugs.pdf (imported 2026-06-30)
+- [ ] Mac app broken — needs investigation (Mac icon source fixed 2026-06-30, new Mac build/upload still needed — may be the same issue)
+
 ## Stashed 2026-06-21
 - [x] macOS `AppIcon.appiconset` 1024x1024 icon added (`AppIcon-1024.png`, copied from existing 1024px `AppIcon-512@2x.png` source, `mac` idiom 1x entry added to `Contents.json`) — verified 1024x1024 pixel dims and valid JSON.
