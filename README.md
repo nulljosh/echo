@@ -42,6 +42,17 @@ open echo.xcodeproj
 
 Select `Echo-iOS` or `Echo-macOS`. The Whisper model is downloaded once on first launch (~39MB tiny, ~150MB base, ~500MB small) and stored in Application Support — subsequent launches load instantly, no re-download. Auto mode picks the right size for your device.
 
+## This Week / This Month
+
+**This week**
+- [ ] Build + upload new Mac build (icon source fixed 2026-06-30)
+- [ ] Fix macOS TestFlight upload "Invalid Bundle OS Type code" error
+- [ ] Fix macOS NavigationSplitView background seam bug
+
+**This month**
+- [ ] XCTest suite + snapshot tests
+- [ ] Apple Shortcut integration
+
 ## Roadmap
 
 XCTest suite, snapshot tests, Apple Shortcut integration.
