@@ -27,4 +27,8 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 ## From icons-bugs.pdf (imported 2026-06-30)
 - [ ] Mac app broken — needs investigation (Mac icon source fixed 2026-06-30, new Mac build/upload still needed — may be the same issue)
 
+## From Echo web.pdf (imported 2026-07-01)
+- [ ] Web app: remove all purple from UI, don't reintroduce it
+- [ ] Web app icon is stale — bump to the newer icon (see readme for current version)
+
 ## Stashed 2026-06-21
