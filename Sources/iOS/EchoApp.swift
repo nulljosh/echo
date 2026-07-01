@@ -8,6 +8,7 @@ struct EchoApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(rawTheme == "dark" ? .dark : rawTheme == "light" ? .light : nil)
+                .overlay { WhatsNewSheet() }
         }
     }
 }
