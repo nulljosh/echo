@@ -23,6 +23,7 @@
 		7DC0F8053C2CF32B65F2B24E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84527CE0B8C331B7289C134E /* SplashView.swift */; };
 		81AC9BAC3FBBF473249F843F /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AFD7789837FEA3C52A7204 /* TranscriptionEntry.swift */; };
 		90FCD92473D488AA8A15DE89 /* EchoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53023BFC315D6444EF169D63 /* EchoApp.swift */; };
+		93565883AA5089B72ADD049E /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19B2FEC7AA24A3B51BBE4E /* WhatsNewSheet.swift */; };
 		93A3E9015AD6EF079A53D6CB /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AFD7789837FEA3C52A7204 /* TranscriptionEntry.swift */; };
 		A72B73EF94622D4E77D68064 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20102E362D9629D6C62AD520 /* HistoryView.swift */; };
 		A7958BD2B9D09137F019436F /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0FAC1D9D36524511797C8 /* StoreManager.swift */; };
@@ -89,6 +90,7 @@
 		F1A4ADEA224680285B4923EA /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		FD9A535ABD21FEE0537660C1 /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
 		FDC118EF795042F003B3BF33 /* echo-mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "echo-mac.entitlements"; sourceTree = "<group>"; };
+		FF19B2FEC7AA24A3B51BBE4E /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				18B5F439ED332417DCD1BF02 /* Assets.xcassets */,
 				53023BFC315D6444EF169D63 /* EchoApp.swift */,
 				D9A88ECD95824AFCD87C3B16 /* Info.plist */,
+				FF19B2FEC7AA24A3B51BBE4E /* WhatsNewSheet.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				81AC9BAC3FBBF473249F843F /* TranscriptionEntry.swift in Sources */,
 				F5BF8295E3BF6C8E1A9D2680 /* TranscriptionView.swift in Sources */,
 				FE7144D2DD6BA488140CC97D /* WaveformBarsView.swift in Sources */,
+				93565883AA5089B72ADD049E /* WhatsNewSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +564,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -581,7 +585,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -644,7 +648,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -659,7 +663,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
