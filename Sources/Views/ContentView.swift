@@ -52,6 +52,14 @@ struct ContentView: View {
         .sheet(isPresented: $store.showPaywall) {
             PaywallView(store: store)
         }
+        .onOpenURL { url in
+            inputMode = .file
+            if store.canTranscribeFile() {
+                transcribe(url)
+            } else {
+                store.showPaywall = true
+            }
+        }
     }
 
     /// File transcription is the paid workflow. Allow it while free runs remain or Pro
@@ -179,6 +187,17 @@ struct ContentView: View {
                 placeholder: ""
             )
 
+            if engine.isTranscribing {
+                VStack(spacing: 10) {
+                    ProgressView(value: engine.fileProgress)
+                        .tint(.primary)
+                        .frame(width: 160)
+                    Text("Transcribing… \(Int(engine.fileProgress * 100))%")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
+            }
+
             if engine.transcribedText.isEmpty && !engine.isTranscribing {
                 VStack(spacing: 12) {
                     Image(systemName: isDropTargeted ? "arrow.down.doc.fill" : "arrow.down.doc")
@@ -216,17 +235,19 @@ struct ContentView: View {
             Text("Echo").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
             Spacer()
             statusDot
-            Button { inputMode = .record } label: {
+            Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .record } } label: {
                 Image(systemName: "mic.fill")
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(inputMode == .record ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
+                    .scaleEffect(inputMode == .record ? 1.1 : 1.0)
             }
             .buttonStyle(.plain)
             .disabled(engine.isRecording || engine.isTranscribing)
-            Button { inputMode = .file } label: {
+            Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .file } } label: {
                 Image(systemName: "doc.fill")
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(inputMode == .file ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
+                    .scaleEffect(inputMode == .file ? 1.1 : 1.0)
             }
             .buttonStyle(.plain)
             .disabled(engine.isRecording || engine.isTranscribing)
@@ -250,18 +271,21 @@ struct ContentView: View {
         }
     }
 
-    @ViewBuilder
     private var statusDot: some View {
-        switch engine.modelState {
-        case .loading:
-            ProgressView().scaleEffect(0.7).frame(width: 20, height: 20)
-        case .ready:
-            Circle().fill(Color.green).frame(width: 7, height: 7)
-        case .error:
-            Circle().fill(Color.orange).frame(width: 7, height: 7)
-        case .unloaded:
-            Circle().fill(Color.secondary).frame(width: 7, height: 7)
+        Group {
+            switch engine.modelState {
+            case .loading:
+                ProgressView().scaleEffect(0.7).frame(width: 20, height: 20)
+            case .ready:
+                Circle().fill(Color.green).frame(width: 7, height: 7)
+            case .error:
+                Circle().fill(Color.orange).frame(width: 7, height: 7)
+            case .unloaded:
+                Circle().fill(Color.secondary).frame(width: 7, height: 7)
+            }
         }
+        .transition(.opacity.combined(with: .scale))
+        .animation(.easeOut(duration: 0.2), value: engine.modelState)
     }
 
     private var bottomBar: some View {

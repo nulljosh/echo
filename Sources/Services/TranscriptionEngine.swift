@@ -27,6 +27,7 @@ class TranscriptionEngine: ObservableObject {
     @Published var isTranscribing = false
     @Published var audioLevel: Float = 0
     @Published var modelState: ModelState = .unloaded
+    @Published var fileProgress: Double = 0
     @Published var selectedModel = "auto"
     @Published var selectedLanguage = "auto"
     @Published var entries: [TranscriptionEntry] = []
@@ -192,13 +193,23 @@ class TranscriptionEngine: ObservableObject {
 
         isTranscribing = true
         transcribedText = ""
-        defer { isTranscribing = false }
+        fileProgress = 0
+        defer { isTranscribing = false; fileProgress = 0 }
 
         let duration = (try? AVAudioFile(forReading: url))
             .map { Double($0.length) / $0.fileFormat.sampleRate } ?? 0
 
         do {
-            let text = try await whisperKit.transcribe(audioPath: url.path, decodeOptions: decodingOptions()).text()
+            let text = try await whisperKit.transcribe(
+                audioPath: url.path,
+                decodeOptions: decodingOptions(),
+                callback: { [weak self] progress in
+                    guard duration > 0 else { return true }
+                    let elapsed = Double(progress.windowId + 1) * Double(Constants.defaultWindowSamples) / 16_000
+                    Task { @MainActor in self?.fileProgress = min(0.98, elapsed / duration) }
+                    return true
+                }
+            ).text()
             transcribedText = text
             if !text.isEmpty {
                 addEntry(TranscriptionEntry(text: text, duration: duration, model: selectedModel))
@@ -249,7 +260,11 @@ class TranscriptionEngine: ObservableObject {
 
     // Accurate options for final pass and file transcription
     private func decodingOptions() -> DecodingOptions {
-        DecodingOptions(language: selectedLanguage == "auto" ? nil : selectedLanguage)
+        DecodingOptions(
+            language: selectedLanguage == "auto" ? nil : selectedLanguage,
+            concurrentWorkerCount: 4,
+            chunkingStrategy: .vad
+        )
     }
 
     // Greedy options for live batches — much faster, good enough for preview

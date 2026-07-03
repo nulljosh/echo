@@ -71,6 +71,9 @@ struct TranscriptionView: View {
                 }
             }
         }
+        .transition(.opacity.combined(with: .scale(scale: 0.98)))
+        .animation(.easeOut(duration: 0.25), value: modelState)
+        .animation(.easeOut(duration: 0.25), value: text.isEmpty)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         .overlay(
