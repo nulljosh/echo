@@ -36,7 +36,7 @@ final class PreviewScreenshot: XCTestCase {
         snapshot("3-paywall")
         app.terminate()
 
-        app = launch(extraArgs: [])
+        app = launch(extraArgs: ["UITEST_FINISHED"])
         sleep(3)
         let settingsButton = app.buttons["settings-button"]
         if settingsButton.waitForExistence(timeout: 5) {

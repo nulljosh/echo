@@ -1,9 +1,9 @@
 import SwiftUI
 
-private let whatsNewVersion = "1.3.2"
+private let whatsNewVersion = "1.3.3"
 private let whatsNewBullets = [
-    "Fixed model re-download on every launch after iOS purges the cache",
-    "Live transcription now redecodes only the trailing window, not the full buffer",
+    "Import audio straight from Voice Memos via Share Sheet",
+    "Fixed long file transcriptions stalling — now chunked with progress bar",
 ]
 
 struct WhatsNewSheet: View {
@@ -12,7 +12,10 @@ struct WhatsNewSheet: View {
 
     var body: some View {
         Color.clear
-            .onAppear { isPresented = seenVersion != whatsNewVersion }
+            .onAppear {
+                guard !CommandLine.arguments.contains(where: { $0.hasPrefix("UITEST_") }) else { return }
+                isPresented = seenVersion != whatsNewVersion
+            }
             .sheet(isPresented: $isPresented) {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("What's New in v\(whatsNewVersion)")
