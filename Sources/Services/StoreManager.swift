@@ -3,12 +3,12 @@ import StoreKit
 
 /// Local, server-free entitlement for Echo Pro.
 ///
-/// One non-consumable unlock (`com.nulljosh.echo.pro`). Ownership is read straight
+/// One non-consumable unlock (`com.nulljosh.echo.unlock`). Ownership is read straight
 /// from StoreKit's `Transaction.currentEntitlements`, so there is no account, no
 /// receipt server, and nothing leaves the device. Fits the whole pitch: own it once.
 @MainActor
 final class StoreManager: ObservableObject {
-    static let productID = "com.nulljosh.echo.pro"
+    static let productID = "com.nulljosh.echo.unlock"
 
     /// Free file transcriptions before the unlock is required. Live mic stays free forever.
     static let freeFileLimit = 3
