@@ -89,9 +89,14 @@ class TranscriptionEngine: ObservableObject {
     var resolvedModel: String {
         guard selectedModel == "auto" else { return selectedModel }
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
+        #if os(iOS)
+        // ponytail: cap auto at base on iOS — small is ~500MB and stalls on cellular
+        return gb >= 4 ? "openai_whisper-base" : "openai_whisper-tiny"
+        #else
         if gb >= 8 { return "openai_whisper-small" }
         if gb >= 4 { return "openai_whisper-base" }
         return "openai_whisper-tiny"
+        #endif
     }
 
     func loadModel() async {
@@ -107,15 +112,7 @@ class TranscriptionEngine: ObservableObject {
             if let folder = cachedFolder(for: model) {
                 whisperKit = try await WhisperKit(modelFolder: folder)
             } else {
-                let downloadedFolder = try await WhisperKit.download(
-                    variant: model,
-                    progressCallback: { [weak self] progress in
-                        let fraction = progress.fractionCompleted
-                        Task { @MainActor in
-                            self?.modelState = .loading(progress: fraction)
-                        }
-                    }
-                )
+                let downloadedFolder = try await downloadWithRetry(model)
                 // ponytail: copy to App Support so iOS cache purges don't force re-download
                 let stableFolder = Self.modelCacheURL.appendingPathComponent(model)
                 if !FileManager.default.fileExists(atPath: stableFolder.path) {
@@ -132,6 +129,52 @@ class TranscriptionEngine: ObservableObject {
             clearCachedFolder(for: resolvedModel)
             modelState = .error(error.localizedDescription)
         }
+    }
+
+    // ponytail: HF download has no timeout — watchdog cancels a stalled attempt, 3 tries total
+    private func downloadWithRetry(_ model: String) async throws -> URL {
+        var lastError: Error?
+        for _ in 1...3 {
+            let lastProgress = Atomic()
+            let download = Task.detached {
+                try await WhisperKit.download(
+                    variant: model,
+                    progressCallback: { [weak self] progress in
+                        let fraction = progress.fractionCompleted
+                        lastProgress.update(fraction)
+                        Task { @MainActor in
+                            self?.modelState = .loading(progress: fraction)
+                        }
+                    }
+                )
+            }
+            let watchdog = Task.detached {
+                while !Task.isCancelled {
+                    try await Task.sleep(nanoseconds: 10_000_000_000)
+                    if Date().timeIntervalSince(lastProgress.date) > 30 {
+                        download.cancel()
+                        return
+                    }
+                }
+            }
+            do {
+                let folder = try await download.value
+                watchdog.cancel()
+                return folder
+            } catch {
+                watchdog.cancel()
+                lastError = error
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+            }
+        }
+        throw lastError ?? URLError(.timedOut)
+    }
+
+    private final class Atomic: @unchecked Sendable {
+        private let lock = NSLock()
+        private var _date = Date()
+        var date: Date { lock.withLock { _date } }
+        func update(_ fraction: Double) { lock.withLock { _date = Date() } }
     }
 
     func reloadModel() async {
