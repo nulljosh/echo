@@ -8,3 +8,5 @@ fastlane/report.xml
 *.pkg
 Echo-macOS.app/
 .DS_Store
+.asc/artifacts/
+.asc/release/
