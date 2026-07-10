@@ -104,6 +104,11 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            // Paywall must present from here while Settings is up: ContentView's
+            // sheet can't present while this sheet is already showing.
+            .sheet(isPresented: $store.showPaywall) {
+                PaywallView(store: store)
+            }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
