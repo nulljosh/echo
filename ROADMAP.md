@@ -40,3 +40,8 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 
 ## From Echo.pdf (imported 2026-07-12)
 - [ ] Submit iOS 1.3.3 for review: run `asc workflow run ship-ios VERSION:1.3.3` (blocked: App Store submission needs user approval outside auto mode; plist + download-UX fixes already committed in 9be1314, build verified)
+
+## From Icons.pdf / Asc.pdf (imported 2026-07-12)
+- [ ] Echo 1.3.3 PREPARE_FOR_SUBMISSION — confirm b9 paywall-fix build submitted (per Asc.pdf)
+- [ ] Add LSSupportsOpeningDocumentsInPlace or UISupportsDocumentBrowser to Info.plist next build (non-blocking)
+- [ ] Echo Transcribe Mac 1.0 — verify Mac build upload, then submit
