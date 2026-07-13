@@ -47,3 +47,4 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [ ] Echo Transcribe Mac 1.0 — verify Mac build upload, then submit
 
 - [ ] If 1.3.3 publish failed: asc publish appstore --app IOS_APP_ID --ipa .asc/artifacts/Echo-iOS.ipa --version 1.3.3 --wait --submit --confirm
+  - note: publish failed — wrong app ID guess; get real ID via `asc apps list | grep -i echo` first
