@@ -45,3 +45,5 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [ ] Echo 1.3.3 PREPARE_FOR_SUBMISSION — confirm b9 paywall-fix build submitted (per Asc.pdf)
 - [ ] Add LSSupportsOpeningDocumentsInPlace or UISupportsDocumentBrowser to Info.plist next build (non-blocking)
 - [ ] Echo Transcribe Mac 1.0 — verify Mac build upload, then submit
+
+- [ ] If 1.3.3 publish failed: asc publish appstore --app IOS_APP_ID --ipa .asc/artifacts/Echo-iOS.ipa --version 1.3.3 --wait --submit --confirm
