@@ -15,7 +15,14 @@ struct TranscriptionView: View {
                 statusLabel("Tap to load model")
             case .loading(let progress):
                 VStack(spacing: 12) {
-                    if progress > 0 {
+                    if progress >= 1 {
+                        ProgressView()
+                            .tint(.secondary)
+                        Text("Preparing model… first launch can take a few minutes")
+                            .font(.system(size: 14))
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    } else if progress > 0 {
                         ProgressView(value: progress)
                             .tint(.secondary)
                             .frame(width: 160)

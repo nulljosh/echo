@@ -120,6 +120,8 @@ class TranscriptionEngine: ObservableObject {
                 }
                 let finalPath = FileManager.default.fileExists(atPath: stableFolder.path)
                     ? stableFolder.path : downloadedFolder.path
+                // ponytail: CoreML compile after download can take minutes — signal "preparing" so UI doesn't look stuck at 100%
+                modelState = .loading(progress: 1)
                 let kit = try await WhisperKit(modelFolder: finalPath)
                 cacheFolder(finalPath, for: model)
                 whisperKit = kit
