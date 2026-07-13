@@ -37,3 +37,6 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [x] No real landing page — `docs/index.html` is now a marketing page (hero, features, CTA to App Store + app), functional app moved to `docs/app.html` unchanged (2026-07-04)
 
 ## Stashed 2026-06-21
+
+## From Echo.pdf (imported 2026-07-12)
+- [ ] Submit iOS 1.3.3 for review: run `asc workflow run ship-ios VERSION:1.3.3` (blocked: App Store submission needs user approval outside auto mode; plist + download-UX fixes already committed in 9be1314, build verified)
