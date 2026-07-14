@@ -52,3 +52,9 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 ## 2026-07-14 dump
 - [ ] Implement purchase flow — Pro paywall Purchase button greyed/dead (verified 2026-07-14: Echo Pro IAP is WAITING_FOR_REVIEW, bundled in resubmission — wire real StoreKit purchase in app next)
 - [ ] What's New sheet: auto-size to text content, currently too large
+
+## Speak-back + voices + paywall gating (requested 2026-07-14, stashed by wrap-up)
+- [ ] Speak transcript aloud via AVSpeechSynthesizer — play/stop button on transcript view + history entries (on-device, no new deps, fits "no cloud" pitch)
+- [ ] Voice picker in Settings: AVSpeechSynthesisVoice list filtered by transcript language, persist to UserDefaults
+- [ ] Decide free/pro split, then gate premium features (extra voices? file transcription already 3-free) behind existing `com.nulljosh.echo.unlock` entitlement — depends on wiring the real StoreKit purchase flow (item above)
+- [ ] Mirror on both Echo-iOS and Echo-macOS targets
