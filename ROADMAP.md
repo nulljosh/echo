@@ -48,3 +48,7 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 
 - [ ] If 1.3.3 publish failed: asc publish appstore --app IOS_APP_ID --ipa .asc/artifacts/Echo-iOS.ipa --version 1.3.3 --wait --submit --confirm
   - note: publish failed — wrong app ID guess; get real ID via `asc apps list | grep -i echo` first
+
+## 2026-07-14 dump
+- [ ] Implement purchase flow — Pro paywall Purchase button greyed/dead (verified 2026-07-14: Echo Pro IAP is WAITING_FOR_REVIEW, bundled in resubmission — wire real StoreKit purchase in app next)
+- [ ] What's New sheet: auto-size to text content, currently too large
