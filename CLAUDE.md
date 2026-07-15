@@ -71,3 +71,10 @@ open echo.xcodeproj
 - [x] Mac screenshots — fixed and verified during this pass (Screen Recording permission granted, `fastlane mac_screenshots` now captures the real app window).
 - [ ] Push IPA/upload to TestFlight via `fastlane beta`/`mac_beta` — go-ahead given, not yet run.
 - [ ] Watch companion app — net-new watchOS target, not started.
+
+## In progress (2026-07-14) — resume here
+Plan file: `~/.claude/plans/federated-discovering-hamster.md`. Three-part ask: language ID feature, ship iOS, new landing page. Session hit usage limit mid-flight — only step 1 landed.
+- [x] Language detection: `TranscriptionEngine` now reads `DecodingResult.language`/`languageProbs` off the existing auto-mode transcribe call (no extra WhisperKit call), sets `detectedLanguage`/`isUnusualLanguage` when the code isn't in the picker's 11 languages. Committed `6b0cf45`, pushed. Build verified via `xcodebuild build -scheme Echo-macOS`.
+- [ ] Wire `detectedLanguage`/`isUnusualLanguage` into `TranscriptionView.swift` as a visible badge (e.g. "Unusual language: Japanese detected") — engine side is done, view side is not.
+- [ ] Ship iOS: bump `CURRENT_PROJECT_VERSION` (currently 9) to include the language-ID change, run `asc workflow run ship-ios VERSION:1.3.3`, verify via `asc submission-health`. Screenshots/metadata/export options already in place — this should be close to a straight upload+submit once the view badge lands.
+- [ ] Landing page: net-new, no `web/` dir exists yet and `echo.heyitsmejosh.com` CNAME isn't added to Cloudflare. Style after `~/Documents/Code/lexly/index.html` + `css/lingo.css` (DM Sans/Geist body + Fraunces-style serif headings, no monospace, 2-col hero with plain `<img>` screenshots + soft shadow/glow, light+dark via `prefers-color-scheme`). Pull screenshots from `fastlane/screenshots/en-US/`. Deploy target + Cloudflare CNAME still TBD.
