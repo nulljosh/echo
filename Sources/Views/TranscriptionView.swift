@@ -7,6 +7,17 @@ struct TranscriptionView: View {
     var audioLevel: Float = 0
     var onRetry: (() -> Void)? = nil
     var placeholder: String = "Press record to start transcribing"
+    var unusualLanguage: String? = nil
+
+    private static let languageNames: [String: String] = [
+        "en": "English", "fr": "French", "es": "Spanish", "de": "German",
+        "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "ar": "Arabic",
+        "pt": "Portuguese", "ru": "Russian", "it": "Italian"
+    ]
+
+    private func languageLabel(_ code: String) -> String {
+        Self.languageNames[code] ?? Locale.current.localizedString(forLanguageCode: code) ?? code.uppercased()
+    }
 
     var body: some View {
         Group {
@@ -87,6 +98,19 @@ struct TranscriptionView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(.primary.opacity(0.06), lineWidth: 1)
         )
+        .overlay(alignment: .top) {
+            if let unusualLanguage {
+                Text("Unusual language detected: \(languageLabel(unusualLanguage))")
+                    .font(.system(size: 12, weight: .medium))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(.orange.opacity(0.15), in: Capsule())
+                    .foregroundStyle(.orange)
+                    .padding(.top, 10)
+                    .transition(.opacity)
+            }
+        }
+        .animation(.easeOut(duration: 0.2), value: unusualLanguage)
     }
 
     private func statusLabel(_ message: String) -> some View {

@@ -174,7 +174,8 @@ struct ContentView: View {
             modelState: engine.modelState,
             isRecording: engine.isRecording,
             audioLevel: engine.audioLevel,
-            onRetry: retryAction
+            onRetry: retryAction,
+            unusualLanguage: engine.isUnusualLanguage ? engine.detectedLanguage : nil
         )
     }
 
