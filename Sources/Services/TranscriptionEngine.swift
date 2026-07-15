@@ -31,9 +31,13 @@ class TranscriptionEngine: ObservableObject {
     @Published var selectedModel = "auto"
     @Published var selectedLanguage = "auto"
     @Published var entries: [TranscriptionEntry] = []
+    @Published var detectedLanguage: String?
+    @Published var isUnusualLanguage = false
 
     let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"]
     let availableLanguages = ["auto", "en", "fr", "es", "de", "zh", "ja", "ko", "ar", "pt", "ru", "it"]
+    // ponytail: "unusual" = outside the languages the picker even offers
+    private static let expectedLanguages = Set(["en", "fr", "es", "de", "zh", "ja", "ko", "ar", "pt", "ru", "it"])
 
     private var whisperKit: WhisperKit?
     private let capture = AudioCapture()
@@ -298,8 +302,13 @@ class TranscriptionEngine: ObservableObject {
 
         do {
             let opts = full ? decodingOptions() : liveDecodingOptions()
-            let text = try await whisperKit.transcribe(audioArray: samples, decodeOptions: opts).text()
+            let results = try await whisperKit.transcribe(audioArray: samples, decodeOptions: opts)
+            let text = results.text()
             if !text.isEmpty { transcribedText = text }
+            if selectedLanguage == "auto", let lang = results.first?.language {
+                detectedLanguage = lang
+                isUnusualLanguage = !Self.expectedLanguages.contains(lang)
+            }
         } catch {}
     }
 
