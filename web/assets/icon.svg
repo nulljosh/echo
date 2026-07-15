@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="44" fill="#000000"/>
+
+  <!-- Two stacked circles, center -->
+  <circle cx="100" cy="85" r="19" fill="#ffffff"/>
+  <circle cx="100" cy="123" r="15" fill="#ffffff"/>
+
+  <!-- Waveform bars - left side -->
+  <rect x="30" y="97" width="9" height="18" rx="4.5" fill="#9a9a9a"/>
+  <rect x="45" y="79" width="9" height="42" rx="4.5" fill="#d8d8d8"/>
+  <rect x="60" y="63" width="9" height="60" rx="4.5" fill="#e8e8e8"/>
+
+  <!-- Waveform bars - right side -->
+  <rect x="131" y="63" width="9" height="60" rx="4.5" fill="#e8e8e8"/>
+  <rect x="146" y="79" width="9" height="42" rx="4.5" fill="#d8d8d8"/>
+  <rect x="161" y="97" width="9" height="18" rx="4.5" fill="#9a9a9a"/>
+</svg>
