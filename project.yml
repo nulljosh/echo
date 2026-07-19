@@ -49,7 +49,9 @@ targets:
         product: WhisperKit
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.mac
+        # Universal Purchase: macOS shares the iOS bundle id so both platforms live
+        # under one App Store record (retiring the separate "Echo Transcribe Mac" record).
+        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo
         INFOPLIST_FILE: Sources/macOS/Info.plist
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGN_ENTITLEMENTS: Sources/macOS/echo-mac.entitlements

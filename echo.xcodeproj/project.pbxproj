@@ -342,8 +342,8 @@
 			targets = (
 				C7926D56FD196DCACE9EB350 /* Echo-iOS */,
 				2B1CDB0EA58D579D3A948505 /* Echo-macOS */,
-				103A5FBF41364FEB740ECDB6 /* EchoMacUITests */,
 				547D4A0AE0D574553C095639 /* EchoUITests */,
+				103A5FBF41364FEB740ECDB6 /* EchoMacUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -525,7 +525,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -609,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
 				SDKROOT = macosx;
 			};
 			name = Debug;
