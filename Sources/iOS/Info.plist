@@ -42,6 +42,8 @@
     </array>
     <key>LSSupportsOpeningDocumentsInPlace</key>
     <false/>
+    <key>UISupportsDocumentBrowser</key>
+    <true/>
     <key>CFBundleDocumentTypes</key>
     <array>
         <dict>

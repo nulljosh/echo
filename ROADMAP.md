@@ -15,6 +15,10 @@ Root cause found: 0 IAP products existed in ASC even though the app's paywall sh
 - [ ] **Manual step (Joshua, ASC dashboard only — no safe public API path):** App Store Connect → Echo Transcription → Pricing and Availability → set territories (app availability is currently unset, blocks resubmission).
 - [ ] Once availability is set, resubmit version 1.3.0 for review.
 
+## 1.3.3 status check (2026-07-20)
+Verified via `asc versions list --app 6782604262`: version 1.3.3 is **REJECTED** (appStoreState), not still "in review" as prior entries below implied. `asc versions view --include appStoreReviewDetail` returns only contact info, no rejection reason text — App Review's actual rejection message lives in Resolution Center, which has no public API (same dashboard-only wall as the ASC availability item above).
+- [ ] **Manual step (Joshua, ASC dashboard only):** App Store Connect → Echo Transcription → 1.3.3 → Resolution Center — read the actual rejection reason, then fix + resubmit.
+
 ## The actual blocker (account-side, only Joshua)
 - [x] Enroll Apple Developer Program — done, app is live.
 - [x] Create app record `com.nulljosh.echo`, create IAP non-consumable at $7.99 — done 2026-07-04 (`com.nulljosh.echo.unlock`).
@@ -39,18 +43,18 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 ## Stashed 2026-06-21
 
 ## From Echo.pdf (imported 2026-07-12)
-- [ ] Submit iOS 1.3.3 for review: run `asc workflow run ship-ios VERSION:1.3.3` (blocked: App Store submission needs user approval outside auto mode; plist + download-UX fixes already committed in 9be1314, build verified)
+- [x] Submit iOS 1.3.3 for review — done 2026-07-19 (see line below); now REJECTED, see "1.3.3 status check" above.
 
 ## From Icons.pdf / Asc.pdf (imported 2026-07-12)
-- [ ] Echo 1.3.3 PREPARE_FOR_SUBMISSION — confirm b9 paywall-fix build submitted (per Asc.pdf)
-- [ ] Add LSSupportsOpeningDocumentsInPlace or UISupportsDocumentBrowser to Info.plist next build (non-blocking)
-- [ ] Echo Transcribe Mac 1.0 — verify Mac build upload, then submit
+- [x] Echo 1.3.3 build submitted — confirmed via ASC API 2026-07-20; version state is REJECTED (rejection reason is dashboard-only, see above).
+- [x] Added `UISupportsDocumentBrowser` to `Sources/iOS/Info.plist` (2026-07-20; `LSSupportsOpeningDocumentsInPlace` was already present, set false). Build verified via `xcodebuild build -scheme Echo-iOS -destination 'generic/platform=iOS Simulator'` — BUILD SUCCEEDED.
+- [x] Echo Transcribe Mac 1.0 — verified via ASC API 2026-07-20: still PREPARE_FOR_SUBMISSION, matches the pricing blocker below (see "Stashed 2026-07-19").
 
 - [ ] If 1.3.3 publish failed: asc publish appstore --app IOS_APP_ID --ipa .asc/artifacts/Echo-iOS.ipa --version 1.3.3 --wait --submit --confirm
-  - note: publish failed — wrong app ID guess; get real ID via `asc apps list | grep -i echo` first
+  - note: publish failed — wrong app ID guess; get real ID via `asc apps list | grep -i echo` first (real iOS app ID: 6782604262, Mac: 6783015101)
 
 ## 2026-07-14 dump
-- [ ] Implement purchase flow — Pro paywall Purchase button greyed/dead (verified 2026-07-14: Echo Pro IAP is WAITING_FOR_REVIEW, bundled in resubmission — wire real StoreKit purchase in app next)
+- [x] Purchase flow was already fully wired (`StoreManager.purchase()` calls real StoreKit `product.purchase()`, `PaywallView` calls it) — the "greyed/dead" symptom was `isPro` being hardcoded `true` behind a `// ponytail: free launch, flip to false when IAP goes live` comment. IAP is now live/submitted, so flipped `isPro` to start `false` (2026-07-20), gating actually takes effect. Build verified.
 - [x] What's New sheet: auto-size to text content — already implemented in `WhatsNewSheet.swift` via `GeometryReader`/`presentationDetents(.height(contentHeight))`, verified by code read 2026-07-20; no fixed oversized height found
 
 ## Speak-back + voices + paywall gating (requested 2026-07-14, stashed by wrap-up)
