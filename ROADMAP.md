@@ -66,3 +66,9 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 ## Stashed 2026-07-19
 - [ ] Submit macOS 1.0 (app 6783015101): metadata DONE 2026-07-19; App Privacy published via asc web 2026-07-19; still blocked on pricing only — set Free in ASC dashboard then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`
 - [x] iOS 1.3.3 submitted for review 2026-07-19 (submission a632f6e0, build 11f70e89)
+
+## ASC review findings 2026-07-20 (via Resolution Center)
+- [ ] Guideline 2.1(b) App Completeness: "Unlock Echo Pro" IAP button greyed out/unresponsive in review. Root cause hypothesis (per Apple's own message): Paid Apps Agreement likely not in effect — needs bank/tax info added in ASC → Business → Agreements, Tax and Banking. No CLI/API path exists to check or fix this (dashboard-only, needs Joshua's real banking info). Paywall design confirmed by Joshua: 3-5 free transcriptions, then Pro unlocks unlimited for a few dollars via IAP.
+
+## ASC review findings 2026-07-20 (via Resolution Center)
+- [ ] Guideline 2.1(b) App Completeness: "Unlock Echo Pro" IAP button greyed out/unresponsive in review. Root cause hypothesis (per Apple's own message): Paid Apps Agreement likely not in effect — needs bank/tax info added in ASC → Business → Agreements, Tax and Banking. No CLI/API path exists to check or fix this (dashboard-only, needs Joshua's real banking info). Paywall design confirmed by Joshua: 3-5 free transcriptions, then Pro unlocks unlimited for a few dollars via IAP.
