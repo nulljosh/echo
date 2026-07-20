@@ -58,3 +58,7 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [ ] Voice picker in Settings: AVSpeechSynthesisVoice list filtered by transcript language, persist to UserDefaults
 - [ ] Decide free/pro split, then gate premium features (extra voices? file transcription already 3-free) behind existing `com.nulljosh.echo.unlock` entitlement — depends on wiring the real StoreKit purchase flow (item above)
 - [ ] Mirror on both Echo-iOS and Echo-macOS targets
+
+## Stashed 2026-07-19
+- [ ] Submit macOS 1.0 (app 6783015101): preflight failed — en-US description, keywords, supportUrl missing; copy from iOS metadata then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`
+- [x] iOS 1.3.3 submitted for review 2026-07-19 (submission a632f6e0, build 11f70e89)
