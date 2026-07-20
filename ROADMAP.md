@@ -2,7 +2,7 @@
 
 ## App Store Connect (2026-06-22)
 - [ ] **Build upload failed ASC processing** (error code 90183, no detail text via API) — check the Apple validation email for the real reason, fix, then re-upload.
-- [ ] Support URL still missing — required before submission.
+- [x] Support URL — `https://heyitsmejosh.com` is live (verified 200 via curl 2026-07-20), matches `AppStore.md`; no longer missing.
 
 ## Submission status (2026-05-30)
 Code is done. Full paste-ready submission package: **`AppStore.md`**.
@@ -51,7 +51,7 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 
 ## 2026-07-14 dump
 - [ ] Implement purchase flow — Pro paywall Purchase button greyed/dead (verified 2026-07-14: Echo Pro IAP is WAITING_FOR_REVIEW, bundled in resubmission — wire real StoreKit purchase in app next)
-- [ ] What's New sheet: auto-size to text content, currently too large
+- [x] What's New sheet: auto-size to text content — already implemented in `WhatsNewSheet.swift` via `GeometryReader`/`presentationDetents(.height(contentHeight))`, verified by code read 2026-07-20; no fixed oversized height found
 
 ## Speak-back + voices + paywall gating (requested 2026-07-14, stashed by wrap-up)
 - [ ] Speak transcript aloud via AVSpeechSynthesizer — play/stop button on transcript view + history entries (on-device, no new deps, fits "no cloud" pitch)
