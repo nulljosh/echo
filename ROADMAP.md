@@ -60,5 +60,5 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [ ] Mirror on both Echo-iOS and Echo-macOS targets
 
 ## Stashed 2026-07-19
-- [ ] Submit macOS 1.0 (app 6783015101): metadata DONE 2026-07-19; now blocked on pricing — asc pricing schedule create fails (known CLI dead-end), set Free in ASC dashboard then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`
+- [ ] Submit macOS 1.0 (app 6783015101): metadata DONE 2026-07-19; App Privacy published via asc web 2026-07-19; still blocked on pricing only — set Free in ASC dashboard then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`
 - [x] iOS 1.3.3 submitted for review 2026-07-19 (submission a632f6e0, build 11f70e89)
