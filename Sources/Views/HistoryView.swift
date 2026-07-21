@@ -3,6 +3,7 @@ import SwiftUI
 struct HistoryView: View {
     let entries: [TranscriptionEntry]
     let onDelete: (TranscriptionEntry) -> Void
+    @ObservedObject var speech: SpeechManager
 
     var body: some View {
         Group {
@@ -19,7 +20,7 @@ struct HistoryView: View {
             } else {
                 List {
                     ForEach(entries) { entry in
-                        HistoryRow(entry: entry)
+                        HistoryRow(entry: entry, speech: speech)
                             .listRowBackground(Color.clear)
                     }
                     .onDelete { indexSet in
@@ -34,6 +35,7 @@ struct HistoryView: View {
 
 struct HistoryRow: View {
     let entry: TranscriptionEntry
+    @ObservedObject var speech: SpeechManager
     @State private var expanded = false
 
     var body: some View {
@@ -46,6 +48,14 @@ struct HistoryRow: View {
                 Text(entry.formattedDuration)
                     .font(.system(size: 11))
                     .foregroundStyle(.tertiary)
+                Button {
+                    speech.toggle(id: entry.id, text: entry.text, languageCode: nil)
+                } label: {
+                    Image(systemName: speech.speakingID == entry.id ? "stop.circle.fill" : "speaker.wave.2.circle")
+                        .font(.system(size: 14))
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
             }
 
             Text(entry.text)

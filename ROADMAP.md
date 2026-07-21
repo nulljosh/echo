@@ -58,10 +58,10 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [x] What's New sheet: auto-size to text content — already implemented in `WhatsNewSheet.swift` via `GeometryReader`/`presentationDetents(.height(contentHeight))`, verified by code read 2026-07-20; no fixed oversized height found
 
 ## Speak-back + voices + paywall gating (requested 2026-07-14, stashed by wrap-up)
-- [ ] Speak transcript aloud via AVSpeechSynthesizer — play/stop button on transcript view + history entries (on-device, no new deps, fits "no cloud" pitch)
-- [ ] Voice picker in Settings: AVSpeechSynthesisVoice list filtered by transcript language, persist to UserDefaults
-- [ ] Decide free/pro split, then gate premium features (extra voices? file transcription already 3-free) behind existing `com.nulljosh.echo.unlock` entitlement — depends on wiring the real StoreKit purchase flow (item above)
-- [ ] Mirror on both Echo-iOS and Echo-macOS targets
+- [x] Speak transcript aloud via AVSpeechSynthesizer — new `Sources/Services/SpeechManager.swift`, play/stop button added to `TranscriptionView` (live transcript) and `HistoryRow` (past entries). Both Echo-iOS and Echo-macOS build clean (2026-07-21).
+- [x] Voice picker in Settings: `VoicePicker` in `SettingsView.swift` lists `AVSpeechSynthesisVoice.speechVoices()` filtered to the device's current language, persists identifier to `UserDefaults` via `@AppStorage(SpeechManager.voiceIdentifierKey)`.
+- [ ] Decide free/pro split — shipped ungated for now (`ponytail:` comment in `SpeechManager.swift` marks this as deferred to Joshua); revisit once a split is decided.
+- [x] Mirrored on both Echo-iOS and Echo-macOS targets (shared SwiftUI code, no platform-specific branching needed).
 
 ## Stashed 2026-07-19
 - [ ] Submit macOS 1.0 (app 6783015101): metadata DONE 2026-07-19; App Privacy published via asc web 2026-07-19; still blocked on pricing only — set Free in ASC dashboard then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`

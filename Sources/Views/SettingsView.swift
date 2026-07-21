@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 struct SettingsView: View {
     @Binding var selectedModel: String
@@ -70,6 +71,10 @@ struct SettingsView: View {
                         Button("Restore Purchase") { Task { await store.restore() } }
                             .foregroundStyle(.secondary)
                     }
+                }
+
+                Section("Speak-Back Voice") {
+                    VoicePicker()
                 }
 
                 Section("Language") {
@@ -160,6 +165,32 @@ struct SettingsView: View {
 
     private func languageLabel(_ lang: String) -> String {
         languageNames[lang] ?? lang.uppercased()
+    }
+}
+
+private struct VoicePicker: View {
+    @AppStorage(SpeechManager.voiceIdentifierKey) private var selectedVoiceID = ""
+
+    private var voices: [AVSpeechSynthesisVoice] {
+        AVSpeechSynthesisVoice.speechVoices()
+            .filter { $0.language.hasPrefix(Locale.current.language.languageCode?.identifier ?? "en") }
+            .sorted { $0.name < $1.name }
+    }
+
+    var body: some View {
+        ForEach(voices, id: \.identifier) { voice in
+            Button {
+                selectedVoiceID = voice.identifier
+            } label: {
+                HStack {
+                    Text(voice.name).foregroundStyle(.primary)
+                    Spacer()
+                    if selectedVoiceID == voice.identifier {
+                        Image(systemName: "checkmark").foregroundStyle(.tint)
+                    }
+                }
+            }
+        }
     }
 }
 

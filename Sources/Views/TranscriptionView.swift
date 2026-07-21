@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct TranscriptionView: View {
+    private static let liveID = UUID()
+
     let text: String
     let modelState: ModelState
     var isRecording: Bool = false
@@ -8,6 +10,7 @@ struct TranscriptionView: View {
     var onRetry: (() -> Void)? = nil
     var placeholder: String = "Press record to start transcribing"
     var unusualLanguage: String? = nil
+    @ObservedObject var speech: SpeechManager
 
     private static let languageNames: [String: String] = [
         "en": "English", "fr": "French", "es": "Spanish", "de": "German",
@@ -83,9 +86,21 @@ struct TranscriptionView: View {
                             .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(20)
+                            .padding(.top, 28)
                             .textSelection(.enabled)
                     }
                     .scrollBounceBehavior(.basedOnSize)
+                    .overlay(alignment: .topTrailing) {
+                        Button {
+                            speech.toggle(id: Self.liveID, text: text, languageCode: unusualLanguage)
+                        } label: {
+                            Image(systemName: speech.speakingID == Self.liveID ? "stop.circle.fill" : "speaker.wave.2.circle.fill")
+                                .font(.system(size: 22))
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(10)
+                    }
                 }
             }
         }

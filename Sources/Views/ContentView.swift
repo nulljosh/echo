@@ -16,6 +16,7 @@ enum InputMode: String, CaseIterable {
 struct ContentView: View {
     @StateObject private var engine = TranscriptionEngine()
     @StateObject private var store = StoreManager()
+    @StateObject private var speech = SpeechManager()
     @State private var showHistory = false
     @State private var inputMode: InputMode = .record
     @State private var showFilePicker = false
@@ -108,7 +109,7 @@ struct ContentView: View {
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundStyle(.primary)
                         .padding(.horizontal, 20).padding(.top, 24).padding(.bottom, 12)
-                    HistoryView(entries: engine.entries, onDelete: engine.deleteEntry)
+                    HistoryView(entries: engine.entries, onDelete: engine.deleteEntry, speech: speech)
                 }
             }
             .presentationDetents([.medium, .large])
@@ -134,7 +135,7 @@ struct ContentView: View {
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(.secondary)
                         .padding(.horizontal, 16).padding(.top, 16).padding(.bottom, 8)
-                    HistoryView(entries: engine.entries, onDelete: engine.deleteEntry)
+                    HistoryView(entries: engine.entries, onDelete: engine.deleteEntry, speech: speech)
                 }
             }
             .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
@@ -175,7 +176,8 @@ struct ContentView: View {
             isRecording: engine.isRecording,
             audioLevel: engine.audioLevel,
             onRetry: retryAction,
-            unusualLanguage: engine.isUnusualLanguage ? engine.detectedLanguage : nil
+            unusualLanguage: engine.isUnusualLanguage ? engine.detectedLanguage : nil,
+            speech: speech
         )
     }
 
@@ -185,7 +187,8 @@ struct ContentView: View {
                 text: engine.transcribedText,
                 modelState: engine.modelState,
                 onRetry: retryAction,
-                placeholder: ""
+                placeholder: "",
+                speech: speech
             )
 
             if engine.isTranscribing {
