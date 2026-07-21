@@ -9,7 +9,7 @@
     <key>CFBundleDisplayName</key>
     <string>Echo</string>
     <key>CFBundleIdentifier</key>
-    <string>com.nulljosh.echo.mac</string>
+    <string>com.nulljosh.echo</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>LSApplicationCategoryType</key>
