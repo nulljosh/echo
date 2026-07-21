@@ -12,7 +12,7 @@ Code is done. Full paste-ready submission package: **`AppStore.md`**.
 
 ## iOS 1.3.0 rejection (2026-07-04)
 Root cause found: 0 IAP products existed in ASC even though the app's paywall shipped referencing `com.nulljosh.echo.pro`. Created the non-consumable in ASC (`com.nulljosh.echo.unlock` — the `.pro` id was already permanently reserved from an earlier attempt), $7.99, review screenshot attached, code + `Echo.storekit` updated to match. IAP state is READY_TO_SUBMIT.
-- [x] Echo Transcribe Mac: pricing ($0.00, 175 regions) + availability (all countries) set via ASC web 2026-07-21. App Privacy was already published (Data Not Collected). Screenshots still empty (0/10) — needs simulator/Mac capture pass.
+- [x] Echo Transcribe Mac: pricing ($0.00, 175 regions) + availability (all countries) set via ASC web 2026-07-21. App Privacy was already published (Data Not Collected). Screenshots still empty (0/10) — needs a native macOS build+capture pass (not simulator — Mac apps run natively), not attempted this session, ran out of time after Healstack.
 - [ ] Once availability is set, resubmit version 1.3.0 for review.
 
 ## 1.3.3 status check (2026-07-20)
