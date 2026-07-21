@@ -1,70 +1,70 @@
-2026-06-30 03:05:22 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0xa8c185800; archive(resolved)="<IDEArchive: 0xa8c2041c0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team(resolved)="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+2026-07-21 22:51:23 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x82df40f00; archive(resolved)="<IDEArchive: 0x82df941c0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team(resolved)="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
 	Chain (15, self inclusive):
-	<IDEDistributionProcessingPipelineContext: 0xa8c185800; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionProcessingPipelineContext: 0xa8c184c00; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89816800; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89816d00; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89816f80; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89815b80; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89817200; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89817480; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89817700; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89815180; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89814f00; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89814c80; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="<IDEProvisioningBasicTeam: 0xa8c420cc0; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
-	<IDEDistributionContext: 0xa89814a00; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="(null)">
-	<IDEDistributionContext: 0xa89814280; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0xa8a65ba20>", team="(null)">
-	<IDEDistributionContext: 0x100940f60; archive = "<IDEArchive: 0xa8c2041c0>", distributionMethod="(null)", team="(null)">
-</IDEDistributionProcessingPipelineContext: 0xa8c185800>
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionCopyItemStep
-2026-06-30 03:05:22 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app'
-2026-06-30 03:05:22 +0000  >>> Copying /Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app 
-2026-06-30 03:05:22 +0000  copying file ./Contents/_CodeSignature/CodeResources ... 
-2026-06-30 03:05:22 +0000  4570 bytes for ./Contents/_CodeSignature/CodeResources
-2026-06-30 03:05:22 +0000  copying file ./Contents/MacOS/Echo-macOS ... 
-2026-06-30 03:05:22 +0000  6176272 bytes for ./Contents/MacOS/Echo-macOS
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/gpt2_tokenizer_config.json ... 
-2026-06-30 03:05:22 +0000  234 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/gpt2_tokenizer_config.json
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/t5_tokenizer_config.json ... 
-2026-06-30 03:05:22 +0000  20746 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/t5_tokenizer_config.json
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Info.plist ... 
-2026-06-30 03:05:22 +0000  1135 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Info.plist
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Resources/PrivacyInfo.xcprivacy ... 
-2026-06-30 03:05:22 +0000  398 bytes for ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Resources/PrivacyInfo.xcprivacy
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Info.plist ... 
-2026-06-30 03:05:22 +0000  1130 bytes for ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Info.plist
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/AppIcon.icns ... 
-2026-06-30 03:05:22 +0000  10132 bytes for ./Contents/Resources/AppIcon.icns
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/Assets.car ... 
-2026-06-30 03:05:22 +0000  47848 bytes for ./Contents/Resources/Assets.car
-2026-06-30 03:05:22 +0000  copying file ./Contents/Resources/PrivacyInfo.xcprivacy ... 
-2026-06-30 03:05:22 +0000  1262 bytes for ./Contents/Resources/PrivacyInfo.xcprivacy
-2026-06-30 03:05:22 +0000  copying file ./Contents/Info.plist ... 
-2026-06-30 03:05:22 +0000  1720 bytes for ./Contents/Info.plist
-2026-06-30 03:05:22 +0000  copying file ./Contents/PkgInfo ... 
-2026-06-30 03:05:22 +0000  8 bytes for ./Contents/PkgInfo
-2026-06-30 03:05:22 +0000 [MT] /usr/bin/ditto exited with 0
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
-2026-06-30 03:05:22 +0000 [MT] Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionItemRemovalStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionSymbolsStep
-2026-06-30 03:05:22 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Symbols/3748F3E5-B646-3057-BF12-81D467C935ED.symbols
-2026-06-30 03:05:22 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Symbols/A2AEE056-1B85-31A0-A948-E921DF6C375A.symbols
-2026-06-30 03:05:22 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Symbols/3748F3E5-B646-3057-BF12-81D467C935ED.symbols
-2026-06-30 03:05:22 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Symbols/A2AEE056-1B85-31A0-A948-E921DF6C375A.symbols
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionCopyAppleProvidedContentStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionAppThinningStep
-2026-06-30 03:05:22 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionArchThinningStep
-2026-06-30 03:05:22 +0000 [MT] Archs to thin for item /Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app are []
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionODRStep
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
-2026-06-30 03:05:22 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionCodesignStep
-2026-06-30 03:05:22 +0000 [MT] Entitlements for <IDEDistributionItem: 0xa8c3789c0; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0xa8c1d5ce0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0xa8c378a20; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0xa89a803c0; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
+	<IDEDistributionProcessingPipelineContext: 0x82df40f00; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionProcessingPipelineContext: 0x82df41800; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88ef80; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88f200; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88f480; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88f700; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88db80; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88d900; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88f980; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88d180; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88cf00; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88cc80; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="<IDEProvisioningBasicTeam: 0x82b9b6580; teamID='QMM486NPYC', teamName='Joshua Trommel'>">
+	<IDEDistributionContext: 0x82d88ca00; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="(null)">
+	<IDEDistributionContext: 0x82d88c280; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="<IDEDistributionMethodMacAppStoreDistribution: 0x82ddb3b70>", team="(null)">
+	<IDEDistributionContext: 0x10541c2e0; archive = "<IDEArchive: 0x82df941c0>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x82df40f00>
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2026-07-21 22:51:23 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app'
+2026-07-21 22:51:23 +0000  >>> Copying /Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app 
+2026-07-21 22:51:23 +0000  copying file ./Contents/_CodeSignature/CodeResources ... 
+2026-07-21 22:51:23 +0000  4570 bytes for ./Contents/_CodeSignature/CodeResources
+2026-07-21 22:51:23 +0000  copying file ./Contents/MacOS/Echo-macOS ... 
+2026-07-21 22:51:23 +0000  6365008 bytes for ./Contents/MacOS/Echo-macOS
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/gpt2_tokenizer_config.json ... 
+2026-07-21 22:51:23 +0000  234 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/gpt2_tokenizer_config.json
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/t5_tokenizer_config.json ... 
+2026-07-21 22:51:23 +0000  20746 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Resources/t5_tokenizer_config.json
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Info.plist ... 
+2026-07-21 22:51:23 +0000  1135 bytes for ./Contents/Resources/swift-transformers_Hub.bundle/Contents/Info.plist
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Resources/PrivacyInfo.xcprivacy ... 
+2026-07-21 22:51:23 +0000  398 bytes for ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Resources/PrivacyInfo.xcprivacy
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Info.plist ... 
+2026-07-21 22:51:23 +0000  1130 bytes for ./Contents/Resources/swift-crypto_Crypto.bundle/Contents/Info.plist
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/AppIcon.icns ... 
+2026-07-21 22:51:23 +0000  10228 bytes for ./Contents/Resources/AppIcon.icns
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/Assets.car ... 
+2026-07-21 22:51:23 +0000  55400 bytes for ./Contents/Resources/Assets.car
+2026-07-21 22:51:23 +0000  copying file ./Contents/Resources/PrivacyInfo.xcprivacy ... 
+2026-07-21 22:51:23 +0000  1262 bytes for ./Contents/Resources/PrivacyInfo.xcprivacy
+2026-07-21 22:51:23 +0000  copying file ./Contents/Info.plist ... 
+2026-07-21 22:51:23 +0000  1731 bytes for ./Contents/Info.plist
+2026-07-21 22:51:23 +0000  copying file ./Contents/PkgInfo ... 
+2026-07-21 22:51:23 +0000  8 bytes for ./Contents/PkgInfo
+2026-07-21 22:51:23 +0000 [MT] /usr/bin/ditto exited with 0
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2026-07-21 22:51:23 +0000 [MT] Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionItemRemovalStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2026-07-21 22:51:23 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Symbols/7FCC4AAA-4737-3605-A367-B16C9F508693.symbols
+2026-07-21 22:51:23 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Symbols/1D42BACF-1DF7-3B9B-8243-930C14F7D15B.symbols
+2026-07-21 22:51:23 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Symbols/7FCC4AAA-4737-3605-A367-B16C9F508693.symbols
+2026-07-21 22:51:23 +0000 [MT] Writing /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Symbols/1D42BACF-1DF7-3B9B-8243-930C14F7D15B.symbols
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionCopyAppleProvidedContentStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2026-07-21 22:51:23 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2026-07-21 22:51:23 +0000 [MT] Archs to thin for item /Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app are []
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionODRStep
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2026-07-21 22:51:23 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2026-07-21 22:51:23 +0000 [MT] Entitlements for <IDEDistributionItem: 0x82bae0420; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0x82b95d8c0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x82bae0480; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x82b530e40; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
     "1.2.840.113635.100.6.1.12",
     "1.2.840.113635.100.6.1.2"
 ), issueDate='2026-06-12 02:06:14 +0000''>', entitlements='{
@@ -72,7 +72,7 @@
     "com.apple.security.device.audio-input" = 1;
     "com.apple.security.files.user-selected.read-only" = 1;
     "com.apple.security.network.client" = 1;
-}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0xa8c1d7540:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'>: {
+}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0x82b95e8e0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'>: {
     "com.apple.application-identifier" = "QMM486NPYC.com.nulljosh.echo.mac";
     "com.apple.developer.team-identifier" = QMM486NPYC;
     "com.apple.security.app-sandbox" = 1;
@@ -80,8 +80,8 @@
     "com.apple.security.files.user-selected.read-only" = 1;
     "com.apple.security.network.client" = 1;
 }
-2026-06-30 03:05:22 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
-2026-06-30 03:05:22 +0000 [MT] Entitlements for <IDEDistributionItem: 0xa8c3789c0; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0xa8c1d5ce0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0xa8c378a20; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0xa89a80e40; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
+2026-07-21 22:51:23 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2026-07-21 22:51:23 +0000 [MT] Entitlements for <IDEDistributionItem: 0x82bae0420; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0x82b95d8c0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x82bae0480; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x82b530fc0; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
     "1.2.840.113635.100.6.1.12",
     "1.2.840.113635.100.6.1.2"
 ), issueDate='2026-06-12 02:06:14 +0000''>', entitlements='{
@@ -89,7 +89,7 @@
     "com.apple.security.device.audio-input" = 1;
     "com.apple.security.files.user-selected.read-only" = 1;
     "com.apple.security.network.client" = 1;
-}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0xa8c1d7540:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'> are: {
+}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0x82b95e8e0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'> are: {
     "com.apple.application-identifier" = "QMM486NPYC.com.nulljosh.echo.mac";
     "com.apple.developer.team-identifier" = QMM486NPYC;
     "com.apple.security.app-sandbox" = 1;
@@ -97,7 +97,7 @@
     "com.apple.security.files.user-selected.read-only" = 1;
     "com.apple.security.network.client" = 1;
 }
-2026-06-30 03:05:22 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0xa8c3789c0; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0xa8c1d5ce0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0xa8c378a20; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0xa89a80e40; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
+2026-07-21 22:51:23 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x82bae0420; bundleID='com.nulljosh.echo.mac', path='<DVTFilePath:0x82b95d8c0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x82bae0480; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x82b530fc0; name='Apple Development: trommatic@icloud.com (8VQ3Z7494A)', hash='DCF40745BE43EDF323978FBAEB96BAC4C4FA93E2', serialNumber='AD882848985F58FD0F83487E38FA44C', certificateKinds='(
     "1.2.840.113635.100.6.1.12",
     "1.2.840.113635.100.6.1.2"
 ), issueDate='2026-06-12 02:06:14 +0000''>', entitlements='{
@@ -105,35 +105,35 @@
     "com.apple.security.device.audio-input" = 1;
     "com.apple.security.files.user-selected.read-only" = 1;
     "com.apple.security.network.client" = 1;
-}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0xa8c1d7540:'/Users/joshua/Documents/Code/echo/.asc/artifacts/Echo-macOS.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'> to: /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/entitlements~~~OlulNf
-2026-06-30 03:05:22 +0000 [MT] invoking codesign: <NSConcreteTask: 0xa8c68ec10; launchPath='/usr/bin/codesign', arguments='(
+}', teamID='QMM486NPYC', identifier='com.nulljosh.echo.mac', executablePath='<DVTFilePath:0x82b95e8e0:'/Users/joshua/Documents/Code/echo/.asc/artifacts/EchoMac.xcarchive/Products/Applications/Echo-macOS.app/Contents/MacOS/Echo-macOS'>', hardenedRuntime='1'>'> to: /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/entitlements~~~zRnP51
+2026-07-21 22:51:23 +0000 [MT] invoking codesign: <NSConcreteTask: 0x82b546df0; launchPath='/usr/bin/codesign', arguments='(
     "-f",
     "-s",
     841ED832F5CB2EA83C5EE8C502992F8B46BBBC32,
     "--entitlements",
-    "/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/entitlements~~~OlulNf",
+    "/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/entitlements~~~zRnP51",
     "--preserve-metadata=identifier,flags,runtime,launch-constraints,library-constraints",
     "--generate-entitlement-der",
     "--strip-disallowed-xattrs",
     "-vvv",
-    "/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app"
+    "/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app"
 )'>
-2026-06-30 03:05:22 +0000 [MT] codesign output: /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app: replacing existing signature
-/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app: signed app bundle with Mach-O universal (x86_64 arm64) [com.nulljosh.echo.mac]
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
-2026-06-30 03:05:22 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
-2026-06-30 03:05:22 +0000 [MT] Processing step: IDEDistributionCreatePKGStep
-2026-06-30 03:05:22 +0000 [MT] Running /usr/bin/productbuild '--sign' '3rd Party Mac Developer Installer: Joshua Trommel (QMM486NPYC)' '--symbolication' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Symbols' '--component' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app' '/Applications' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Packages/Echo.pkg'
-2026-06-30 03:05:23 +0000  productbuild: Adding component at /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app
+2026-07-21 22:51:23 +0000 [MT] codesign output: /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app: replacing existing signature
+/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app: signed app bundle with Mach-O universal (x86_64 arm64) [com.nulljosh.echo.mac]
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2026-07-21 22:51:23 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2026-07-21 22:51:23 +0000 [MT] Processing step: IDEDistributionCreatePKGStep
+2026-07-21 22:51:23 +0000 [MT] Running /usr/bin/productbuild '--sign' '3rd Party Mac Developer Installer: Joshua Trommel (QMM486NPYC)' '--symbolication' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Symbols' '--component' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app' '/Applications' '/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Packages/Echo.pkg'
+2026-07-21 22:51:24 +0000  productbuild: Adding component at /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app
 productbuild: Signing product with identity "3rd Party Mac Developer Installer: Joshua Trommel (QMM486NPYC)" from keychain /Users/joshua/Library/Keychains/login.keychain-db
 productbuild: Adding certificate "Apple Worldwide Developer Relations Certification Authority"
 productbuild: Adding certificate "Apple Root CA"
-productbuild: Wrote product to /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Packages/Echo.pkg
+productbuild: Wrote product to /var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Packages/Echo.pkg
 productbuild: Supported OS versions: [Min: 14.0, Before: None]
-2026-06-30 03:05:23 +0000 [MT] /usr/bin/productbuild exited with 0
-2026-06-30 03:05:23 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
-2026-06-30 03:05:23 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
-2026-06-30 03:05:23 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
-2026-06-30 03:05:23 +0000 [MT] IDEDistributionItem init <DVTFilePath:0xa8c37a040:'/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~FDSepi/Root/Applications/Echo-macOS.app'>
-2026-06-30 03:05:23 +0000 [MT] Processing step: IDEDistributionCreateManifestStep
-2026-06-30 03:05:23 +0000 [MT] Skipping step: IDEDistributionCreateManifestStep because it said so
+2026-07-21 22:51:24 +0000 [MT] /usr/bin/productbuild exited with 0
+2026-07-21 22:51:24 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2026-07-21 22:51:24 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2026-07-21 22:51:24 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2026-07-21 22:51:24 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x82bae1b00:'/var/folders/vk/dmj39y_n1n7gs0wclbyqkfn40000gn/T/XcodeDistPipeline.~~~twu8Mf/Root/Applications/Echo-macOS.app'>
+2026-07-21 22:51:24 +0000 [MT] Processing step: IDEDistributionCreateManifestStep
+2026-07-21 22:51:24 +0000 [MT] Skipping step: IDEDistributionCreateManifestStep because it said so
