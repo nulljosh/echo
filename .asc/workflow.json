@@ -1,6 +1,6 @@
 {
   // Release automation. Run: asc workflow run ship-ios VERSION:x.y.z
-  "env": { "IOS_APP_ID": "6782604262", "MAC_APP_ID": "6783015101", "VERSION": "", "SUBMIT": "true" },
+  "env": { "IOS_APP_ID": "6782604262", "MAC_APP_ID": "6782604262", "VERSION": "", "SUBMIT": "true" },
   "before_all": "asc auth status",
   "workflows": {
     "ship-ios": { "description": "Bump, archive, upload, submit iOS", "steps": [

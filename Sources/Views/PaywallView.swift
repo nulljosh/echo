@@ -77,6 +77,7 @@ struct PaywallView: View {
         }
         .frame(maxWidth: 420)
         .onChange(of: store.isPro) { _, isPro in if isPro { dismiss() } }
+        .task { if store.product == nil { await store.loadProduct() } }
     }
 
     private var buyTitle: String {

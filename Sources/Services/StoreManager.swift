@@ -14,7 +14,9 @@ final class StoreManager: ObservableObject {
     static let freeFileLimit = 3
     private static let usedCountKey = "echo.fileTranscriptionsUsed"
 
-    @Published private(set) var isPro = false
+    // ponytail: no Paid Apps Agreement/bank account on the dev account yet, so IAP
+    // can't function in review at all — ship v1 fully unlocked, re-enable for v2.
+    @Published private(set) var isPro = true
     @Published private(set) var product: Product?
     @Published private(set) var purchasing = false
     @Published var showPaywall = false
@@ -57,7 +59,15 @@ final class StoreManager: ObservableObject {
     // MARK: - Purchase flow
 
     func loadProduct() async {
-        product = try? await Product.products(for: [Self.productID]).first
+        // ponytail: sandbox/App Review StoreKit fetches occasionally fail transiently;
+        // retry a few times with backoff instead of leaving the button dead forever.
+        for attempt in 0..<3 {
+            if let fetched = try? await Product.products(for: [Self.productID]).first {
+                product = fetched
+                return
+            }
+            if attempt < 2 { try? await Task.sleep(for: .seconds(1 << attempt)) }
+        }
     }
 
     func purchase() async {
@@ -85,15 +95,9 @@ final class StoreManager: ObservableObject {
     // MARK: - Entitlement
 
     private func refreshEntitlement() async {
-        for await result in Transaction.currentEntitlements {
-            if case .verified(let transaction) = result,
-               transaction.productID == Self.productID,
-               transaction.revocationDate == nil {
-                isPro = true
-                return
-            }
-        }
-        isPro = false
+        // ponytail: no-op while isPro is hardcoded true above; restore this body
+        // (removing the early return) when IAP is re-enabled for v2.
+        return
     }
 
     private func listenForTransactions() -> Task<Void, Never> {
