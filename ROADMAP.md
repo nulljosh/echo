@@ -66,7 +66,7 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 - [x] Mirrored on both Echo-iOS and Echo-macOS targets (shared SwiftUI code, no platform-specific branching needed).
 
 ## Stashed 2026-07-19
-- [ ] Submit macOS 1.0 (app 6783015101): metadata DONE 2026-07-19; App Privacy published via asc web 2026-07-19; still blocked on pricing only — set Free in ASC dashboard then `asc review submit --app 6783015101 --version 1.0 --platform MAC_OS --build <latest> --confirm`
+- [x] Submit macOS (app 6783015101) — "blocked on pricing" was stale: `asc pricing current/schedule view/availability view` all showed Free + availability already set via CLI (no dashboard step needed). Version is actually 1.3.3 (Universal Purchase merge already bumped it past 1.0), not 1.0 as this note assumed. Attached latest VALID build (e53be61e, 202607211549), `asc validate` came back clean (only a non-blocking "what's new empty" warning — not editable on a first Mac submission, no prior version to reference), submitted 2026-07-21T20:34:22-07:00 (submission 7b96da2c).
 - [x] iOS 1.3.3 submitted for review 2026-07-19 (submission a632f6e0, build 11f70e89)
 
 ## ASC review findings 2026-07-20 (via Resolution Center)
