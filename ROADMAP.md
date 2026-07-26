@@ -47,3 +47,7 @@ $7.99 one-time, freemium with 3 free file transcriptions. Rationale and competit
 
 ## ASC review findings 2026-07-20 (via Resolution Center)
 - [ ] Guideline 2.1(b) App Completeness: "Unlock Echo Pro" IAP button greyed out/unresponsive in review. Root cause hypothesis (per Apple's own message): Paid Apps Agreement likely not in effect — needs bank/tax info added in ASC → Business → Agreements, Tax and Banking. No CLI/API path exists to check or fix this (dashboard-only, needs Joshua's real banking info). Paywall design confirmed by Joshua: 3-5 free transcriptions, then Pro unlocks unlimited for a few dollars via IAP.
+
+## Ingested 2026-07-25
+- [ ] Echo Mac — follow-up work needed (no further detail given).
+- [ ] Splash screen / landing page still has cursive font — should match SF/Helvetica like other projects (epiphany etc). Never use cursive. Double-check all remaining projects landing pages for cursive too (sparkjar flagged specifically — see sparkjar/roadmap.md).
