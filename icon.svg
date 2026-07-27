@@ -1,17 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <rect width="200" height="200" rx="44" fill="#16a394"/>
+  <rect width="200" height="200" rx="44" fill="#0074D9"/>
 
-  <!-- Two stacked circles, center -->
-  <circle cx="100" cy="85" r="19" fill="#ffffff"/>
-  <circle cx="100" cy="123" r="15" fill="#ffffff"/>
-
-  <!-- Waveform bars - left side -->
-  <rect x="30" y="97" width="9" height="18" rx="4.5" fill="#9a9a9a"/>
-  <rect x="45" y="79" width="9" height="42" rx="4.5" fill="#d8d8d8"/>
-  <rect x="60" y="63" width="9" height="60" rx="4.5" fill="#e8e8e8"/>
-
-  <!-- Waveform bars - right side -->
-  <rect x="131" y="63" width="9" height="60" rx="4.5" fill="#e8e8e8"/>
-  <rect x="146" y="79" width="9" height="42" rx="4.5" fill="#d8d8d8"/>
-  <rect x="161" y="97" width="9" height="18" rx="4.5" fill="#9a9a9a"/>
+  <!-- Microphone -->
+  <rect x="84" y="46" width="32" height="62" rx="16" fill="#ffffff"/>
+  <path d="M62 92 a38 38 0 0 0 76 0" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+  <line x1="100" y1="130" x2="100" y2="148" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+  <line x1="76" y1="148" x2="124" y2="148" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
 </svg>
