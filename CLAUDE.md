@@ -55,7 +55,7 @@ open echo.xcodeproj
 
 ## Web Deployment
 
-Echo's landing page (`web/index.html` + `web/css/main.css`) is hosted on **Cloudflare Pages**, not Vercel. The site has no git auto-deploy configured — changes require manual deployment after pushing commits:
+Echo's landing page (`web/index.html`, styles inline) is hosted on **Cloudflare Pages**, not Vercel. The site has no git auto-deploy configured — changes require manual deployment after pushing commits:
 
 ```bash
 npx wrangler login
