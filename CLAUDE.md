@@ -93,3 +93,6 @@ Plan file: `~/.claude/plans/federated-discovering-hamster.md`. Three-part ask: l
 ## Icon redesign (2026-07-26 night)
 - [x] Icon reworked from teal-squircle "snowman circles + waveform" to a single clean mic glyph on clrs.cc blue (#0074D9). All of `icon.svg`/`icon-mac.svg`/`web/assets/icon.svg` plus iOS/macOS Assets.xcassets PNGs regenerated and synced; macOS build verified (`xcodebuild build -scheme Echo-macOS`).
 - [ ] Not yet shipped: v1.3.4 is already in App Store review with the old teal icon — this new icon needs a version bump (1.3.5) and a fresh `asc workflow run ship-ios` once the current review clears, don't resubmit mid-review.
+
+## From App Store.pdf (imported 2026-07-28)
+- [ ] Echo Transcribe Mac (ASC 6783015101) duplicate record still needs merge/delete — support case 102949488998 filed 2026-07-22, dashboard-only.
