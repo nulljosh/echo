@@ -95,4 +95,10 @@ Plan file: `~/.claude/plans/federated-discovering-hamster.md`. Three-part ask: l
 - [ ] Not yet shipped: v1.3.4 is already in App Store review with the old teal icon — this new icon needs a version bump (1.3.5) and a fresh `asc workflow run ship-ios` once the current review clears, don't resubmit mid-review.
 
 ## From App Store.pdf (imported 2026-07-28)
-- [ ] Echo Transcribe Mac (ASC 6783015101) duplicate record still needs merge/delete — support case 102949488998 filed 2026-07-22, dashboard-only.
+- [ ] Echo Transcribe Mac (ASC 6783015101) duplicate record still needs merge/delete — support case 102949488998 filed 2026-07-22, dashboard-only. Joshua confirmed 2026-07-29 he'd delete it himself from the ASC app-info screen he was already on.
+
+## Ship v1.3.5 (2026-07-29, in progress — resume here if interrupted)
+- [x] `project.yml` MARKETING_VERSION bumped 1.3.3 → 1.3.5, `xcodegen generate` run.
+- [x] First `asc workflow run ship-ios VERSION:1.3.5` attempt failed at export: `Invalid large app icon... can't be transparent or contain an alpha channel` (code 90717) — the new mic-glyph icon from the 2026-07-26 redesign had alpha.
+- [x] Fixed: `magick Sources/iOS/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png -background "#0074D9" -alpha remove -alpha off <same path>` to flatten. Committed `e9aed79`.
+- [ ] Re-ran `asc workflow run ship-ios VERSION:1.3.5` (fresh, not `--resume` — resuming skipped the archive step since it had "succeeded" before I deleted the stale archive dir). Was mid-archive/export when session hit 93% usage. Check status with `asc submission-health` or re-run `asc workflow run ship-ios VERSION:1.3.5` if it didn't complete — if it's already at 1.3.5 Ready/In Review, this is done.
