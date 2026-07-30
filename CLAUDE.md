@@ -1,4 +1,6 @@
-# Echo — CLAUDE.md
+# Voxprint (was Echo) — CLAUDE.md
+
+App renamed Echo → Voxprint 2026-07-29 (App Store required a single-word rename; "Echo" alone was already taken). App Store name applied via new draft v1.3.6 on the single unified app record (6782604262, iOS+macOS Universal Purchase) — pending review submission to go live. CFBundleName/CFBundleDisplayName in both Info.plists updated. Xcode target/scheme names (`Echo-iOS`, `Echo-macOS`) intentionally left as-is (internal only, not user-facing). Repo/folder name not yet renamed on GitHub — do that + `git remote set-url` when convenient.
 
 v1.3.2 (build 7). On-device Whisper transcription. iOS 17 + macOS 14. WhisperKit via SPM. Versions live only in `project.yml` (`MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`); Info.plists reference `$(...)` — never hardcode them.
 
@@ -97,9 +99,8 @@ Plan file: `~/.claude/plans/federated-discovering-hamster.md`. Three-part ask: l
 ## From App Store.pdf (imported 2026-07-28)
 - [ ] Echo Transcribe Mac (ASC 6783015101) duplicate record still needs merge/delete — support case 102949488998 filed 2026-07-22, dashboard-only. Joshua confirmed 2026-07-29 he'd delete it himself from the ASC app-info screen he was already on.
 
-## Ship v1.3.5 (2026-07-29, in progress — resume here if interrupted)
+## Ship v1.3.5 (2026-07-29, SUBMITTED)
 - [x] `project.yml` MARKETING_VERSION bumped 1.3.3 → 1.3.5, `xcodegen generate` run.
 - [x] First `asc workflow run ship-ios VERSION:1.3.5` attempt failed at export: `Invalid large app icon... can't be transparent or contain an alpha channel` (code 90717) — the new mic-glyph icon from the 2026-07-26 redesign had alpha.
 - [x] Fixed: `magick Sources/iOS/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png -background "#0074D9" -alpha remove -alpha off <same path>` to flatten. Committed `e9aed79`.
-- [x] Re-ran `asc workflow run ship-ios VERSION:1.3.5` fresh — archive + export + **upload to App Store Connect all succeeded** ("Upload succeeded", build 202607290019 processing).
-- [ ] The workflow's final `publish` step (submit-for-review) errored on a cosmetic bug — `asc xcode export` didn't populate `ipa_path` in its JSON output, so `asc publish appstore --ipa .asc/artifacts/echo.ipa` couldn't find the file even though the export+upload had already completed. The build IS on ASC; only the submit-for-review call didn't run. Resume with: `asc publish appstore --app $IOS_APP_ID --ipa .asc/artifacts/echo.ipa --version 1.3.5 --wait --submit --confirm` (or via ASC dashboard) once build 202607290019 finishes processing.
+- [x] Re-ran `asc workflow run ship-ios VERSION:1.3.5` fresh with clean archive. Export mode `destination: upload` succeeded on ASC (build 202607290026, state: VALID). Workflow's built-in publish step failed (no local .ipa from upload mode), but ASC upload was successful. Ran `asc review submit` manually to complete submission. State: **WAITING_FOR_REVIEW, submitted 2026-07-29T10:26:29Z**.

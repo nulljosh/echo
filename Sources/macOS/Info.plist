@@ -5,9 +5,9 @@
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleName</key>
-    <string>Echo</string>
+    <string>Voxprint</string>
     <key>CFBundleDisplayName</key>
-    <string>Echo</string>
+    <string>Voxprint</string>
     <key>CFBundleIdentifier</key>
     <string>com.nulljosh.echo</string>
     <key>CFBundlePackageType</key>
