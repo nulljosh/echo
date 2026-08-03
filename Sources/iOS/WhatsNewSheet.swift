@@ -1,9 +1,9 @@
 import SwiftUI
 
-private let whatsNewVersion = "1.3.3"
+private let whatsNewVersion = "1.3.6"
 private let whatsNewBullets = [
-    "Import audio straight from Voice Memos via Share Sheet",
-    "Fixed long file transcriptions stalling — now chunked with progress bar",
+    "Echo is now Voxprint — same on-device transcription, new name",
+    "Nothing leaves your device: transcription still runs entirely offline",
 ]
 
 struct WhatsNewSheet: View {
