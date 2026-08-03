@@ -73,7 +73,7 @@ class TranscriptionEngine: ObservableObject {
             return
         }
         if args.contains("UITEST_FINISHED") {
-            transcribedText = "This is a sample finished transcript that demonstrates how Echo captures and displays spoken words with high accuracy, entirely on-device."
+            transcribedText = "This is a sample finished transcript that demonstrates how Voxprint captures and displays spoken words with high accuracy, entirely on-device."
             return
         }
         if args.contains("UITEST_HISTORY") {

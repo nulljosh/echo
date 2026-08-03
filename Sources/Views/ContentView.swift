@@ -236,7 +236,7 @@ struct ContentView: View {
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Text("Echo").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
+            Text("Voxprint").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
             Spacer()
             statusDot
             Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .record } } label: {

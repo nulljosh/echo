@@ -20,7 +20,7 @@ struct PaywallView: View {
                 .foregroundStyle(.primary)
                 .padding(.bottom, 16)
 
-            Text("Echo Pro")
+            Text("Voxprint Pro")
                 .font(.system(size: 28, weight: .bold))
             Text("Own it once. Not a subscription.")
                 .font(.system(size: 15))
@@ -82,7 +82,7 @@ struct PaywallView: View {
 
     private var buyTitle: String {
         if let price = store.product?.displayPrice { return "Unlock for \(price)" }
-        return "Unlock Echo Pro"
+        return "Unlock Voxprint Pro"
     }
 
     /// System background color (inverse of `Color.primary`) so the button label

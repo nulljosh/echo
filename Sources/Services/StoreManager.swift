@@ -1,7 +1,7 @@
 import Foundation
 import StoreKit
 
-/// Local, server-free entitlement for Echo Pro.
+/// Local, server-free entitlement for Voxprint Pro.
 ///
 /// One non-consumable unlock (`com.nulljosh.echo.unlock`). Ownership is read straight
 /// from StoreKit's `Transaction.currentEntitlements`, so there is no account, no

@@ -50,7 +50,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("Echo Pro") {
+                Section("Voxprint Pro") {
                     if store.isPro {
                         Label("Unlocked", systemImage: "checkmark.seal.fill")
                             .foregroundStyle(.primary)
@@ -60,7 +60,7 @@ struct SettingsView: View {
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("Unlock Echo Pro").foregroundStyle(.primary)
+                                    Text("Unlock Voxprint Pro").foregroundStyle(.primary)
                                     Text("\(store.freeFilesRemaining) free file transcriptions left")
                                         .font(.caption).foregroundStyle(.secondary)
                                 }

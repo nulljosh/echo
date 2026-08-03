@@ -15,7 +15,7 @@ struct SplashView: View {
                 Image(systemName: "waveform")
                     .font(.system(size: 56, weight: .light))
                     .foregroundStyle(.primary)
-                Text("Echo")
+                Text("Voxprint")
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundStyle(.primary)
             }

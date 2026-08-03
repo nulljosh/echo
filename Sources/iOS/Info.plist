@@ -19,7 +19,7 @@
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Echo transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
+    <string>Voxprint transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
     <key>NSAppTransportSecurity</key>
     <dict>
         <key>NSAllowsLocalNetworking</key>
