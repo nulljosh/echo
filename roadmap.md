@@ -8,18 +8,12 @@
   - **Exactly what to do:** run `asc-login`, enter the 2FA code, then `asc web apps delete --app 6783015101`. If that still refuses, delete via appstoreconnect.apple.com → Transcriptly → App Information → Remove App.
   - Apple support case **102949489427** (an earlier note cites 102949488998 — still unconfirmed which is live; can't check without the web session).
 
-## Echo→Voxprint rename, remaining (2026-08-10)
-- [ ] Regenerate `web/assets/shot-1.png` / `shot-2.png` — hero mockups on
-      voxprint.heyitsmejosh.com still show "Echo" in the phone title bar.
-      Captured 14 Jul, pre-rename. App source already renders "Voxprint"
-      (Sources/Views/ContentView.swift:239), so a fresh sim capture is the
-      whole fix: shot-1 = finished transcript, shot-2 = mid-record (red stop).
-      Overwrite at the same filenames, then `wrangler pages deploy web
-      --project-name echo`.
-- [ ] AppStore.md:8,69 lists the privacy URL as
-      https://heyitsmejosh.com/echo/privacy.html — that 404s. The live,
-      Voxprint-branded page is https://echo.heyitsmejosh.com/privacy.html.
-      Verify which URL App Store Connect actually holds and repoint if needed.
-- Done: docs/ site (GitHub Pages, echo.heyitsmejosh.com) fully renamed.
-- Deliberately skipped: project.yml target/scheme names, .ship.json,
-  bundle id com.nulljosh.echo — internal only, no user-visible impact.
+## After the 5.6 freeze lifts (2026-08-18)
+- [ ] Upload the regenerated App Store screenshots (`screenshots/appstore/`) — the
+      live listing still shows Jul 3 captures with "Echo" branding. Shots 1/2/5 are
+      current as of 2026-08-11; `3-paywall.png` and `4-settings.png` are still stale
+      and need capturing (they require UI navigation, not just a launch argument).
+- [ ] Migrate the App Store privacy URL to `https://echo.heyitsmejosh.com/privacy.html`.
+      Currently held as the old `heyitsmejosh.com/echo/privacy.html`, which now works
+      via a redirect in the portfolio repo. `asc localizations update` rejects the
+      field while the app-info is locked outside an editable version.
