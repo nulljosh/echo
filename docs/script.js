@@ -1,4 +1,4 @@
-// Echo Web App - Main JavaScript
+// Voxprint Web App - Main JavaScript
 // Transcription, recording, file upload, and history management
 
 // Initialize Web Speech API
