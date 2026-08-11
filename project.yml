@@ -107,6 +107,10 @@ schemes:
         Echo-iOS: all
         EchoUITests: all
     test:
+      # Screenshot runs are headless: attaching LLDB makes the app launch with
+      # wait_for_debugger, and a broken debugger version store then denies the
+      # launch outright (SBMainWorkspace RequestDenied).
+      debugEnabled: false
       targets:
         - EchoUITests
     shared: true
