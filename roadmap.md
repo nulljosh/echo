@@ -99,3 +99,20 @@ not before.
       200 and serves Voxprint-branded content (the old one also still 200s, so this is
       a correctness/branding fix, not an outage). One `asc localizations update` call
       once a 1.3.7 draft exists.
+
+
+## From ASC session 2026-08-19
+- [ ] **Delete orphan ASC record 6783015101 (Transcriptly, com.nulljosh.echo.mac).**
+  Progress 2026-08-19: Apple's SRP 503 cleared, web session re-established. The
+  in-flight-submission blocker is GONE — submission f9402460 was cancelled with
+  `asc review submissions-update --id <id> --canceled=true --confirm` (this DOES
+  work via CLI; the old "drafts are dashboard-only" note was wrong).
+  Remaining blocker is only `STATE_ERROR.CANNOT_REMOVE_WITH_APP_STORE_AVAILABILITY`.
+  `asc web apps availability` exposes only `create`, and `asc pricing availability
+  edit` refuses to flip `--available-in-new-territories` on an existing record, so
+  clearing availability looks genuinely dashboard-only: App Store Connect ->
+  Transcriptly -> Pricing and Availability -> remove from sale in all territories.
+  Then re-run:
+  `asc web apps delete --app 6783015101 --expected-bundle-id com.nulljosh.echo.mac --expected-name "Transcriptly" --confirm`
+  Safe to delete: Voxprint 6782604262 (com.nulljosh.echo) already ships MAC_OS
+  1.3.6 READY_FOR_SALE, and deleting an app record does not unregister the bundle ID.
