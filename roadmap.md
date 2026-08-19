@@ -13,11 +13,12 @@ with `ponytail:` comments explaining why:
 - line ~19: `@Published private(set) var isPro = true` — hardcoded open
 - `refreshEntitlement()`: stubbed to an early `return`
 
-**Blocker: no Paid Apps Agreement / bank account on the Apple dev account.** Dashboard-only
-(App Store Connect → Business → Agreements); `asc agreements` exposes only `territories`, so
-there is no CLI path. Blocked on Joshua, tracked in the wiki's `blocked-on-joshua.md` §3.
+**Blocker: Apple is rejecting the bank account during payout enrollment.** This gates all IAP
+revenue across every app. Apple's exact rejection reason is unknown (check ASC web UI → Business
+→ Agreements); CRA business number involvement is uncertain but requires investigation. Phone queue
+to CRA has been unresolved for weeks. Tracked in the wiki's `blocked-on-joshua.md` §3.
 
-Once signed: revert those two lines, rebuild, ship as v2. No other work required.
+Once the account is enrolled: revert those two lines, rebuild, ship as v2. No other work required.
 Stripe is irrelevant here — Voxprint has no server and no accounts, and Apple requires IAP for
 unlocking in-app features regardless.
 
