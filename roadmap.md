@@ -1,5 +1,27 @@
 # Voxprint (formerly Echo Transcription) Roadmap
 
+## BLOCKED — IAP is built but switched off (Paid Apps Agreement)
+
+Everything for Voxprint Pro already exists and is correct:
+`Echo.storekit` defines `com.nulljosh.echo.unlock` as a **$7.99 non-consumable** (pricing
+re-confirmed 2026-08-19 — keep it; "own it once, nothing leaves your device" is the pitch, so a
+subscription would contradict the product), `PaywallView.swift` renders, `canTranscribeFile()`
+enforces the 3-free-file gate, and `listenForTransactions()` is wired.
+
+It is deliberately disabled in two places in `Sources/Services/StoreManager.swift`, both marked
+with `ponytail:` comments explaining why:
+- line ~19: `@Published private(set) var isPro = true` — hardcoded open
+- `refreshEntitlement()`: stubbed to an early `return`
+
+**Blocker: no Paid Apps Agreement / bank account on the Apple dev account.** Dashboard-only
+(App Store Connect → Business → Agreements); `asc agreements` exposes only `territories`, so
+there is no CLI path. Blocked on Joshua, tracked in the wiki's `blocked-on-joshua.md` §3.
+
+Once signed: revert those two lines, rebuild, ship as v2. No other work required.
+Stripe is irrelevant here — Voxprint has no server and no accounts, and Apple requires IAP for
+unlocking in-app features regardless.
+
+
 
 
 ## 2026-08-18 — Echo Pro branding: IAP fixed, screenshots BLOCKED on toolchain
