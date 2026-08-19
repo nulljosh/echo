@@ -1,5 +1,19 @@
 # Voxprint (formerly Echo Transcription) Roadmap
 
+
+## Bug 2026-08-18 — App Store screenshots still show the old name
+
+The live Voxprint listing's screenshots still render the pre-rename branding (**"Echo Pro"**) in the
+app-detail popup sheet. Visually confirmed against the ASC product page on 2026-08-18 — several
+iPhone 6.5" screenshots show "Echo Pro" in the sheet header.
+
+This is user-facing on a **live** listing: the store name says Voxprint, the screenshots say Echo Pro.
+
+- [ ] Re-shoot the iPhone screenshot set with the current build so the detail sheet reads "Voxprint",
+  then `asc screenshots upload`. Check the macOS set for the same leftover.
+- [ ] Blocked with everything else until the updated Apple Developer Program License Agreement is
+  accepted — metadata updates on existing apps are frozen until then.
+
 ## Blocked on Joshua
 - [ ] **Icon direction decision.** Current blue mic mark (clrs.cc #0074D9) reads generic. Needs Joshua's call on the new direction before any redesign — this is a taste/design judgement, not something to guess at. No command; just a decision, then the icon regen + a version bump to ship it.
 - [ ] **Delete the duplicate Mac ASC record `6783015101` ("Echo Transcribe Mac" / now listed as "Transcriptly", macOS 9.9.9 Developer Rejected).** Re-verified 2026-08-10: the record **still exists** and is still `MAC_OS 9.9.9 REJECTED`.
