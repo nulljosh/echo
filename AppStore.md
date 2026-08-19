@@ -11,7 +11,7 @@ Everything below is paste-ready. Account-side steps are the only thing blocking 
 ## The one blocker (only Joshua can do these)
 1. Enroll Apple Developer Program — $99 USD/yr. This gates every step below and every App Store dollar across all 38 apps. Highest-ROI $99 on the board.
 2. Create app record: bundle `com.nulljosh.echo` (iOS), team QMM486NPYC.
-3. Create IAP: non-consumable `com.nulljosh.echo.pro`, $7.99 (Tier 8), reference name "Echo Pro". Attach one paywall screenshot (IAP is reviewed with the first version).
+3. Create IAP: non-consumable `com.nulljosh.echo.unlock`, $7.99 (Tier 8), reference name "Voxprint Pro". Attach one paywall screenshot (IAP is reviewed with the first version).
 4. App Privacy: select **Data Not Collected** (paste the privacy URL above).
 5. Run the macOS sandbox smoke test before submitting the Mac build (mic permission, WhisperKit model lands in sandbox container, file import works). Ship iOS first if the Mac sandbox test slips — do not let it block the iPhone submission.
 
@@ -61,7 +61,7 @@ Echo is built for people who want their words, music, and audio transcribed with
 
 **What's New** (first version)
 ```
-First release. On-device transcription for iPhone. Live mic and file import, 12 languages, full history, all running locally. Echo Pro unlocks unlimited file transcription and the most accurate model for one payment.
+First release. On-device transcription for iPhone. Live mic and file import, 12 languages, full history, all running locally. Voxprint Pro unlocks unlimited file transcription and the most accurate model for one payment.
 ```
 
 **Support URL**: `https://heyitsmejosh.com`
@@ -76,7 +76,7 @@ Echo transcribes speech entirely on-device using a Whisper model (WhisperKit). N
 
 To test the in-app purchase:
 1. Live microphone transcription is free and unlimited. Tap record and speak.
-2. File transcription is free for the first 3 files, then prompts Echo Pro ($7.99, one-time non-consumable, com.nulljosh.echo.pro).
+2. File transcription is free for the first 3 files, then prompts Voxprint Pro ($7.99, one-time non-consumable, com.nulljosh.echo.unlock).
 3. "Restore Purchase" is in the paywall and in Settings.
 
 The first model download requires network once; after that the app is fully offline. Microphone permission is requested only when the user taps record.
@@ -86,7 +86,7 @@ The first model download requires network once; after that the app is fully offl
 1. Live transcription with the waveform animating
 2. A finished transcript with the share/copy bar
 3. History list
-4. The Echo Pro paywall (doubles as the IAP review screenshot)
+4. The Voxprint Pro paywall (doubles as the IAP review screenshot)
 5. Settings showing model + language pickers
 
 ## Privacy nutrition label answers

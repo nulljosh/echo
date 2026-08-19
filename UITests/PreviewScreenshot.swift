@@ -24,11 +24,12 @@ final class PreviewScreenshot: XCTestCase {
         app = launch(extraArgs: ["UITEST_HISTORY"])
         sleep(3)
         let historyButton = app.buttons["history-button"]
-        if historyButton.waitForExistence(timeout: 5) {
-            historyButton.tap()
-            sleep(2)
-            snapshot("2-history")
-        }
+        // A silent `if waitForExistence` skip here once left a stale, pre-rename
+        // 2-history.png in place while the run still exited 0. Fail loudly instead.
+        XCTAssertTrue(historyButton.waitForExistence(timeout: 5), "history-button never appeared - 2-history would have been skipped")
+        historyButton.tap()
+        sleep(2)
+        snapshot("2-history")
         app.terminate()
 
         app = launch(extraArgs: ["UITEST_PAYWALL"])
@@ -39,11 +40,10 @@ final class PreviewScreenshot: XCTestCase {
         app = launch(extraArgs: ["UITEST_FINISHED"])
         sleep(3)
         let settingsButton = app.buttons["settings-button"]
-        if settingsButton.waitForExistence(timeout: 5) {
-            settingsButton.tap()
-            sleep(2)
-            snapshot("4-settings")
-        }
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5), "settings-button never appeared - 4-settings would have been skipped")
+        settingsButton.tap()
+        sleep(2)
+        snapshot("4-settings")
         app.terminate()
 
         app = launch(extraArgs: ["UITEST_RECORDING"])
