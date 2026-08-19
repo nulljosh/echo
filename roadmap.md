@@ -1,6 +1,41 @@
 # Voxprint (formerly Echo Transcription) Roadmap
 
 
+
+## 2026-08-18 — Echo Pro branding: IAP fixed, screenshots BLOCKED on toolchain
+
+**Done:**
+- **IAP renamed.** The ASC in-app purchase was still called "Echo Pro" — visible in the iOS purchase
+  sheet and the listing's In-App Purchases section, independent of any screenshot. APPROVED records
+  can't be edited in place, so created IAP version 2 (`b6820fe3-d079-4e71-8d2e-c7ead1be8fda`) and
+  renamed localization `19ba7fbd-3900-4007-aed0-c8b4bb02a0df` to **"Voxprint Pro"**.
+- **Fixed the silent-skip bug** in `UITests/PreviewScreenshot.swift`. `2-history` and `4-settings`
+  wrapped their `snapshot()` calls in `if waitForExistence` guards, so a missed element skipped the
+  capture without failing and left the stale file in place. That is how `3-paywall.png` and
+  `4-settings.png` kept their pre-rename Jul 3 content while the pipeline exited 0. Both now assert.
+- Cleaned "Echo Pro" from `AppStore.md` and `fastlane/metadata/en-US/release_notes.txt`; corrected the
+  documented product id to the real `com.nulljosh.echo.unlock`.
+
+**Not done — the screenshots are still stale.**
+
+- [ ] **`fastlane snapshot` cannot extract images under Xcode 26.** Run 2026-08-18: the UI test itself
+  **passed** (all five launches ran, the new assertions held, `Test Succeeded`), but the results table
+  reported ❌ for both iPhone 11 Pro Max and iPhone 14 Plus and `fastlane/screenshots/en-US/` came out
+  empty, so the `cp` step failed. Toolchain: **fastlane 2.238.0 + Xcode 26.6** — fastlane cannot parse
+  the current `.xcresult` format, so it extracts zero attachments. Nothing is wrong with the app or
+  the test.
+  Options, cheapest first: (a) upgrade fastlane and retry; (b) drop fastlane and use
+  `asc screenshots run` / `asc screenshots capture`, which drives simctl directly (see the
+  `asc-shots-pipeline` skill); (c) extract the attachments from the `.xcresult` with `xcrun
+  xcresulttool` in `scripts/update_screenshots.sh`.
+- [ ] **`scripts/update_screenshots.sh` reports success when it failed.** It has `set -euo pipefail`,
+  but invoking it through a pipe (`... | tail`) masks the real exit code. Worse, the ❌ results table
+  is printed and ignored. Make the script assert that all five PNGs exist and are newer than the run
+  start before it commits anything.
+- [ ] Once capture works: the listing fix needs a **new iOS version 1.3.7** — 1.3.6 is READY_FOR_SALE
+  and ASC locks screenshots on a live version — plus a new build. Stage it, do not submit until the
+  four in-flight review verdicts land.
+
 ## Bug 2026-08-18 — live app still shows "Echo Pro" branding
 
 **Root cause is NOT stale screenshots.** The screenshots are accurate; the *app* renders the old name.
