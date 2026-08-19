@@ -1,16 +1,24 @@
 # Voxprint (formerly Echo Transcription) Roadmap
 
 
-## Bug 2026-08-18 — App Store screenshots still show the old name
+## Bug 2026-08-18 — live app still shows "Echo Pro" branding
 
-The live Voxprint listing's screenshots still render the pre-rename branding (**"Echo Pro"**) in the
-app-detail popup sheet. Visually confirmed against the ASC product page on 2026-08-18 — several
-iPhone 6.5" screenshots show "Echo Pro" in the sheet header.
+**Root cause is NOT stale screenshots.** The screenshots are accurate; the *app* renders the old name.
+The paywall and Settings show "Echo Pro" because that string comes from **StoreKit**, and the IAP in
+App Store Connect is still named "Echo Pro":
 
-This is user-facing on a **live** listing: the store name says Voxprint, the screenshots say Echo Pro.
+- IAP `6787371864`, productId `com.nulljosh.echo.unlock`, NON_CONSUMABLE, state **APPROVED**
+- en-US localization `abdea9d9-8fda-4844-8470-d858f101e88b`, name **"Echo Pro"**, state APPROVED
 
-- [ ] Re-shoot the iPhone screenshot set with the current build so the detail sheet reads "Voxprint",
-  then `asc screenshots upload`. Check the macOS set for the same leftover.
+So customers see "Unlock Echo Pro" in a purchase sheet for an app called Voxprint. Re-shooting the
+screenshots would NOT have fixed this — it would just have re-photographed the same wrong string.
+
+- [ ] Rename the IAP localization to "Voxprint Pro". `asc iap versions localizations update` is
+  refused on the live record: *"Cannot edit InAppPurchaseLocalization"* in the APPROVED state. Same
+  pattern as the Bookrank listing fix — it needs a **new IAP version** created first, which then
+  carries the edit. Do that, then re-shoot the screenshots so both agree.
+- [ ] Also audit `AppStore.md` and `fastlane/metadata/en-US/release_notes.txt`, which still say
+  "Echo Pro", and check the macOS listing for the same leftover.
 - [ ] Blocked with everything else until the updated Apple Developer Program License Agreement is
   accepted — metadata updates on existing apps are frozen until then.
 
