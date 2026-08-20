@@ -65,3 +65,7 @@ XCTest suite, snapshot tests, Apple Shortcut integration.
 ## License
 
 MIT 2026, Joshua Trommel
+
+## Whitepaper
+
+[Technical whitepaper](WHITEPAPER.md)
