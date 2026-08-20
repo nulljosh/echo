@@ -1,6 +1,6 @@
-Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
+Voxprint transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
+Powered by an on-device Whisper model, Voxprint transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
 FREE, FOREVER
 - Unlimited live microphone transcription
@@ -19,4 +19,4 @@ WHY ECHO
 - No account, no sign-up, no tracking.
 - No monthly fee. Own it once.
 
-Echo is built for people who want their words, music, and audio transcribed without uploading to a server.
+Voxprint is built for people who want their words, music, and audio transcribed without uploading to a server.

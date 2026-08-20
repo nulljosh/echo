@@ -6,12 +6,40 @@ cd "$ROOT_DIR"
 echo "==> Regenerating Xcode project"
 xcodegen generate
 
-echo "==> Running fastlane snapshot (mock data, no real recordings needed)"
-fastlane snapshot
-
 # Must match fastlane/Snapfile's devices() list and the UITest snapshot names
 DEVICE="iPhone 14 Plus"
 SHOTS=("1-finished-transcript" "2-history" "3-paywall" "4-settings" "5-live-recording")
+
+# fastlane exits 0 even when it extracts zero attachments from the .xcresult, and
+# stale PNGs from a previous run are still on disk -- so "cp succeeded" proves
+# nothing. Gate on freshness: every shot must be newer than this marker.
+RUN_MARKER="$(mktemp -t voxprint-shots)"
+# bash's -nt compares mtimes at 1s granularity, so back the marker off a second
+# to avoid false "stale" on a same-second write. A real run takes minutes.
+touch -A -01 "$RUN_MARKER"
+trap 'rm -f "$RUN_MARKER"' EXIT
+
+echo "==> Running fastlane snapshot (mock data, no real recordings needed)"
+fastlane snapshot
+
+echo "==> Verifying all ${#SHOTS[@]} screenshots were actually regenerated"
+stale=0
+for shot in "${SHOTS[@]}"; do
+  src="fastlane/screenshots/en-US/${DEVICE}-${shot}.png"
+  if [[ ! -f "$src" ]]; then
+    echo "    MISSING: $src" >&2
+    stale=1
+  elif [[ ! "$src" -nt "$RUN_MARKER" ]]; then
+    echo "    STALE (left over from an earlier run): $src" >&2
+    stale=1
+  fi
+done
+if (( stale )); then
+  echo "==> FAILED: fastlane reported success but did not produce fresh screenshots." >&2
+  echo "    Known cause: fastlane 2.238.0 cannot parse Xcode 26.6 .xcresult files." >&2
+  echo "    Nothing was copied or committed. See roadmap.md." >&2
+  exit 1
+fi
 
 echo "==> Copying screenshots into screenshots/appstore"
 mkdir -p screenshots/appstore

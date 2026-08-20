@@ -51,10 +51,9 @@ unlocking in-app features regardless.
   `asc screenshots run` / `asc screenshots capture`, which drives simctl directly (see the
   `asc-shots-pipeline` skill); (c) extract the attachments from the `.xcresult` with `xcrun
   xcresulttool` in `scripts/update_screenshots.sh`.
-- [ ] **`scripts/update_screenshots.sh` reports success when it failed.** It has `set -euo pipefail`,
-  but invoking it through a pipe (`... | tail`) masks the real exit code. Worse, the ❌ results table
-  is printed and ignored. Make the script assert that all five PNGs exist and are newer than the run
-  start before it commits anything.
+- [x] **`scripts/update_screenshots.sh` reports success when it failed.** Fixed 2026-08-19: the
+  script now stamps a run marker before `fastlane snapshot` and asserts all five PNGs exist and are
+  newer than it, exiting 1 with a named cause before anything is copied or committed.
 - [ ] Once capture works: the listing fix needs a **new iOS version 1.3.7** — 1.3.6 is READY_FOR_SALE
   and ASC locks screenshots on a live version — plus a new build. Stage it, do not submit until the
   four in-flight review verdicts land.
@@ -75,8 +74,10 @@ screenshots would NOT have fixed this — it would just have re-photographed the
   refused on the live record: *"Cannot edit InAppPurchaseLocalization"* in the APPROVED state. Same
   pattern as the Bookrank listing fix — it needs a **new IAP version** created first, which then
   carries the edit. Do that, then re-shoot the screenshots so both agree.
-- [ ] Also audit `AppStore.md` and `fastlane/metadata/en-US/release_notes.txt`, which still say
-  "Echo Pro", and check the macOS listing for the same leftover.
+- [x] Audited `AppStore.md` and `fastlane/metadata/en-US/` 2026-08-19. "Echo Pro" was already gone,
+  but `name.txt` still read "Echo Transcription" — a metadata push would have renamed the live app.
+  Now "Voxprint", with description and AppStore.md matching. Bundle ids (`com.nulljosh.echo*`) and
+  the Xcode scheme deliberately unchanged. macOS listing still to check.
 - [ ] Blocked with everything else until the updated Apple Developer Program License Agreement is
   accepted — metadata updates on existing apps are frozen until then.
 

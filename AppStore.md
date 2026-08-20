@@ -1,4 +1,4 @@
-# Echo — App Store Connect submission package
+# Voxprint — App Store Connect submission package
 
 Everything below is paste-ready. Account-side steps are the only thing blocking submission; all copy, the privacy URL, and the build are done.
 
@@ -20,7 +20,7 @@ Everything below is paste-ready. Account-side steps are the only thing blocking 
 ## Listing metadata (copy-paste)
 
 **App Name** (30 char max)
-`Echo: On-Device Transcription`
+`Voxprint: On-Device Transcribe`
 
 **Subtitle** (30 char max)
 `Voice to text, nothing leaves`
@@ -35,9 +35,9 @@ Everything below is paste-ready. Account-side steps are the only thing blocking 
 
 **Description**
 ```
-Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
+Voxprint transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
+Powered by an on-device Whisper model, Voxprint transcribes live from the microphone or from audio files you import—whether it's your voice, song lyrics, podcasts, or lectures. Everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
 FREE, FOREVER
 - Unlimited live microphone transcription
@@ -56,7 +56,7 @@ WHY ECHO
 - No account, no sign-up, no tracking.
 - No monthly fee. Own it once.
 
-Echo is built for people who want their words, music, and audio transcribed without uploading to a server.
+Voxprint is built for people who want their words, music, and audio transcribed without uploading to a server.
 ```
 
 **What's New** (first version)
@@ -72,7 +72,7 @@ First release. On-device transcription for iPhone. Live mic and file import, 12 
 
 ## App Review notes (paste into Review Information)
 ```
-Echo transcribes speech entirely on-device using a Whisper model (WhisperKit). No account or login is required and no data leaves the device, so there are no demo credentials needed.
+Voxprint transcribes speech entirely on-device using a Whisper model (WhisperKit). No account or login is required and no data leaves the device, so there are no demo credentials needed.
 
 To test the in-app purchase:
 1. Live microphone transcription is free and unlimited. Tap record and speak.
