@@ -133,3 +133,9 @@ not before.
 
 ## Ingested 2026-08-22
 - [ ] Remove the "downloading model" step on first launch — bundle the model with the app instead. From Notes: "Opening the app and waiting for the model to download is infuriatingly wasting time." Check the model's on-disk size against App Store limits before committing to bundling.
+
+## 2026-08-23 — delete the Transcriptly ASC record
+Transcriptly (ASC 6783015101, com.nulljosh.echo.mac) is the old Voxprint-for-Mac record,
+superseded by Voxprint macOS 1.3.6 (Ready for Distribution). It is stuck at 9.9.9 Rejected
+and there is no CLI or self-serve delete for a record that has been submitted.
+- [ ] Ask Apple Developer Support to delete app record 6783015101 (bundle in the same request as Lexly Mac 6783501927 and Nullfolio 6788180394).
