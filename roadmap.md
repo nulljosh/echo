@@ -139,3 +139,13 @@ Transcriptly (ASC 6783015101, com.nulljosh.echo.mac) is the old Voxprint-for-Mac
 superseded by Voxprint macOS 1.3.6 (Ready for Distribution). It is stuck at 9.9.9 Rejected
 and there is no CLI or self-serve delete for a record that has been submitted.
 - [ ] Ask Apple Developer Support to delete app record 6783015101 (bundle in the same request as Lexly Mac 6783501927 and Nullfolio 6788180394).
+
+### 2026-08-23 — ship-ios publish step fixed (workflow.json is gitignored)
+`.asc/` is gitignored so this fix is local-only; recorded here to survive a reclone.
+`ExportOptions.plist` sets `destination=upload`, so the export step uploads to ASC itself and
+writes no local `.asc/artifacts/echo.ipa`. The publish step's
+`asc publish appstore --ipa ...` therefore always failed with "failed to stat IPA" *after* a
+successful upload. Replaced with
+`asc review submit --app $IOS_APP_ID --version $VERSION --platform IOS --confirm --output json`.
+Found by hitting the identical bug in curvely. Untested here — voxprint 1.3.6 is already live,
+so it will not be exercised until the next version bump.
