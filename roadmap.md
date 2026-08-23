@@ -130,3 +130,6 @@ not before.
   Safe to delete: Voxprint 6782604262 (com.nulljosh.echo) already ships MAC_OS
   1.3.6 READY_FOR_SALE, and deleting an app record does not unregister the bundle ID.
 - [ ] Do the 'remove from sale in all territories' step via Claude in Chrome rather than by hand — Joshua OK'd browser automation for this on 2026-08-19. It is the one genuinely dashboard-only step: `asc web apps availability` exposes only `create`, so there is no CLI path. Once availability is cleared the delete command above works.
+
+## Ingested 2026-08-22
+- [ ] Remove the "downloading model" step on first launch — bundle the model with the app instead. From Notes: "Opening the app and waiting for the model to download is infuriatingly wasting time." Check the model's on-disk size against App Store limits before committing to bundling.
