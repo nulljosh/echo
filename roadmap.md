@@ -38,7 +38,13 @@ unlocking in-app features regardless.
 
 **Not done — the screenshots are still stale.**
 
-- [ ] **`fastlane snapshot` cannot extract images under Xcode 26.** Run 2026-08-18: the UI test itself
+- [x] **`fastlane snapshot` cannot extract images under Xcode 26.** RESOLVED 2026-08-24 via option (b)/(c)
+  hybrid: `SnapshotHelper` resolves `SIMULATOR_HOST_HOME` and writes the PNGs straight to the HOST's
+  `~/Library/Caches/tools.fastlane/screenshots/`, so nothing ever needed to come out of the `.xcresult`.
+  `scripts/update_screenshots.sh` now runs `xcodebuild test` directly against the dedicated
+  `Voxprint-Shots` sim and copies from that cache. Option (a) was a dead end — 2.238.0 IS the latest
+  stable fastlane. All five shots regenerated at 1284x2778.
+  ~~original diagnosis below~~ Run 2026-08-18: the UI test itself
   **passed** (all five launches ran, the new assertions held, `Test Succeeded`), but the results table
   reported ❌ for both iPhone 11 Pro Max and iPhone 14 Plus and `fastlane/screenshots/en-US/` came out
   empty, so the `cp` step failed. Toolchain: **fastlane 2.238.0 + Xcode 26.6** — fastlane cannot parse
@@ -48,7 +54,11 @@ unlocking in-app features regardless.
   `asc screenshots run` / `asc screenshots capture`, which drives simctl directly (see the
   `asc-shots-pipeline` skill); (c) extract the attachments from the `.xcresult` with `xcrun
   xcresulttool` in `scripts/update_screenshots.sh`.
-- [ ] Once capture works: the listing fix needs a **new iOS version 1.3.7** — 1.3.6 is READY_FOR_SALE
+- [x] Once capture works: the listing fix needs a **new iOS version 1.3.7** — DONE 2026-08-24. Version
+      `8e4ade60-d090-4a8e-a910-a95aeb6bebcc` created, build `202608240033` uploaded + attached (VALID),
+      submitted **WAITING_FOR_REVIEW** 2026-08-24T07:40:09Z. Note `asc review submit` threw the known
+      false negative ("does not contain target version"); the items list showed one READY_FOR_REVIEW item
+      and `asc review submissions-submit --id 0d7dc8e9-...` completed it. Original text: 1.3.6 is READY_FOR_SALE
   and ASC locks screenshots on a live version — plus a new build. Stage it, do not submit until the
   four in-flight review verdicts land.
 
@@ -64,7 +74,13 @@ App Store Connect is still named "Echo Pro":
 So customers see "Unlock Echo Pro" in a purchase sheet for an app called Voxprint. Re-shooting the
 screenshots would NOT have fixed this — it would just have re-photographed the same wrong string.
 
-- [ ] Rename the IAP localization to "Voxprint Pro". `asc iap versions localizations update` is
+- [x] Rename the IAP localization to "Voxprint Pro". DONE — IAP version 2 (`b6820fe3`) carries
+  localization `19ba7fbd` = "Voxprint Pro". **Still PREPARE_FOR_SUBMISSION**, so the live purchase sheet
+  keeps showing the APPROVED "Echo Pro" (`abdea9d9`) until that IAP version clears review alongside a
+  version submission. Separately: the roadmap's "the screenshots are accurate, the app renders the old
+  name" diagnosis was WRONG — `PaywallView.swift:23,85` hardcode "Voxprint Pro", they never read the
+  StoreKit displayName, so the stale PNGs really were just stale. Verified in the 2026-08-24 capture.
+  Original note: `asc iap versions localizations update` is
   refused on the live record: *"Cannot edit InAppPurchaseLocalization"* in the APPROVED state. Same
   pattern as the Bookrank listing fix — it needs a **new IAP version** created first, which then
   carries the edit. Do that, then re-shoot the screenshots so both agree.
@@ -101,13 +117,18 @@ change to ship yet (the icon decision above is still open), and a half-populated
 sitting in ASC is worse than none. Do these as part of the next real 1.3.7 release,
 not before.
 
-- [ ] Upload the regenerated App Store screenshots (`screenshots/appstore/`) — the
+- [x] Upload the regenerated App Store screenshots (`screenshots/appstore/`) — DONE 2026-08-24.
+      All five replaced in the `APP_IPHONE_65` set on 1.3.7 (`--replace` also cleared two duplicate
+      assets inherited from 1.3.6: 7 deleted, 5 uploaded, all COMPLETE). Original note: the
       live listing still shows Jul 3 captures with "Echo" branding. Shots 1/2/5 are
       current as of 2026-08-11; `3-paywall.png` and `4-settings.png` are still stale
       and need capturing (they require UI navigation, not just a launch argument).
       **Second prerequisite beyond the draft:** re-capture 3 + 4 first — uploading the
       current set would push two Echo-branded shots into a Voxprint listing.
-- [ ] Migrate the App Store privacy URL to `https://echo.heyitsmejosh.com/privacy.html`.
+- [x] Migrate the App Store privacy URL to `https://echo.heyitsmejosh.com/privacy.html`. DONE
+      2026-08-24 — creating the 1.3.7 draft opened a second, editable appInfo
+      (`94b25e61-d914-4482-b4af-6c3e2a0e13b5`, PREPARE_FOR_SUBMISSION). Applied via the canonical
+      `asc metadata` pull/plan/approve/apply flow; `./metadata/` is now checked in as the source of truth.
       Currently held as the old `heyitsmejosh.com/echo/privacy.html`, which now works
       via a redirect in the portfolio repo. **Target URL verified 2026-08-17:** returns
       200 and serves Voxprint-branded content (the old one also still 200s, so this is
@@ -149,3 +170,18 @@ successful upload. Replaced with
 `asc review submit --app $IOS_APP_ID --version $VERSION --platform IOS --confirm --output json`.
 Found by hitting the identical bug in curvely. Untested here — voxprint 1.3.6 is already live,
 so it will not be exercised until the next version bump.
+
+## From /work start (imported 2026-08-24)
+- [ ] **macOS 1.3.7 not shipped.** `project.yml` MARKETING_VERSION is shared across both targets, so
+      it now reads 1.3.7 while ASC still has MAC_OS 1.3.6 READY_FOR_SALE. Only the iOS listing needed
+      the screenshot/privacy fix, so the Mac side was deliberately left alone — but the next Mac build
+      archived from this tree will carry 1.3.7. Either ship `asc workflow run ship-mac VERSION:1.3.7`
+      or accept the skew knowingly.
+- [ ] **Mac screenshots still thin** — `screenshots/macos/` has exactly one shot (`01-main.png`,
+      dated 2026-08-03). Same capture trick should work for `EchoMacUITests`, but macOS has no
+      SnapshotHelper host-cache path; needs its own approach (Quotestreak used
+      `CGWindowListCopyWindowInfo`). Not attempted.
+- [ ] **IAP version 2 rides along with a version submission.** `b6820fe3` is PREPARE_FOR_SUBMISSION and
+      was NOT added to review submission `0d7dc8e9` — the 1.3.7 submission carries only the version item.
+      If the "Echo Pro" string in the live purchase sheet matters, the IAP version has to be attached to
+      a review submission explicitly (`asc review items-add`) on the next release.
