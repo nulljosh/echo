@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-24T07:35:10Z",
+  "command": "metadata plan",
+  "reviewDir": ".asc/metadata/review",
+  "planPath": ".asc/metadata/review/plan.json",
+  "approvalPath": ".asc/metadata/review/approved.json",
+  "planHash": "36577a99156cc103a70c2408c36988bb83ba3b214d8c6470cfaf695c03d2aa45",
+  "options": {
+    "appId": "6782604262",
+    "appInfoId": "94b25e61-d914-4482-b4af-6c3e2a0e13b5",
+    "version": "1.3.7",
+    "platform": "IOS",
+    "dir": "./metadata",
+    "includes": [
+      "localizations"
+    ],
+    "allowDeletes": false
+  },
+  "plan": {
+    "appId": "6782604262",
+    "appInfoId": "94b25e61-d914-4482-b4af-6c3e2a0e13b5",
+    "version": "1.3.7",
+    "versionId": "8e4ade60-d090-4a8e-a910-a95aeb6bebcc",
+    "dir": "./metadata",
+    "dryRun": true,
+    "includes": [
+      "localizations"
+    ],
+    "adds": [],
+    "updates": [
+      {
+        "key": "app-info:en-US:privacyPolicyUrl",
+        "scope": "app-info",
+        "locale": "en-US",
+        "field": "privacyPolicyUrl",
+        "reason": "field value differs",
+        "from": "https://heyitsmejosh.com/echo/privacy.html",
+        "to": "https://echo.heyitsmejosh.com/privacy.html"
+      }
+    ],
+    "deletes": [],
+    "apiCalls": [
+      {
+        "operation": "update_localization",
+        "scope": "app-info",
+        "count": 1
+      }
+    ]
+  }
+}
