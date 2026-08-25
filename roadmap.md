@@ -117,7 +117,7 @@ so it will not be exercised until the next version bump.
 ## From /work start (imported 2026-08-24)
 
 - [ ] Hero / background animation. From Notes 2026-08-24: "Still needs background animation like other projects. Hero animation background." Same request applies to Talli. Reference direction: Lexly's scrolling-text-of-different-languages animation, which Joshua called out as the one he likes and wants applied across projects — see lexly/roadmap.md Someday/Explore. Cross-project design-system work; belongs in the shared Jaybulb tokens/hero layer, not a one-off per repo.
-- [ ] **macOS 1.3.7 not shipped.** `project.yml` MARKETING_VERSION is shared across both targets, so
+- [ ] **macOS 1.3.7 still not shipped — re-verified 2026-08-25.** iOS 1.3.7 is READY_FOR_SALE but macOS is still on 1.3.6, while `project.yml` already carries `MARKETING_VERSION: "1.3.7"` shared across both targets. So the source is ready and only the macOS archive/upload is missing. Original note follows:
       it now reads 1.3.7 while ASC still has MAC_OS 1.3.6 READY_FOR_SALE. Only the iOS listing needed
       the screenshot/privacy fix, so the Mac side was deliberately left alone — but the next Mac build
       archived from this tree will carry 1.3.7. Either ship `asc workflow run ship-mac VERSION:1.3.7`
@@ -126,7 +126,7 @@ so it will not be exercised until the next version bump.
       dated 2026-08-03). Same capture trick should work for `EchoMacUITests`, but macOS has no
       SnapshotHelper host-cache path; needs its own approach (Quotestreak used
       `CGWindowListCopyWindowInfo`). Not attempted.
-- [ ] **IAP version 2 rides along with a version submission.** `b6820fe3` is PREPARE_FOR_SUBMISSION and
+- **CLOSED 2026-08-25** (stale — `asc iap list --app 6782604262` now reports `com.nulljosh.echo.unlock` as **APPROVED**, not PREPARE_FOR_SUBMISSION. Note the paywall is still hardcoded open in `Sources/Services/StoreManager.swift` because the Paid Apps Agreement is unsigned; the IAP being approved does not unblock revenue). Was: **IAP version 2 rides along with a version submission.** `b6820fe3` is PREPARE_FOR_SUBMISSION and
       was NOT added to review submission `0d7dc8e9` — the 1.3.7 submission carries only the version item.
       If the "Echo Pro" string in the live purchase sheet matters, the IAP version has to be attached to
       a review submission explicitly (`asc review items-add`) on the next release.
