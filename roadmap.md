@@ -115,6 +115,8 @@ Found by hitting the identical bug in curvely. Untested here — voxprint 1.3.6 
 so it will not be exercised until the next version bump.
 
 ## From /work start (imported 2026-08-24)
+
+- [ ] Hero / background animation. From Notes 2026-08-24: "Still needs background animation like other projects. Hero animation background." Same request applies to Talli. Reference direction: Lexly's scrolling-text-of-different-languages animation, which Joshua called out as the one he likes and wants applied across projects — see lexly/roadmap.md Someday/Explore. Cross-project design-system work; belongs in the shared Jaybulb tokens/hero layer, not a one-off per repo.
 - [ ] **macOS 1.3.7 not shipped.** `project.yml` MARKETING_VERSION is shared across both targets, so
       it now reads 1.3.7 while ASC still has MAC_OS 1.3.6 READY_FOR_SALE. Only the iOS listing needed
       the screenshot/privacy fix, so the Mac side was deliberately left alone — but the next Mac build
