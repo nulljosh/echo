@@ -1,8 +1,8 @@
-# Echo Technical Whitepaper
+# Voxprint Technical Whitepaper
 
-**v1.3.2** | July 2026
+**v1.3.7** | August 2026
 
-Echo is on-device speech transcription for iOS and macOS. No cloud, no
+Voxprint is on-device speech transcription for iOS and macOS. No cloud, no
 network calls for transcription — audio never leaves the device.
 
 ## Transcription Pipeline
@@ -18,7 +18,7 @@ seconds of speaking rather than after the recording ends.
   tick.
 - **Model persistence**: WhisperKit's default cache directory
   (HuggingFace Caches) is purgeable by iOS under storage pressure. After the
-  first successful download, Echo copies the model into Application Support,
+  first successful download, Voxprint copies the model into Application Support,
   which iOS does not purge, so subsequent launches load instantly instead of
   re-downloading.
 - **Model selection**: chosen automatically at launch based on available
