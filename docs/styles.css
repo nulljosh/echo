@@ -3,10 +3,11 @@
 
 :root {
     --font: var(--font-body, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif);
-    /* ponytail: neutral ink instead of the portfolio yellow — the bright accent
-       reads wrong here and fails contrast under white button text. */
-    --primary: #1A1A1A;
+    /* ponytail: Voxprint's own blue instead of the portfolio yellow — the bright
+       accent reads wrong here and fails contrast under white button text. */
+    --primary: #2E6BE6;
     --primary-ink: #ffffff;
+    --sig-glow: color-mix(in srgb, var(--primary) 16%, transparent);
     --primary-light: var(--blue-light);
     --primary-dark: var(--navy);
     --text-primary: var(--text);
@@ -26,8 +27,9 @@
         --text: #e8e8f0;
         --text2: rgba(232,232,240,0.60);
         --border: rgba(232,232,240,0.10);
-        --primary: #e8e8f0;
+        --primary: #7FB0FF;
         --primary-ink: #111111;
+        --sig-glow: color-mix(in srgb, var(--primary) 14%, transparent);
         --primary-dark: var(--blue-light);
     }
 }
@@ -38,8 +40,9 @@ html.dark-mode {
     --text: #e8e8f0;
     --text2: rgba(232,232,240,0.60);
     --border: rgba(232,232,240,0.10);
-    --primary: #e8e8f0;
+    --primary: #7FB0FF;
     --primary-ink: #111111;
+    --sig-glow: color-mix(in srgb, var(--primary) 14%, transparent);
     --primary-dark: var(--blue-light);
 }
 
@@ -717,33 +720,21 @@ body {
     overflow: hidden;
 }
 
-/* Animated hero glow — CSS only, no canvas, no JS. */
-.landing-hero::before {
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    width: 520px;
-    height: 520px;
-    margin: -260px 0 0 -260px;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        color-mix(in srgb, var(--primary) 12%, transparent) 0%,
-        transparent 70%);
-    animation: heroDrift 12s var(--ease, ease-in-out) infinite;
-    pointer-events: none;
-    z-index: 0;
+/* Animated background — same two slow blooms the other project landing pages
+   use (see litigate/web/style.css). No canvas, no JS; stops under reduced motion. */
+.lp-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.lp-orb {
+    position: absolute; width: min(76vw, 760px); aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--sig-glow), transparent 68%);
+    filter: blur(26px); will-change: transform;
 }
-
-.landing-hero > * { position: relative; z-index: 1; }
-
-@keyframes heroDrift {
-    0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.85; }
-    50%      { transform: scale(1.18) translate(0, -18px); opacity: 1; }
-}
+.lp-orb-a { top: -22%; left: -12%; animation: lp-float-a 34s ease-in-out infinite alternate; }
+.lp-orb-b { top:  14%; right: -18%; animation: lp-float-b 44s ease-in-out infinite alternate; }
+@keyframes lp-float-a { to { transform: translate3d(13vw, 11vh, 0) scale(1.14); } }
+@keyframes lp-float-b { to { transform: translate3d(-11vw, 17vh, 0) scale(0.9); } }
 
 @media (prefers-reduced-motion: reduce) {
-    .landing-hero::before { animation: none; }
+    .lp-orb { animation: none; }
 }
 
 .landing-hero img {
