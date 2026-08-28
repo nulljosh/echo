@@ -789,14 +789,17 @@ body {
 }
 
 .landing-hero h1 {
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 14px;
 }
 
 .landing-hero p {
     color: var(--text-secondary);
-    font-size: 1.05rem;
-    margin-bottom: 28px;
+    font-size: 1.08rem;
+    max-width: 30em;
+    margin: 0 auto 28px;
 }
 
 .landing-ctas {
@@ -815,14 +818,36 @@ body {
     text-decoration: none;
 }
 
+.btn-primary,
+.btn-outline,
+.btn-appstore,
+.site-bar-brand {
+    transition: background 0.15s, border-color 0.15s, transform 0.15s, opacity 0.15s;
+}
+
 .btn-primary {
     background: var(--primary);
     color: var(--primary-ink);
 }
 
+.btn-primary:hover { background: color-mix(in srgb, var(--primary) 86%, black); }
+.btn-primary:active { transform: translateY(1px); }
+
 .btn-outline {
     border: 1px solid var(--border);
     color: var(--text-primary);
+}
+
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+.btn-appstore:hover { opacity: 0.82; }
+.site-bar-brand:hover { opacity: 0.7; }
+
+/* visible keyboard focus — the default outline is lost against the wall */
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 .landing-features {
@@ -840,6 +865,7 @@ body {
     padding: 20px;
     border-radius: var(--radius);
     background: var(--bg2);
+    border: 1px solid var(--border);
 }
 
 .landing-features h3 {
@@ -855,6 +881,9 @@ body {
 .landing-footer {
     position: relative;
     z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
     text-align: center;
     padding: 24px;
     color: var(--text-secondary);
@@ -863,4 +892,13 @@ body {
 
 .landing-footer a {
     color: inherit;
+}
+
+.landing-footer a:hover { color: var(--primary); }
+
+/* the wall is decorative: drop it on small screens rather than shrink it to mush */
+@media (max-width: 640px) {
+    .hero-wall { display: none; }
+    .landing-hero { padding-top: 48px; }
+    .site-bar { padding: 12px 16px; }
 }

@@ -5,11 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Voxprint Privacy Policy</title>
 <style>
-  :root { color-scheme: dark; }
+  /* theme-aware, matching the landing page; was dark-only with an orange accent */
+  :root {
+    color-scheme: light dark;
+    --p-bg: #ffffff;
+    --p-text: #1a1a1a;
+    --p-soft: #4a4a4a;
+    --p-dim: #6a6864;
+    --p-accent: #2E6BE6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --p-bg: #0c0c0d;
+      --p-text: #e8e6e3;
+      --p-soft: #c4c2be;
+      --p-dim: #8a8884;
+      --p-accent: #7FB0FF;
+    }
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #0c0c0d;
-    color: #e8e6e3;
+    background: var(--p-bg);
+    color: var(--p-text);
     font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     padding: 8vh 24px;
@@ -17,22 +34,22 @@
     margin: 0 auto;
   }
   h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
-  .sub { color: #8a8884; font-size: 0.9rem; margin-bottom: 40px; }
+  .sub { color: var(--p-dim); font-size: 0.9rem; margin-bottom: 40px; }
   h2 { font-size: 1.05rem; font-weight: 600; margin: 32px 0 8px; letter-spacing: -0.01em; }
-  p { color: #c4c2be; margin-bottom: 12px; }
-  strong { color: #e8e6e3; }
-  ul { margin: 8px 0 12px 20px; color: #c4c2be; }
+  p { color: var(--p-soft); margin-bottom: 12px; }
+  strong { color: var(--p-text); }
+  ul { margin: 8px 0 12px 20px; color: var(--p-soft); }
   li { margin-bottom: 6px; }
-  a { color: #ff851b; text-decoration: none; }
+  a { color: var(--p-accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .lede {
-    border-left: 2px solid #ff851b;
+    border-left: 2px solid var(--p-accent);
     padding-left: 16px;
-    color: #e8e6e3;
+    color: var(--p-text);
     font-size: 1.05rem;
     margin: 24px 0 8px;
   }
-  footer { margin-top: 48px; color: #6a6864; font-size: 0.85rem; }
+  footer { margin-top: 48px; color: var(--p-dim); font-size: 0.85rem; }
 </style>
 </head>
 <body>
