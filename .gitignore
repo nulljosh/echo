@@ -21,3 +21,4 @@ Echo-macOS.app/
 **/.asc/release/
 **/.asc/runs/
 **/.asc/reports/
+.vercel/
