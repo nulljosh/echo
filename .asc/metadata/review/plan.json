@@ -36,7 +36,7 @@
         "field": "privacyPolicyUrl",
         "reason": "field value differs",
         "from": "https://heyitsmejosh.com/echo/privacy.html",
-        "to": "https://echo.heyitsmejosh.com/privacy.html"
+        "to": "https://voxprint.heyitsmejosh.com/privacy.html"
       }
     ],
     "deletes": [],

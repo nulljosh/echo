@@ -6,7 +6,7 @@
 
 Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
-Live at [echo.heyitsmejosh.com](https://echo.heyitsmejosh.com) · [App Store](https://apps.apple.com/app/id6782604262)
+Live at [voxprint.heyitsmejosh.com](https://voxprint.heyitsmejosh.com) · [App Store](https://apps.apple.com/app/id6782604262)
 
 <p align="center">
   <img src="screenshots/appstore/1-finished-transcript.png" width="180">

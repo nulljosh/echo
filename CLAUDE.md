@@ -64,7 +64,7 @@ npx wrangler login
 npx wrangler pages deploy web/ --project-name=echo --branch=main
 ```
 
-Domain: `echo.heyitsmejosh.com` (Cloudflare DNS CNAME pointing to Cloudflare Pages). Project name in Pages dashboard: `echo`.
+Domain: `voxprint.heyitsmejosh.com` (Cloudflare DNS CNAME pointing to Cloudflare Pages). Project name in Pages dashboard: `echo` (unchanged; the `echo.` host still resolves as an alias).
 
 ## Targets
 
@@ -90,7 +90,7 @@ Plan file: `~/.claude/plans/federated-discovering-hamster.md`. Three-part ask: l
 - [x] Language detection: `TranscriptionEngine` now reads `DecodingResult.language`/`languageProbs` off the existing auto-mode transcribe call (no extra WhisperKit call), sets `detectedLanguage`/`isUnusualLanguage` when the code isn't in the picker's 11 languages. Committed `6b0cf45`, pushed. Build verified via `xcodebuild build -scheme Echo-macOS`.
 - [x] Wire `detectedLanguage`/`isUnusualLanguage` into `TranscriptionView.swift` as a visible badge — DONE (verified 2026-08-03): `ContentView.swift:179` passes `unusualLanguage`, `TranscriptionView.swift:117-118` renders "Unusual language detected: …" with a 0.2s ease-out animation. Item was stale.
 - [x] Ship iOS — SUPERSEDED: 1.3.5 shipped and is READY_FOR_SALE; 1.3.6 (Voxprint rename) built + submitted 2026-08-03. Note `asc submission-health` is not a real subcommand (it's a skill name) — use `asc versions list` / `asc review submissions-*`.
-- [x] Landing page — DONE: `web/` exists and `echo.heyitsmejosh.com` returns 200 (verified 2026-08-03). Style after `~/Documents/Code/lexly/index.html` + `css/lingo.css` (DM Sans/Geist body + Fraunces-style serif headings, no monospace, 2-col hero with plain `<img>` screenshots + soft shadow/glow, light+dark via `prefers-color-scheme`). Pull screenshots from `fastlane/screenshots/en-US/`. Deploy target + Cloudflare CNAME still TBD.
+- [x] Landing page — DONE: `web/` exists and `voxprint.heyitsmejosh.com` returns 200 (verified 2026-08-03). Style after `~/Documents/Code/lexly/index.html` + `css/lingo.css` (DM Sans/Geist body + Fraunces-style serif headings, no monospace, 2-col hero with plain `<img>` screenshots + soft shadow/glow, light+dark via `prefers-color-scheme`). Pull screenshots from `fastlane/screenshots/en-US/`. Deploy target + Cloudflare CNAME still TBD.
 
 ## Icon redesign (2026-07-26 night)
 - [x] Icon reworked from teal-squircle "snowman circles + waveform" to a single clean mic glyph on clrs.cc blue (#0074D9). All of `icon.svg`/`icon-mac.svg`/`web/assets/icon.svg` plus iOS/macOS Assets.xcassets PNGs regenerated and synced; macOS build verified (`xcodebuild build -scheme Echo-macOS`).

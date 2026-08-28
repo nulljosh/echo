@@ -5,7 +5,7 @@ Everything below is paste-ready. Account-side steps are the only thing blocking 
 ## Status (2026-05-30)
 - iOS Release: **BUILD SUCCEEDED** (signing aside, verified this session).
 - Device family set to iPhone-only (`TARGETED_DEVICE_FAMILY: "1"`) — iPhone screenshots only, no iPad QA.
-- Privacy policy live target: **https://echo.heyitsmejosh.com/privacy.html** (served from this repo's `docs/privacy.html` via GitHub Pages — verified 200).
+- Privacy policy live target: **https://voxprint.heyitsmejosh.com/privacy.html** (served from this repo's `docs/privacy.html` via GitHub Pages — verified 200).
 - Privacy manifest bundled, `ITSAppUsesNonExemptEncryption=false` set, StoreKit 2 local entitlement done.
 
 ## The one blocker (only Joshua can do these)
@@ -66,7 +66,7 @@ First release. On-device transcription for iPhone. Live mic and file import, 12 
 
 **Support URL**: `https://heyitsmejosh.com`
 **Marketing URL** (optional): `https://heyitsmejosh.com/echo/`
-**Privacy Policy URL**: `https://echo.heyitsmejosh.com/privacy.html`
+**Privacy Policy URL**: `https://voxprint.heyitsmejosh.com/privacy.html`
 
 ---
 
