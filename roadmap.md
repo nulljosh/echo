@@ -136,3 +136,21 @@ corrected to `https://voxprint.heyitsmejosh.com/privacy.html` (verified by re-pu
 no build, no whatsNew, and **zero code changes** behind it. Do not submit it on its own — a
 no-significant-changes review during the 4.3(a) wave is a bad trade. Attach it to the next
 real change, and fold in the macOS `marketingUrl` gap noted above at the same time.
+
+## The landing page deploys to Cloudflare Pages, not GitHub Pages
+
+Found 2026-08-28 after landing-page CSS changes stayed invisible on the live site.
+`voxprint.heyitsmejosh.com` and `echo.heyitsmejosh.com` are both proxied CNAMEs to
+**`echo-59b.pages.dev`** — a Cloudflare Pages project. `docs/CNAME` and the repo's GitHub
+Pages setup are vestigial: GH Pages builds fine and serves nothing anyone visits.
+
+Pushing to `main` does **not** deploy the site. It must be pushed explicitly:
+
+    npx wrangler pages deploy docs --project-name echo
+
+`CLOUDFLARE_DNS_TOKEN` in `secrets.fish` is DNS-scoped and cannot do this — it fails with
+"Failed to automatically retrieve account IDs". Needs `wrangler login`, or a token with
+Account / Cloudflare Pages / Edit.
+
+**Open:** either wire the Pages project to auto-build from this repo, or store a Pages-scoped
+token so deploys can run headlessly. Until then every web change needs a manual deploy.
