@@ -2,6 +2,7 @@
 @import url("https://heyitsmejosh.com/tokens.css");
 
 :root {
+    --font: var(--font-body, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif);
     --primary: var(--accent);
     --primary-light: var(--blue-light);
     --primary-dark: var(--navy);
