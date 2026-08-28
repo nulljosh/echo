@@ -77,7 +77,6 @@ change to ship yet (the icon decision above is still open), and a half-populated
 sitting in ASC is worse than none. Do these as part of the next real 1.3.7 release,
 not before.
 
-
 ## From ASC session 2026-08-19
 - [ ] **Delete orphan ASC record 6783015101 (Transcriptly, com.nulljosh.echo.mac).**
   Progress 2026-08-19: Apple's SRP 503 cleared, web session re-established. The
