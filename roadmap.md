@@ -129,14 +129,10 @@ so it will not be exercised until the next version bump.
       If the "Echo Pro" string in the live purchase sheet matters, the IAP version has to be attached to
       a review submission explicitly (`asc review items-add`) on the next release.
 
-## Privacy URL on ASC still points at the old `echo.` host
+## iOS 1.3.8 is a staged draft, not ready to submit
 
-`metadata/app-info/en-US.json` and `fastlane/metadata/en-US/privacy_url.txt` were
-canonicalized to `https://voxprint.heyitsmejosh.com/privacy.html` locally. `asc metadata push`
-reports the update as applied, but a re-pull still returns the old `echo.` value — the known
-app-info false-success: there is no editable version to attach it to while iOS 1.3.7 is
-READY_FOR_DISTRIBUTION.
-
-Not worth a release of its own; both hosts return 200 so nothing is broken. **Re-run
-`asc metadata push --app 6782604262 --version <new> --dir metadata` and verify with a re-pull
-as part of the next version that ships**, alongside the macOS `marketingUrl` gap noted above.
+Created 2026-08-28 purely to unfreeze the app-info record so the privacy URL could be
+corrected to `https://voxprint.heyitsmejosh.com/privacy.html` (verified by re-pull). It has
+no build, no whatsNew, and **zero code changes** behind it. Do not submit it on its own — a
+no-significant-changes review during the 4.3(a) wave is a bad trade. Attach it to the next
+real change, and fold in the macOS `marketingUrl` gap noted above at the same time.
