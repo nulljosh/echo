@@ -3,7 +3,10 @@
 
 :root {
     --font: var(--font-body, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif);
-    --primary: var(--accent);
+    /* ponytail: neutral ink instead of the portfolio yellow — the bright accent
+       reads wrong here and fails contrast under white button text. */
+    --primary: #1A1A1A;
+    --primary-ink: #ffffff;
     --primary-light: var(--blue-light);
     --primary-dark: var(--navy);
     --text-primary: var(--text);
@@ -23,6 +26,8 @@
         --text: #e8e8f0;
         --text2: rgba(232,232,240,0.60);
         --border: rgba(232,232,240,0.10);
+        --primary: #e8e8f0;
+        --primary-ink: #111111;
         --primary-dark: var(--blue-light);
     }
 }
@@ -33,6 +38,8 @@ html.dark-mode {
     --text: #e8e8f0;
     --text2: rgba(232,232,240,0.60);
     --border: rgba(232,232,240,0.10);
+    --primary: #e8e8f0;
+    --primary-ink: #111111;
     --primary-dark: var(--blue-light);
 }
 
@@ -702,10 +709,41 @@ body {
 
 /* Landing page */
 .landing-hero {
+    position: relative;
     max-width: 640px;
     margin: 0 auto;
     padding: 64px 24px 32px;
     text-align: center;
+    overflow: hidden;
+}
+
+/* Animated hero glow — CSS only, no canvas, no JS. */
+.landing-hero::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 520px;
+    height: 520px;
+    margin: -260px 0 0 -260px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        color-mix(in srgb, var(--primary) 12%, transparent) 0%,
+        transparent 70%);
+    animation: heroDrift 12s var(--ease, ease-in-out) infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.landing-hero > * { position: relative; z-index: 1; }
+
+@keyframes heroDrift {
+    0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.85; }
+    50%      { transform: scale(1.18) translate(0, -18px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-hero::before { animation: none; }
 }
 
 .landing-hero img {
@@ -742,7 +780,7 @@ body {
 
 .btn-primary {
     background: var(--primary);
-    color: #fff;
+    color: var(--primary-ink);
 }
 
 .btn-outline {
