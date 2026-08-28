@@ -7,7 +7,6 @@
        accent reads wrong here and fails contrast under white button text. */
     --primary: #2E6BE6;
     --primary-ink: #ffffff;
-    --sig-glow: color-mix(in srgb, var(--primary) 16%, transparent);
     --primary-light: var(--blue-light);
     --primary-dark: var(--navy);
     --text-primary: var(--text);
@@ -29,7 +28,6 @@
         --border: rgba(232,232,240,0.10);
         --primary: #7FB0FF;
         --primary-ink: #111111;
-        --sig-glow: color-mix(in srgb, var(--primary) 14%, transparent);
         --primary-dark: var(--blue-light);
     }
 }
@@ -42,7 +40,6 @@ html.dark-mode {
     --border: rgba(232,232,240,0.10);
     --primary: #7FB0FF;
     --primary-ink: #111111;
-    --sig-glow: color-mix(in srgb, var(--primary) 14%, transparent);
     --primary-dark: var(--blue-light);
 }
 
@@ -711,30 +708,79 @@ body {
 }
 
 /* Landing page */
+.site-bar {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.site-bar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.site-bar-brand img { border-radius: 7px; display: block; }
+
+/* Official Apple badge, same asset the other project sites use. */
+.btn-appstore { display: inline-flex; align-items: center; }
+.btn-appstore img { display: block; height: 40px; width: auto; }
+
 .landing-hero {
     position: relative;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 64px 24px 32px;
+    /* full-bleed band: the wall spans the viewport, the copy stays narrow */
+    padding: 72px 24px 56px;
     text-align: center;
+    z-index: 1;
     overflow: hidden;
 }
 
-/* Animated background — same two slow blooms the other project landing pages
-   use (see litigate/web/style.css). No canvas, no JS; stops under reduced motion. */
-.lp-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.lp-orb {
-    position: absolute; width: min(76vw, 760px); aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, var(--sig-glow), transparent 68%);
-    filter: blur(26px); will-change: transform;
+/* Animated hero wall — the same drifting card wall the other project landing
+   pages use (see wordroot/landing/index.html). No canvas; CSS transforms only,
+   and it stops dead under prefers-reduced-motion. */
+.hero-wall {
+    position: absolute; inset: -8%; z-index: 0;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px;
+    opacity: 0.55;
+    pointer-events: none; user-select: none;
 }
-.lp-orb-a { top: -22%; left: -12%; animation: lp-float-a 34s ease-in-out infinite alternate; }
-.lp-orb-b { top:  14%; right: -18%; animation: lp-float-b 44s ease-in-out infinite alternate; }
-@keyframes lp-float-a { to { transform: translate3d(13vw, 11vh, 0) scale(1.14); } }
-@keyframes lp-float-b { to { transform: translate3d(-11vw, 17vh, 0) scale(0.9); } }
+.wall-col { display: flex; min-width: 0; flex-direction: column; gap: 10px; }
+.wall-col.up   { animation: wall-up   var(--dur) linear infinite; }
+.wall-col.down { animation: wall-down var(--dur) linear infinite; }
+@keyframes wall-up   { from { transform: translateY(0); }    to { transform: translateY(-50%); } }
+@keyframes wall-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+
+.wall-card {
+    aspect-ratio: 5/3; border-radius: 6px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.2rem; padding: 0.45rem; text-align: center; overflow: hidden;
+    background: var(--bg2); border: 1px solid var(--border);
+}
+.wall-card b { font-size: 0.78rem; font-weight: 600; color: var(--text); line-height: 1.15; }
+.wall-card span { font-size: 0.62rem; color: var(--text2); line-height: 1.1; }
+
+/* keeps the headline readable over the wall, in either theme */
+.hero-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(46% 60% at 50% 45%,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 78%, transparent) 55%,
+        transparent 100%);
+}
+
+.hero-copy { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
 
 @media (prefers-reduced-motion: reduce) {
-    .lp-orb { animation: none; }
+    .wall-col { animation: none; }
 }
 
 .landing-hero img {
@@ -780,7 +826,9 @@ body {
 }
 
 .landing-features {
-    max-width: 720px;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
     margin: 0 auto;
     padding: 8px 24px 64px;
     display: grid;
@@ -805,6 +853,8 @@ body {
 }
 
 .landing-footer {
+    position: relative;
+    z-index: 1;
     text-align: center;
     padding: 24px;
     color: var(--text-secondary);

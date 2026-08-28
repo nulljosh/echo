@@ -10,17 +10,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="lp-bg" aria-hidden="true">
-        <div class="lp-orb lp-orb-a"></div>
-        <div class="lp-orb lp-orb-b"></div>
-    </div>
+   <header class="site-bar">
+        <a class="site-bar-brand" href="/">
+            <img src="assets/logo.png" width="28" height="28" alt="">
+            <span>Voxprint</span>
+        </a>
+        <a class="btn-appstore" href="https://apps.apple.com/app/id6782604262">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                 alt="Download on the App Store" width="120" height="40">
+        </a>
+    </header>
+
     <section class="landing-hero">
+        <div class="hero-wall" id="heroWall" aria-hidden="true"></div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-copy">
         <img src="assets/logo.png" width="88" alt="Voxprint icon">
         <h1>Voxprint</h1>
         <p>On-device speech transcription. No cloud, no account, no data ever leaves your device.</p>
         <div class="landing-ctas">
             <a class="btn-primary" href="app.html">Open Voxprint</a>
-            <a class="btn-outline" href="https://apps.apple.com/app/id6782604262">Get it on the App Store</a>
+        </div>
         </div>
     </section>
 
@@ -44,7 +54,54 @@
     </section>
 
     <footer class="landing-footer">
-        <a href="privacy.html">Privacy</a> · <a href="https://github.com/nulljosh/echo">GitHub</a>
+        <a href="privacy.html">Privacy</a> · <a href="https://github.com/nulljosh/voxprint">GitHub</a>
     </footer>
+<script>
+(function () {
+  // Snippets the app would actually produce: transcript line + the language it detected.
+  var LINES = [
+    ["the meeting starts at nine", "English"],
+    ["je voudrais un caf\u00e9 noir", "Fran\u00e7ais"],
+    ["das Wetter wird besser", "Deutsch"],
+    ["no me acuerdo del nombre", "Espa\u00f1ol"],
+    ["ci vediamo domani sera", "Italiano"],
+    ["\u4eca\u65e5\u306f\u3044\u3044\u5929\u6c17\u3067\u3059\u306d", "\u65e5\u672c\u8a9e"],
+    ["remind me to call back", "English"],
+    ["\uc624\ub298 \uc57d\uc18d \uc788\uc5b4\uc694", "\ud55c\uad6d\uc5b4"],
+    ["tudo bem por aqui", "Portugu\u00eas"],
+    ["\u0432\u0441\u0451 \u0438\u0434\u0451\u0442 \u043f\u043e \u043f\u043b\u0430\u043d\u0443", "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"],
+    ["chorus comes in after this", "English"],
+    ["\u6211\u4eec\u660e\u5929\u518d\u8c08", "\u4e2d\u6587"],
+    ["send the notes when you can", "English"],
+    ["het regent de hele dag", "Nederlands"],
+    ["play that part again", "English"],
+    ["\u0645\u0631\u062d\u0628\u0627 \u0643\u064a\u0641 \u062d\u0627\u0644\u0643", "\u0627\u0644\u0639\u0631\u0628\u064a\u0629"]
+  ];
+  var wall = document.getElementById('heroWall');
+  if (!wall) return;
+  for (var i = LINES.length - 1; i > 0; i--) {   // shuffle so the wall differs each visit
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = LINES[i]; LINES[i] = LINES[j]; LINES[j] = t;
+  }
+  var cols = Math.max(3, Math.ceil(window.innerWidth / 190));
+  var per = Math.max(4, Math.min(6, Math.floor(LINES.length / cols)));
+  for (var c = 0; c < cols; c++) {
+    var col = document.createElement('div');
+    col.className = 'wall-col ' + (c % 2 ? 'down' : 'up');
+    col.style.setProperty('--dur', (64 + c * 13) + 's');
+    var slice = LINES.slice(c * per, (c + 1) * per);
+    if (!slice.length) slice = LINES.slice(0, per);
+    slice.concat(slice).forEach(function (entry) {   // doubled, so the loop is seamless
+      var card = document.createElement('div');
+      card.className = 'wall-card';
+      var b = document.createElement('b'); b.textContent = entry[0];
+      var sp = document.createElement('span'); sp.textContent = entry[1];
+      card.appendChild(b); card.appendChild(sp);
+      col.appendChild(card);
+    });
+    wall.appendChild(col);
+  }
+})();
+</script>
 </body>
 </html>

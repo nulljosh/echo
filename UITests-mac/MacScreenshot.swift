@@ -17,7 +17,7 @@ final class MacScreenshot: XCTestCase {
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10), "App window never appeared")
         let screenshot = window.screenshot()
-        let dir = NSTemporaryDirectory() + "echo-mac-screenshots"
+        let dir = NSTemporaryDirectory() + "voxprint-mac-screenshots"
         do {
             try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
             try screenshot.pngRepresentation.write(to: URL(fileURLWithPath: "\(dir)/1-main.png"))

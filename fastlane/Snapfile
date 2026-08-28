@@ -7,7 +7,7 @@ languages([
   "en-US"
 ])
 
-scheme("EchoUITests")
+scheme("VoxprintUITests")
 
 output_directory("./fastlane/screenshots")
 

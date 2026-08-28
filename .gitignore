@@ -6,7 +6,7 @@ fastlane/report.xml
 *.ipa
 *.dSYM.zip
 *.pkg
-Echo-macOS.app/
+Voxprint-macOS.app/
 .DS_Store
 .asc/artifacts/
 .asc/release/

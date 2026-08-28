@@ -1,4 +1,4 @@
-name: echo
+name: voxprint
 options:
   bundleIdPrefix: com.nulljosh
   deploymentTarget:
@@ -19,7 +19,7 @@ packages:
     from: "0.9.0"
 
 targets:
-  Echo-iOS:
+  Voxprint-iOS:
     type: application
     platform: iOS
     sources:
@@ -37,7 +37,7 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 
-  Echo-macOS:
+  Voxprint-macOS:
     type: application
     platform: macOS
     sources:
@@ -54,72 +54,72 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo
         INFOPLIST_FILE: Sources/macOS/Info.plist
         GENERATE_INFOPLIST_FILE: NO
-        CODE_SIGN_ENTITLEMENTS: Sources/macOS/echo-mac.entitlements
+        CODE_SIGN_ENTITLEMENTS: Sources/macOS/voxprint-mac.entitlements
         ENABLE_HARDENED_RUNTIME: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 
-  EchoUITests:
+  VoxprintUITests:
     type: bundle.ui-testing
     platform: iOS
     sources:
       - UITests
     dependencies:
-      - target: Echo-iOS
+      - target: Voxprint-iOS
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.uitests
         GENERATE_INFOPLIST_FILE: YES
 
-  EchoMacUITests:
+  VoxprintMacUITests:
     type: bundle.ui-testing
     platform: macOS
     sources:
       - UITests-mac
     dependencies:
-      - target: Echo-macOS
+      - target: Voxprint-macOS
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.mac.uitests
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:
-  Echo-iOS:
+  Voxprint-iOS:
     build:
       targets:
-        Echo-iOS: all
+        Voxprint-iOS: all
     run:
       config: Debug
     archive:
       config: Release
     shared: true
-  Echo-macOS:
+  Voxprint-macOS:
     build:
       targets:
-        Echo-macOS: all
+        Voxprint-macOS: all
     run:
       config: Debug
     archive:
       config: Release
     shared: true
-  EchoUITests:
+  VoxprintUITests:
     build:
       targets:
-        Echo-iOS: all
-        EchoUITests: all
+        Voxprint-iOS: all
+        VoxprintUITests: all
     test:
       # Screenshot runs are headless: attaching LLDB makes the app launch with
       # wait_for_debugger, and a broken debugger version store then denies the
       # launch outright (SBMainWorkspace RequestDenied).
       debugEnabled: false
       targets:
-        - EchoUITests
+        - VoxprintUITests
     shared: true
-  EchoMacUITests:
+  VoxprintMacUITests:
     build:
       targets:
-        Echo-macOS: all
-        EchoMacUITests: all
+        Voxprint-macOS: all
+        VoxprintMacUITests: all
     test:
       targets:
-        - EchoMacUITests
+        - VoxprintMacUITests
     shared: true

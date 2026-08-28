@@ -5,15 +5,15 @@
   "workflows": {
     "ship-ios": { "description": "Bump, archive, upload, submit iOS", "steps": [
       { "name": "bump", "run": "cd . && asc xcode version edit --version \"$VERSION\" --build-number \"$(date +%Y%m%d%H%M)\"" },
-      { "name": "archive", "run": "cd . && asc xcode archive --project echo.xcodeproj --scheme Echo-iOS --archive-path .asc/artifacts/echo.xcarchive --overwrite --output json" },
-      { "name": "export", "run": "cd . && asc xcode export --archive-path .asc/artifacts/echo.xcarchive --export-options ExportOptions.plist --overwrite --ipa-path .asc/artifacts/echo.ipa --output json" },
+      { "name": "archive", "run": "cd . && asc xcode archive --project voxprint.xcodeproj --scheme Voxprint-iOS --archive-path .asc/artifacts/voxprint.xcarchive --overwrite --output json" },
+      { "name": "export", "run": "cd . && asc xcode export --archive-path .asc/artifacts/voxprint.xcarchive --export-options ExportOptions.plist --overwrite --ipa-path .asc/artifacts/voxprint.ipa --output json" },
       { "name": "publish", "if": "SUBMIT", "run": "asc review submit --app $IOS_APP_ID --version $VERSION --platform IOS --confirm --output json" }
     ] },
     "ship-mac": { "description": "Bump, archive, upload, submit Mac", "steps": [
       { "name": "bump_mac", "run": "cd . && asc xcode version edit --version \"$VERSION\" --build-number \"$(date +%Y%m%d%H%M)\"" },
-      { "name": "archive_mac", "run": "cd . && asc xcode archive --project echo.xcodeproj --scheme Echo-macOS --archive-path .asc/artifacts/echo-mac.xcarchive --overwrite --output json" },
-      { "name": "export_mac", "run": "cd . && asc xcode export --archive-path .asc/artifacts/echo-mac.xcarchive --export-options ExportOptions.plist --overwrite --ipa-path .asc/artifacts/echo-mac.ipa --output json" },
-      { "name": "publish_mac", "if": "SUBMIT", "run": "asc publish appstore --app $MAC_APP_ID --ipa .asc/artifacts/echo-mac.ipa --version $VERSION --wait --submit --confirm --output json" }
+      { "name": "archive_mac", "run": "cd . && asc xcode archive --project voxprint.xcodeproj --scheme Voxprint-macOS --archive-path .asc/artifacts/voxprint-mac.xcarchive --overwrite --output json" },
+      { "name": "export_mac", "run": "cd . && asc xcode export --archive-path .asc/artifacts/voxprint-mac.xcarchive --export-options ExportOptions.plist --overwrite --ipa-path .asc/artifacts/voxprint-mac.ipa --output json" },
+      { "name": "publish_mac", "if": "SUBMIT", "run": "asc publish appstore --app $MAC_APP_ID --ipa .asc/artifacts/voxprint-mac.ipa --version $VERSION --wait --submit --confirm --output json" }
     ] }
   }
 }

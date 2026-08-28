@@ -37,8 +37,8 @@ xcrun simctl status_bar "$SIM_UDID" override \
 
 echo "==> Running UI test (mock data, no real recordings needed)"
 xcodebuild test \
-  -project echo.xcodeproj \
-  -scheme EchoUITests \
+  -project voxprint.xcodeproj \
+  -scheme VoxprintUITests \
   -destination "id=$SIM_UDID" \
   -skipPackagePluginValidation \
   | tail -5

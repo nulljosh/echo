@@ -2,8 +2,8 @@
 # Xcode Cloud: regenerate project from project.yml before building
 set -e
 
-if [ -d "$CI_PRIMARY_REPOSITORY_PATH/echo" ]; then
-    WD="$CI_PRIMARY_REPOSITORY_PATH/echo"
+if [ -d "$CI_PRIMARY_REPOSITORY_PATH/voxprint" ]; then
+    WD="$CI_PRIMARY_REPOSITORY_PATH/voxprint"
 else
     WD="$CI_PRIMARY_REPOSITORY_PATH"
 fi

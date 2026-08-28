@@ -129,28 +129,21 @@ so it will not be exercised until the next version bump.
       If the "Echo Pro" string in the live purchase sheet matters, the IAP version has to be attached to
       a review submission explicitly (`asc review items-add`) on the next release.
 
-## iOS 1.3.8 is a staged draft, not ready to submit
+## iOS 1.3.8 is a staged draft — do not submit it alone
 
-Created 2026-08-28 purely to unfreeze the app-info record so the privacy URL could be
-corrected to `https://voxprint.heyitsmejosh.com/privacy.html` (verified by re-pull). It has
-no build, no whatsNew, and **zero code changes** behind it. Do not submit it on its own — a
-no-significant-changes review during the 4.3(a) wave is a bad trade. Attach it to the next
-real change, and fold in the macOS `marketingUrl` gap noted above at the same time.
+Created 2026-08-28 only to unfreeze the app-info record so the privacy URL could be corrected
+to `https://voxprint.heyitsmejosh.com/privacy.html` (verified by re-pull). No build, no
+whatsNew, zero code changes behind it. A no-significant-changes review during the 4.3(a) wave
+is a bad trade — attach it to the next real change, and fold in the macOS `marketingUrl`,
+still on the pre-rename host, at the same time.
 
-## The landing page deploys to Cloudflare Pages, not GitHub Pages
+## The site does not deploy on push
 
-Found 2026-08-28 after landing-page CSS changes stayed invisible on the live site.
-`voxprint.heyitsmejosh.com` and `echo.heyitsmejosh.com` are both proxied CNAMEs to
-**`echo-59b.pages.dev`** — a Cloudflare Pages project. `docs/CNAME` and the repo's GitHub
-Pages setup are vestigial: GH Pages builds fine and serves nothing anyone visits.
+`voxprint.heyitsmejosh.com` is a proxied CNAME to the Cloudflare **Pages** project `voxprint`,
+with no git integration. Deploy explicitly:
 
-Pushing to `main` does **not** deploy the site. It must be pushed explicitly:
+    env -u CLOUDFLARE_API_TOKEN npx wrangler pages deploy docs --project-name voxprint --branch main
 
-    npx wrangler pages deploy docs --project-name echo
-
-`CLOUDFLARE_DNS_TOKEN` in `secrets.fish` is DNS-scoped and cannot do this — it fails with
-"Failed to automatically retrieve account IDs". Needs `wrangler login`, or a token with
-Account / Cloudflare Pages / Edit.
-
-**Open:** either wire the Pages project to auto-build from this repo, or store a Pages-scoped
-token so deploys can run headlessly. Until then every web change needs a manual deploy.
+`CLOUDFLARE_DNS_TOKEN` is DNS-scoped and **overrides** the working OAuth login if exported —
+that is what made an earlier deploy fail with "Failed to automatically retrieve account IDs".
+Worth wiring the Pages project to build from this repo so a push is enough.

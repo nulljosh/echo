@@ -1,0 +1,791 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01F40A48F8CFD10DE7BE46F1 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E923562DB66A3DDBA6AC32 /* StoreManager.swift */; };
+		05CDE64D959FF0E4CD1DDE1A /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4EDF0EB36D3605787E476DEA /* WhisperKit */; };
+		07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
+		155F69C43BFEFAAC1A2F0144 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0226572018B4E269CFF /* TranscriptionEngine.swift */; };
+		18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
+		1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3FD038F68389C5E660B5C /* VoxprintApp.swift */; };
+		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
+		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
+		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
+		382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
+		3A139D30630B02C550F8190A /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E923562DB66A3DDBA6AC32 /* StoreManager.swift */; };
+		3EA36301F0DF4FE61B5D6501 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0226572018B4E269CFF /* TranscriptionEngine.swift */; };
+		429DCFF98A3F8142596B9158 /* MacScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */; };
+		45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2979D9C3680EC57594490295 /* Assets.xcassets */; };
+		495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
+		5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
+		58727EA565C57496808CEDE6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
+		598C602752E19BA975B31B64 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
+		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
+		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
+		781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
+		7A3EA8A0D5519DA67C1B3E35 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */; };
+		7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
+		89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7948E5D32A49F30A1748199 /* WhisperKit */; };
+		8FCCAB0B151092B48F15294D /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D8E1255B0EAAE726BF42DA /* PaywallView.swift */; };
+		A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
+		A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
+		ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCE0C09F8A34129F5803E83 /* Assets.xcassets */; };
+		B8AF031CE7EEAFB7752DE774 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D8E1255B0EAAE726BF42DA /* PaywallView.swift */; };
+		BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
+		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
+		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
+		DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
+		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
+		F53122CC80636C8AD894260C /* PreviewScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */; };
+		FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
+		FB9F94334B2C9733A080BF89 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */; };
+		FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20EF43BF2BF9DAFEB3946698 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E91DCA098026ECD5A24A7092;
+			remoteInfo = "Voxprint-macOS";
+		};
+		A6CF831DF77238FE991B99A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCFA617113565E7ABE6FB52D;
+			remoteInfo = "Voxprint-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacScreenshot.swift; sourceTree = "<group>"; };
+		04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Voxprint-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16C3FD038F68389C5E660B5C /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
+		1824C0226572018B4E269CFF /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
+		1E3C83FFB9437708C5B3184B /* voxprint-mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "voxprint-mac.entitlements"; sourceTree = "<group>"; };
+		2979D9C3680EC57594490295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2FF9D1E91E59C9DCDB46932E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		332A910F82F4863EBB411432 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
+		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
+		67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsView.swift; sourceTree = "<group>"; };
+		6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreenshot.swift; sourceTree = "<group>"; };
+		72702A5CFAC0AD1F611CE747 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7349640877D9FF7A297ECA96 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCapture.swift; sourceTree = "<group>"; };
+		7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voxprint-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		ABCE0C09F8A34129F5803E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntry.swift; sourceTree = "<group>"; };
+		CF83663B541B3469842D0224 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
+		DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VoxprintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E3E923562DB66A3DDBA6AC32 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		EA4EFE3E213916AF613C4034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F4D8E1255B0EAAE726BF42DA /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81C853C2EE1360C65FF51690 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CDE64D959FF0E4CD1DDE1A /* WhisperKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9AE64109AECD148DCDA1BC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AAA0A4B07AE48B28CFEB4A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */,
+				7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */,
+				4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */,
+				DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30E913D2E49A586EE56B7C8C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE0C09F8A34129F5803E83 /* Assets.xcassets */,
+				7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */,
+				16C3FD038F68389C5E660B5C /* VoxprintApp.swift */,
+				D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		7A12FC2CCEF7B3DC268F0916 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */,
+				30E913D2E49A586EE56B7C8C /* iOS */,
+				EB54CA9D4E38FABD051F92FF /* macOS */,
+				ECE44A7E65994063945BAB0D /* Models */,
+				A4076E5A3E5F499A704AB90B /* Services */,
+				9EEAADF59F404D8B4504B5A4 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9EEAADF59F404D8B4504B5A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2FF9D1E91E59C9DCDB46932E /* ContentView.swift */,
+				7349640877D9FF7A297ECA96 /* HistoryView.swift */,
+				F4D8E1255B0EAAE726BF42DA /* PaywallView.swift */,
+				3A6E7245B1913F78E4416A3C /* RecordButton.swift */,
+				72702A5CFAC0AD1F611CE747 /* SettingsView.swift */,
+				CF83663B541B3469842D0224 /* SplashView.swift */,
+				4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */,
+				67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A4076E5A3E5F499A704AB90B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */,
+				332A910F82F4863EBB411432 /* SpeechManager.swift */,
+				E3E923562DB66A3DDBA6AC32 /* StoreManager.swift */,
+				1824C0226572018B4E269CFF /* TranscriptionEngine.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A7522B3576E680E43D787643 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */,
+				DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		B2EF018880D913EC381B9479 = {
+			isa = PBXGroup;
+			children = (
+				7A12FC2CCEF7B3DC268F0916 /* Sources */,
+				A7522B3576E680E43D787643 /* UITests */,
+				B7351F844B9F1450479F27BF /* UITests-mac */,
+				1AAA0A4B07AE48B28CFEB4A5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B7351F844B9F1450479F27BF /* UITests-mac */ = {
+			isa = PBXGroup;
+			children = (
+				0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */,
+			);
+			path = "UITests-mac";
+			sourceTree = "<group>";
+		};
+		EB54CA9D4E38FABD051F92FF /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				2979D9C3680EC57594490295 /* Assets.xcassets */,
+				EA4EFE3E213916AF613C4034 /* Info.plist */,
+				1E3C83FFB9437708C5B3184B /* voxprint-mac.entitlements */,
+				5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		ECE44A7E65994063945BAB0D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05C174F4F7C035326BFB4D1D /* VoxprintMacUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2563EBF7650B35FA785A944D /* Build configuration list for PBXNativeTarget "VoxprintMacUITests" */;
+			buildPhases = (
+				2148EC21DD89A2B20264A4E9 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8DB6DB56DA45BF8D282F6E2 /* PBXTargetDependency */,
+			);
+			name = VoxprintMacUITests;
+			packageProductDependencies = (
+			);
+			productName = VoxprintMacUITests;
+			productReference = 4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		49493D04EC624D522DD3630C /* VoxprintUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EFA19BAE21BCE57FAA57409 /* Build configuration list for PBXNativeTarget "VoxprintUITests" */;
+			buildPhases = (
+				37FCABB7B2E14F51E12A2A40 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A007627B06A74B2378A5C55 /* PBXTargetDependency */,
+			);
+			name = VoxprintUITests;
+			packageProductDependencies = (
+			);
+			productName = VoxprintUITests;
+			productReference = DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		DCFA617113565E7ABE6FB52D /* Voxprint-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C12FCF3042C22CBECC2988 /* Build configuration list for PBXNativeTarget "Voxprint-iOS" */;
+			buildPhases = (
+				70D50C8E9C2B10D3CD96CA4A /* Sources */,
+				81162214C8A7E01AD991C863 /* Resources */,
+				F9AE64109AECD148DCDA1BC4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Voxprint-iOS";
+			packageProductDependencies = (
+				D7948E5D32A49F30A1748199 /* WhisperKit */,
+			);
+			productName = "Voxprint-iOS";
+			productReference = 04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E91DCA098026ECD5A24A7092 /* Voxprint-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5AF1E486CC94AC14A444890 /* Build configuration list for PBXNativeTarget "Voxprint-macOS" */;
+			buildPhases = (
+				60575E053EE4A822F4F243F5 /* Sources */,
+				1E637615E36D361D5BC2A9C8 /* Resources */,
+				81C853C2EE1360C65FF51690 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Voxprint-macOS";
+			packageProductDependencies = (
+				4EDF0EB36D3605787E476DEA /* WhisperKit */,
+			);
+			productName = "Voxprint-macOS";
+			productReference = 7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE114ED96FEC7AFCBAB95598 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					05C174F4F7C035326BFB4D1D = {
+						DevelopmentTeam = QMM486NPYC;
+						TestTargetID = E91DCA098026ECD5A24A7092;
+					};
+					49493D04EC624D522DD3630C = {
+						DevelopmentTeam = QMM486NPYC;
+						TestTargetID = DCFA617113565E7ABE6FB52D;
+					};
+					DCFA617113565E7ABE6FB52D = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+					E91DCA098026ECD5A24A7092 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+				};
+			};
+			buildConfigurationList = 306CDF56B0CC0E63527E3E89 /* Build configuration list for PBXProject "voxprint" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B2EF018880D913EC381B9479;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D55FEF2369FF0790F1611F14 /* XCRemoteSwiftPackageReference "WhisperKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1AAA0A4B07AE48B28CFEB4A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCFA617113565E7ABE6FB52D /* Voxprint-iOS */,
+				E91DCA098026ECD5A24A7092 /* Voxprint-macOS */,
+				49493D04EC624D522DD3630C /* VoxprintUITests */,
+				05C174F4F7C035326BFB4D1D /* VoxprintMacUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E637615E36D361D5BC2A9C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */,
+				DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81162214C8A7E01AD991C863 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */,
+				BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2148EC21DD89A2B20264A4E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				429DCFF98A3F8142596B9158 /* MacScreenshot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37FCABB7B2E14F51E12A2A40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53122CC80636C8AD894260C /* PreviewScreenshot.swift in Sources */,
+				7A3EA8A0D5519DA67C1B3E35 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60575E053EE4A822F4F243F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */,
+				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
+				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
+				8FCCAB0B151092B48F15294D /* PaywallView.swift in Sources */,
+				781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */,
+				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
+				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
+				598C602752E19BA975B31B64 /* SplashView.swift in Sources */,
+				3A139D30630B02C550F8190A /* StoreManager.swift in Sources */,
+				3EA36301F0DF4FE61B5D6501 /* TranscriptionEngine.swift in Sources */,
+				206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */,
+				C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */,
+				FB9F94334B2C9733A080BF89 /* VoxprintApp.swift in Sources */,
+				34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D50C8E9C2B10D3CD96CA4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */,
+				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,
+				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
+				B8AF031CE7EEAFB7752DE774 /* PaywallView.swift in Sources */,
+				7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */,
+				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
+				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,
+				58727EA565C57496808CEDE6 /* SplashView.swift in Sources */,
+				01F40A48F8CFD10DE7BE46F1 /* StoreManager.swift in Sources */,
+				155F69C43BFEFAAC1A2F0144 /* TranscriptionEngine.swift in Sources */,
+				382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */,
+				18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */,
+				1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */,
+				35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */,
+				D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A007627B06A74B2378A5C55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCFA617113565E7ABE6FB52D /* Voxprint-iOS */;
+			targetProxy = A6CF831DF77238FE991B99A3 /* PBXContainerItemProxy */;
+		};
+		E8DB6DB56DA45BF8D282F6E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E91DCA098026ECD5A24A7092 /* Voxprint-macOS */;
+			targetProxy = 20EF43BF2BF9DAFEB3946698 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		29D3D8B2605363464349CC85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.mac.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Voxprint-macOS";
+			};
+			name = Debug;
+		};
+		3C24BE4A49C5BF154B68CBE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		575AD78EFCC342951A91EB23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Voxprint-iOS";
+			};
+			name = Release;
+		};
+		918313BA0C4E120DE6F30749 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 202608240033;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.3.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		9B216904E7601AA9FE2A7520 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 202608240033;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.3.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		AF43C8CC393F2872E305967B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Voxprint-iOS";
+			};
+			name = Debug;
+		};
+		CC2BBFE1EAB9D2075153BB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D395485C101050DE6BDA45BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		F97E1E1AFF7B18CEA50D38BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.mac.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Voxprint-macOS";
+			};
+			name = Release;
+		};
+		FE7AAF1AE5388A18F687249B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0EFA19BAE21BCE57FAA57409 /* Build configuration list for PBXNativeTarget "VoxprintUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF43C8CC393F2872E305967B /* Debug */,
+				575AD78EFCC342951A91EB23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2563EBF7650B35FA785A944D /* Build configuration list for PBXNativeTarget "VoxprintMacUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D3D8B2605363464349CC85 /* Debug */,
+				F97E1E1AFF7B18CEA50D38BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		306CDF56B0CC0E63527E3E89 /* Build configuration list for PBXProject "voxprint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B216904E7601AA9FE2A7520 /* Debug */,
+				918313BA0C4E120DE6F30749 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		68C12FCF3042C22CBECC2988 /* Build configuration list for PBXNativeTarget "Voxprint-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE7AAF1AE5388A18F687249B /* Debug */,
+				D395485C101050DE6BDA45BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5AF1E486CC94AC14A444890 /* Build configuration list for PBXNativeTarget "Voxprint-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC2BBFE1EAB9D2075153BB53 /* Debug */,
+				3C24BE4A49C5BF154B68CBE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D55FEF2369FF0790F1611F14 /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argmaxinc/WhisperKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4EDF0EB36D3605787E476DEA /* WhisperKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55FEF2369FF0790F1611F14 /* XCRemoteSwiftPackageReference "WhisperKit" */;
+			productName = WhisperKit;
+		};
+		D7948E5D32A49F30A1748199 /* WhisperKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55FEF2369FF0790F1611F14 /* XCRemoteSwiftPackageReference "WhisperKit" */;
+			productName = WhisperKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = DE114ED96FEC7AFCBAB95598 /* Project object */;
+}

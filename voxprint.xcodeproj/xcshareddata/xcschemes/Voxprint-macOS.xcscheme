@@ -15,24 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2B1CDB0EA58D579D3A948505"
-               BuildableName = "Echo-macOS.app"
-               BlueprintName = "Echo-macOS"
-               ReferencedContainer = "container:echo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "103A5FBF41364FEB740ECDB6"
-               BuildableName = "EchoMacUITests.xctest"
-               BlueprintName = "EchoMacUITests"
-               ReferencedContainer = "container:echo.xcodeproj">
+               BlueprintIdentifier = "E91DCA098026ECD5A24A7092"
+               BuildableName = "Voxprint-macOS.app"
+               BlueprintName = "Voxprint-macOS"
+               ReferencedContainer = "container:voxprint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,27 +32,14 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2B1CDB0EA58D579D3A948505"
-            BuildableName = "Echo-macOS.app"
-            BlueprintName = "Echo-macOS"
-            ReferencedContainer = "container:echo.xcodeproj">
+            BlueprintIdentifier = "E91DCA098026ECD5A24A7092"
+            BuildableName = "Voxprint-macOS.app"
+            BlueprintName = "Voxprint-macOS"
+            ReferencedContainer = "container:voxprint.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "103A5FBF41364FEB740ECDB6"
-               BuildableName = "EchoMacUITests.xctest"
-               BlueprintName = "EchoMacUITests"
-               ReferencedContainer = "container:echo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -82,12 +55,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2B1CDB0EA58D579D3A948505"
-            BuildableName = "Echo-macOS.app"
-            BlueprintName = "Echo-macOS"
-            ReferencedContainer = "container:echo.xcodeproj">
+            BlueprintIdentifier = "E91DCA098026ECD5A24A7092"
+            BuildableName = "Voxprint-macOS.app"
+            BlueprintName = "Voxprint-macOS"
+            ReferencedContainer = "container:voxprint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -99,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2B1CDB0EA58D579D3A948505"
-            BuildableName = "Echo-macOS.app"
-            BlueprintName = "Echo-macOS"
-            ReferencedContainer = "container:echo.xcodeproj">
+            BlueprintIdentifier = "E91DCA098026ECD5A24A7092"
+            BuildableName = "Voxprint-macOS.app"
+            BlueprintName = "Voxprint-macOS"
+            ReferencedContainer = "container:voxprint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

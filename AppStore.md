@@ -46,12 +46,12 @@ FREE, FOREVER
 - Full history, copy, and share
 - 12 languages with auto-detect
 
-ECHO PRO, ONE PAYMENT
+VOXPRINT PRO, ONE PAYMENT
 - Unlimited audio file transcription
 - The Small model, the most accurate
 - One purchase. Not a subscription, ever.
 
-WHY ECHO
+WHY VOXPRINT
 - On device. Your voice stays yours.
 - No account, no sign-up, no tracking.
 - No monthly fee. Own it once.
@@ -65,7 +65,7 @@ First release. On-device transcription for iPhone. Live mic and file import, 12 
 ```
 
 **Support URL**: `https://heyitsmejosh.com`
-**Marketing URL** (optional): `https://heyitsmejosh.com/echo/`
+**Marketing URL** (optional): `https://voxprint.heyitsmejosh.com/`
 **Privacy Policy URL**: `https://voxprint.heyitsmejosh.com/privacy.html`
 
 ---

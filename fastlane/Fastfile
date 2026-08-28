@@ -11,8 +11,8 @@ platform :ios do
   desc "Capture macOS screenshot"
   lane :mac_screenshots do
     sh("cd .. && xcodegen generate")
-    scan(scheme: "EchoMacUITests")
-    sh("mkdir -p ../fastlane/screenshots/mac && cp ~/Library/Containers/com.nulljosh.echo.mac.uitests.xctrunner/Data/tmp/echo-mac-screenshots/*.png ../fastlane/screenshots/mac/")
+    scan(scheme: "VoxprintMacUITests")
+    sh("mkdir -p ../fastlane/screenshots/mac && cp ~/Library/Containers/com.nulljosh.echo.mac.uitests.xctrunner/Data/tmp/voxprint-mac-screenshots/*.png ../fastlane/screenshots/mac/")
   end
 
   desc "Build and upload a TestFlight beta"
@@ -24,7 +24,7 @@ platform :ios do
     )
     sh("cd .. && xcodegen generate")
     gym(
-      scheme: "Echo-iOS",
+      scheme: "Voxprint-iOS",
       export_method: "app-store",
       xcargs: "-allowProvisioningUpdates",
       clean: true
@@ -41,11 +41,11 @@ platform :ios do
     )
     sh("cd .. && xcodegen generate")
     gym(
-      scheme: "Echo-macOS",
+      scheme: "Voxprint-macOS",
       export_method: "app-store",
       xcargs: "-allowProvisioningUpdates",
       clean: true
     )
-    pilot(skip_waiting_for_build_processing: true, app_platform: "osx", pkg: "./Echo-macOS.pkg")
+    pilot(skip_waiting_for_build_processing: true, app_platform: "osx", pkg: "./Voxprint-macOS.pkg")
   end
 end

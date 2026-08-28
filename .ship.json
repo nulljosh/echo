@@ -1,13 +1,15 @@
 {
   "appId": "6782604262",
   "bundleId": "com.nulljosh.echo",
-  "scheme": "Echo",
-  "platforms": ["ios"],
+  "scheme": "Voxprint-iOS",
+  "platforms": [
+    "ios"
+  ],
   "simulator": "iPhone 11 Pro Max",
   "iosDir": ".",
-  "xcodeProject": "echo.xcodeproj",
+  "xcodeProject": "voxprint.xcodeproj",
   "exportOptions": ".asc/artifacts/ExportOptions.plist",
-  "archivePath": ".asc/artifacts/Echo-iOS.xcarchive",
-  "ipaPath": ".asc/artifacts/Echo-iOS.ipa",
+  "archivePath": ".asc/artifacts/Voxprint-iOS.xcarchive",
+  "ipaPath": ".asc/artifacts/Voxprint-iOS.ipa",
   "screenshots": {}
 }

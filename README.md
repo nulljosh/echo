@@ -2,7 +2,7 @@
 
 # Voxprint
 
-![Version](https://img.shields.io/badge/version-1.3.3-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fecho-black?logo=github)](https://github.com/nulljosh/echo)
+![Version](https://img.shields.io/badge/version-1.3.3-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fvoxprint-black?logo=github)](https://github.com/nulljosh/voxprint)
 
 Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
 
@@ -39,10 +39,10 @@ Live at [voxprint.heyitsmejosh.com](https://voxprint.heyitsmejosh.com) · [App S
 
 ```bash
 xcodegen generate
-open echo.xcodeproj
+open voxprint.xcodeproj
 ```
 
-Select `Echo-iOS` or `Echo-macOS`. The Whisper model is downloaded once on first launch (~39MB tiny, ~150MB base, ~500MB small) and stored in Application Support — subsequent launches load instantly, no re-download. Auto mode picks the right size for your device.
+Select `Voxprint-iOS` or `Voxprint-macOS`. The Whisper model is downloaded once on first launch (~39MB tiny, ~150MB base, ~500MB small) and stored in Application Support — subsequent launches load instantly, no re-download. Auto mode picks the right size for your device.
 
 ## This Week / This Month
 

@@ -28,8 +28,8 @@ seconds of speaking rather than after the recording ends.
 
 ```
 Sources/
-  iOS/        EchoApp.swift, Info.plist, Assets.xcassets
-  macOS/      EchoApp.swift, Info.plist, entitlements, Assets.xcassets
+  iOS/        VoxprintApp.swift, Info.plist, Assets.xcassets
+  macOS/      VoxprintApp.swift, Info.plist, entitlements, Assets.xcassets
   Models/     TranscriptionEntry (Codable: id, text, date, duration, model)
   Services/   TranscriptionEngine, AudioCapture
   Views/      ContentView, RecordButton, TranscriptionView, WaveformBarsView,
