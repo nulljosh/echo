@@ -896,9 +896,9 @@ a:focus-visible {
 
 .landing-footer a:hover { color: var(--primary); }
 
-/* the wall is decorative: drop it on small screens rather than shrink it to mush */
 @media (max-width: 640px) {
-    .hero-wall { display: none; }
+    /* ponytail: keep the wall on phones, just quieter behind the copy */
+    .hero-wall { opacity: 0.35; gap: 8px; }
     .landing-hero { padding-top: 48px; }
     .site-bar { padding: 12px 16px; }
 }
