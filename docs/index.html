@@ -12,51 +12,65 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <header class="site-bar">
-        <a class="site-bar-brand" href="/">
-            <img src="assets/logo.png" width="28" height="28" alt="">
-            <span>Voxprint</span>
-        </a>
-        <a class="btn-appstore" href="https://apps.apple.com/app/id6782604262">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                 alt="Download on the App Store" width="120" height="40">
-        </a>
-    </header>
+    <a class="skip" href="#main">Skip to content</a>
 
+<main id="main">
     <section class="landing-hero">
         <div class="hero-wall" id="heroWall" aria-hidden="true"></div>
         <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-copy">
-        <img src="assets/logo.png" width="88" alt="Voxprint icon">
-        <h1>Voxprint</h1>
-        <p>On-device speech transcription. No cloud, no account, no data ever leaves your device.</p>
-        <div class="landing-ctas">
-            <a class="btn-primary" href="app.html">Open Voxprint</a>
-        </div>
+            <img src="assets/logo.png" width="88" height="88" alt="Voxprint icon">
+            <h1>Voxprint</h1>
+            <p>On-device speech transcription. No cloud, no account, no data ever leaves your device.</p>
+            <div class="landing-ctas">
+                <a class="btn btn-primary" href="app.html">Open Voxprint</a>
+                <a class="btn btn-outline" href="https://apps.apple.com/app/id6782604262">iPhone &amp; iPad</a>
+                <a class="btn btn-outline" href="https://apps.apple.com/app/id6782604262?mt=12">Mac</a>
+                <a class="btn btn-outline" href="https://github.com/nulljosh/voxprint">Source</a>
+            </div>
         </div>
     </section>
 
     <section class="landing-features">
-        <div class="feature">
-            <h3>Runs locally</h3>
-            <p>WhisperKit transcribes entirely on-device — no API keys, no servers.</p>
-        </div>
-        <div class="feature">
-            <h3>Live or file</h3>
-            <p>Real-time mic transcription with waveform, or drop in an audio file.</p>
-        </div>
-        <div class="feature">
-            <h3>iOS + macOS</h3>
-            <p>Native SwiftUI apps for both platforms, 12 languages supported.</p>
-        </div>
-        <div class="feature">
-            <h3>One-time purchase</h3>
-            <p>3 free file transcriptions, then a single $7.99 unlock. No subscription.</p>
+        <div class="container">
+            <h2>Spoken, heard, written down</h2>
+            <div class="grid">
+                <div class="feature">
+                    <h3>Runs locally</h3>
+                    <p>WhisperKit transcribes entirely on-device &mdash; no API keys, no servers.</p>
+                </div>
+                <div class="feature">
+                    <h3>Live or file</h3>
+                    <p>Real-time mic transcription with waveform, or drop in an audio file.</p>
+                </div>
+                <div class="feature">
+                    <h3>iOS + macOS</h3>
+                    <p>Native SwiftUI apps for both platforms, 12 languages supported.</p>
+                </div>
+                <div class="feature">
+                    <h3>One-time purchase</h3>
+                    <p>3 free file transcriptions, then a single $7.99 unlock. No subscription.</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <section class="closing">
+        <div class="container">
+            <h2>Start transcribing</h2>
+            <p>Open it in the browser, or get the native app for iPhone, iPad, and Mac.</p>
+            <div class="landing-ctas">
+                <a class="btn btn-primary" href="app.html">Open Voxprint</a>
+            </div>
+        </div>
+    </section>
+</main>
+
     <footer class="landing-footer">
-        <a href="privacy.html">Privacy</a> · <a href="https://github.com/nulljosh/voxprint">GitHub</a>
+        <div class="container">
+            <p>Voxprint &mdash; by <a href="https://heyitsmejosh.com">Joshua Trommel</a></p>
+            <p><a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/nulljosh/voxprint">Source on GitHub</a></p>
+        </div>
     </footer>
 <script>
 (function () {
