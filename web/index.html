@@ -37,7 +37,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font); overflow-x: hidden; }
-  a { color: var(--accent); }
+  a { color: var(--link, var(--accent)); }
   img { max-width: 100%; display: block; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
@@ -78,7 +78,7 @@
   .section-head { max-width: 480px; margin: 0 auto 3rem; text-align: center; }
   .section-head h2 { font-size: 2rem; }
 
-  .icon-tile { width: 44px; height: 44px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 14%, transparent); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--accent); font-size: 1.25rem; }
+  .icon-tile { width: 44px; height: 44px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 14%, transparent); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--link, var(--accent)); font-size: 1.25rem; }
 
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .card { padding: 1.5rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 14px; }
