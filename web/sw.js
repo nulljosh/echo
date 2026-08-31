@@ -1,5 +1,5 @@
 // ponytail: cache-first over a fixed file list. Bump CACHE to ship an update.
-const CACHE = "voxprint-v1";
+const CACHE = "voxprint-v2";
 const FILES = ["/", "/index.html", "/manifest.webmanifest"];
 
 self.addEventListener("install", e => {
@@ -18,5 +18,21 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   // Same-origin GETs only; APIs are cross-origin and stay network-only.
   if (e.request.method !== "GET" || new URL(e.request.url).origin !== location.origin) return;
-  e.respondWith(caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request)));
+  e.respondWith(
+    caches.match(e.request, { ignoreSearch: true }).then(hit => hit ||
+      fetch(e.request).then(res => {
+        // Fill the cache as the app loads, so the hashed bundles the shell needs
+        // are there the next time the network is not. Opaque/error responses are
+        // not worth storing.
+        if (res.ok && res.type === "basic") {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return res;
+      }).catch(() =>
+        // A navigation offline with nothing cached still gets the app shell.
+        e.request.mode === "navigate" ? caches.match(FILES[0]) : Promise.reject()
+      )
+    )
+  );
 });
