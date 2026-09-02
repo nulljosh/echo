@@ -2,8 +2,10 @@
 
 **v1.3.7** | August 2026
 
-Voxprint is on-device speech transcription for iOS and macOS. No cloud, no
-network calls for transcription — audio never leaves the device.
+Speech to text that never leaves your device.
+
+Voxprint transcribes on iPhone and Mac. No cloud, no network call. The audio stays
+where you recorded it.
 
 ## Transcription Pipeline
 
@@ -22,7 +24,7 @@ seconds of speaking rather than after the recording ends.
   which iOS does not purge, so subsequent launches load instantly instead of
   re-downloading.
 - **Model selection**: chosen automatically at launch based on available
-  device memory — no user-facing model picker.
+  device memory, no user-facing model picker.
 
 ## Structure
 
@@ -44,7 +46,7 @@ Sources/
 | macOS | SwiftUI | macOS 14+, sandboxed (Mac App Store IAP requirement) |
 
 Versioning lives only in `project.yml` (`MARKETING_VERSION` /
-`CURRENT_PROJECT_VERSION`) — Info.plists reference it via build variable, never
+`CURRENT_PROJECT_VERSION`), Info.plists reference it via build variable, never
 hardcoded.
 
 ## Security / Privacy
