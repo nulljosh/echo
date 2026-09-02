@@ -4,7 +4,9 @@
 
 ![Version](https://img.shields.io/badge/version-1.3.3-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fvoxprint-black?logo=github)](https://github.com/nulljosh/voxprint)
 
-Native on-device speech transcription using [WhisperKit](https://github.com/argmaxinc/WhisperKit). Runs entirely locally — no cloud, no API keys, no data leaves the device.
+Speech to text that never leaves your device.
+
+Native transcription on iPhone and Mac with [WhisperKit](https://github.com/argmaxinc/WhisperKit). No cloud. No API keys. Nothing uploaded, ever.
 
 Live at [voxprint.heyitsmejosh.com](https://voxprint.heyitsmejosh.com) · [App Store](https://apps.apple.com/app/id6782604262)
 
@@ -18,22 +20,22 @@ Live at [voxprint.heyitsmejosh.com](https://voxprint.heyitsmejosh.com) · [App S
 
 ## Features
 
-- Live microphone recording with real-time transcription and waveform
-- File transcription — drag/drop on macOS, browse on iOS
-- 12 languages — auto-detect or force specific
-- Auto model selection based on device RAM
-- Persistent history (max 50 entries)
-- Export / share / copy to clipboard
-- Retry on model load failure
-- Cmd+R shortcut (macOS)
-- Light/dark mode
-- iOS + macOS SwiftUI
+- Record live. Text and waveform appear as you talk
+- Transcribe a file. Drag it in on Mac, browse on iOS
+- 12 languages. Auto-detect, or pick one
+- Picks the right model for your device's RAM
+- History, the last 50
+- Export, share, copy
+- Retries if the model fails to load
+- Cmd+R on Mac
+- Light and dark
+- SwiftUI on iOS and macOS
 
 ## Architecture
 
 ![Architecture](architecture.svg)
 
-`AVAudioEngine` captures mic at native sample rate, resampled to 16kHz mono Float32. Waveform driven by RMS per buffer. Batches transcribe every 2 seconds via `WhisperKit` CoreML inference. File mode uses `AVAudioFile` for duration. History (max 50) persists to `Documents/echo-history.json`.
+`AVAudioEngine` captures the mic at native rate and resamples to 16 kHz mono Float32. The waveform is RMS per buffer. Every 2 seconds a batch goes through WhisperKit's CoreML inference. File mode uses `AVAudioFile` for duration. History, capped at 50, persists to `Documents/echo-history.json`.
 
 ## Build
 
@@ -42,7 +44,7 @@ xcodegen generate
 open voxprint.xcodeproj
 ```
 
-Select `Voxprint-iOS` or `Voxprint-macOS`. The Whisper model is downloaded once on first launch (~39MB tiny, ~150MB base, ~500MB small) and stored in Application Support — subsequent launches load instantly, no re-download. Auto mode picks the right size for your device.
+Pick `Voxprint-iOS` or `Voxprint-macOS`. The Whisper model downloads once on first launch (about 39 MB tiny, 150 MB base, 500 MB small) into Application Support. After that it loads instantly. Auto mode picks the size for your device.
 
 ## This Week / This Month
 
