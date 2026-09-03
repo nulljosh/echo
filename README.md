@@ -30,6 +30,7 @@ Live at [voxprint.heyitsmejosh.com](https://voxprint.heyitsmejosh.com) · [App S
 - Cmd+R on Mac
 - Light and dark
 - SwiftUI on iOS and macOS
+- Apple Watch companion, record voice memos standalone on your wrist
 
 ## Architecture
 
@@ -45,6 +46,16 @@ open voxprint.xcodeproj
 ```
 
 Pick `Voxprint-iOS` or `Voxprint-macOS`. The Whisper model downloads once on first launch (about 39 MB tiny, 150 MB base, 500 MB small) into Application Support. After that it loads instantly. Auto mode picks the size for your device.
+
+### Apple Watch
+
+A standalone watchOS companion lives in `watchos/` (`WKWatchOnly`, no iPhone required to record). It records voice memos locally with `AVAudioRecorder` and keeps a history you can play back and delete, all on-device, nothing is transcribed or uploaded from the watch itself.
+
+```bash
+cd watchos
+xcodegen generate
+open VoxprintWatch.xcodeproj
+```
 
 ## This Week / This Month
 
