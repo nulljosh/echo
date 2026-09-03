@@ -871,13 +871,3 @@ a.skip:focus {
     .landing-hero { padding: 3.5rem 1.25rem 3rem; }
 }
 
-/* Top banner for the App Store, in place of a CTA button */
-.store-banner {
-    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-    padding: 0.7rem 1rem; background: var(--primary); color: var(--primary-ink);
-    font-size: 0.9rem; text-decoration: none; text-align: center;
-}
-.store-banner img { border-radius: 6px; }
-.store-banner strong { font-weight: 600; }
-.store-banner:hover { opacity: 0.92; }
-@media (max-width: 480px) { .store-banner span { display: none; } }
