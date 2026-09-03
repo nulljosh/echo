@@ -61,10 +61,10 @@ Echo's landing page (`web/index.html`, styles inline) is hosted on **Cloudflare 
 
 ```bash
 npx wrangler login
-npx wrangler pages deploy web/ --project-name=echo --branch=main
+npx wrangler pages deploy docs/ --project-name=voxprint --branch=main
 ```
 
-Domain: `voxprint.heyitsmejosh.com` (Cloudflare DNS CNAME pointing to Cloudflare Pages). Project name in Pages dashboard: `echo` (unchanged; the `echo.` host still resolves as an alias).
+Domain: `voxprint.heyitsmejosh.com` (Cloudflare DNS CNAME pointing to Cloudflare Pages). Project name in Pages dashboard: `voxprint`; deploy `docs/`, not `web/`.
 
 ## Targets
 
