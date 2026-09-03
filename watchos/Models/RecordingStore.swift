@@ -19,7 +19,7 @@ final class RecordingStore: NSObject, ObservableObject {
     @Published private(set) var playingID: UUID?
     @Published var errorMessage: String?
 
-    static let recordingsDirectory: URL = {
+    static nonisolated let recordingsDirectory: URL = {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let dir = docs.appendingPathComponent("Recordings", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
@@ -48,7 +48,7 @@ final class RecordingStore: NSObject, ObservableObject {
 
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try session.setCategory(.playAndRecord, mode: .default)
             try session.setActive(true)
         } catch {
             errorMessage = "Couldn't access the microphone."
