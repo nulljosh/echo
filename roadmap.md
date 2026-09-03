@@ -147,3 +147,7 @@ with no git integration. Deploy explicitly:
 `CLOUDFLARE_DNS_TOKEN` is DNS-scoped and **overrides** the working OAuth login if exported , 
 that is what made an earlier deploy fail with "Failed to automatically retrieve account IDs".
 Worth wiring the Pages project to build from this repo so a push is enough.
+
+## Open
+
+- [ ] Apple Watch companion app -- standalone watchOS target (XcodeGen), same pattern as talli/watchos, sparkjar/watchos, epiphany/watchos, and the new companions in bookrank/charwork/curvely/fengshui/inkpress/lexly/quotestreak. Deferred 2026-09-02 to keep the sweep scoped; pick network+token-pairing, App-Group share, or a fully local port depending on what the app actually is.
