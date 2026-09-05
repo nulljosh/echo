@@ -147,3 +147,4 @@ with no git integration. Deploy explicitly:
 `CLOUDFLARE_DNS_TOKEN` is DNS-scoped and **overrides** the working OAuth login if exported , 
 that is what made an earlier deploy fail with "Failed to automatically retrieve account IDs".
 Worth wiring the Pages project to build from this repo so a push is enough.
+- [ ] native (kmp) port — sibling apps have one, this doesn't (project-sync 2026-09-05)
