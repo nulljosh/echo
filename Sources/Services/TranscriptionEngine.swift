@@ -34,7 +34,7 @@ class TranscriptionEngine: ObservableObject {
     @Published var detectedLanguage: String?
     @Published var isUnusualLanguage = false
 
-    let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"]
+    let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small", "openai_whisper-large-v3-v20240930_turbo_632MB"]
     let availableLanguages = ["auto", "en", "fr", "es", "de", "zh", "ja", "ko", "ar", "pt", "ru", "it"]
     // ponytail: "unusual" = outside the languages the picker even offers
     private static let expectedLanguages = Set(["en", "fr", "es", "de", "zh", "ja", "ko", "ar", "pt", "ru", "it"])
@@ -94,7 +94,8 @@ class TranscriptionEngine: ObservableObject {
         guard selectedModel == "auto" else { return selectedModel }
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
         #if os(iOS)
-        // ponytail: cap auto at base on iOS — small is ~500MB and stalls on cellular
+        // ponytail: small on any 6GB+ phone (iPhone 12 and up); base was noticeably worse than Siri dictation
+        if gb >= 6 { return "openai_whisper-small" }
         return gb >= 4 ? "openai_whisper-base" : "openai_whisper-tiny"
         #else
         if gb >= 8 { return "openai_whisper-small" }
