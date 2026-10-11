@@ -11,4 +11,4 @@ Built with SwiftUI and WhisperKit (CoreML). Everything is included in one $0.99 
 
 Would love feedback, especially on accuracy across languages and where the live-decode latency still shows.
 
-https://notate.heyitsmejosh.com
+https://notate.jaybulb.com

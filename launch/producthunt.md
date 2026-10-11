@@ -11,7 +11,7 @@ Topics: Productivity, Privacy, iOS
 Pricing: $0.99 one-time purchase, everything included. No in-app purchases, no subscriptions.
 
 Links
-Web: https://notate.heyitsmejosh.com
+Web: https://notate.jaybulb.com
 App Store: https://apps.apple.com/app/id6782604262
 GitHub: https://github.com/nulljosh/notate
 

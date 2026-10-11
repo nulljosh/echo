@@ -4,7 +4,7 @@ Name: Notate
 One-liner: Speech to text that never leaves your device.
 Description: Notate runs WhisperKit locally on iPhone and Mac, so audio is transcribed on-device with no cloud call, no account, and nothing uploaded. It transcribes live from the mic in real time or from a dropped-in file, auto-detecting across every language Whisper supports.
 Category: Productivity / Privacy / Developer Tools
-Links: https://notate.heyitsmejosh.com · https://apps.apple.com/app/id6782604262 · https://github.com/nulljosh/notate
+Links: https://notate.jaybulb.com · https://apps.apple.com/app/id6782604262 · https://github.com/nulljosh/notate
 
 ## AlternativeTo
 List as an alternative to cloud dictation apps (Otter.ai, Aiko). Lead with "on-device, no cloud" as the differentiator. Use the one-liner and description above.

@@ -11,4 +11,4 @@ Everything is included in one $0.99 payment: live mic transcription, file transc
 
 Genuinely curious if anyone here has audited on-device ML apps for privacy leaks I might have missed (telemetry, crash reporting, etc).
 
-https://notate.heyitsmejosh.com
+https://notate.jaybulb.com
