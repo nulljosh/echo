@@ -1,5 +1,5 @@
-/* Variables & Theme, portfolio vibe (heyitsmejosh.com/tokens.css) */
-@import url("https://heyitsmejosh.com/tokens.css");
+/* Variables & Theme, portfolio vibe (jaybulb.com/tokens.css) */
+@import url("https://jaybulb.com/tokens.css");
 
 :root {
     --font: var(--font-body, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif);
