@@ -198,6 +198,3 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 
 ## Ingested 2026-10-02
 - [ ] Stale name: something still says Voxprint; it should say Notate (note said "now it's notify, I think"). Which surface?
-
-## Ingested 2026-10-05
-- [x] What's new sheet needs padding (more side, top and bottom padding in WhatsNewSheet.swift 2026-10-05; not yet visually checked on device) (screenshot: notes/attachments/2026-10-05/notate-1.png, bullets run tight against the sheet edges and the Got it button)
