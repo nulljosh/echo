@@ -8,7 +8,7 @@ Speech to text that never leaves your device.
 
 Native transcription on iPhone and Mac with [WhisperKit](https://github.com/argmaxinc/WhisperKit). No cloud. No API keys. Nothing uploaded, ever.
 
-Live at [notate.heyitsmejosh.com](https://notate.heyitsmejosh.com) · [App Store](https://apps.apple.com/app/id6782604262)
+Live at [notate.jaybulb.com](https://notate.jaybulb.com) · [App Store](https://apps.apple.com/app/id6782604262)
 
 <p align="center">
   <img src="screenshots/appstore/1-finished-transcript.png" width="180">
