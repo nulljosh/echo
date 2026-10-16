@@ -201,4 +201,3 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 
 ## Ingested 2026-10-16
 - [ ] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
-- [ ] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
