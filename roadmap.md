@@ -16,6 +16,8 @@ It ships with 1.4.1, not before. 1.4.0 is in review with "Voxprint" inside the b
 
 # Notate (formerly Voxprint, Echo Transcription) Roadmap
 
+> Priority tier 2 (2026-10-17): ship push, this week. Order: live blockers, ship pushes, active features, portfolio, exploratory. See ~/Documents/Code/LOOP-HANDOFF.md.
+
 ## READY TO SHIP: v1.3.9, real $1 paywall, needs a build from the signing Mac
 
 Paid Apps Agreement/bank enrollment is DONE (signed 2026-09-09) — the blocker described below
