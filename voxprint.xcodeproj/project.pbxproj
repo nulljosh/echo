@@ -16,6 +16,7 @@
 		18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3FD038F68389C5E660B5C /* VoxprintApp.swift */; };
 		1A351A7D83BF800C2E258B25 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
+		1C7C6EDA4D46A8AC31CF0E3C /* AppleSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */; };
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
 		2832DADDF47FA44F395696FB /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
@@ -61,6 +62,7 @@
 		A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
 		A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCE0C09F8A34129F5803E83 /* Assets.xcassets */; };
+		B0D6FEBA96849AD4E0A6797F /* AppleSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */; };
 		B26B43C9C7C3AEBF60EFCEC7 /* NotateWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 25BE114BCA11D958A324FCDC /* NotateWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
 		B745577C3F5A674412161D99 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
@@ -146,6 +148,7 @@
 		332A910F82F4863EBB411432 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		33D5104677907CD79CDEE02B /* NotateFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotateFont.swift; sourceTree = "<group>"; };
 		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeech.swift; sourceTree = "<group>"; };
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Medium.ttf"; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 		A4076E5A3E5F499A704AB90B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */,
 				7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */,
 				739827B542A84C837CAD7966 /* Cleanup.swift */,
 				534E2DEDC49E843805A98F8E /* Exporter.swift */,
@@ -663,6 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7C6EDA4D46A8AC31CF0E3C /* AppleSpeech.swift in Sources */,
 				DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */,
 				B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */,
 				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
@@ -688,6 +693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D6FEBA96849AD4E0A6797F /* AppleSpeech.swift in Sources */,
 				663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */,
 				04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */,
 				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,

@@ -220,6 +220,6 @@ v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 - [x] 3. Search across history
 - [x] 4. Export: plain text, Markdown, subtitles (SRT)
 - [x] 5. Shortcuts and the Action button (App Intents: start recording, transcribe a file)
-- [ ] 6. Apple's speech model (SpeechAnalyzer) as an option on iOS 26 and macOS 26
+- [x] 6. Apple's speech model (SpeechAnalyzer) as an option on iOS 26 and macOS 26
 - [ ] 7. Fresh App Store screenshots (new icon, Notate Sans, Watch)
 - [ ] 8. Ship 2.0 on iPhone, Watch and Mac

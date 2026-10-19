@@ -49,6 +49,7 @@ class TranscriptionEngine: ObservableObject {
     @Published var isUnusualLanguage = false
 
     let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small_216MB", "openai_whisper-large-v3-v20240930_turbo_632MB"]
+        + (AppleSpeech.isSupported ? [AppleSpeech.modelID] : [])
     // Every language Whisper knows (the table has aliases, so dedupe by code)
     let availableLanguages = ["auto"] + Set(Constants.languages.values).sorted()
     // ponytail: "unusual" = outside the languages the picker even offers
@@ -145,7 +146,8 @@ class TranscriptionEngine: ObservableObject {
     }
 
     var resolvedModel: String {
-        guard selectedModel == "auto" else { return selectedModel }
+        // "apple" handles files; live recording still needs a Whisper model, picked the auto way.
+        guard selectedModel == "auto" || selectedModel == AppleSpeech.modelID else { return selectedModel }
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
         #if os(iOS)
         // ponytail: small on any 6GB+ phone (iPhone 12 and up); base was noticeably worse than Siri dictation
@@ -472,9 +474,13 @@ class TranscriptionEngine: ObservableObject {
     }
 
     func transcribeFile(url: URL) async {
-        guard let whisperKit, modelState == .ready else { return }
         let accessing = url.startAccessingSecurityScopedResource()
         defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+        if selectedModel == AppleSpeech.modelID, let locale = await AppleSpeech.installedLocale(for: selectedLanguage) {
+            await transcribeFileWithApple(url: url, locale: locale)
+            return
+        }
+        guard let whisperKit, modelState == .ready else { return }
 
         isTranscribing = true
         transcribedText = ""
@@ -503,6 +509,24 @@ class TranscriptionEngine: ObservableObject {
                 entry.lines = lines.isEmpty ? nil : lines
                 addEntry(entry)
             }
+        } catch {
+            transcribedText = "Transcription failed: \(error.localizedDescription)"
+        }
+    }
+
+    private func transcribeFileWithApple(url: URL, locale: Locale) async {
+        isTranscribing = true
+        transcribedText = ""
+        defer { isTranscribing = false }
+        let duration = (try? AVAudioFile(forReading: url)).map { Double($0.length) / $0.fileFormat.sampleRate } ?? 0
+        do {
+            let lines = try await AppleSpeech.transcribe(url: url, locale: locale)
+            let text = lines.map(\.text).joined(separator: " ")
+            transcribedText = text
+            guard !text.isEmpty else { return }
+            var entry = TranscriptionEntry(text: text, duration: duration, model: AppleSpeech.modelID)
+            entry.lines = lines
+            addEntry(entry)
         } catch {
             transcribedText = "Transcription failed: \(error.localizedDescription)"
         }

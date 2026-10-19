@@ -155,6 +155,7 @@ struct SettingsView: View {
         let resolved = resolvedModel.replacingOccurrences(of: "openai_whisper-", with: "").lowercased()
         switch model {
         case "auto": return "Picks best for this device (currently \(resolved))"
+        case "apple": return "Apple · files and Shortcuts, when installed"
         case "openai_whisper-tiny": return "Fastest · built in"
         case "openai_whisper-base": return "Balanced · built in"
         case "openai_whisper-small_216MB": return "Accurate · built in"
