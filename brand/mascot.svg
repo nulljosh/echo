@@ -1,10 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Dot, the Notate mascot: a little blue page with a sound wave for hair">
-  <path d="M72 46Q84 22 96 46T120 46T144 46T168 46" fill="none" stroke="#0074D9" stroke-width="9" stroke-linecap="round"/>
-  <rect x="52" y="62" width="136" height="148" rx="32" fill="#4da6ff"/>
-  <path d="M188 104V94Q188 62 156 62H146Z" fill="#0074D9"/>
-  <circle cx="96" cy="118" r="10" fill="#1d1d1f"/><circle cx="144" cy="118" r="10" fill="#1d1d1f"/>
-  <circle cx="99.5" cy="114.5" r="3.5" fill="#fff"/><circle cx="147.5" cy="114.5" r="3.5" fill="#fff"/>
-  <path d="M104 142Q120 156 136 142" fill="none" stroke="#1d1d1f" stroke-width="7" stroke-linecap="round"/>
-  <g stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M80 176H160M80 194H128"/></g>
-  <g stroke="#0074D9" stroke-width="9" stroke-linecap="round"><path d="M96 212V226M144 212V226"/></g>
+  <ellipse cx="120" cy="226" rx="56" ry="7" fill="#0074D9" opacity=".18"/>
+  <path d="M120 62V50" stroke="#0074D9" stroke-width="8" stroke-linecap="round"/>
+  <path d="M78 44Q89 22 100 44T122 44T144 44T166 44" fill="none" stroke="#0074D9" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 94Q52 62 84 62H150L188 100V178Q188 210 156 210H84Q52 210 52 178Z" fill="#4da6ff"/>
+  <path d="M150 62V84Q150 100 166 100H188Z" fill="#0074D9"/>
+  <path d="M52 140Q34 146 36 164" fill="none" stroke="#4da6ff" stroke-width="12" stroke-linecap="round"/>
+  <path d="M188 140Q206 130 210 112" fill="none" stroke="#4da6ff" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="96" cy="120" r="10.5" fill="#1d1d1f"/><circle cx="144" cy="120" r="10.5" fill="#1d1d1f"/>
+  <circle cx="99.5" cy="116.5" r="3.5" fill="#fff"/><circle cx="147.5" cy="116.5" r="3.5" fill="#fff"/>
+  <ellipse cx="80" cy="140" rx="9" ry="6" fill="#fff" opacity=".35"/><ellipse cx="160" cy="140" rx="9" ry="6" fill="#fff" opacity=".35"/>
+  <path d="M106 140Q120 153 134 140" fill="none" stroke="#1d1d1f" stroke-width="7" stroke-linecap="round"/>
+  <g stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M80 174H160M80 192H124"/></g>
+  <g stroke="#0074D9" stroke-width="9" stroke-linecap="round"><path d="M98 212V222M142 212V222"/></g>
 </svg>
