@@ -222,4 +222,4 @@ v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 - [x] 5. Shortcuts and the Action button (App Intents: start recording, transcribe a file)
 - [x] 6. Apple's speech model (SpeechAnalyzer) as an option on iOS 26 and macOS 26
 - [x] 7. Fresh App Store screenshots (new icon, Notate Sans, Watch)
-- [ ] 8. Ship 2.0 on iPhone, Watch and Mac
+- [ ] 8. Ship 2.0 on iPhone, Watch and Mac (submitted 2026-10-19, waiting for review; deploy the landing when live)
