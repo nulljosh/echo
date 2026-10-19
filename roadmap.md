@@ -218,7 +218,7 @@ v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 - [x] 1. Speaker labels in meeting mode: "You" and "Them", from which stream (mic or call) carries the voice
 - [x] 2. On-device summary and action items for any transcript (Apple Foundation Models, where available)
 - [x] 3. Search across history
-- [ ] 4. Export: plain text, Markdown, subtitles (SRT)
+- [x] 4. Export: plain text, Markdown, subtitles (SRT)
 - [ ] 5. Shortcuts and the Action button (App Intents: start recording, transcribe a file)
 - [ ] 6. Apple's speech model (SpeechAnalyzer) as an option on iOS 26 and macOS 26
 - [ ] 7. Fresh App Store screenshots (new icon, Notate Sans, Watch)

@@ -46,7 +46,7 @@ struct TranscriptSummary: Codable, Equatable {
 private struct GeneratedNotes {
     @Guide(description: "Two or three plain sentences saying what was discussed or said. No preamble.")
     var summary: String
-    @Guide(description: "Concrete tasks someone said they or another person will do, each one short, starting with who if known. Empty when there are none.")
+    @Guide(description: "Every task anyone commits to or is asked to do, e.g. 'I will email the budget tomorrow' or 'can you send me the report by Friday'. One short line each, starting with who if known. Empty only when nobody commits to or asks for anything.")
     var actionItems: [String]
 }
 #endif
@@ -55,7 +55,8 @@ private struct GeneratedNotes {
 enum Summarizer {
     static let instructions = """
         You read transcripts of speech and meetings. Summarize only what is in the transcript, in its language. \
-        Never invent tasks, names or dates. Lines may start with You: or Them: to say who spoke.
+        Never invent tasks, names or dates. Lines may start with You: or Them: to say who spoke. \
+        Whenever someone says they will do something, or asks someone else to, that is an action item.
         """
     // ponytail: chars per chunk keeps each request well inside the on-device context window
     static let chunkChars = 6_000
@@ -89,7 +90,8 @@ enum Summarizer {
     @available(iOS 26.0, macOS 26.0, *)
     private static func notesFor(_ text: String) async throws -> GeneratedNotes {
         let session = LanguageModelSession(instructions: instructions)
-        return try await session.respond(to: "Transcript:\n" + text, generating: GeneratedNotes.self).content
+        // Temperature 0: the same transcript gives the same notes.
+        return try await session.respond(to: "Transcript:\n" + text, generating: GeneratedNotes.self, options: GenerationOptions(temperature: 0)).content
     }
     #endif
 }

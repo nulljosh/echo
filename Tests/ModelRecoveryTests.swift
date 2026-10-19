@@ -247,4 +247,19 @@ final class ModelRecoveryTests: XCTestCase {
         e.summary = TranscriptSummary(summary: "Plans", actionItems: ["Order the espresso machine"])
         XCTAssertTrue(HistoryView.matches(e, "espresso"))
     }
+
+    /// Export: Markdown bolds speakers and lists action items, SRT has numbered timed cues.
+    func testExportFormats() {
+        var e = TranscriptionEntry(text: "You: send the budget\nThem: tomorrow morning", duration: 6, model: "tiny")
+        e.summary = TranscriptSummary(summary: "Budget talk.", actionItems: ["Them: email the budget"])
+        e.lines = [TimedLine(start: 0, end: 2.5, text: "send the budget", speaker: "You"),
+                   TimedLine(start: 3, end: 61.25, text: "tomorrow morning", speaker: "Them")]
+        let md = Exporter.markdown(e)
+        XCTAssertTrue(md.contains("**You:** send the budget"))
+        XCTAssertTrue(md.contains("- [ ] Them: email the budget"))
+        let srt = Exporter.srt(e)
+        XCTAssertTrue(srt.hasPrefix("1\n00:00:00,000 --> 00:00:02,500\nYou: send the budget"), srt)
+        XCTAssertTrue(srt.contains("2\n00:00:03,000 --> 00:01:01,250\nThem: tomorrow morning"), srt)
+        XCTAssertEqual(Exporter.stamp(3725.5), "01:02:05,500")
+    }
 }

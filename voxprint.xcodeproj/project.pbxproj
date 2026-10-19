@@ -56,10 +56,12 @@
 		90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
 		943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
 		A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
+		A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
 		A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCE0C09F8A34129F5803E83 /* Assets.xcassets */; };
 		B26B43C9C7C3AEBF60EFCEC7 /* NotateWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 25BE114BCA11D958A324FCDC /* NotateWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
+		B745577C3F5A674412161D99 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
 		B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
 		BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
 		C1D81FEFBE5873E7EE7F0EAA /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D5104677907CD79CDEE02B /* NotateFont.swift */; };
@@ -145,6 +147,7 @@
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Medium.ttf"; sourceTree = "<group>"; };
+		534E2DEDC49E843805A98F8E /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
 		63DEC2A0D702908EFEE6EAEF /* VoxprintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsView.swift; sourceTree = "<group>"; };
@@ -288,6 +291,7 @@
 			children = (
 				7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */,
 				739827B542A84C837CAD7966 /* Cleanup.swift */,
+				534E2DEDC49E843805A98F8E /* Exporter.swift */,
 				332A910F82F4863EBB411432 /* SpeechManager.swift */,
 				BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */,
 				1824C0226572018B4E269CFF /* TranscriptionEngine.swift */,
@@ -658,6 +662,7 @@
 				DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */,
 				B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */,
 				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
+				A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
 				B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */,
 				781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */,
@@ -681,6 +686,7 @@
 				663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */,
 				04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */,
 				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,
+				B745577C3F5A674412161D99 /* Exporter.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
 				8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */,
 				7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */,

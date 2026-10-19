@@ -1,5 +1,13 @@
 import Foundation
 
+/// One stretch of speech with its time in the recording and, in meeting mode, who said it.
+struct TimedLine: Codable, Equatable {
+    var start: Double
+    var end: Double
+    var text: String
+    var speaker: String?
+}
+
 struct TranscriptionEntry: Identifiable, Codable {
     let id: UUID
     var text: String
@@ -8,6 +16,8 @@ struct TranscriptionEntry: Identifiable, Codable {
     let model: String
     /// On-device summary and action items, once asked for.
     var summary: TranscriptSummary?
+    /// Timed lines (seconds from the start), for subtitles. Older entries have none.
+    var lines: [TimedLine]?
 
     init(text: String, duration: TimeInterval, model: String) {
         self.id = UUID()

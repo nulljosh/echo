@@ -90,6 +90,10 @@ class TranscriptionEngine: ObservableObject {
     /// Meeting mode: loudness frames (mic, call) aligned with `audioBuffer`, 100 ms each, for You/Them labels.
     private var speakerFrames: [(mic: Float, system: Float)] = []
     private var lastSpeaker: String?
+    /// Timed lines already committed this recording, and how many seconds of audio were dropped before the buffer.
+    private var committedLines: [TimedLine] = []
+    private var bufferOffset: Double = 0
+    private var finalLines: [TimedLine] = []
     private static let commitAfterSamples = 16_000 * 15
 
     private static let historyURL: URL = {
@@ -375,6 +379,7 @@ class TranscriptionEngine: ObservableObject {
         transcribedText = ""
         committedText = ""
         lastSpeaker = nil
+        committedLines = []; finalLines = []; bufferOffset = 0
         bufferLock.withLock { audioBuffer = []; speakerFrames = [] }
         recordingStart = Date()
 
@@ -453,7 +458,9 @@ class TranscriptionEngine: ObservableObject {
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
         let trimmed = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
         if !trimmed.isEmpty {
-            addEntry(TranscriptionEntry(text: trimmed, duration: duration, model: selectedModel))
+            var entry = TranscriptionEntry(text: trimmed, duration: duration, model: selectedModel)
+            entry.lines = finalLines.isEmpty ? nil : finalLines
+            addEntry(entry)
         }
         recordingStart = nil
         applyPendingUpgrade()
@@ -473,7 +480,7 @@ class TranscriptionEngine: ObservableObject {
             .map { Double($0.length) / $0.fileFormat.sampleRate } ?? 0
 
         do {
-            let text = try await whisperKit.transcribe(
+            let results = try await whisperKit.transcribe(
                 audioPath: url.path,
                 decodeOptions: decodingOptions(),
                 callback: { [weak self] progress in
@@ -482,10 +489,14 @@ class TranscriptionEngine: ObservableObject {
                     Task { @MainActor in self?.fileProgress = min(0.98, elapsed / duration) }
                     return true
                 }
-            ).text()
+            )
+            let text = results.text()
             transcribedText = text
             if !text.isEmpty {
-                addEntry(TranscriptionEntry(text: text, duration: duration, model: selectedModel))
+                var entry = TranscriptionEntry(text: text, duration: duration, model: selectedModel)
+                let lines = timedLines(results.flatMap(\.segments), offset: 0)
+                entry.lines = lines.isEmpty ? nil : lines
+                addEntry(entry)
             }
         } catch {
             transcribedText = "Transcription failed: \(error.localizedDescription)"
@@ -562,13 +573,16 @@ class TranscriptionEngine: ObservableObject {
             }
             var segments = results.flatMap(\.segments)
             if full {
+                finalLines = committedLines + timedLines(segments, offset: bufferOffset)
                 transcribedText = appendLabelled(segments, to: committedText, speaker: &lastSpeaker)
                 return
             }
             if samples.count > Self.commitAfterSamples, segments.count > 1 {
                 let done = Array(segments.dropLast())
                 committedText = appendLabelled(done, to: committedText, speaker: &lastSpeaker)
+                committedLines += timedLines(done, offset: bufferOffset)
                 let drop = min(samples.count, Int((done.last?.end ?? 0) * 16_000))
+                bufferOffset += Double(drop) / 16_000
                 bufferLock.withLock {
                     audioBuffer.removeFirst(min(drop, audioBuffer.count))
                     speakerFrames.removeFirst(min(speakerFrames.count, Int((Double(drop) / Double(AudioMixer.frameSamples)).rounded())))
@@ -589,14 +603,34 @@ class TranscriptionEngine: ObservableObject {
         for seg in segments {
             let words = Self.clean(seg.text)
             guard !words.isEmpty else { continue }
-            let lo = min(frames.count, max(0, Int(seg.start * 10))), hi = min(frames.count, max(lo, Int(seg.end * 10)))
-            guard let who = AudioMixer.speaker(frames[lo..<hi]) else { out = Self.join(out, words); continue }
+            guard let who = Self.speaker(for: seg, in: frames) else { out = Self.join(out, words); continue }
             if who == speaker { out = Self.join(out, words) } else {
                 out += (out.isEmpty ? "" : "\n") + "\(who): " + words
                 speaker = who
             }
         }
         return out
+    }
+
+    private static func speaker(for seg: TranscriptionSegment, in frames: [(mic: Float, system: Float)]) -> String? {
+        let lo = min(frames.count, max(0, Int(seg.start * 10))), hi = min(frames.count, max(lo, Int(seg.end * 10)))
+        return AudioMixer.speaker(frames[lo..<hi])
+    }
+
+    /// Segments as timed lines in recording time (`offset` = seconds dropped before the buffer), for subtitles.
+    private func timedLines(_ segments: [TranscriptionSegment], offset: Double) -> [TimedLine] {
+        let frames = bufferLock.withLock { speakerFrames }
+        return segments.compactMap { seg in
+            let words = Self.clean(seg.text)
+            guard !words.isEmpty else { return nil }
+            return TimedLine(start: offset + Double(seg.start), end: offset + Double(seg.end), text: words, speaker: Self.speaker(for: seg, in: frames))
+        }
+    }
+
+    /// The history entry for the transcript on screen, or a fresh one when it was never saved.
+    var currentEntry: TranscriptionEntry? {
+        guard !transcribedText.isEmpty else { return nil }
+        return entries.first { $0.text == transcribedText } ?? TranscriptionEntry(text: transcribedText, duration: 0, model: activeModel)
     }
 
     /// Strips Whisper's timestamp and special tokens from segment text.

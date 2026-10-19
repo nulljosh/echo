@@ -18,6 +18,7 @@ struct ContentView: View {
     @StateObject private var speech = SpeechManager()
     @State private var showHistory = false
     @State private var inputMode: InputMode = .record
+    @State private var exportFormat: Exporter.Format?
     @State private var showFilePicker = false
     @State private var isDropTargeted = false
     @State private var showSplash = true
@@ -34,6 +35,12 @@ struct ContentView: View {
                 SplashView { showSplash = false }
             }
         }
+        .fileExporter(
+            isPresented: Binding(get: { exportFormat != nil }, set: { if !$0 { exportFormat = nil } }),
+            document: ExportFile(text: engine.currentEntry.map { Exporter.render($0, as: exportFormat ?? .text) } ?? ""),
+            contentType: (exportFormat ?? .text).contentType,
+            defaultFilename: "Notate \(Date().formatted(date: .abbreviated, time: .omitted)).\((exportFormat ?? .text).fileExtension)"
+        ) { _ in exportFormat = nil }
         .sheet(item: Binding(get: { engine.summary.map(SummaryBox.init) }, set: { if $0 == nil { engine.summary = nil } })) { box in
             SummaryView(summary: box.summary)
         }
@@ -348,13 +355,23 @@ struct ContentView: View {
                 .accessibilityLabel("Summarize transcript")
             }
 
-            ShareLink(item: engine.transcribedText) {
+            Menu {
+                ShareLink("Share text", item: engine.transcribedText)
+                Divider()
+                ForEach(Exporter.Format.allCases) { format in
+                    Button("Export \(format.rawValue)") { exportFormat = format }
+                }
+            } label: {
                 Image(systemName: "square.and.arrow.up")
                     .font(.notate(20))
                     .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
             }
+            .menuStyle(.button)
             .buttonStyle(.plain)
+            .menuIndicator(.hidden)
+            .fixedSize()
             .disabled(engine.transcribedText.isEmpty)
+            .accessibilityLabel("Share or export")
         }
     }
 
