@@ -52,7 +52,8 @@ The QA tests plant a corrupt model (the engine must heal), break the chosen mode
 Ship gotchas, all seen for real:
 - The workflow's publish step fails on a new version: the build is still processing and the version record does not exist. Finish by hand: `asc versions create`, set whatsNew with `asc localizations update --id`, wait for the build to go VALID (`asc builds uploads list`), then `asc review submit --build-id`.
 - App icon PNGs must have no alpha channel (error 90717). Flatten with `magick ... -background "#0074D9" -alpha remove -alpha off`.
-- Versions live only in `project.yml`. Info.plists use `$(...)`.
+- Versions live only in `project.yml`. `asc xcode version edit` bumps the generated xcodeproj, so never run `xcodegen generate` between the bump and the archive or the build number resets to project.yml's.
+- The Watch app needs manual export: `signing/` holds the "Notate iOS App Store" and "Notate Watch App Store" profiles (gitignored); export with an ExportOptions plist naming both, then `asc builds upload --ipa`. A build with a Watch app needs an APP_WATCH_ULTRA screenshot or review refuses it. Info.plists use `$(...)`.
 - Do not edit Sources while an archive is running.
 
 ## Landing
