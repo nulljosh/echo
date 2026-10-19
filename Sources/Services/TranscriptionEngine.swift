@@ -116,22 +116,25 @@ class TranscriptionEngine: ObservableObject {
     private static let liveWindowSamples = 16_000 * 30
 
     init() {
-        let args = CommandLine.arguments
+        // Leading dashes allowed: on the Mac a bare word is taken as a document to open and the window never shows.
+        let args = CommandLine.arguments.map { $0.trimmingCharacters(in: CharacterSet(charactersIn: "-")) }
         if args.contains("UITEST_RECORDING") {
+            entries = Self.sampleEntries
             isRecording = true
             transcribedText = "the quick brown fox jumps over the lazy dog and keeps talking while the model listens in real time"
             return
         }
-        if args.contains("UITEST_FINISHED") {
-            transcribedText = "This is a sample finished transcript that demonstrates how Notate captures and displays spoken words with high accuracy, entirely on-device."
+        if args.contains("UITEST_FINISHED") || args.contains("UITEST_SUMMARY") {
+            entries = Self.sampleEntries // the Mac sidebar shows history next to the transcript
+            transcribedText = "You: Can we move the launch to Thursday so design has one more day?\nThem: Thursday works. I'll tell the store team and update the plan tonight.\nYou: Great. I'll send the final screenshots by Wednesday noon."
+            if args.contains("UITEST_SUMMARY") {
+                summary = TranscriptSummary(summary: "The launch moves to Thursday to give design one more day. The store team will be told tonight.",
+                                            actionItems: ["Them: tell the store team and update the plan tonight", "You: send the final screenshots by Wednesday noon"])
+            }
             return
         }
         if args.contains("UITEST_HISTORY") {
-            entries = [
-                TranscriptionEntry(text: "Meeting notes from this morning's standup.", duration: 42, model: "base"),
-                TranscriptionEntry(text: "Voice memo about the new feature ideas.", duration: 18, model: "small"),
-                TranscriptionEntry(text: "Quick reminder to call back later today.", duration: 9, model: "tiny")
-            ]
+            entries = Self.sampleEntries
             return
         }
         if let data = try? Data(contentsOf: Self.historyURL) {
@@ -144,6 +147,13 @@ class TranscriptionEngine: ObservableObject {
             }
         }
     }
+
+    /// Mock history for App Store screenshots.
+    private static let sampleEntries = [
+        TranscriptionEntry(text: "You: Can we move the launch to Thursday so design has one more day? Them: Thursday works.", duration: 754, model: "small"),
+        TranscriptionEntry(text: "Ideas for the onboarding: one screen, record button first, no account.", duration: 48, model: "small"),
+        TranscriptionEntry(text: "Pick up oat milk, call the dentist back, book the flight for Friday.", duration: 12, model: "small")
+    ]
 
     var resolvedModel: String {
         // "apple" handles files; live recording still needs a Whisper model, picked the auto way.
@@ -161,7 +171,7 @@ class TranscriptionEngine: ObservableObject {
     }
 
     func loadModel() async {
-        if CommandLine.arguments.contains(where: { $0.hasPrefix("UITEST_") }) {
+        if CommandLine.arguments.contains(where: { $0.hasPrefix("UITEST_") || $0.hasPrefix("-UITEST_") }) {
             modelState = .ready
             return
         }

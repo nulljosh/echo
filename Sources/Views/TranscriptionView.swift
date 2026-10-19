@@ -61,8 +61,8 @@ struct TranscriptionView: View {
                         let lastWord = isRecording ? words.last.map(String.init) ?? "" : ""
                         let leading = isRecording && !lastWord.isEmpty ? words.dropLast().joined(separator: " ") : text
 
-                        // The word being heard right now is highlighted in the accent colour.
-                        (Text(leading).foregroundStyle(.primary) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ")
+                        // The word being heard right now is highlighted in the accent colour; speaker names are bold.
+                        (Self.styled(leading) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ")
                             + Text(lastWord).foregroundStyle(Color.accentColor).fontWeight(.semibold))
                             .font(.notate(18, .regular))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -110,6 +110,20 @@ struct TranscriptionView: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: unusualLanguage)
+    }
+
+    /// Bolds the "You:" and "Them:" that start meeting lines.
+    static func styled(_ text: String) -> Text {
+        var out = Text("")
+        for (i, line) in text.split(separator: "\n", omittingEmptySubsequences: false).enumerated() {
+            if i > 0 { out = out + Text("\n") }
+            if let who = ["You:", "Them:"].first(where: { line.hasPrefix($0) }) {
+                out = out + Text(who).fontWeight(.semibold) + Text(line.dropFirst(who.count))
+            } else {
+                out = out + Text(line)
+            }
+        }
+        return out.foregroundStyle(.primary)
     }
 
     private func statusLabel(_ message: String) -> some View {

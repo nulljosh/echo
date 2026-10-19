@@ -7,22 +7,21 @@ final class MacScreenshot: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Three Mac App Store shots from mock data: a labelled meeting with history, its summary, and live recording.
     func testCaptureMacScreenshot() throws {
-        let app = XCUIApplication()
-        app.launch()
-        sleep(3)
-
-        app.activate()
-        sleep(1)
-        let window = app.windows.firstMatch
-        XCTAssertTrue(window.waitForExistence(timeout: 10), "App window never appeared")
-        let screenshot = window.screenshot()
         let dir = NSTemporaryDirectory() + "voxprint-mac-screenshots"
-        do {
-            try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
-            try screenshot.pngRepresentation.write(to: URL(fileURLWithPath: "\(dir)/1-main.png"))
-        } catch {
-            XCTFail("Screenshot write failed: \(error)")
+        try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
+        for (name, arg) in [("1-meeting", "UITEST_FINISHED"), ("2-summary", "UITEST_SUMMARY"), ("3-recording", "UITEST_RECORDING")] {
+            let app = XCUIApplication()
+            app.launchArguments = [arg, "-ApplePersistenceIgnoreState", "YES"]
+            app.launch()
+            sleep(3)
+            app.activate()
+            sleep(1)
+            let window = app.windows.firstMatch
+            XCTAssertTrue(window.waitForExistence(timeout: 10), "App window never appeared for \(name)")
+            try window.screenshot().pngRepresentation.write(to: URL(fileURLWithPath: "\(dir)/\(name).png"))
+            app.terminate()
         }
     }
 }

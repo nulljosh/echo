@@ -13,10 +13,10 @@ xcodegen generate
 # We do NOT use `fastlane snapshot`: fastlane 2.238.0 cannot parse Xcode 26's
 # .xcresult format, so its extraction step yields zero images and still exits 0.
 # The capture itself was never broken -- only fastlane's post-processing was.
-DEVICE="Voxprint-Shots"          # dedicated iPhone 14 Plus (1284x2778, 6.7")
-SIM_UDID="267C51B7-E068-4A9A-8870-9B66A2B16412"
+DEVICE="iPhone 18 Pro Max"      # 6.9 inch, the size App Store Connect asks for first
+SIM_UDID="DBBE86E4-2B2D-4B76-B1A4-F2C01D586811"
 SRC_DIR="$HOME/Library/Caches/tools.fastlane/screenshots"
-SHOTS=("1-finished-transcript" "2-history" "3-paywall" "4-settings" "5-live-recording")
+SHOTS=("1-finished-transcript" "2-history" "3-summary" "4-settings" "5-live-recording")
 
 # Capture is only trustworthy if every PNG is newer than this marker -- a partial
 # run leaves stale files on disk and would otherwise silently ship old images.
@@ -67,33 +67,4 @@ for shot in "${SHOTS[@]}"; do
   cp "$SRC_DIR/${DEVICE}-${shot}.png" "screenshots/appstore/${shot}.png"
 done
 
-# The landing page hero uses these same two shots -- refresh them here so the
-# site can't drift out of sync with the app again (it did across the rename).
-echo "==> Refreshing web hero shots"
-cp "$SRC_DIR/${DEVICE}-1-finished-transcript.png" web/assets/shot-1.png
-cp "$SRC_DIR/${DEVICE}-5-live-recording.png" web/assets/shot-2.png
-
-echo "==> Staging screenshots + README"
-git add -f screenshots/appstore/*.png web/assets/shot-1.png web/assets/shot-2.png
-git add README.md
-
-if git diff --cached --quiet; then
-  echo "==> No changes to commit"
-  exit 0
-fi
-
-echo "==> Committing"
-git commit -m "$(cat <<'EOF'
-Update Notate App Store screenshots
-
-Regenerated via xcodebuild UI test using mock data (UITEST_RECORDING/FINISHED/
-HISTORY/PAYWALL launch arguments) -- no real audio/transcription required.
-
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
-EOF
-)"
-
-echo "==> Pushing"
-git push
-
-echo "==> Done"
+echo "==> Done: screenshots/appstore/ is fresh. Review and commit them yourself."

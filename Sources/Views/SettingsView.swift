@@ -176,6 +176,7 @@ private struct VoicePicker: View {
     private var voices: [AVSpeechSynthesisVoice] {
         AVSpeechSynthesisVoice.speechVoices()
             .filter { $0.language.hasPrefix(Locale.current.language.languageCode?.identifier ?? "en") }
+            .filter { !$0.voiceTraits.contains(.isNoveltyVoice) } // no Bahh, Boing or Bad News
             .sorted { $0.name < $1.name }
     }
 

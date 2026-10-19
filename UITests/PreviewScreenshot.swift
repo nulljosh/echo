@@ -32,6 +32,11 @@ final class PreviewScreenshot: XCTestCase {
         snapshot("2-history")
         app.terminate()
 
+        app = launch(extraArgs: ["UITEST_SUMMARY"])
+        sleep(3)
+        snapshot("3-summary")
+        app.terminate()
+
         app = launch(extraArgs: ["UITEST_FINISHED"])
         sleep(3)
         let settingsButton = app.buttons["settings-button"]
