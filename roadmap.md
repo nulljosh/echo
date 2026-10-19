@@ -141,7 +141,7 @@ not before.
 - [ ] Do the 'remove from sale in all territories' step via Claude in Chrome rather than by hand, Joshua OK'd browser automation for this on 2026-08-19. It is the one genuinely dashboard-only step: `asc web apps availability` exposes only `create`, so there is no CLI path. Once availability is cleared the delete command above works.
 
 ## Ingested 2026-08-22
-- [ ] Remove the "downloading model" step on first launch, bundle the model with the app instead. From Notes: "Opening the app and waiting for the model to download is infuriatingly wasting time." Check the model's on-disk size against App Store limits before committing to bundling.
+- [x] Remove the "downloading model" step on first launch, bundle the model with the app instead. From Notes: "Opening the app and waiting for the model to download is infuriatingly wasting time." Check the model's on-disk size against App Store limits before committing to bundling.
 
 ## 2026-08-23, delete the Transcriptly ASC record
 Transcriptly (ASC 6783015101, com.nulljosh.echo.mac) is the old Voxprint-for-Mac record,
@@ -202,7 +202,7 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 - [ ] Stale name: something still says Voxprint; it should say Notate (note said "now it's notify, I think"). Which surface?
 
 ## Ingested 2026-10-16
-- [ ] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
+- [x] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
 
 ## Next (2026-10-18)
 
