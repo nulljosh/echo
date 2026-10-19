@@ -120,9 +120,11 @@ final class ModelRecoveryTests: XCTestCase {
         let samples = Array(UnsafeBufferPointer(start: buf.floatChannelData![0], count: Int(buf.frameLength)))
         XCTAssertGreaterThan(samples.count, 16_000 * 30, "need more than the 30 s window")
 
+        // The model people actually get: tiny first, then the bundled model auto picks swaps in.
         let engine = TranscriptionEngine()
-        engine.selectedModel = "openai_whisper-tiny"
+        engine.selectedModel = "auto"
         await engine.loadModel()
+        await engine.waitForUpgrade()
         await engine.simulateLive(samples)
         let text = engine.transcribedText.lowercased()
         // "recording" is only in the opening sentence (a single word like "banana" is at the mercy of tiny's ear)
