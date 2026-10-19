@@ -84,6 +84,9 @@ class TranscriptionEngine: ObservableObject {
     private var recordingTask: Task<Void, Never>?
     private var recordingStart: Date?
     private var committedText = ""
+    /// Meeting mode: loudness frames (mic, call) aligned with `audioBuffer`, 100 ms each, for You/Them labels.
+    private var speakerFrames: [(mic: Float, system: Float)] = []
+    private var lastSpeaker: String?
     private static let commitAfterSamples = 16_000 * 15
 
     private static let historyURL: URL = {
@@ -325,6 +328,27 @@ class TranscriptionEngine: ObservableObject {
         }
     }
 
+    #if os(macOS)
+    /// Feeds a mic stream and a call stream through the meeting mixer 2 s at a time, then stops (tests).
+    func simulateMeeting(mic: [Float], call: [Float]) async {
+        committedText = ""; transcribedText = ""; lastSpeaker = nil
+        bufferLock.withLock { audioBuffer = []; speakerFrames = []; mixer = AudioMixer() }
+        var i = 0
+        while i < max(mic.count, call.count) {
+            let m = i < mic.count ? Array(mic[i..<min(mic.count, i + 32_000)]) : []
+            let c = i < call.count ? Array(call[i..<min(call.count, i + 32_000)]) : []
+            bufferLock.withLock {
+                audioBuffer += mixer.pushMic(m)
+                audioBuffer += mixer.pushSystem(c)
+                speakerFrames += mixer.takeFrames()
+            }
+            i += 32_000
+            await transcribeCurrentBuffer()
+        }
+        await transcribeCurrentBuffer(full: true)
+    }
+    #endif
+
     /// Waits for the background model swap to finish (tests).
     func waitForUpgrade() async { await upgradeTask?.value }
 
@@ -347,7 +371,8 @@ class TranscriptionEngine: ObservableObject {
         isRecording = true
         transcribedText = ""
         committedText = ""
-        bufferLock.withLock { audioBuffer = [] }
+        lastSpeaker = nil
+        bufferLock.withLock { audioBuffer = []; speakerFrames = [] }
         recordingStart = Date()
 
         #if os(macOS)
@@ -358,7 +383,10 @@ class TranscriptionEngine: ObservableObject {
                 do {
                     try await systemCapture.start { [weak self] samples in
                         guard let self else { return }
-                        self.bufferLock.withLock { self.audioBuffer.append(contentsOf: self.mixer.pushSystem(samples)) }
+                        self.bufferLock.withLock {
+                            self.audioBuffer.append(contentsOf: self.mixer.pushSystem(samples))
+                            self.speakerFrames += self.mixer.takeFrames()
+                        }
                     }
                     // Stop was pressed while the capture was still starting: never leave the Mac listening.
                     if !self.isRecording { self.systemCapture.stop() }
@@ -377,7 +405,10 @@ class TranscriptionEngine: ObservableObject {
                     guard let self else { return }
                     #if os(macOS)
                     if meeting {
-                        self.bufferLock.withLock { self.audioBuffer.append(contentsOf: self.mixer.pushMic(samples)) }
+                        self.bufferLock.withLock {
+                            self.audioBuffer.append(contentsOf: self.mixer.pushMic(samples))
+                            self.speakerFrames += self.mixer.takeFrames()
+                        }
                         return
                     }
                     #endif
@@ -511,22 +542,43 @@ class TranscriptionEngine: ObservableObject {
                 detectedLanguage = lang
                 isUnusualLanguage = !Self.expectedLanguages.contains(lang)
             }
+            var segments = results.flatMap(\.segments)
             if full {
-                let tail = results.text()
-                transcribedText = Self.join(committedText, Self.clean(tail))
+                transcribedText = appendLabelled(segments, to: committedText, speaker: &lastSpeaker)
                 return
             }
-            var segments = results.flatMap(\.segments)
             if samples.count > Self.commitAfterSamples, segments.count > 1 {
-                let done = segments.dropLast()
-                committedText = Self.join(committedText, Self.clean(done.map(\.text).joined(separator: " ")))
+                let done = Array(segments.dropLast())
+                committedText = appendLabelled(done, to: committedText, speaker: &lastSpeaker)
                 let drop = min(samples.count, Int((done.last?.end ?? 0) * 16_000))
-                bufferLock.withLock { audioBuffer.removeFirst(min(drop, audioBuffer.count)) }
+                bufferLock.withLock {
+                    audioBuffer.removeFirst(min(drop, audioBuffer.count))
+                    speakerFrames.removeFirst(min(speakerFrames.count, Int((Double(drop) / Double(AudioMixer.frameSamples)).rounded())))
+                }
                 segments = Array(segments.suffix(1))
             }
-            let live = Self.join(committedText, Self.clean(segments.map(\.text).joined(separator: " ")))
+            var tailSpeaker = lastSpeaker
+            let live = appendLabelled(segments, to: committedText, speaker: &tailSpeaker)
             if !live.isEmpty { transcribedText = live }
         } catch {}
+    }
+
+    /// Adds segments to `text`. In meeting mode each segment is labelled You or Them from the loudness frames, and
+    /// consecutive lines from the same speaker merge. Outside meeting mode there are no frames and no labels.
+    private func appendLabelled(_ segments: [TranscriptionSegment], to text: String, speaker: inout String?) -> String {
+        let frames = bufferLock.withLock { speakerFrames }
+        var out = text
+        for seg in segments {
+            let words = Self.clean(seg.text)
+            guard !words.isEmpty else { continue }
+            let lo = min(frames.count, max(0, Int(seg.start * 10))), hi = min(frames.count, max(lo, Int(seg.end * 10)))
+            guard let who = AudioMixer.speaker(frames[lo..<hi]) else { out = Self.join(out, words); continue }
+            if who == speaker { out = Self.join(out, words) } else {
+                out += (out.isEmpty ? "" : "\n") + "\(who): " + words
+                speaker = who
+            }
+        }
+        return out
     }
 
     /// Strips Whisper's timestamp and special tokens from segment text.

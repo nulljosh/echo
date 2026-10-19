@@ -144,6 +144,37 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertEqual(out.count, AudioMixer.maxLag + 1)
     }
 
+    /// Meeting mode labels who spoke: the mic voice is You, the call voice is Them.
+    func testMeetingSpeakerLabels() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        func speech(_ text: String, voice: String) throws -> [Float] {
+            let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-\(voice).wav")
+            let say = Process()
+            say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+            say.arguments = ["-v", voice, "-o", wav.path, "--data-format=LEF32@16000", text]
+            try say.run(); say.waitUntilExit()
+            let file = try AVAudioFile(forReading: wav)
+            let buf = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))!
+            try file.read(into: buf)
+            return Array(UnsafeBufferPointer(start: buf.floatChannelData![0], count: Int(buf.frameLength)))
+        }
+        let mine = try speech("Can you send me the quarterly budget by Friday.", voice: "Samantha")
+        let theirs = try speech("Sure, I will email the budget tomorrow morning.", voice: "Daniel")
+        let gap = [Float](repeating: 0, count: 16_000)
+        let mic = mine + gap + [Float](repeating: 0, count: theirs.count)
+        let call = [Float](repeating: 0, count: mine.count) + gap + theirs
+
+        let engine = TranscriptionEngine()
+        engine.selectedModel = "auto"
+        await engine.loadModel()
+        await engine.waitForUpgrade()
+        await engine.simulateMeeting(mic: mic, call: call)
+        let text = engine.transcribedText
+        let lines = text.split(separator: "\n").map { $0.lowercased() }
+        XCTAssertTrue(lines.contains { $0.hasPrefix("you:") && $0.contains("budget") && $0.contains("friday") }, "mic line not labelled You: \(text)")
+        XCTAssertTrue(lines.contains { $0.hasPrefix("them:") && $0.contains("tomorrow") }, "call line not labelled Them: \(text)")
+    }
+
     /// Custom words: clean prompt text, and a prompt must never blank real speech.
     func testCustomWordsPromptTextAndNoBlankOutput() async throws {
         XCTAssertNil(TranscriptionEngine.promptText(from: " , \n "))

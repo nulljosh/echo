@@ -215,7 +215,7 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 
 v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 
-- [ ] 1. Speaker labels in meeting mode: "You" and "Them", from which stream (mic or call) carries the voice
+- [x] 1. Speaker labels in meeting mode: "You" and "Them", from which stream (mic or call) carries the voice
 - [ ] 2. On-device summary and action items for any transcript (Apple Foundation Models, where available)
 - [ ] 3. Search across history
 - [ ] 4. Export: plain text, Markdown, subtitles (SRT)

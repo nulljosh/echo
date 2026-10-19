@@ -93,19 +93,48 @@ struct AudioMixer {
     private(set) var mic: [Float] = []
     private(set) var system: [Float] = []
     static let maxLag = 8_000
+    /// One loudness pair per 100 ms of mixed audio (mic, call), so each transcript segment can be labelled You or Them.
+    private(set) var frames: [(mic: Float, system: Float)] = []
+    static let frameSamples = 1_600
+    private var micSquares: Float = 0, systemSquares: Float = 0, frameFill = 0
 
     mutating func pushMic(_ samples: [Float]) -> [Float] { mic += samples; return drain() }
     mutating func pushSystem(_ samples: [Float]) -> [Float] { system += samples; return drain() }
+
+    /// Hands over the loudness frames measured so far.
+    mutating func takeFrames() -> [(mic: Float, system: Float)] { defer { frames = [] }; return frames }
 
     private mutating func drain() -> [Float] {
         if mic.count > system.count + Self.maxLag { system += [Float](repeating: 0, count: mic.count - system.count) }
         if system.count > mic.count + Self.maxLag { mic += [Float](repeating: 0, count: system.count - mic.count) }
         let n = min(mic.count, system.count)
         guard n > 0 else { return [] }
-        let out = (0..<n).map { max(-1, min(1, mic[$0] + system[$0])) }
+        var out = [Float](repeating: 0, count: n)
+        for i in 0..<n {
+            out[i] = max(-1, min(1, mic[i] + system[i]))
+            micSquares += mic[i] * mic[i]
+            systemSquares += system[i] * system[i]
+            frameFill += 1
+            if frameFill == Self.frameSamples {
+                frames.append((sqrt(micSquares / Float(frameFill)), sqrt(systemSquares / Float(frameFill))))
+                micSquares = 0; systemSquares = 0; frameFill = 0
+            }
+        }
         mic.removeFirst(n)
         system.removeFirst(n)
         return out
+    }
+
+    /// "You" when the mic carries the voice, "Them" when the call does. The mic also hears the call through the
+    /// speakers, so the call wins once it is above the floor and at least two thirds as loud as the mic.
+    // ponytail: energy heuristic, tune callFloor/callBias on real calls; diarization model if it misfires
+    static let callFloor: Float = 0.004
+    static let callBias: Float = 1.5
+    static func speaker(_ frames: ArraySlice<(mic: Float, system: Float)>) -> String? {
+        guard !frames.isEmpty else { return nil }
+        let mic = frames.reduce(0) { $0 + $1.mic }, call = frames.reduce(0) { $0 + $1.system }
+        let n = Float(frames.count)
+        return call / n > callFloor && call * callBias >= mic ? "Them" : "You"
     }
 }
 
