@@ -15,6 +15,13 @@ class AudioCapture {
 
         let inputNode = engine.inputNode
         let inputFormat = inputNode.outputFormat(forBus: 0)
+        // No input device (a Mac mini with nothing plugged in): installTap would raise an exception Swift can't catch.
+        // The node's output format still claims 44.1 kHz stereo with no device; the hardware format is the truth.
+        let hardware = inputNode.inputFormat(forBus: 0)
+        guard hardware.sampleRate > 0, hardware.channelCount > 0 else {
+            self.engine = nil
+            throw AudioCaptureError.noMicrophone
+        }
 
         guard let targetFormat = AVAudioFormat(
             commonFormat: .pcmFormatFloat32,
@@ -141,11 +148,13 @@ struct AudioMixer {
 enum AudioCaptureError: Error, LocalizedError {
     case formatUnavailable
     case converterUnavailable
+    case noMicrophone
 
     var errorDescription: String? {
         switch self {
         case .formatUnavailable: return "Could not create 16kHz audio format."
         case .converterUnavailable: return "Could not create audio converter."
+        case .noMicrophone: return "No microphone found. Plug one in or pick one in System Settings, Sound, Input."
         }
     }
 }

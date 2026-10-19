@@ -44,16 +44,20 @@ struct ContentView: View {
         .sheet(item: Binding(get: { engine.summary.map(SummaryBox.init) }, set: { if $0 == nil { engine.summary = nil } })) { box in
             SummaryView(summary: box.summary)
         }
-        .alert("Can't hear the call yet", isPresented: Binding(get: { engine.meetingError != nil }, set: { if !$0 { engine.meetingError = nil } })) {
+        .alert("Notate", isPresented: Binding(get: { engine.notice != nil }, set: { if !$0 { engine.notice = nil } })) {
             Button("OK") {}
         } message: {
-            Text(engine.meetingError ?? "")
+            Text(engine.notice ?? "")
         }
         .task {
             #if os(iOS)
             WatchBridge.shared.engine = engine
             #endif
+            if IntentInbox.takePendingStart() { engine.startRecording() } // launched by Shortcuts or the Action button
             await engine.loadModel()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: IntentInbox.startRecording)) { _ in
+            if IntentInbox.takePendingStart(), !engine.isRecording { engine.startRecording() }
         }
         .sheet(isPresented: $showSettings) {
             SettingsView(

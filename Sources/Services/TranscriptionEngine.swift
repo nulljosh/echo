@@ -35,7 +35,8 @@ class TranscriptionEngine: ObservableObject {
     @Published var modelState: ModelState = .unloaded
     /// Progress of the background download of a better model. nil when nothing is upgrading.
     @Published var upgradeProgress: Double?
-    @Published var meetingError: String?
+    /// A problem worth telling the person about (no microphone, no call audio permission). Shown as an alert.
+    @Published var notice: String?
     @Published var fileProgress: Double = 0
     @Published var selectedModel = "auto"
     @Published var selectedLanguage = "auto"
@@ -400,7 +401,7 @@ class TranscriptionEngine: ObservableObject {
                     if !self.isRecording { self.systemCapture.stop() }
                 } catch {
                     // No permission yet: keep recording the mic alone rather than failing the recording.
-                    await MainActor.run { self.meetingError = "Allow Notate under Screen and System Audio Recording in System Settings to hear the call." }
+                    await MainActor.run { self.notice = "Allow Notate under Screen and System Audio Recording in System Settings to hear the call." }
                 }
             }
         }
@@ -428,6 +429,10 @@ class TranscriptionEngine: ObservableObject {
             )
         } catch {
             isRecording = false
+            #if os(macOS)
+            systemCapture.stop()
+            #endif
+            notice = error.localizedDescription
             return
         }
 

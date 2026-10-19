@@ -1,4 +1,5 @@
 import XCTest
+import AppIntents
 import SwiftUI
 import AVFoundation
 @testable import Voxprint_macOS
@@ -262,4 +263,29 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertTrue(srt.contains("2\n00:00:03,000 --> 00:01:01,250\nThem: tomorrow morning"), srt)
         XCTAssertEqual(Exporter.stamp(3725.5), "01:02:05,500")
     }
+
+    /// Shortcuts: "Transcribe Audio" hands back the words; "Start Recording" is never lost if the UI isn't up yet.
+    @MainActor
+    func testShortcutIntents() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-intent.wav")
+        let say = Process()
+        say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+        say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "Remember to water the plants on Sunday."]
+        try say.run(); say.waitUntilExit()
+        var intent = TranscribeAudioIntent()
+        intent.audio = IntentFile(data: try Data(contentsOf: wav), filename: "memo.wav")
+        let result = try await intent.perform()
+        let text = (result.value ?? "").lowercased()
+        XCTAssertTrue(text.contains("plants") && text.contains("sunday"), "got: \(text)")
+        // history entry from the intent stays out of the real history
+        let engine = TranscriptionEngine()
+        if let e = engine.entries.first(where: { $0.text.lowercased() == text }) { engine.deleteEntry(e) }
+
+        // The pending flag, without posting to the running test host (that would start a real recording).
+        IntentInbox.pendingStart = true
+        XCTAssertTrue(IntentInbox.takePendingStart(), "start request must wait for the UI")
+        XCTAssertFalse(IntentInbox.takePendingStart(), "and be taken once")
+    }
+
 }
