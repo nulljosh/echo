@@ -58,7 +58,7 @@ Ship gotchas, all seen for real:
 
 ## Landing
 
-`docs/` on Cloudflare Pages, project `voxprint`, domain notate.heyitsmejosh.com (voxprint.heyitsmejosh.com still points here). A push deploys nothing:
+`docs/` on Cloudflare Pages, project `voxprint`, domain notate.jaybulb.com. A push deploys nothing:
 
 ```bash
 npx wrangler pages deploy docs/ --project-name=voxprint --branch=main

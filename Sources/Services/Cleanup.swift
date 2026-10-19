@@ -22,6 +22,7 @@ enum Cleanup {
     static func clean(_ text: String) async throws -> String {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, macOS 26.0, *) {
+            guard isAvailable else { return text }
             let session = LanguageModelSession(instructions: instructions)
             let reply = try await session.respond(to: text)
             let cleaned = reply.content.trimmingCharacters(in: .whitespacesAndNewlines)
