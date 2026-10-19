@@ -124,12 +124,13 @@ struct ContentView: View {
             .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
             VStack(spacing: 0) {
-                topBar.padding(.horizontal, 20).padding(.top, 20).padding(.bottom, 12)
-                transcriptionArea.padding(.horizontal, 20)
+                transcriptionArea.padding(.horizontal, 20).padding(.top, 20)
                 bottomBar.padding(.horizontal, 24).padding(.vertical, 20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.regularMaterial)
+            // The controls live in the title bar next to the window title, one header instead of two.
+            .toolbar { ToolbarItem(placement: .primaryAction) { topBar.padding(.horizontal, 6) } }
         }
         .navigationSplitViewStyle(.balanced)
         .fileImporter(isPresented: $showFilePicker, allowedContentTypes: Self.audioTypes, allowsMultipleSelection: false) { result in
@@ -219,7 +220,9 @@ struct ContentView: View {
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Text("Notate").font(.notate(17, .semibold)).foregroundStyle(.primary)
+            #if os(iOS)
+            Text("Notate").font(.notate(17, .semibold)).foregroundStyle(.primary) // the Mac window title already says it
+            #endif
             Spacer()
             statusDot
             Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .record } } label: {
