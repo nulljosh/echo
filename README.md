@@ -2,7 +2,7 @@
 
 # Notate
 
-![Version](https://img.shields.io/badge/version-1.4.1-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fnotate-black?logo=github)](https://github.com/nulljosh/notate) [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-voxprint-da552f?logo=producthunt&logoColor=white)](https://www.producthunt.com/products/voxprint?launch=voxprint)
+![Version](https://img.shields.io/badge/version-2.0.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fnotate-black?logo=github)](https://github.com/nulljosh/notate) [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-Notate-da552f?logo=producthunt&logoColor=white)](https://www.producthunt.com/products/voxprint?launch=voxprint)
 
 Speech to text that never leaves your device.
 
