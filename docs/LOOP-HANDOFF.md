@@ -11,7 +11,7 @@ Always say Notate, never Voxprint. Replies short, TLDR, no em dashes.
 - Ship 1.4.2 after the Mac 1.4.1 review clears: bump the version and build number in project.yml, run the speech QA gate, archive iOS and macOS, upload, set What's New, submit.
 - The fleet picture below dates from 2026-10-04 and was not re-verified in this checkpoint. Siftbox is now Mailbag and was resubmitted on 2026-10-18, so the old Pare rename plan is retired.
 - Weekly usage: stop at 90 percent and report.
-- Keep at least 6 GB free on the internal disk before heavy jobs. Builds and DerivedData go on /Volumes/LaCie.
+- Disk: about 27 GB free on the internal disk since the oMLX cache moved to the LaCie on 2026-10-18. Keep 6 GB free before heavy jobs. Builds and DerivedData go on /Volumes/LaCie.
 
 ## Next, in order
 1. `asc-status`: new rejections or approvals first. Fix a rejection with the recipe in `~/.claude/skills/asc-status/SKILL.md`.
