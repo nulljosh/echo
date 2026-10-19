@@ -1,290 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>document.documentElement.classList.add('js')</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notate: On-Device Transcription</title>
-    <meta name="description" content="Transcribe speech, music, and audio files entirely on-device. No account, no cloud, no subscription.">
-    <meta property="og:title" content="Notate: On-Device Transcription">
-    <meta property="og:description" content="Whisper transcription that runs entirely on your iPhone or Mac. No account, no cloud, no subscription.">
-    <meta property="og:image" content="https://notate.jaybulb.com/og.png">
-    <meta property="og:url" content="https://notate.jaybulb.com/">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://notate.jaybulb.com/og.png">
-    <link rel="canonical" href="https://notate.jaybulb.com/">
-    <meta name="theme-color" content="#f5f0e4">
-    <meta name="apple-itunes-app" content="app-id=6782604262">
-    <link rel="icon" href="icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="icon-180.png">
-    <link rel="stylesheet" href="https://jaybulb.com/tokens.css">
-    <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="devices.css">
-<script>
-// ponytail: UA sniff, good enough for a mockup. iphone is the default. ?embed = app only, for the landing demo frame.
-(function(u,d){d=/Android/.test(u)?'android':/iPhone|iPad/.test(u)?'iphone':/Windows/.test(u)?'windows':/Mac/.test(u)?'mac':'iphone';document.documentElement.dataset.device=d;if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed')})(navigator.userAgent);
-</script>
-<style>
-/* Live demo: the real app in a frame matching the visitor's device (nimble treatment) */
-.demo{margin:2rem auto 0;text-align:center;position:relative;z-index:2}
-.demo .device-screen{aspect-ratio:9/19.5}
-.demo .device-mac .device-screen,.demo .device-windows .device-screen{aspect-ratio:16/10}
-.demo .device-screen iframe{position:absolute;top:0;left:0;border:0;display:block;transform-origin:0 0;width:390px;height:845px;background:#fff}
-.demo .device-mac .device-screen iframe,.demo .device-windows .device-screen iframe{width:1024px;height:640px}
-.demo-caption{font-size:.9rem;opacity:.65;margin:1rem 0 0}
-.embed .demo,.embed footer,.embed nav{display:none!important}
-.site-logo{position:absolute;top:1.5rem;left:1.5rem;z-index:3;display:flex;align-items:center;gap:.5rem;font-weight:600;color:inherit;text-decoration:none}
-.site-logo svg{display:block}
-@media (prefers-reduced-motion: no-preference) {
-  html.js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease-out, transform .6s ease-out; }
-  html.js .reveal.in-view { opacity: 1; transform: translateY(0); }
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notate: On-Device Transcription</title>
+<meta name="description" content="Speech to text that runs entirely on your iPhone or Mac. The model ships inside the app, so it works the moment you open it, even offline.">
+<meta property="og:title" content="Notate: On-Device Transcription">
+<meta property="og:description" content="Open it and talk. The model is already inside. No account, no cloud, no data leaves your device.">
+<meta property="og:image" content="https://notate.jaybulb.com/og.png">
+<meta property="og:url" content="https://notate.jaybulb.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notate.jaybulb.com/og.png">
+<link rel="canonical" href="https://notate.jaybulb.com/">
+<meta name="theme-color" content="#0074D9">
+<meta name="apple-itunes-app" content="app-id=6782604262">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/NotateSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="landing.css">
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed')</script>
 </head>
 <body>
-    <a class="skip" href="#main">Skip to content</a>
-
-
-<main id="main">
-    <section class="landing-hero">
-        <div class="hero-wall" id="heroWall" aria-hidden="true"></div>
-        <div class="hero-scrim" aria-hidden="true"></div>
-        <a class="site-logo" href="/">
-            <svg viewBox="0 0 200 200" width="24" height="24"><rect width="200" height="200" rx="44" fill="#0074D9"/><rect x="23.4" y="75.4" width="11.7" height="27.3" rx="5.9" fill="#ffffff" fill-opacity="0.55"/><rect x="45.3" y="61.7" width="11.7" height="54.7" rx="5.9" fill="#ffffff" fill-opacity="0.8"/><rect x="143.0" y="61.7" width="11.7" height="54.7" rx="5.9" fill="#ffffff" fill-opacity="0.8"/><rect x="164.8" y="75.4" width="11.7" height="27.3" rx="5.9" fill="#ffffff" fill-opacity="0.55"/><rect x="84.4" y="44.1" width="31.2" height="78.1" rx="15.6" fill="#ffffff"/><rect x="95.7" y="130.1" width="8.6" height="19.5" rx="4.3" fill="#ffffff"/><rect x="78.5" y="147.3" width="43.0" height="8.6" rx="4.3" fill="#ffffff"/><path d="M71.1 100.8 a28.9 28.9 0 0 0 57.8 0" fill="none" stroke="#ffffff" stroke-width="8.6"/></svg>
-            Notate
-        </a>
-        <div class="hero-copy">
-            <h1>On-device speech transcription. No cloud, no account, no data ever leaves your device.</h1>
-<div class="demo">
-  <div class="device device-iphone" id="demoFrame"><div class="device-screen"><iframe id="demoApp" title="Notate, live" loading="lazy" data-src="app.html?embed"></iframe></div></div>
-  <p class="demo-caption">This is the <span id="demoDev">iPhone</span> app, live. Try it.</p>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="/"><img src="apple-touch-icon.png" alt="" width="32" height="32">Notate</a>
+    <a class="btn btn-quiet" href="https://apps.apple.com/app/id6782604262">Get the app</a>
+  </nav>
 </div>
-<script>
-(function(){var names={iphone:'iPhone',android:'Android',mac:'Mac',windows:'Windows'},dev=document.documentElement.dataset.device,f=document.getElementById('demoFrame'),i=document.getElementById('demoApp');
-if(!names[dev])dev='iphone';f.className='device device-'+dev;document.getElementById('demoDev').textContent=names[dev];
-if(!document.documentElement.classList.contains('embed'))i.src=i.dataset.src;
-function fit(){i.style.transform='scale('+(i.parentNode.clientWidth/i.offsetWidth)+')';}fit();addEventListener('resize',fit);})();
-</script>
+<main id="main">
+  <section class="hero wrap">
+    <h1>Open it. Talk. It's written down.</h1>
+    <p class="lead">Speech to text that runs on your device. The model is already inside the app, so there is nothing to download.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://apps.apple.com/app/id6782604262">Get Notate for iPhone and Mac</a>
+      <a class="btn btn-quiet" href="#live">Try it here</a>
+    </div>
+    <p class="price">$1, once. No account, no subscription.</p>
+    <div class="live" id="live">
+      <iframe title="Notate, live" loading="lazy" src="app.html?embed"></iframe>
+      <p>This is the app running on this page.</p>
+    </div>
+  </section>
 
-            <div class="landing-ctas">
-                <a class="btn btn-primary" href="app.html">Open Notate</a>
-                <a class="btn btn-outline" href="https://github.com/nulljosh/notate">Source</a>
-            </div>
-        </div>
-    </section>
+  <section class="block wrap" aria-labelledby="why">
+    <h2 id="why">Spoken, heard, written down</h2>
+    <div class="grid">
+      <div class="card wide"><h3>Works the first second, with no signal</h3><p>Three Whisper models ship inside the app. Open it on a plane, in a tunnel, on a new phone with no data, and it transcribes. Nothing downloads, ever.</p></div>
+      <div class="card"><h3>Stays on your device</h3><p>WhisperKit runs on the Neural Engine. No API keys, no servers, no account. Your audio never leaves.</p></div>
+      <div class="card"><h3>Live or from a file</h3><p>Watch words appear as you speak, or drop in a recording and get the whole thing back.</p></div>
+      <div class="card"><h3>Every language Whisper knows</h3><p>About 99 of them, detected for you or picked by hand.</p></div>
+      <div class="card"><h3>Your words, spelled your way</h3><p>Add names, places and jargon once and Notate gets them right.</p></div>
+      <div class="card"><h3>One-tap cleanup</h3><p>Fix punctuation and drop the ums with Apple's on-device model, where your device has it.</p></div>
+      <div class="card"><h3>Native on iPhone, iPad and Mac</h3><p>SwiftUI, one purchase, every device.</p></div>
+    </div>
+  </section>
 
-    <section class="landing-features">
-        <div class="container">
-            <h2>Spoken, heard, written down</h2>
-            <div class="grid">
-                <div class="feature">
-                    <h3>Runs locally</h3>
-                    <p>WhisperKit transcribes entirely on-device, no API keys, no servers.</p>
-                </div>
-                <div class="feature">
-                    <h3>Live or file</h3>
-                    <p>Real-time mic transcription with waveform, or drop in an audio file.</p>
-                </div>
-                <div class="feature">
-                    <h3>iOS + macOS</h3>
-                    <p>Native SwiftUI apps for both platforms. Supports every language Whisper knows, about 99 total.</p>
-                </div>
-                <div class="feature">
-                    <h3>Works on first launch</h3>
-                    <p>A small model ships inside the app, so you can talk the moment it opens, even offline. A sharper one downloads quietly in the background. Coming in the next update.</p>
-                </div>
-                <div class="feature">
-                    <h3>Your words</h3>
-                    <p>Add names, places and jargon once and Notate spells them your way. Coming in the next update.</p>
-                </div>
-                <div class="feature">
-                    <h3>One-tap cleanup</h3>
-                    <p>Fix punctuation and drop the ums with Apple's on-device model. Nothing leaves your device. Coming in the next update.</p>
-                </div>
-                <div class="feature">
-                    <h3>One-time purchase</h3>
-                    <p>One dollar, once. Everything unlocked. No subscription, no in-app purchases.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="closing">
-        <div class="container">
-            <h2>Start transcribing</h2>
-            <p>Open it in the browser, or get the native app for iPhone, iPad, and Mac.</p>
-            <div class="landing-ctas">
-                <a class="btn btn-primary" href="app.html">Open Notate</a>
-            </div>
-        </div>
-    </section>
+  <section class="block wrap" id="install" aria-labelledby="where-h">
+    <h2 id="where-h">Install it anywhere</h2>
+    <div class="where">
+      <div><h3>iPhone and iPad</h3><p><a href="https://apps.apple.com/app/id6782604262">App Store</a></p></div>
+      <div><h3>Mac</h3><p><a href="https://apps.apple.com/app/id6782604262">App Store</a>. Apple silicon and Intel.</p></div>
+      <div><h3>Windows, Android, Linux</h3><p>Open the <a href="app.html">web app</a> and use Install from the browser menu. It runs in its own window and works offline.</p></div>
+    </div>
+  </section>
 </main>
 
-
-<style>
-#install-anywhere{padding:5rem 0;border-top:1px solid color-mix(in srgb, currentColor 14%, transparent);}
-#install-anywhere .xp-wrap{max-width:960px;margin:0 auto;padding:0 1.5rem;}
-#install-anywhere h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin:0 0 .6rem;letter-spacing:-.02em;}
-#install-anywhere .xp-lead{max-width:46ch;margin:0 0 2.5rem;opacity:.7;line-height:1.55;}
-#install-anywhere .xp-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-#install-anywhere .xp-card{background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 14%, transparent);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.5rem;}
-#install-anywhere .xp-card h3{margin:0;font-size:1rem;letter-spacing:-.01em;}
-#install-anywhere .xp-card p{margin:0;font-size:.9rem;line-height:1.5;opacity:.7;flex:1;}
-#install-anywhere .xp-card a{margin-top:.5rem;font-size:.875rem;font-weight:500;color:var(--primary,currentColor);text-decoration:none;}
-#install-anywhere .xp-card a:hover{text-decoration:underline;}
-</style>
-
-<section id="install-anywhere">
-  <div class="xp-wrap">
-    <h2>Install it anywhere.</h2>
-    <p class="xp-lead">Notate runs on every platform. On Windows, Linux and Android it installs straight from the browser, no store, no download, no runtime. It gets a real window, its own icon, and keeps working offline.</p>
-    <div class="xp-grid">
-    <div class="xp-card">
-      <h3>iPhone &amp; iPad</h3>
-      <p>A native app, not a wrapped web page.</p>
-      <a href="https://apps.apple.com/app/id6782604262">App Store &rarr;</a>
-      <a href="https://www.producthunt.com/products/voxprint?launch=voxprint">Product Hunt &rarr;</a>
+<footer>
+  <section class="story" aria-label="About Notate">
+    <img src="apple-touch-icon.png" alt="Notate: a sound wave turning into lines of text" width="120" height="120" loading="lazy">
+    <div>
+      <h2>Say it once.<br>Keep it forever.</h2>
+      <p>Notate turns what you say into text and keeps every word on your device. The model comes inside the app, so it works with no signal and no setup. Made for people who talk faster than they type.</p>
     </div>
-    <div class="xp-card">
-      <h3>Mac</h3>
-      <p>Native, universal binary. Runs on Apple silicon and Intel.</p>
-      <a href="https://apps.apple.com/app/id6782604262">App Store &rarr;</a>
-      <a href="https://www.producthunt.com/products/voxprint?launch=voxprint">Product Hunt &rarr;</a>
-    </div>
-    <div class="xp-card">
-      <h3>Windows</h3>
-      <p>Open the web app in Edge or Chrome, then <strong>Install Notate</strong> from the address bar. It lands in the Start Menu like any other app.</p>
-      <a href="https://notate.jaybulb.com">Open &amp; install &rarr;</a>
-    </div>
-    <div class="xp-card">
-      <h3>Android</h3>
-      <p>Open the web app in Chrome, then <strong>Add to Home screen</strong>. Full screen, no browser chrome, works offline.</p>
-      <a href="https://notate.jaybulb.com">Open &amp; install &rarr;</a>
-    </div>
-    <div class="xp-card">
-      <h3>Linux</h3>
-      <p>Same as Windows, install the web app from Chrome or Chromium and it runs in its own window.</p>
-      <a href="https://notate.jaybulb.com">Open &amp; install &rarr;</a>
-    </div>
-    <div class="xp-card">
-      <h3>Web</h3>
-      <p>Nothing to install. The same app, in any modern browser.</p>
-      <a href="https://notate.jaybulb.com">Open the web app &rarr;</a>
-    </div>
-    </div>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="foot-rule" aria-hidden="true"><span>Notate</span><span>Transcription that stays on your device</span></div>
-  <nav class="foot-dir" aria-label="Footer">
-    <div class="foot-col">
-      <h3>Notate</h3>
-      <ul>
-        <li><a href="https://apps.apple.com/app/id6782604262">Get the app</a></li>
-        <li><a href="app.html">Web app</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h3>Explore</h3>
-      <ul>
-        <li><a href="#demoFrame">Live demo</a></li>
-        <li><a href="#install-anywhere">Install anywhere</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h3>Developers</h3>
-      <ul>
-        <li><a href="https://github.com/nulljosh/notate">Source</a></li>
-        <li><a href="https://github.com/nulljosh/notate/blob/main/docs/ARCHITECTURE.md">Architecture</a></li>
-        <li><a href="https://github.com/nulljosh/notate/blob/main/CONTRIBUTING.md">Contributing</a></li>
-        <li><a href="https://github.com/nulljosh/notate/blob/main/SECURITY.md">Security policy</a></li>
-        <li><a href="https://github.com/nulljosh/notate/issues">Report a bug</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h3>Project</h3>
-      <ul>
-        <li><a href="https://github.com/nulljosh/notate/blob/main/LICENSE">License (MIT)</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="https://jaybulb.com">Portfolio</a></li>
-        <li><a href="#top">Back to top</a></li>
-      </ul>
-    </div>
+  </section>
+  <div class="rule" aria-hidden="true"><span>Notate</span><span>Transcription that stays on your device</span></div>
+  <nav class="dir" aria-label="Footer">
+    <div><h3>Notate</h3><ul>
+      <li><a href="https://apps.apple.com/app/id6782604262">Get the app</a></li>
+      <li><a href="app.html">Web app</a></li>
+      <li><a href="#live">Try it live</a></li>
+      <li><a href="https://github.com/nulljosh/notate/releases">What's new</a></li>
+      <li><a href="https://github.com/nulljosh/notate/blob/main/roadmap.md">Roadmap</a></li>
+    </ul></div>
+    <div><h3>Explore</h3><ul>
+      <li><a href="#why">Features</a></li>
+      <li><a href="#install">Install anywhere</a></li>
+      <li><a href="https://github.com/nulljosh/notate/blob/main/brand/BRAND.md">Brand kit</a></li>
+      <li><a href="https://github.com/nulljosh/notate/tree/main/fonts">Notate Sans</a></li>
+    </ul></div>
+    <div><h3>Developers</h3><ul>
+      <li><a href="https://github.com/nulljosh/notate">Source</a></li>
+      <li><a href="https://github.com/nulljosh/notate/blob/main/docs/ARCHITECTURE.md">Architecture</a></li>
+      <li><a href="https://github.com/nulljosh/notate/blob/main/SECURITY.md">Security policy</a></li>
+      <li><a href="https://github.com/nulljosh/notate/issues">Report a bug</a></li>
+    </ul></div>
+    <div><h3>Project</h3><ul>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="https://github.com/nulljosh/notate/blob/main/LICENSE">License (MIT)</a></li>
+      <li><a href="https://jaybulb.com">Portfolio</a></li>
+      <li><a href="#main">Back to top</a></li>
+    </ul></div>
   </nav>
-  <div class="foot-bar">
-    <p class="foot-meta">Notate &middot; MIT License &middot; &copy; 2026 Joshua Trommel &middot; Made with <span aria-hidden="true">&hearts;</span> in Vancouver, BC</p>
-  </div>
+  <div class="bar"><p>Notate &middot; MIT License &middot; &copy; 2026 Joshua Trommel &middot; Made with <span aria-hidden="true">&hearts;</span> in Vancouver, BC</p></div>
+  <svg class="waves" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" fill="currentColor"><rect x="2.0" y="82.8" width="6.4" height="17.2" rx="3.2"/><rect x="12.4" y="69.9" width="6.4" height="30.1" rx="3.2"/><rect x="22.8" y="49.9" width="6.4" height="50.1" rx="3.2"/><rect x="33.2" y="41.3" width="6.4" height="58.7" rx="3.2"/><rect x="43.7" y="23.8" width="6.4" height="76.2" rx="3.2"/><rect x="54.1" y="14.9" width="6.4" height="85.1" rx="3.2"/><rect x="64.5" y="10.3" width="6.4" height="89.7" rx="3.2"/><rect x="74.9" y="1.7" width="6.4" height="98.3" rx="3.2"/><rect x="85.3" y="6.1" width="6.4" height="93.9" rx="3.2"/><rect x="95.8" y="5.7" width="6.4" height="94.3" rx="3.2"/><rect x="106.2" y="16.6" width="6.4" height="83.4" rx="3.2"/><rect x="116.6" y="26.8" width="6.4" height="73.2" rx="3.2"/><rect x="127.0" y="36.4" width="6.4" height="63.6" rx="3.2"/><rect x="137.4" y="47.2" width="6.4" height="52.8" rx="3.2"/><rect x="147.8" y="69.8" width="6.4" height="30.2" rx="3.2"/><rect x="158.2" y="83.2" width="6.4" height="16.8" rx="3.2"/><rect x="168.7" y="64.5" width="6.4" height="35.5" rx="3.2"/><rect x="179.1" y="48.5" width="6.4" height="51.5" rx="3.2"/><rect x="189.5" y="41.9" width="6.4" height="58.1" rx="3.2"/><rect x="199.9" y="36.2" width="6.4" height="63.8" rx="3.2"/><rect x="210.3" y="26.1" width="6.4" height="73.9" rx="3.2"/><rect x="220.8" y="34.3" width="6.4" height="65.7" rx="3.2"/><rect x="231.2" y="28.1" width="6.4" height="71.9" rx="3.2"/><rect x="241.6" y="38.2" width="6.4" height="61.8" rx="3.2"/><rect x="252.0" y="46.0" width="6.4" height="54.0" rx="3.2"/><rect x="262.4" y="53.9" width="6.4" height="46.1" rx="3.2"/><rect x="272.8" y="60.1" width="6.4" height="39.9" rx="3.2"/><rect x="283.2" y="62.8" width="6.4" height="37.2" rx="3.2"/><rect x="293.7" y="76.0" width="6.4" height="24.0" rx="3.2"/><rect x="304.1" y="77.2" width="6.4" height="22.8" rx="3.2"/><rect x="314.5" y="79.4" width="6.4" height="20.6" rx="3.2"/><rect x="324.9" y="81.1" width="6.4" height="18.9" rx="3.2"/><rect x="335.3" y="80.4" width="6.4" height="19.6" rx="3.2"/><rect x="345.8" y="82.0" width="6.4" height="18.0" rx="3.2"/><rect x="356.2" y="77.2" width="6.4" height="22.8" rx="3.2"/><rect x="366.6" y="69.8" width="6.4" height="30.2" rx="3.2"/><rect x="377.0" y="58.7" width="6.4" height="41.3" rx="3.2"/><rect x="387.4" y="55.3" width="6.4" height="44.7" rx="3.2"/><rect x="397.8" y="51.6" width="6.4" height="48.4" rx="3.2"/><rect x="408.2" y="45.8" width="6.4" height="54.2" rx="3.2"/><rect x="418.7" y="46.4" width="6.4" height="53.6" rx="3.2"/><rect x="429.1" y="49.9" width="6.4" height="50.1" rx="3.2"/><rect x="439.5" y="49.7" width="6.4" height="50.3" rx="3.2"/><rect x="449.9" y="58.3" width="6.4" height="41.7" rx="3.2"/><rect x="460.3" y="72.9" width="6.4" height="27.1" rx="3.2"/><rect x="470.8" y="78.7" width="6.4" height="21.3" rx="3.2"/><rect x="481.2" y="65.7" width="6.4" height="34.3" rx="3.2"/><rect x="491.6" y="48.1" width="6.4" height="51.9" rx="3.2"/><rect x="502.0" y="35.8" width="6.4" height="64.2" rx="3.2"/><rect x="512.4" y="27.7" width="6.4" height="72.3" rx="3.2"/><rect x="522.8" y="10.4" width="6.4" height="89.6" rx="3.2"/><rect x="533.2" y="11.4" width="6.4" height="88.6" rx="3.2"/><rect x="543.7" y="4.1" width="6.4" height="95.9" rx="3.2"/><rect x="554.1" y="0.2" width="6.4" height="99.8" rx="3.2"/><rect x="564.5" y="9.5" width="6.4" height="90.5" rx="3.2"/><rect x="574.9" y="13.1" width="6.4" height="86.9" rx="3.2"/><rect x="585.3" y="27.9" width="6.4" height="72.1" rx="3.2"/><rect x="595.8" y="34.6" width="6.4" height="65.4" rx="3.2"/><rect x="606.2" y="48.7" width="6.4" height="51.3" rx="3.2"/><rect x="616.6" y="66.6" width="6.4" height="33.4" rx="3.2"/><rect x="627.0" y="74.7" width="6.4" height="25.3" rx="3.2"/><rect x="637.4" y="64.9" width="6.4" height="35.1" rx="3.2"/><rect x="647.8" y="47.4" width="6.4" height="52.6" rx="3.2"/><rect x="658.2" y="37.0" width="6.4" height="63.0" rx="3.2"/><rect x="668.7" y="28.8" width="6.4" height="71.2" rx="3.2"/><rect x="679.1" y="24.8" width="6.4" height="75.2" rx="3.2"/><rect x="689.5" y="19.2" width="6.4" height="80.8" rx="3.2"/><rect x="699.9" y="19.6" width="6.4" height="80.4" rx="3.2"/><rect x="710.3" y="28.6" width="6.4" height="71.4" rx="3.2"/><rect x="720.8" y="33.3" width="6.4" height="66.7" rx="3.2"/><rect x="731.2" y="47.6" width="6.4" height="52.4" rx="3.2"/><rect x="741.6" y="50.2" width="6.4" height="49.8" rx="3.2"/><rect x="752.0" y="59.9" width="6.4" height="40.1" rx="3.2"/><rect x="762.4" y="64.8" width="6.4" height="35.2" rx="3.2"/><rect x="772.8" y="73.5" width="6.4" height="26.5" rx="3.2"/><rect x="783.2" y="82.3" width="6.4" height="17.7" rx="3.2"/><rect x="793.7" y="78.4" width="6.4" height="21.6" rx="3.2"/><rect x="804.1" y="74.9" width="6.4" height="25.1" rx="3.2"/><rect x="814.5" y="82.9" width="6.4" height="17.1" rx="3.2"/><rect x="824.9" y="80.8" width="6.4" height="19.2" rx="3.2"/><rect x="835.3" y="78.9" width="6.4" height="21.1" rx="3.2"/><rect x="845.8" y="73.8" width="6.4" height="26.2" rx="3.2"/><rect x="856.2" y="68.7" width="6.4" height="31.3" rx="3.2"/><rect x="866.6" y="56.6" width="6.4" height="43.4" rx="3.2"/><rect x="877.0" y="59.4" width="6.4" height="40.6" rx="3.2"/><rect x="887.4" y="56.6" width="6.4" height="43.4" rx="3.2"/><rect x="897.8" y="55.9" width="6.4" height="44.1" rx="3.2"/><rect x="908.2" y="54.5" width="6.4" height="45.5" rx="3.2"/><rect x="918.7" y="68.6" width="6.4" height="31.4" rx="3.2"/><rect x="929.1" y="73.5" width="6.4" height="26.5" rx="3.2"/><rect x="939.5" y="77.8" width="6.4" height="22.2" rx="3.2"/><rect x="949.9" y="62.2" width="6.4" height="37.8" rx="3.2"/><rect x="960.3" y="49.8" width="6.4" height="50.2" rx="3.2"/><rect x="970.8" y="36.5" width="6.4" height="63.5" rx="3.2"/><rect x="981.2" y="30.4" width="6.4" height="69.6" rx="3.2"/><rect x="991.6" y="18.9" width="6.4" height="81.1" rx="3.2"/></svg>
 </footer>
-<script>
-(function () {
-  // Snippets the app would actually produce: transcript line + the language it detected.
-  var LINES = [
-    ["the meeting starts at nine", "English"],
-    ["je voudrais un caf\u00e9 noir", "Fran\u00e7ais"],
-    ["das Wetter wird besser", "Deutsch"],
-    ["no me acuerdo del nombre", "Espa\u00f1ol"],
-    ["ci vediamo domani sera", "Italiano"],
-    ["\u4eca\u65e5\u306f\u3044\u3044\u5929\u6c17\u3067\u3059\u306d", "\u65e5\u672c\u8a9e"],
-    ["remind me to call back", "English"],
-    ["\uc624\ub298 \uc57d\uc18d \uc788\uc5b4\uc694", "\ud55c\uad6d\uc5b4"],
-    ["tudo bem por aqui", "Portugu\u00eas"],
-    ["\u0432\u0441\u0451 \u0438\u0434\u0451\u0442 \u043f\u043e \u043f\u043b\u0430\u043d\u0443", "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"],
-    ["chorus comes in after this", "English"],
-    ["\u6211\u4eec\u660e\u5929\u518d\u8c08", "\u4e2d\u6587"],
-    ["send the notes when you can", "English"],
-    ["het regent de hele dag", "Nederlands"],
-    ["play that part again", "English"],
-    ["\u0645\u0631\u062d\u0628\u0627 \u0643\u064a\u0641 \u062d\u0627\u0644\u0643", "\u0627\u0644\u0639\u0631\u0628\u064a\u0629"]
-  ];
-  var wall = document.getElementById('heroWall');
-  if (!wall) return;
-  for (var i = LINES.length - 1; i > 0; i--) {   // shuffle so the wall differs each visit
-    var j = Math.floor(Math.random() * (i + 1));
-    var t = LINES[i]; LINES[i] = LINES[j]; LINES[j] = t;
-  }
-  var cols = Math.max(3, Math.ceil(window.innerWidth / 190));
-  var per = Math.max(4, Math.min(6, Math.floor(LINES.length / cols)));
-  for (var c = 0; c < cols; c++) {
-    var col = document.createElement('div');
-    col.className = 'wall-col ' + (c % 2 ? 'down' : 'up');
-    col.style.setProperty('--dur', (64 + c * 13) + 's');
-    var slice = LINES.slice(c * per, (c + 1) * per);
-    if (!slice.length) slice = LINES.slice(0, per);
-    slice.concat(slice).forEach(function (entry) {   // doubled, so the loop is seamless
-      var card = document.createElement('div');
-      card.className = 'wall-card';
-      var b = document.createElement('b'); b.textContent = entry[0];
-      var sp = document.createElement('span'); sp.textContent = entry[1];
-      card.appendChild(b); card.appendChild(sp);
-      col.appendChild(card);
-    });
-    wall.appendChild(col);
-  }
-})();
-</script>
-<script>
-(function(){
-  if (!('IntersectionObserver' in window)) return;
-  document.querySelectorAll('.landing-features, .closing, #install-anywhere').forEach(function(el){ el.classList.add('reveal'); });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-
-  var wall = document.getElementById('heroWall');
-  if (wall && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    var ticking = false;
-    addEventListener('scroll', function(){
-      if (!ticking) {
-        requestAnimationFrame(function(){ wall.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)'; ticking = false; });
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-})();
-</script>
 </body>
 </html>

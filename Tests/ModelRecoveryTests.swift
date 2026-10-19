@@ -50,7 +50,7 @@ final class ModelRecoveryTests: XCTestCase {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
         try XCTSkipIf(TranscriptionEngine.bundledTiny == nil, "tiny model not bundled (run scripts/fetch-tiny-model.sh)")
         let fm = FileManager.default
-        let model = "openai_whisper-base"
+        let model = "openai_whisper-large-v3-v20240930_turbo_632MB" // not bundled, so it can be broken and re-fetched
         let stable = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("echo-models").appendingPathComponent(model)
         try? fm.removeItem(at: stable)
@@ -61,10 +61,24 @@ final class ModelRecoveryTests: XCTestCase {
         let engine = TranscriptionEngine()
         engine.selectedModel = model
         await engine.loadModel()
-        engine.cancelUpgrade() // no need to fetch base in a test
-        XCTAssertEqual(engine.modelState, .ready, "broken base must not leave an error screen")
+        engine.cancelUpgrade() // no need to fetch the big model in a test
+        XCTAssertEqual(engine.modelState, .ready, "broken model must not leave an error screen")
         XCTAssertEqual(engine.activeModel, TranscriptionEngine.tinyModel, "should be running on the bundled tiny model")
         XCTAssertFalse(fm.fileExists(atPath: stable.path), "the broken copy must be deleted")
+    }
+
+    /// 1.4.2: the model auto picks ships inside the app, so first launch needs no network and no download.
+    func testChosenModelIsBundledAndLoadsWithoutDownload() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        for m in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"] {
+            XCTAssertNotNil(TranscriptionEngine.bundled(m), "\(m) must ship inside the app (run scripts/fetch-tiny-model.sh)")
+        }
+        let engine = TranscriptionEngine()
+        engine.selectedModel = "auto"
+        await engine.loadModel()
+        XCTAssertEqual(engine.modelState, .ready)
+        XCTAssertEqual(engine.activeModel, engine.resolvedModel, "must run the chosen model itself, not tiny")
+        XCTAssertNil(engine.upgradeProgress, "nothing may download")
     }
 
     /// Custom words: clean prompt text, and a prompt must never blank real speech.

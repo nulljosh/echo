@@ -23,18 +23,20 @@ Sources/
 Tests/          unit tests + ModelRecoveryTests (the end-to-end gate)
 UITests/        fastlane snapshot screenshots
 watchos/        standalone voice memo recorder, own xcodegen project
-docs/           landing page + web demo (app.html)
+docs/           landing (index.html + landing.css, Notate Sans, footer like joshuatree) + web demo (app.html)
+fonts/          Notate Sans, derived from Inter under the OFL, build.py rebuilds it. Landing and brand only, the apps keep the system font
+brand/          icon, tokens.css, BRAND.md
 ```
 
 **TranscriptionEngine** owns everything: model load, 2s live batches (8s trailing window, greedy), file transcription, history (max 50). Auto picks the model from device RAM.
 
 **Model loading, read before touching it.** WhisperKit downloads into a cache iOS can purge, so the engine copies the model to `Application Support/echo-models/<model>` (temp name, then move, so a kill mid-copy cannot leave half a model). `cachedFolder` checks that stable folder by name first, because the absolute path stored in UserDefaults dies on every app update. If a load throws, every local copy is wiped and it tries once more clean. 1.3.9 shipped without this and bricked phones.
 
-Since 1.4.2 `loadModel` takes the fast path first: a good cached copy of the chosen model, else the tiny model bundled in `BundledModels/` (fetched by the `scripts/fetch-tiny-model.sh` pre-build step, gitignored, Release builds fail without it) while the chosen model downloads in the background (`upgrade(to:)`). The new kit waits in `pending` and only swaps in through `applyPendingUpgrade()` when nothing is recording or transcribing. The old blocking path (`blockingLoad`) only runs when there is no bundled model. Custom words (`customWords`, UserDefaults `notate.customWords`) become Whisper `promptTokens`. `Cleanup.swift` wraps Apple Foundation Models and is only shown where the system model is available.
+Since 1.4.2 the app ships tiny, base and small inside `BundledModels/` (fetched by `scripts/fetch-tiny-model.sh`, gitignored, Release builds fail without it), so nothing downloads and first launch works offline. `loadModel` loads the chosen model straight from the bundle (`bundled(_:)`). Only a model that does not ship (large turbo, picked under Advanced) uses a cached copy, or runs tiny while `upgrade(to:)` downloads it. A broken model falls back to bundled tiny. The new kit waits in `pending` and swaps in through `applyPendingUpgrade()` when nothing is recording. `blockingLoad` only runs when no model is bundled. Custom words (`customWords`, UserDefaults `notate.customWords`) become Whisper `promptTokens`. `Cleanup.swift` wraps Apple Foundation Models and is only shown where the system model is available.
 
 **SettingsView**: appearance, speak-back voice, language (own page, every Whisper language), custom words, status. The model picker is under Advanced on purpose. Users should not need it.
 
-Accent color is the asset catalog blue. Buttons and splash use `Color.accentColor`, not `Color.primary`. Icon is the white mic on #0074D9.
+Accent color is the asset catalog blue. Buttons and splash use `Color.accentColor`, not `Color.primary`. Icon is a white sound wave turning into two lines of text on a #0074D9 gradient, built from `Notate.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Notate`), there is no AppIcon.appiconset. Products are named Notate.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
 
 ## Build, test, ship
 

@@ -203,3 +203,10 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 
 ## Ingested 2026-10-16
 - [ ] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
+
+## Next (2026-10-18)
+
+- [ ] Apple's own speech model on iOS 26 and macOS 26 (SpeechAnalyzer and SpeechTranscriber): starts instantly, adds no app size, and the OS keeps the model fresh. The OS may still fetch a language pack the first time, so bundled Whisper stays the guaranteed offline path. Use Apple's as an option when the language pack is already on the device, Whisper otherwise. Deployment target is still iOS 17 and macOS 14, so gate it with `#available`.
+- [ ] Meetings on the Mac with no bot: mic plus system audio (ScreenCaptureKit), transcribed locally. See MONEY.md.
+- [ ] On-device summary and action items over a whole transcript (Apple Foundation Models), speaker labels, search across history.
+- [ ] Share extension, Action button and Shortcuts so Notate is one tap away.

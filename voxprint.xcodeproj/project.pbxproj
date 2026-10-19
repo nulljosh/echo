@@ -15,6 +15,8 @@
 		18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3FD038F68389C5E660B5C /* VoxprintApp.swift */; };
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
+		2832DADDF47FA44F395696FB /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
+		321BA2B956B47155D3742DAD /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
@@ -101,6 +103,7 @@
 		ABCE0C09F8A34129F5803E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntry.swift; sourceTree = "<group>"; };
 		CF83663B541B3469842D0224 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Notate.icon; sourceTree = "<group>"; };
 		D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
 		DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VoxprintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				F31EAC7D6224E7BB2BDECB12 /* BundledModels */,
+				CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */,
 				7A12FC2CCEF7B3DC268F0916 /* Sources */,
 				5B37322E28927AD2315C07E6 /* Tests */,
 				A7522B3576E680E43D787643 /* UITests */,
@@ -406,6 +410,7 @@
 			files = (
 				45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */,
 				3FFD02E0AF33F663591DD17A /* BundledModels in Resources */,
+				2832DADDF47FA44F395696FB /* Notate.icon in Resources */,
 				DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +421,7 @@
 			files = (
 				ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */,
 				0D6C8F4E8C13ECE6EF48CF55 /* BundledModels in Resources */,
+				321BA2B956B47155D3742DAD /* Notate.icon in Resources */,
 				BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,14 +587,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.VoxprintTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voxprint-macOS.app/Contents/MacOS/Voxprint-macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notate.app/Contents/MacOS/Notate";
 			};
 			name = Release;
 		};
 		3C24BE4A49C5BF154B68CBE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
 				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -599,6 +605,8 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				PRODUCT_MODULE_NAME = Voxprint_macOS;
+				PRODUCT_NAME = Notate;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -670,7 +678,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -736,7 +744,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -767,7 +775,7 @@
 		CC2BBFE1EAB9D2075153BB53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
 				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -778,6 +786,8 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				PRODUCT_MODULE_NAME = Voxprint_macOS;
+				PRODUCT_NAME = Notate;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -785,7 +795,7 @@
 		D395485C101050DE6BDA45BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -794,6 +804,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				PRODUCT_NAME = Notate;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -811,7 +822,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.VoxprintTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voxprint-macOS.app/Contents/MacOS/Voxprint-macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notate.app/Contents/MacOS/Notate";
 			};
 			name = Debug;
 		};
@@ -835,7 +846,7 @@
 		FE7AAF1AE5388A18F687249B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -844,6 +855,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
+				PRODUCT_NAME = Notate;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

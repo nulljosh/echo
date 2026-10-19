@@ -53,11 +53,12 @@ class TranscriptionEngine: ObservableObject {
     private var upgradeTask: Task<Void, Never>?
     private(set) var activeModel = ""
     static let tinyModel = "openai_whisper-tiny"
-    /// The tiny model that ships inside the app, so the first launch works at once and offline.
-    static var bundledTiny: URL? {
-        let url = Bundle.main.resourceURL?.appendingPathComponent("BundledModels/\(tinyModel)")
+    /// Models that ship inside the app (tiny, base, small), so nothing ever has to download.
+    static func bundled(_ model: String) -> URL? {
+        let url = Bundle.main.resourceURL?.appendingPathComponent("BundledModels/\(model)")
         return url.flatMap { FileManager.default.fileExists(atPath: $0.appendingPathComponent("AudioEncoder.mlmodelc").path) ? $0 : nil }
     }
+    static var bundledTiny: URL? { bundled(tinyModel) }
     private let capture = AudioCapture()
     private let bufferLock = NSLock()
     private var audioBuffer: [Float] = []
@@ -135,21 +136,25 @@ class TranscriptionEngine: ObservableObject {
         await blockingLoad(model)
     }
 
-    /// Ready in seconds: a good cached copy of the chosen model, else the bundled tiny model while the
-    /// chosen one downloads in the background. Returns false only when there is no bundled model.
+    /// Ready with no network: the chosen model from the app bundle (or a good cached copy for a model that
+    /// does not ship), else tiny while the chosen one downloads in the background. False only with no bundled models.
     private func loadFastPath(_ model: String) async -> Bool {
-        if model != Self.tinyModel, let folder = cachedFolder(for: model) {
+        let fm = FileManager.default
+        if let folder = Self.bundled(model)?.path ?? cachedFolder(for: model) {
             if let kit = try? await WhisperKit(modelFolder: folder) {
                 whisperKit = kit; activeModel = model; modelState = .ready
                 return true
             }
-            // The cached copy is broken. Drop it and fall back to tiny, then fetch it again.
-            clearCachedFolder(for: model)
-            try? FileManager.default.removeItem(at: Self.modelCacheURL.appendingPathComponent(model))
+            if Self.bundled(model) == nil {
+                // The cached copy is broken. Drop it and fall back to tiny, then fetch it again.
+                clearCachedFolder(for: model)
+                try? fm.removeItem(at: Self.modelCacheURL.appendingPathComponent(model))
+            }
         }
         guard let tiny = Self.bundledTiny, let kit = try? await WhisperKit(modelFolder: tiny.path) else { return false }
         whisperKit = kit; activeModel = Self.tinyModel; modelState = .ready
-        if model != Self.tinyModel {
+        // Only a model that does not ship (large) ever downloads, and tiny keeps working meanwhile.
+        if model != Self.tinyModel, Self.bundled(model) == nil {
             upgradeTask = Task { [weak self] in await self?.upgrade(to: model) }
         }
         return true
