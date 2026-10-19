@@ -237,4 +237,14 @@ final class ModelRecoveryTests: XCTestCase {
         let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
         try rep.representation(using: .png, properties: [:])!.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("notate-summary.png"))
     }
+
+    /// History search: every word must match, any case or accent, transcript or summary.
+    func testHistorySearch() {
+        var e = TranscriptionEntry(text: "Meeting about the Café opening on Friday", duration: 9, model: "tiny")
+        XCTAssertTrue(HistoryView.matches(e, ""))
+        XCTAssertTrue(HistoryView.matches(e, "cafe friday"))
+        XCTAssertFalse(HistoryView.matches(e, "cafe monday"))
+        e.summary = TranscriptSummary(summary: "Plans", actionItems: ["Order the espresso machine"])
+        XCTAssertTrue(HistoryView.matches(e, "espresso"))
+    }
 }
