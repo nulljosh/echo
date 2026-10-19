@@ -1,4 +1,4 @@
-# Notate loop handoff (2026-10-19, afternoon)
+# Notate loop handoff (2026-10-19, morning)
 
 ## What the loop is
 One loop works the road to v2.0 in this repo, one roadmap item per tick. It reads `roadmap.md` ("Road to v2.0"), does the next open item, runs the QA gate and a cold-launch check before each commit, and pushes. It ships builds only when App Review allows. It stops at v2.0.
