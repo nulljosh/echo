@@ -2,7 +2,8 @@ import SwiftUI
 
 private let whatsNewVersion = "1.4.2"
 private let whatsNewBullets = [
-    "Talk the moment it opens, even offline. A sharper model downloads quietly in the background",
+    "Open it and talk, even with no signal. Every model ships inside the app, nothing downloads",
+    "The live transcript keeps everything you say, with the word being heard highlighted",
     "Custom words: add names and jargon in Settings and Notate spells them your way",
     "One-tap cleanup fixes punctuation and drops the ums, on device (needs Apple Intelligence)",
 ]
