@@ -60,6 +60,7 @@
 		B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
 		B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
 		BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
+		C1D81FEFBE5873E7EE7F0EAA /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D5104677907CD79CDEE02B /* NotateFont.swift */; };
 		C77CB642FA2948A428B741F1 /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
 		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		CA2CDBE70E2221C1F6089D78 /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
@@ -137,6 +138,7 @@
 		2979D9C3680EC57594490295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF9D1E91E59C9DCDB46932E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		332A910F82F4863EBB411432 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		33D5104677907CD79CDEE02B /* NotateFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotateFont.swift; sourceTree = "<group>"; };
 		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,6 +305,7 @@
 			children = (
 				18FC30F7E8146158BCC235D9 /* Assets.xcassets */,
 				E4A93C1BD632A004057A4D13 /* ContentView.swift */,
+				33D5104677907CD79CDEE02B /* NotateFont.swift */,
 				682B20533C1FEB6414135623 /* VoxprintWatchApp.swift */,
 				1EA12A54A819A446FF06B0ED /* Models */,
 				C59668D2E1F5506BDBEFD67C /* Views */,
@@ -705,6 +708,7 @@
 			files = (
 				5C591883B2246C96C3949F9A /* ContentView.swift in Sources */,
 				D64803515132F1A8C234AC5B /* HistoryView.swift in Sources */,
+				C1D81FEFBE5873E7EE7F0EAA /* NotateFont.swift in Sources */,
 				FD1613873F33D362184A6A80 /* RecordView.swift in Sources */,
 				6938696A3F1BC03B9280F179 /* RecordingEntry.swift in Sources */,
 				C77CB642FA2948A428B741F1 /* RecordingStore.swift in Sources */,

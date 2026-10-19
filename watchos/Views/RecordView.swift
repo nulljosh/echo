@@ -6,7 +6,7 @@ struct RecordView: View {
     var body: some View {
         VStack(spacing: 10) {
             Text("Notate")
-                .font(.headline)
+                .font(.notate(17, .semibold))
                 .foregroundStyle(.secondary)
 
             if store.isRecording {
@@ -18,8 +18,10 @@ struct RecordView: View {
                 Image(systemName: "waveform")
                     .font(.system(size: 28))
                     .foregroundStyle(.tertiary)
-                Text("Recorded on your watch, written out by your iPhone. Never a server.")
-                    .font(.caption2)
+                Text("Your iPhone writes it out")
+                    .font(.notate(13))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
             }
@@ -27,7 +29,7 @@ struct RecordView: View {
             Button(action: toggle) {
                 ZStack {
                     Circle()
-                        .fill(store.isRecording ? Color.red : Color.primary)
+                        .fill(store.isRecording ? Color.red : Self.accent)
                         .frame(width: 52, height: 52)
                     if store.isRecording {
                         RoundedRectangle(cornerRadius: 4)
@@ -56,9 +58,9 @@ struct RecordView: View {
         }
     }
 
-    private var iconColor: Color {
-        Color.black
-    }
+    private static let accent = Color(red: 0, green: 0x74 / 255, blue: 0xD9 / 255) // brand blue #0074D9
+
+    private var iconColor: Color { .white }
 
     private var formattedElapsed: String {
         let s = Int(store.elapsed)
