@@ -4,7 +4,7 @@
 set -u
 ROOT="${SRCROOT:-$(cd "$(dirname "$0")/.." && pwd)}/BundledModels"
 status=0
-for M in openai_whisper-tiny openai_whisper-base openai_whisper-small; do
+for M in openai_whisper-tiny openai_whisper-base openai_whisper-small_216MB; do
 DEST="$ROOT/$M"
 [ -f "$DEST/.complete" ] && [ -f "$DEST/tokenizer.json" ] && continue
 echo "Fetching $M into $DEST"
@@ -23,7 +23,7 @@ for i in files:
     urllib.request.urlretrieve(f"https://huggingface.co/{repo}/resolve/main/{i['path']}", out)
     if os.path.getsize(out) != i["size"]: raise SystemExit(f"size mismatch: {rel}")
 # The tokenizer too, or WhisperKit fetches it from the internet on first launch.
-size = folder.split("openai_whisper-", 1)[1]
+size = folder.split("openai_whisper-", 1)[1].split("_")[0]  # small_216MB uses the small tokenizer
 for name in ("tokenizer.json", "tokenizer_config.json"):
     out = os.path.join(dest, name)
     if not os.path.exists(out):

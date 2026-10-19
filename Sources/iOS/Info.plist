@@ -42,11 +42,6 @@
 	<false/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Notate transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
 	<key>UILaunchScreen</key>

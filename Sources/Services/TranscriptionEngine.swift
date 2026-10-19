@@ -44,7 +44,7 @@ class TranscriptionEngine: ObservableObject {
     @Published var detectedLanguage: String?
     @Published var isUnusualLanguage = false
 
-    let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small", "openai_whisper-large-v3-v20240930_turbo_632MB"]
+    let availableModels = ["auto", "openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small_216MB", "openai_whisper-large-v3-v20240930_turbo_632MB"]
     // Every language Whisper knows (the table has aliases, so dedupe by code)
     let availableLanguages = ["auto"] + Set(Constants.languages.values).sorted()
     // ponytail: "unusual" = outside the languages the picker even offers
@@ -84,7 +84,6 @@ class TranscriptionEngine: ObservableObject {
     private var recordingTask: Task<Void, Never>?
     private var recordingStart: Date?
     private var committedText = ""
-    private var committedSamples = 0
     private static let commitAfterSamples = 16_000 * 15
 
     private static let historyURL: URL = {
@@ -123,9 +122,14 @@ class TranscriptionEngine: ObservableObject {
             ]
             return
         }
-        if let data = try? Data(contentsOf: Self.historyURL),
-           let saved = try? JSONDecoder().decode([TranscriptionEntry].self, from: data) {
-            entries = saved
+        if let data = try? Data(contentsOf: Self.historyURL) {
+            if let saved = try? JSONDecoder().decode([TranscriptionEntry].self, from: data) {
+                entries = saved
+            } else {
+                // Unreadable history is set aside, never overwritten by the next save.
+                let aside = Self.historyURL.deletingPathExtension().appendingPathExtension("unreadable-\(Int(Date().timeIntervalSince1970)).json")
+                try? FileManager.default.moveItem(at: Self.historyURL, to: aside)
+            }
         }
     }
 
@@ -134,10 +138,10 @@ class TranscriptionEngine: ObservableObject {
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
         #if os(iOS)
         // ponytail: small on any 6GB+ phone (iPhone 12 and up); base was noticeably worse than Siri dictation
-        if gb >= 6 { return "openai_whisper-small" }
+        if gb >= 6 { return "openai_whisper-small_216MB" }
         return gb >= 4 ? "openai_whisper-base" : "openai_whisper-tiny"
         #else
-        if gb >= 8 { return "openai_whisper-small" }
+        if gb >= 8 { return "openai_whisper-small_216MB" }
         if gb >= 4 { return "openai_whisper-base" }
         return "openai_whisper-tiny"
         #endif
@@ -181,7 +185,7 @@ class TranscriptionEngine: ObservableObject {
         let fm = FileManager.default
         let stable = Self.modelCacheURL.appendingPathComponent(model)
         if let folder = cachedFolder(for: model) {
-            if let kit = try? await WhisperKit(modelFolder: folder), !Task.isCancelled {
+            if let kit = try? await WhisperKit(modelFolder: folder, verbose: false), !Task.isCancelled {
                 pending = (kit, model)
                 applyPendingUpgrade()
                 return
@@ -202,7 +206,7 @@ class TranscriptionEngine: ObservableObject {
                 if (try? fm.copyItem(at: downloaded, to: tmp)) != nil { try? fm.moveItem(at: tmp, to: stable) }
             }
             let path = fm.fileExists(atPath: stable.path) ? stable.path : downloaded.path
-            let kit = try await WhisperKit(modelFolder: path)
+            let kit = try await WhisperKit(modelFolder: path, verbose: false)
             cacheFolder(path, for: model)
             pending = (kit, model)
             applyPendingUpgrade()
@@ -228,7 +232,7 @@ class TranscriptionEngine: ObservableObject {
             var downloadedFolder: URL?
             do {
                 if let folder = cachedFolder(for: model) {
-                    whisperKit = try await WhisperKit(modelFolder: folder)
+                    whisperKit = try await WhisperKit(modelFolder: folder, verbose: false)
                 } else {
                     let downloaded = try await downloadWithRetry(model) { [weak self] f in self?.modelState = .loading(progress: f) }
                     downloadedFolder = downloaded
@@ -245,7 +249,7 @@ class TranscriptionEngine: ObservableObject {
                     let finalPath = fm.fileExists(atPath: stableFolder.path) ? stableFolder.path : downloaded.path
                     // ponytail: CoreML compile after download can take minutes, signal "preparing" so UI doesn't look stuck at 100%
                     modelState = .loading(progress: 1)
-                    let kit = try await WhisperKit(modelFolder: finalPath)
+                    let kit = try await WhisperKit(modelFolder: finalPath, verbose: false)
                     cacheFolder(finalPath, for: model)
                     whisperKit = kit
                 }
@@ -310,7 +314,7 @@ class TranscriptionEngine: ObservableObject {
 
     /// Feeds audio through the live path 2 s at a time, exactly as the mic would (tests).
     func simulateLive(_ samples: [Float]) async {
-        committedText = ""; committedSamples = 0; transcribedText = ""
+        committedText = ""; transcribedText = ""
         bufferLock.withLock { audioBuffer = [] }
         var i = 0
         while i < samples.count {
@@ -343,7 +347,6 @@ class TranscriptionEngine: ObservableObject {
         isRecording = true
         transcribedText = ""
         committedText = ""
-        committedSamples = 0
         bufferLock.withLock { audioBuffer = [] }
         recordingStart = Date()
 
@@ -357,6 +360,8 @@ class TranscriptionEngine: ObservableObject {
                         guard let self else { return }
                         self.bufferLock.withLock { self.audioBuffer.append(contentsOf: self.mixer.pushSystem(samples)) }
                     }
+                    // Stop was pressed while the capture was still starting: never leave the Mac listening.
+                    if !self.isRecording { self.systemCapture.stop() }
                 } catch {
                     // No permission yet: keep recording the mic alone rather than failing the recording.
                     await MainActor.run { self.meetingError = "Allow Notate under Screen and System Audio Recording in System Settings to hear the call." }
@@ -399,14 +404,16 @@ class TranscriptionEngine: ObservableObject {
     func stopRecording() async {
         isRecording = false
         audioLevel = 0
-        recordingTask?.cancel()
+        let live = recordingTask
         recordingTask = nil
+        live?.cancel()
         capture.stopCapture()
         #if os(macOS)
         systemCapture.stop()
         #endif
         // Stopped before any model finished loading: wait for it so nothing said is lost.
         while whisperKit == nil, case .loading = modelState { try? await Task.sleep(for: .milliseconds(200)) }
+        await live?.value // the live pass in flight finishes first, then the final pass runs alone
         await transcribeCurrentBuffer(full: true)
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
@@ -485,13 +492,15 @@ class TranscriptionEngine: ObservableObject {
     /// finished segment and moves on. Cost stays flat however long you talk, and nothing said is ever dropped.
     /// Final (`full`): one accurate pass over the whole recording.
     private func transcribeCurrentBuffer(full: Bool = false) async {
-        let start = full ? 0 : committedSamples
+        // The buffer only ever holds audio after the last committed segment (committed audio is dropped),
+        // so memory stays flat however long a meeting runs, and the final pass only decodes the tail.
         let samples: [Float] = bufferLock.withLock {
-            let total = audioBuffer.count
-            guard total > start else { return [] }
-            return Array(audioBuffer[start..<min(total, full ? total : start + Self.liveWindowSamples)])
+            Array(audioBuffer.prefix(full ? audioBuffer.count : Self.liveWindowSamples))
         }
-        guard samples.count > 16_000, let whisperKit else { return }
+        guard samples.count > 16_000 || (full && !samples.isEmpty), let whisperKit else {
+            if full, !committedText.isEmpty { transcribedText = committedText }
+            return
+        }
 
         isTranscribing = true
         defer { isTranscribing = false }
@@ -503,15 +512,16 @@ class TranscriptionEngine: ObservableObject {
                 isUnusualLanguage = !Self.expectedLanguages.contains(lang)
             }
             if full {
-                let text = results.text()
-                if !text.isEmpty { transcribedText = text }
+                let tail = results.text()
+                transcribedText = Self.join(committedText, Self.clean(tail))
                 return
             }
             var segments = results.flatMap(\.segments)
             if samples.count > Self.commitAfterSamples, segments.count > 1 {
                 let done = segments.dropLast()
                 committedText = Self.join(committedText, Self.clean(done.map(\.text).joined(separator: " ")))
-                committedSamples = start + Int((done.last?.end ?? 0) * 16_000)
+                let drop = min(samples.count, Int((done.last?.end ?? 0) * 16_000))
+                bufferLock.withLock { audioBuffer.removeFirst(min(drop, audioBuffer.count)) }
                 segments = Array(segments.suffix(1))
             }
             let live = Self.join(committedText, Self.clean(segments.map(\.text).joined(separator: " ")))
@@ -602,6 +612,19 @@ class TranscriptionEngine: ObservableObject {
     }
 
     private func saveHistory() {
-        try? JSONEncoder().encode(entries).write(to: Self.historyURL, options: .atomic)
+        let snapshot = entries
+        let url = Self.historyURL
+        // Off the main thread: with no cap, history can grow to megabytes. Saves run in order on one queue.
+        Self.saveQueue.async {
+            guard let data = try? JSONEncoder().encode(snapshot) else { return }
+            #if os(iOS)
+            // Transcripts are private: encrypted at rest while the phone is locked (new files can still be written).
+            try? data.write(to: url, options: [.atomic, .completeFileProtectionUnlessOpen])
+            #else
+            try? data.write(to: url, options: .atomic)
+            #endif
+        }
     }
+
+    private static let saveQueue = DispatchQueue(label: "notate.history", qos: .utility)
 }

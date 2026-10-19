@@ -74,7 +74,7 @@ final class ModelRecoveryTests: XCTestCase {
     /// (also bundled) swaps in from the bundle. Nothing downloads at any point.
     func testOpensReadyAndSwapsToBundledModelWithoutDownload() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
-        for m in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"] {
+        for m in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small_216MB"] {
             XCTAssertNotNil(TranscriptionEngine.bundled(m), "\(m) must ship inside the app (run scripts/fetch-tiny-model.sh)")
         }
         TranscriptionEngine.downloadsEnabled = false // any download attempt would leave the chosen model unloaded
@@ -88,7 +88,17 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertNil(engine.upgradeProgress, "nothing may download")
         await engine.waitForUpgrade()
         XCTAssertEqual(engine.activeModel, engine.resolvedModel, "the chosen bundled model must swap in")
-        for m in ["openai_whisper-tiny", "openai_whisper-small"] {
+        // The swapped-in model (the quantized small on a Mac) must still hear real speech right.
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-accuracy.wav")
+        let say = Process()
+        say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+        say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "The quick brown fox jumps over the lazy dog near the river bank."]
+        try say.run(); say.waitUntilExit()
+        await engine.transcribeFile(url: wav)
+        let heard = engine.transcribedText.lowercased()
+        for word in ["quick", "brown", "fox", "lazy", "river"] { XCTAssertTrue(heard.contains(word), "\(engine.activeModel) missed \"\(word)\": \(heard)") }
+        if let entry = engine.entries.first { engine.deleteEntry(entry) }
+        for m in ["openai_whisper-tiny", "openai_whisper-small_216MB"] {
             let folder = TranscriptionEngine.bundled(m)!
             XCTAssertTrue(FileManager.default.fileExists(atPath: folder.appendingPathComponent("tokenizer.json").path), "\(m) must carry its tokenizer")
             XCTAssertFalse(FileManager.default.fileExists(atPath: folder.appendingPathComponent("models").path), "the tokenizer was fetched from the internet")

@@ -155,9 +155,9 @@ struct SettingsView: View {
         let resolved = resolvedModel.replacingOccurrences(of: "openai_whisper-", with: "").lowercased()
         switch model {
         case "auto": return "Picks best for this device (currently \(resolved))"
-        case "openai_whisper-tiny": return "Fastest · ~39 MB"
-        case "openai_whisper-base": return "Balanced · ~150 MB"
-        case "openai_whisper-small": return "Accurate · ~500 MB"
+        case "openai_whisper-tiny": return "Fastest · built in"
+        case "openai_whisper-base": return "Balanced · built in"
+        case "openai_whisper-small_216MB": return "Accurate · built in"
         case "openai_whisper-large-v3-v20240930_turbo_632MB": return "Most accurate · ~630 MB"
         default: return ""
         }

@@ -66,6 +66,13 @@ function setupSpeechRecognition() {
     recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
+    // Ask the browser to recognise speech on this device. Where it can't (Chrome sends audio to its own
+    // speech service), say so plainly: only the iPhone and Mac apps promise nothing leaves your device.
+    if ('processLocally' in recognition) {
+        recognition.processLocally = true;
+    } else {
+        recordStatus.textContent = "Web demo: your browser's speech service may run online. The apps never send anything.";
+    }
 
     recognition.onstart = () => {
         state.isRecording = true;
