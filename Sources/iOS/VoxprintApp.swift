@@ -4,6 +4,8 @@ import SwiftUI
 struct VoxprintApp: App {
     @AppStorage("app_theme") private var rawTheme = "system"
 
+    init() { WatchBridge.shared.activate() }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

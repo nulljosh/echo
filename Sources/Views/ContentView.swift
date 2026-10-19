@@ -35,6 +35,9 @@ struct ContentView: View {
             }
         }
         .task {
+            #if os(iOS)
+            WatchBridge.shared.engine = engine
+            #endif
             await engine.loadModel()
         }
         .sheet(isPresented: $showSettings) {

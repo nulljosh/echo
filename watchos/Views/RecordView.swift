@@ -18,7 +18,7 @@ struct RecordView: View {
                 Image(systemName: "waveform")
                     .font(.system(size: 28))
                     .foregroundStyle(.tertiary)
-                Text("Recorded on device. Nothing leaves your watch.")
+                Text("Recorded on your watch, written out by your iPhone. Never a server.")
                     .font(.caption2)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)

@@ -1,13 +1,14 @@
 import Foundation
 
-/// A single on-watch voice memo. Notate's transcription runs entirely on
-/// the paired iPhone/Mac via WhisperKit; the watch app only captures and
-/// stores raw audio locally, nothing is transcribed or uploaded here.
+/// A single on-watch voice memo. The watch records; the paired iPhone transcribes it on device with its
+/// bundled Whisper models and sends the text back. Nothing goes to a server.
 struct RecordingEntry: Identifiable, Codable {
     let id: UUID
     let fileName: String
     let date: Date
     let duration: TimeInterval
+    /// The transcript from the iPhone, nil until it arrives.
+    var text: String?
 
     init(id: UUID = UUID(), fileName: String, date: Date = Date(), duration: TimeInterval) {
         self.id = id

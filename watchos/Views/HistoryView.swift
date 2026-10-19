@@ -38,9 +38,16 @@ private struct HistoryRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text(entry.formattedDate)
-                    .font(.system(size: 12, weight: .medium))
-                Text(entry.formattedDuration)
+                if let text = entry.text {
+                    Text(text)
+                        .font(.system(size: 13))
+                        .lineLimit(3)
+                } else {
+                    Text("Transcribing on iPhone")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                }
+                Text("\(entry.formattedDate) · \(entry.formattedDuration)")
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
             }

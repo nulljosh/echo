@@ -1,6 +1,7 @@
 import Foundation
 import AVFoundation
 import Combine
+import WatchConnectivity
 
 /// Records, persists, and plays back voice memos entirely on-device.
 ///
@@ -8,8 +9,9 @@ import Combine
 /// audio is captured with `AVAudioRecorder`, saved as `.m4a` files under the
 /// watch's own Documents directory, and indexed in a small JSON manifest
 /// (`recordings.json`), the same pattern the main app uses for its own
-/// history file. The watch app is standalone (`WKWatchOnly`) and does not
-/// require the iPhone to be nearby to record or play back.
+/// history file. Recording and playback never need the iPhone. Each new recording is handed to the iPhone
+/// (`WCSession.transferFile`, queued until the phone is in reach), which transcribes it on device and
+/// sends the text back.
 @MainActor
 final class RecordingStore: NSObject, ObservableObject {
     @Published private(set) var entries: [RecordingEntry] = []
@@ -39,6 +41,28 @@ final class RecordingStore: NSObject, ObservableObject {
     override init() {
         super.init()
         load()
+        if WCSession.isSupported() {
+            WCSession.default.delegate = self
+            WCSession.default.activate()
+        }
+    }
+
+    /// Queues the recording for the iPhone to transcribe. The system delivers it when the phone is reachable.
+    private func sendToPhone(_ entry: RecordingEntry) {
+        guard WCSession.isSupported(), WCSession.default.activationState == .activated else { return }
+        WCSession.default.transferFile(entry.fileURL, metadata: ["id": entry.id.uuidString, "duration": entry.duration])
+    }
+
+    /// Sends every recording that has no transcript yet (new ones, or ones made before the phone was paired).
+    private func sendUntranscribed() {
+        let queued = Set(WCSession.default.outstandingFileTransfers.compactMap { $0.file.metadata?["id"] as? String })
+        for entry in entries where entry.text == nil && !queued.contains(entry.id.uuidString) { sendToPhone(entry) }
+    }
+
+    fileprivate func receiveTranscript(id: String, text: String) {
+        guard let i = entries.firstIndex(where: { $0.id.uuidString == id }) else { return }
+        entries[i].text = text
+        save()
     }
 
     // MARK: - Recording
@@ -101,6 +125,7 @@ final class RecordingStore: NSObject, ObservableObject {
         let entry = RecordingEntry(fileName: fileName, duration: duration)
         entries.insert(entry, at: 0)
         save()
+        sendToPhone(entry)
     }
 
     private func startMetering() {
@@ -190,5 +215,17 @@ extension RecordingStore: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         Task { @MainActor in
             self.stopPlayback()
         }
+    }
+}
+
+extension RecordingStore: WCSessionDelegate {
+    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        guard activationState == .activated else { return }
+        Task { @MainActor in self.sendUntranscribed() }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
+        guard let id = userInfo["id"] as? String, let text = userInfo["text"] as? String else { return }
+        Task { @MainActor in self.receiveTranscript(id: id, text: text) }
     }
 }
