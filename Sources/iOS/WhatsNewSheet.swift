@@ -1,11 +1,11 @@
 import SwiftUI
 
-private let whatsNewVersion = "1.4.2"
+private let whatsNewVersion = "2.0"
 private let whatsNewBullets = [
-    "Open it and talk, even with no signal. Every model ships inside the app, nothing downloads",
-    "The live transcript keeps everything you say, with the word being heard highlighted",
-    "Custom words: add names and jargon in Settings and Notate spells them your way",
-    "One-tap cleanup fixes punctuation and drops the ums, on device (needs Apple Intelligence)",
+    "Summary and action items for any transcript, made on your device",
+    "Search everything you've ever said, and export as text, Markdown or subtitles",
+    "Shortcuts, Siri and the Action button: start recording or transcribe a file in one tap",
+    "An Apple Watch app: record on your wrist, your iPhone writes it out",
 ]
 
 struct WhatsNewSheet: View {
