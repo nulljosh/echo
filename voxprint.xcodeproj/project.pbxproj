@@ -49,6 +49,7 @@
 		7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
 		87C0F61F5F14B589286725CD /* WatchBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C97534740EDB317B6FB5A /* WatchBridge.swift */; };
 		89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7948E5D32A49F30A1748199 /* WhisperKit */; };
+		8BF5417D6137FC56F2EF1A55 /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
 		8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
 		90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
 		943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
@@ -63,6 +64,7 @@
 		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		CA2CDBE70E2221C1F6089D78 /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		CC4F348CEB40C6EFD076B6B7 /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
+		CCBAE84235C620BE056852DD /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
 		D64692E97ACB3D3A6E3A123B /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		D64803515132F1A8C234AC5B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57905786F6A895BB1CA7384 /* HistoryView.swift */; };
 		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
@@ -157,6 +159,7 @@
 		ABCE0C09F8A34129F5803E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Regular.ttf"; sourceTree = "<group>"; };
 		B6C509CCA329A09FD24BD990 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioCapture.swift; sourceTree = "<group>"; };
 		C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntry.swift; sourceTree = "<group>"; };
 		CF83663B541B3469842D0224 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Notate.icon; sourceTree = "<group>"; };
@@ -280,6 +283,7 @@
 				7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */,
 				739827B542A84C837CAD7966 /* Cleanup.swift */,
 				332A910F82F4863EBB411432 /* SpeechManager.swift */,
+				BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */,
 				1824C0226572018B4E269CFF /* TranscriptionEngine.swift */,
 			);
 			path = Services;
@@ -653,6 +657,7 @@
 				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
 				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
 				598C602752E19BA975B31B64 /* SplashView.swift in Sources */,
+				CCBAE84235C620BE056852DD /* SystemAudioCapture.swift in Sources */,
 				3EA36301F0DF4FE61B5D6501 /* TranscriptionEngine.swift in Sources */,
 				206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */,
 				C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */,
@@ -674,6 +679,7 @@
 				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
 				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,
 				58727EA565C57496808CEDE6 /* SplashView.swift in Sources */,
+				8BF5417D6137FC56F2EF1A55 /* SystemAudioCapture.swift in Sources */,
 				155F69C43BFEFAAC1A2F0144 /* TranscriptionEngine.swift in Sources */,
 				382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */,
 				18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */,

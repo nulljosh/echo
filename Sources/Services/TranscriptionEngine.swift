@@ -32,6 +32,7 @@ class TranscriptionEngine: ObservableObject {
     @Published var modelState: ModelState = .unloaded
     /// Progress of the background download of a better model. nil when nothing is upgrading.
     @Published var upgradeProgress: Double?
+    @Published var meetingError: String?
     @Published var fileProgress: Double = 0
     @Published var selectedModel = "auto"
     @Published var selectedLanguage = "auto"
@@ -70,6 +71,14 @@ class TranscriptionEngine: ObservableObject {
         return try await WhisperKit(modelFolder: folder.path, tokenizerFolder: folder, computeOptions: fast ? gpu : nil, verbose: false, download: false)
     }
     private let capture = AudioCapture()
+    #if os(macOS)
+    private let systemCapture = SystemAudioCapture()
+    private var mixer = AudioMixer()
+    /// Meeting mode (Mac): also hear what the Mac plays, so both sides of a call are written down. No bot joins.
+    @Published var meetingMode = UserDefaults.standard.bool(forKey: "notate.meetingMode") {
+        didSet { UserDefaults.standard.set(meetingMode, forKey: "notate.meetingMode") }
+    }
+    #endif
     private let bufferLock = NSLock()
     private var audioBuffer: [Float] = []
     private var recordingTask: Task<Void, Never>?
@@ -338,10 +347,36 @@ class TranscriptionEngine: ObservableObject {
         bufferLock.withLock { audioBuffer = [] }
         recordingStart = Date()
 
+        #if os(macOS)
+        let meeting = meetingMode
+        bufferLock.withLock { mixer = AudioMixer() }
+        if meeting {
+            Task {
+                do {
+                    try await systemCapture.start { [weak self] samples in
+                        guard let self else { return }
+                        self.bufferLock.withLock { self.audioBuffer.append(contentsOf: self.mixer.pushSystem(samples)) }
+                    }
+                } catch {
+                    // No permission yet: keep recording the mic alone rather than failing the recording.
+                    await MainActor.run { self.meetingError = "Allow Notate under Screen and System Audio Recording in System Settings to hear the call." }
+                }
+            }
+        }
+        #else
+        let meeting = false
+        #endif
         do {
             try capture.startCapture(
                 onSamples: { [weak self] samples in
-                    self?.bufferLock.withLock { self?.audioBuffer.append(contentsOf: samples) }
+                    guard let self else { return }
+                    #if os(macOS)
+                    if meeting {
+                        self.bufferLock.withLock { self.audioBuffer.append(contentsOf: self.mixer.pushMic(samples)) }
+                        return
+                    }
+                    #endif
+                    self.bufferLock.withLock { self.audioBuffer.append(contentsOf: samples) }
                 },
                 onLevel: { [weak self] level in
                     DispatchQueue.main.async { self?.audioLevel = level }
@@ -367,6 +402,9 @@ class TranscriptionEngine: ObservableObject {
         recordingTask?.cancel()
         recordingTask = nil
         capture.stopCapture()
+        #if os(macOS)
+        systemCapture.stop()
+        #endif
         // Stopped before any model finished loading: wait for it so nothing said is lost.
         while whisperKit == nil, case .loading = modelState { try? await Task.sleep(for: .milliseconds(200)) }
         await transcribeCurrentBuffer(full: true)

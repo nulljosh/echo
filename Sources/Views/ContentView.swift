@@ -34,6 +34,11 @@ struct ContentView: View {
                 SplashView { showSplash = false }
             }
         }
+        .alert("Can't hear the call yet", isPresented: Binding(get: { engine.meetingError != nil }, set: { if !$0 { engine.meetingError = nil } })) {
+            Button("OK") {}
+        } message: {
+            Text(engine.meetingError ?? "")
+        }
         .task {
             #if os(iOS)
             WatchBridge.shared.engine = engine
@@ -233,6 +238,18 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .disabled(engine.isRecording || engine.isTranscribing)
+            #if os(macOS)
+            // Meeting: also hear the call (what the Mac plays). No bot joins, nothing leaves the Mac.
+            Button { engine.meetingMode.toggle() } label: {
+                Image(systemName: "person.2.wave.2.fill")
+                    .font(.notate(15, .medium))
+                    .foregroundStyle(engine.meetingMode ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.tertiary))
+            }
+            .buttonStyle(.plain)
+            .disabled(engine.isRecording)
+            .help(engine.meetingMode ? "Meeting on: hears your mic and the call" : "Meeting off: hears your mic only")
+            .accessibilityLabel(engine.meetingMode ? "Meeting mode on" : "Meeting mode off")
+            #endif
             #if os(iOS)
             Button { showHistory = true } label: {
                 Image(systemName: "clock.arrow.circlepath")
