@@ -81,7 +81,7 @@ struct ContentView: View {
                 Color(.systemBackground).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("History")
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.notate(22, .semibold))
                         .foregroundStyle(.primary)
                         .padding(.horizontal, 20).padding(.top, 24).padding(.bottom, 12)
                     HistoryView(entries: engine.entries, onDelete: engine.deleteEntry, speech: speech)
@@ -107,7 +107,7 @@ struct ContentView: View {
                 Rectangle().fill(.thinMaterial).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("History")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.notate(13, .semibold))
                         .foregroundStyle(.secondary)
                         .padding(.horizontal, 16).padding(.top, 16).padding(.bottom, 8)
                     HistoryView(entries: engine.entries, onDelete: engine.deleteEntry, speech: speech)
@@ -172,7 +172,7 @@ struct ContentView: View {
                         .tint(.accentColor)
                         .frame(width: 160)
                     Text("Transcribing… \(Int(engine.fileProgress * 100))%")
-                        .font(.system(size: 13))
+                        .font(.notate(13))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -180,12 +180,12 @@ struct ContentView: View {
             if engine.transcribedText.isEmpty && !engine.isTranscribing {
                 VStack(spacing: 12) {
                     Image(systemName: isDropTargeted ? "arrow.down.doc.fill" : "arrow.down.doc")
-                        .font(.system(size: 36))
+                        .font(.notate(36))
                         .foregroundStyle(isDropTargeted ? AnyShapeStyle(.tint) : AnyShapeStyle(.tertiary))
                         .scaleEffect(isDropTargeted ? 1.1 : 1.0)
                         .animation(.interpolatingSpring(stiffness: 300, damping: 15), value: isDropTargeted)
                     Text(dropZoneLabel)
-                        .font(.system(size: 14))
+                        .font(.notate(14))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                     Button("Browse Files") { showFilePicker = true }
@@ -211,12 +211,12 @@ struct ContentView: View {
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Text("Notate").font(.system(size: 17, weight: .semibold)).foregroundStyle(.primary)
+            Text("Notate").font(.notate(17, .semibold)).foregroundStyle(.primary)
             Spacer()
             statusDot
             Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .record } } label: {
                 Image(systemName: "mic.fill")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.notate(15, .medium))
                     .foregroundStyle(inputMode == .record ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
                     .scaleEffect(inputMode == .record ? 1.1 : 1.0)
             }
@@ -224,7 +224,7 @@ struct ContentView: View {
             .disabled(engine.isRecording || engine.isTranscribing)
             Button { withAnimation(.easeOut(duration: 0.2)) { inputMode = .file } } label: {
                 Image(systemName: "doc.fill")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.notate(15, .medium))
                     .foregroundStyle(inputMode == .file ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
                     .scaleEffect(inputMode == .file ? 1.1 : 1.0)
             }
@@ -233,7 +233,7 @@ struct ContentView: View {
             #if os(iOS)
             Button { showHistory = true } label: {
                 Image(systemName: "clock.arrow.circlepath")
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.notate(16, .medium))
                     .foregroundStyle(engine.entries.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
             }
             .buttonStyle(.plain)
@@ -242,7 +242,7 @@ struct ContentView: View {
             #endif
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.notate(17, .semibold))
                     .foregroundStyle(.primary)
             }
             .buttonStyle(.plain)
@@ -282,7 +282,7 @@ struct ContentView: View {
                     if engine.isRecording { Task { await engine.stopRecording() } }
                     else { engine.startRecording() }
                 }
-                .disabled(engine.modelState != .ready)
+                .disabled(engine.modelState.isError) // never waits on a model
                 #if os(macOS)
                 .keyboardShortcut("r", modifiers: .command)
                 #endif
@@ -296,7 +296,7 @@ struct ContentView: View {
                         ProgressView().scaleEffect(0.8).frame(width: 22, height: 22)
                     } else {
                         Image(systemName: "wand.and.stars")
-                            .font(.system(size: 20))
+                            .font(.notate(20))
                             .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
                     }
                 }
@@ -308,7 +308,7 @@ struct ContentView: View {
 
             ShareLink(item: engine.transcribedText) {
                 Image(systemName: "square.and.arrow.up")
-                    .font(.system(size: 20))
+                    .font(.notate(20))
                     .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
             }
             .buttonStyle(.plain)
@@ -324,7 +324,7 @@ struct ContentView: View {
                     ProgressView().tint(Color.white).scaleEffect(0.85)
                 } else {
                     Image(systemName: "folder.fill")
-                        .font(.system(size: 20, weight: .medium))
+                        .font(.notate(20, .medium))
                         .foregroundStyle(Color.white)
                 }
             }

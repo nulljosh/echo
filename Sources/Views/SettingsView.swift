@@ -109,7 +109,7 @@ struct SettingsView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(modelLabel(model)).foregroundStyle(.primary)
                                 Text(modelDescription(model))
-                                    .font(.caption)
+                                    .font(.notate(12))
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
@@ -212,7 +212,7 @@ private struct AppearancePicker: View {
                                     .stroke(rawTheme == id ? Color.accentColor : Color.primary.opacity(0.12), lineWidth: 2)
                             )
                         Text(label)
-                            .font(.caption.weight(.medium))
+                            .font(.notate(12, .medium))
                             .foregroundStyle(rawTheme == id ? Color.accentColor : Color.secondary)
                     }
                 }

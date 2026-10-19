@@ -16,6 +16,7 @@
 		1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3FD038F68389C5E660B5C /* VoxprintApp.swift */; };
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
 		2832DADDF47FA44F395696FB /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
+		2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
 		321BA2B956B47155D3742DAD /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
@@ -28,20 +29,29 @@
 		5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
 		58727EA565C57496808CEDE6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
 		598C602752E19BA975B31B64 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
+		5CF0001411512057DD498879 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
+		5E48CDE6483A7380758E1582 /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		6008A6F03726FCE4DCD847F6 /* TranscriptionEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */; };
 		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
+		753EA5D94D92B6B3E514F8EC /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
 		781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
 		795C233A63214E0A4196E6EA /* ModelRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */; };
 		7A3EA8A0D5519DA67C1B3E35 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */; };
 		7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
 		89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7948E5D32A49F30A1748199 /* WhisperKit */; };
+		8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
+		90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
+		943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
 		A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
 		A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCE0C09F8A34129F5803E83 /* Assets.xcassets */; };
 		B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
+		B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
 		BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
 		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
+		CC4F348CEB40C6EFD076B6B7 /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
+		D64692E97ACB3D3A6E3A123B /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
 		DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
@@ -78,6 +88,7 @@
 /* Begin PBXFileReference section */
 		0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacScreenshot.swift; sourceTree = "<group>"; };
 		04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Voxprint-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Bold.ttf"; sourceTree = "<group>"; };
 		1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntryTests.swift; sourceTree = "<group>"; };
 		16C3FD038F68389C5E660B5C /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
 		1824C0226572018B4E269CFF /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
@@ -88,6 +99,7 @@
 		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Medium.ttf"; sourceTree = "<group>"; };
 		5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
 		63DEC2A0D702908EFEE6EAEF /* VoxprintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsView.swift; sourceTree = "<group>"; };
@@ -99,14 +111,17 @@
 		7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voxprint-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRecoveryTests.swift; sourceTree = "<group>"; };
 		ABCE0C09F8A34129F5803E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Regular.ttf"; sourceTree = "<group>"; };
 		C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntry.swift; sourceTree = "<group>"; };
 		CF83663B541B3469842D0224 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Notate.icon; sourceTree = "<group>"; };
 		D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
 		DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VoxprintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E724D484A18D90D552A35245 /* NotateFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotateFont.swift; sourceTree = "<group>"; };
 		EA4EFE3E213916AF613C4034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31EAC7D6224E7BB2BDECB12 /* BundledModels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundledModels; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -176,11 +191,23 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		9DFE2D71DFF33D4308F3790F /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */,
+				4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */,
+				AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */,
+				9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		9EEAADF59F404D8B4504B5A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				2FF9D1E91E59C9DCDB46932E /* ContentView.swift */,
 				7349640877D9FF7A297ECA96 /* HistoryView.swift */,
+				E724D484A18D90D552A35245 /* NotateFont.swift */,
 				3A6E7245B1913F78E4416A3C /* RecordButton.swift */,
 				72702A5CFAC0AD1F611CE747 /* SettingsView.swift */,
 				CF83663B541B3469842D0224 /* SplashView.swift */,
@@ -215,6 +242,7 @@
 			children = (
 				F31EAC7D6224E7BB2BDECB12 /* BundledModels */,
 				CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */,
+				9DFE2D71DFF33D4308F3790F /* fonts */,
 				7A12FC2CCEF7B3DC268F0916 /* Sources */,
 				5B37322E28927AD2315C07E6 /* Tests */,
 				A7522B3576E680E43D787643 /* UITests */,
@@ -411,6 +439,10 @@
 				45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */,
 				3FFD02E0AF33F663591DD17A /* BundledModels in Resources */,
 				2832DADDF47FA44F395696FB /* Notate.icon in Resources */,
+				90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */,
+				D64692E97ACB3D3A6E3A123B /* NotateSans-Medium.ttf in Resources */,
+				753EA5D94D92B6B3E514F8EC /* NotateSans-Regular.ttf in Resources */,
+				5CF0001411512057DD498879 /* NotateSans-SemiBold.ttf in Resources */,
 				DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +454,10 @@
 				ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */,
 				0D6C8F4E8C13ECE6EF48CF55 /* BundledModels in Resources */,
 				321BA2B956B47155D3742DAD /* Notate.icon in Resources */,
+				943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */,
+				5E48CDE6483A7380758E1582 /* NotateSans-Medium.ttf in Resources */,
+				CC4F348CEB40C6EFD076B6B7 /* NotateSans-Regular.ttf in Resources */,
+				2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */,
 				BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +531,7 @@
 				B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */,
 				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
+				B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */,
 				781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */,
 				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
 				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
@@ -515,6 +552,7 @@
 				04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */,
 				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
+				8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */,
 				7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */,
 				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
 				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,

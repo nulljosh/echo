@@ -31,6 +31,10 @@ targets:
         type: folder
         optional: true
       - path: Notate.icon
+      - path: fonts
+        includes:
+          - "*.ttf"
+        buildPhase: resources
     preBuildScripts:
       - name: Fetch tiny model
         script: "\"$SRCROOT/scripts/fetch-tiny-model.sh\""
@@ -59,6 +63,10 @@ targets:
         type: folder
         optional: true
       - path: Notate.icon
+      - path: fonts
+        includes:
+          - "*.ttf"
+        buildPhase: resources
     preBuildScripts:
       - name: Fetch tiny model
         script: "\"$SRCROOT/scripts/fetch-tiny-model.sh\""

@@ -25,39 +25,13 @@ struct TranscriptionView: View {
     var body: some View {
         Group {
             switch modelState {
-            case .unloaded:
-                statusLabel("Tap to load model")
-            case .loading(let progress):
-                VStack(spacing: 12) {
-                    if progress >= 1 {
-                        ProgressView()
-                            .tint(.secondary)
-                        Text("Preparing model… first launch can take a few minutes")
-                            .font(.system(size: 14))
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                    } else if progress > 0 {
-                        ProgressView(value: progress)
-                            .tint(.secondary)
-                            .frame(width: 160)
-                        Text("Downloading model… \(Int(progress * 100))%")
-                            .font(.system(size: 14))
-                            .foregroundStyle(.secondary)
-                    } else {
-                        ProgressView()
-                            .tint(.secondary)
-                        Text("Downloading Whisper model...")
-                            .font(.system(size: 14))
-                            .foregroundStyle(.secondary)
-                    }
-                }
             case .error(let msg):
                 VStack(spacing: 10) {
                     Image(systemName: "exclamationmark.triangle")
-                        .font(.system(size: 28))
+                        .font(.notate(28))
                         .foregroundStyle(.orange)
                     Text(msg)
-                        .font(.system(size: 13))
+                        .font(.notate(13))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                     if let onRetry {
@@ -67,13 +41,14 @@ struct TranscriptionView: View {
                     }
                 }
                 .padding()
-            case .ready:
+            default:
+                // Ready, loading or unloaded all look the same: the app is usable the moment it opens.
                 if text.isEmpty {
                     if isRecording {
                         VStack(spacing: 10) {
                             WaveformBarsView(level: audioLevel)
                             Text("Listening...")
-                                .font(.system(size: 14))
+                                .font(.notate(14))
                                 .foregroundStyle(.secondary)
                         }
                     } else if !placeholder.isEmpty {
@@ -86,9 +61,10 @@ struct TranscriptionView: View {
                         let lastWord = isRecording ? words.last.map(String.init) ?? "" : ""
                         let leading = isRecording && !lastWord.isEmpty ? words.dropLast().joined(separator: " ") : text
 
-                        (Text(leading) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ") + Text(lastWord))
-                            .font(.system(size: 18, weight: .regular))
-                            .foregroundStyle(.primary)
+                        // The word being heard right now is highlighted in the accent colour.
+                        (Text(leading).foregroundStyle(.primary) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ")
+                            + Text(lastWord).foregroundStyle(Color.accentColor).fontWeight(.semibold))
+                            .font(.notate(18, .regular))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(20)
                             .padding(.top, 28)
@@ -103,7 +79,7 @@ struct TranscriptionView: View {
                             speech.toggle(id: Self.liveID, text: text, languageCode: unusualLanguage)
                         } label: {
                             Image(systemName: speech.speakingID == Self.liveID ? "stop.circle.fill" : "speaker.wave.2.circle.fill")
-                                .font(.system(size: 22))
+                                .font(.notate(22))
                                 .foregroundStyle(.secondary)
                         }
                         .buttonStyle(.plain)
@@ -124,7 +100,7 @@ struct TranscriptionView: View {
         .overlay(alignment: .top) {
             if let unusualLanguage {
                 Text("Unusual language detected: \(languageLabel(unusualLanguage))")
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.notate(12, .medium))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .background(.orange.opacity(0.15), in: Capsule())
@@ -138,7 +114,7 @@ struct TranscriptionView: View {
 
     private func statusLabel(_ message: String) -> some View {
         Text(message)
-            .font(.system(size: 15))
+            .font(.notate(15))
             .foregroundStyle(.tertiary)
             .multilineTextAlignment(.center)
             .padding()

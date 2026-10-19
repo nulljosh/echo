@@ -1,4 +1,5 @@
 import XCTest
+import AVFoundation
 @testable import Voxprint_macOS
 
 /// End-to-end QA: a corrupt model folder must heal itself, then real speech must transcribe.
@@ -58,27 +59,65 @@ final class ModelRecoveryTests: XCTestCase {
         try fm.createDirectory(at: junk, withIntermediateDirectories: true)
         try Data("not a model".utf8).write(to: junk.appendingPathComponent("model.mil"))
 
+        TranscriptionEngine.downloadsEnabled = false
+        defer { TranscriptionEngine.downloadsEnabled = true }
         let engine = TranscriptionEngine()
         engine.selectedModel = model
         await engine.loadModel()
-        engine.cancelUpgrade() // no need to fetch the big model in a test
+        await engine.waitForUpgrade() // tries the broken copy, drops it, and stops short of a download
         XCTAssertEqual(engine.modelState, .ready, "broken model must not leave an error screen")
         XCTAssertEqual(engine.activeModel, TranscriptionEngine.tinyModel, "should be running on the bundled tiny model")
         XCTAssertFalse(fm.fileExists(atPath: stable.path), "the broken copy must be deleted")
     }
 
-    /// 1.4.2: the model auto picks ships inside the app, so first launch needs no network and no download.
-    func testChosenModelIsBundledAndLoadsWithoutDownload() async throws {
+    /// 1.4.2: open it and it works. Tiny is ready in seconds from the bundle, then the model auto picks
+    /// (also bundled) swaps in from the bundle. Nothing downloads at any point.
+    func testOpensReadyAndSwapsToBundledModelWithoutDownload() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
         for m in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small"] {
             XCTAssertNotNil(TranscriptionEngine.bundled(m), "\(m) must ship inside the app (run scripts/fetch-tiny-model.sh)")
         }
+        TranscriptionEngine.downloadsEnabled = false // any download attempt would leave the chosen model unloaded
+        defer { TranscriptionEngine.downloadsEnabled = true }
         let engine = TranscriptionEngine()
         engine.selectedModel = "auto"
+        let start = Date()
         await engine.loadModel()
         XCTAssertEqual(engine.modelState, .ready)
-        XCTAssertEqual(engine.activeModel, engine.resolvedModel, "must run the chosen model itself, not tiny")
+        XCTAssertLessThan(Date().timeIntervalSince(start), 20, "first launch must be ready in seconds, got \(Date().timeIntervalSince(start))s")
         XCTAssertNil(engine.upgradeProgress, "nothing may download")
+        await engine.waitForUpgrade()
+        XCTAssertEqual(engine.activeModel, engine.resolvedModel, "the chosen bundled model must swap in")
+        for m in ["openai_whisper-tiny", "openai_whisper-small"] {
+            let folder = TranscriptionEngine.bundled(m)!
+            XCTAssertTrue(FileManager.default.fileExists(atPath: folder.appendingPathComponent("tokenizer.json").path), "\(m) must carry its tokenizer")
+            XCTAssertFalse(FileManager.default.fileExists(atPath: folder.appendingPathComponent("models").path), "the tokenizer was fetched from the internet")
+        }
+    }
+
+    /// Live transcript keeps everything said, not just the last few seconds: 40 s of speech through the live path.
+    func testLiveTranscriptKeepsEverythingSaid() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-long.wav")
+        let say = Process()
+        say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+        say.arguments = ["-o", wav.path, "--data-format=LEF32@16000", "-r", "150",
+            "Banana is the first word of this long recording. " + String(repeating: "We are talking for a while so the live transcript has to keep up with every sentence. ", count: 7) + "Finally the last word is pineapple."]
+        try say.run(); say.waitUntilExit()
+        let file = try AVAudioFile(forReading: wav)
+        let buf = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))!
+        try file.read(into: buf)
+        let samples = Array(UnsafeBufferPointer(start: buf.floatChannelData![0], count: Int(buf.frameLength)))
+        XCTAssertGreaterThan(samples.count, 16_000 * 30, "need more than the 30 s window")
+
+        let engine = TranscriptionEngine()
+        engine.selectedModel = "openai_whisper-tiny"
+        await engine.loadModel()
+        await engine.simulateLive(samples)
+        let text = engine.transcribedText.lowercased()
+        XCTAssertTrue(text.contains("banana"), "first words dropped from the live transcript: \(text)")
+        XCTAssertTrue(text.contains("pineapple"), "last words missing: \(text)")
+        XCTAssertFalse(text.contains("<|"), "timestamp tokens leaked: \(text)")
     }
 
     /// Custom words: clean prompt text, and a prompt must never blank real speech.

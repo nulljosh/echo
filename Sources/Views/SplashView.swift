@@ -13,10 +13,10 @@ struct SplashView: View {
             #endif
             VStack(spacing: 12) {
                 Image(systemName: "waveform")
-                    .font(.system(size: 56, weight: .light))
+                    .font(.notate(56, .light))
                     .foregroundStyle(.tint)
                 Text("Notate")
-                    .font(.system(size: 28, weight: .semibold))
+                    .font(.notate(28, .semibold))
                     .foregroundStyle(.primary)
             }
         }

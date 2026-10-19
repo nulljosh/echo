@@ -6,7 +6,7 @@ ROOT="${SRCROOT:-$(cd "$(dirname "$0")/.." && pwd)}/BundledModels"
 status=0
 for M in openai_whisper-tiny openai_whisper-base openai_whisper-small; do
 DEST="$ROOT/$M"
-[ -f "$DEST/.complete" ] && continue
+[ -f "$DEST/.complete" ] && [ -f "$DEST/tokenizer.json" ] && continue
 echo "Fetching $M into $DEST"
 mkdir -p "$DEST"
 python3 - "$DEST" "$M" <<'PY'
@@ -22,6 +22,12 @@ for i in files:
     os.makedirs(os.path.dirname(out), exist_ok=True)
     urllib.request.urlretrieve(f"https://huggingface.co/{repo}/resolve/main/{i['path']}", out)
     if os.path.getsize(out) != i["size"]: raise SystemExit(f"size mismatch: {rel}")
+# The tokenizer too, or WhisperKit fetches it from the internet on first launch.
+size = folder.split("openai_whisper-", 1)[1]
+for name in ("tokenizer.json", "tokenizer_config.json"):
+    out = os.path.join(dest, name)
+    if not os.path.exists(out):
+        urllib.request.urlretrieve(f"https://huggingface.co/openai/whisper-{size}/resolve/main/{name}", out)
 open(os.path.join(dest, ".complete"), "w").write("ok")
 print(f"fetched {len(files)} files")
 PY

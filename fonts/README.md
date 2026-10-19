@@ -10,4 +10,4 @@ Made for reading transcripts. Four forms are frozen on so they are the default:
 
 Subset to Latin, punctuation, arrows and the math signs. Kerning, ligatures and tabular figures kept. Four weights: Regular, Medium, SemiBold, Bold. `build.py` rebuilds them from the Inter static TTFs.
 
-`docs/fonts/*.woff2` is the web copy. The apps keep the system font; this face is for the landing page and brand kit.
+`docs/fonts/*.woff2` is the web copy. Both apps bundle the TTFs and use them everywhere through `Font.notate`.

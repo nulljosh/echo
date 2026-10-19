@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notate Brand Kit</title>
+<meta name="description" content="Notate's brand kit and design system: the mark, colour, Notate Sans, space and controls.">
+<meta name="theme-color" content="#0074D9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="landing.css">
+<style>
+.kit h1{font-size:clamp(40px,7vw,72px);line-height:1.04;letter-spacing:-.045em;margin:48px 0 16px}
+.kit .lead{font-size:21px;line-height:28px;color:var(--sub);max-width:46ch;margin:0 0 48px}
+.kit section{padding:64px 0 0}
+.marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.marks figure{margin:0;background:var(--surface);border-radius:28px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.marks figcaption{font-size:13px;color:var(--sub)}
+.marks .tile{width:160px;height:160px;border-radius:36px}
+.marks .glyph{width:120px;height:120px;color:var(--accent)}
+.marks .small{display:flex;gap:16px;align-items:end;height:160px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.sw{border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.sw div{height:96px}.sw p{margin:0;padding:12px 16px;font-size:13px;line-height:18px}.sw b{display:block;font-size:15px;color:var(--fg)}
+.spec{background:var(--surface);border-radius:28px;padding:32px}
+.spec .big{font-size:clamp(56px,11vw,128px);line-height:1;letter-spacing:-.05em;font-weight:700;margin:0 0 24px}
+.spec .weights p{margin:0 0 8px;font-size:28px;line-height:36px}
+.spec .il{font-size:48px;letter-spacing:.02em;margin:24px 0 0}
+.scale p{margin:0;padding:12px 0;border-top:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.scale span{width:72px;flex:none;font-size:13px;color:var(--sub)}
+.grid8{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.grid8 div{background:var(--accent);border-radius:4px}
+.grid8 p{font-size:13px;color:var(--sub);margin:8px 0 0;text-align:center}
+.radii{display:flex;gap:16px;flex-wrap:wrap}
+.radii div{width:120px;height:96px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--sub)}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.rec{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.rec i{width:20px;height:20px;border-radius:50%;background:#fff}
+.demo-t{font-size:18px;line-height:28px;margin:0}.demo-t b{color:var(--accent);font-weight:600}
+.files a{margin-right:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="/"><img src="apple-touch-icon.png" alt="" width="32" height="32">Notate</a>
+    <a class="btn btn-quiet" href="/">Home</a>
+  </nav>
+</div>
+<main class="kit wrap" id="main">
+  <h1>Brand kit</h1>
+  <p class="lead">Notate turns speech into text and keeps it on your device. Everything here follows from that: a sound wave becoming writing, one blue, one typeface made for reading transcripts.</p>
+
+  <section aria-labelledby="mark"><h2 id="mark">The mark</h2>
+    <div class="marks">
+      <figure><img class="tile" src="apple-touch-icon.png" alt="Notate app icon"><figcaption>App icon. Notate.icon is the source.</figcaption></figure>
+      <figure><div class="glyph" role="img" aria-label="Notate glyph alone" style="background:var(--accent);-webkit-mask:url(mark.svg) center/contain no-repeat;mask:url(mark.svg) center/contain no-repeat"></div><figcaption>The glyph, for your own background</figcaption></figure>
+      <figure><div class="small"><img src="apple-touch-icon.png" width="64" height="64" style="border-radius:14px" alt=""><img src="apple-touch-icon.png" width="32" height="32" style="border-radius:7px" alt=""><img src="favicon-32.png" width="16" height="16" alt=""></div><figcaption>Holds up at 16 px</figcaption></figure>
+    </div>
+    <p>A sound wave turns into two lines of text: speech in, writing out. White on a blue gradient, no outline, no text. Clear space equals the stroke width. Always blue.</p>
+  </section>
+
+  <section aria-labelledby="colour"><h2 id="colour">Colour</h2>
+    <div class="swatches">
+      <div class="sw"><div style="background:#0074D9"></div><p><b>Accent</b>#0074D9. Actions, links, the icon</p></div>
+      <div class="sw"><div style="background:#4da6ff"></div><p><b>Accent light</b>#4da6ff. Gradient top, dark mode accent</p></div>
+      <div class="sw"><div style="background:#1d1d1f"></div><p><b>Ink</b>#1d1d1f light, #f5f5f7 dark</p></div>
+      <div class="sw"><div style="background:#f5f5f7"></div><p><b>Surface</b>#f5f5f7 light, #1c1c1e dark</p></div>
+      <div class="sw"><div style="background:#fff"></div><p><b>Paper</b>#ffffff light, #000000 dark</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="type"><h2 id="type">Notate Sans</h2>
+    <div class="spec">
+      <p class="big">Aa Notate</p>
+      <div class="weights">
+        <p style="font-weight:400">Regular: say it once, keep it forever</p>
+        <p style="font-weight:500">Medium: say it once, keep it forever</p>
+        <p style="font-weight:600">SemiBold: say it once, keep it forever</p>
+        <p style="font-weight:700">Bold: say it once, keep it forever</p>
+      </div>
+      <p class="il">Il1 0O &ldquo;quoted,&rdquo; a</p>
+      <p>A proportional sans serif made for reading transcripts. Tailed l and serifed I so Il1 never blur, round quotes and commas, single-storey a. Derived from Inter 4.1 under the SIL Open Font License.</p>
+    </div>
+    <div class="scale" style="margin-top:32px">
+      <p><span>34 / 41</span><b style="font-size:34px;line-height:41px">Title</b></p>
+      <p><span>22 / 28</span><b style="font-size:22px;line-height:28px;font-weight:600">Heading</b></p>
+      <p><span>17 / 24</span><span style="width:auto;font-size:17px;color:var(--fg)">Body. The transcript reads at 18.</span></p>
+      <p><span>15 / 20</span><span style="width:auto;font-size:15px;color:var(--fg)">Secondary</span></p>
+      <p><span>13 / 18</span><span style="width:auto;font-size:13px;color:var(--fg)">Caption</span></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="space"><h2 id="space">Space and shape</h2>
+    <div class="grid8">
+      <div><div style="width:4px;height:4px"></div><p>4</p></div><div><div style="width:8px;height:8px"></div><p>8</p></div><div><div style="width:12px;height:12px"></div><p>12</p></div><div><div style="width:16px;height:16px"></div><p>16</p></div><div><div style="width:24px;height:24px"></div><p>24</p></div><div><div style="width:32px;height:32px"></div><p>32</p></div><div><div style="width:48px;height:48px"></div><p>48</p></div>
+    </div>
+    <p>Everything sits on the 8 point grid. Side margin 20 in the app, 32 on the web. Reading column 680.</p>
+    <div class="radii"><div style="border-radius:28px">Card 28</div><div style="border-radius:20px">List 20</div><div style="border-radius:16px">Transcript 16</div><div style="border-radius:999px">Control</div></div>
+  </section>
+
+  <section aria-labelledby="controls"><h2 id="controls">Controls</h2>
+    <div class="controls">
+      <a class="btn btn-primary" href="#controls">Primary</a>
+      <a class="btn btn-quiet" href="#controls">Quiet</a>
+      <div class="rec" aria-label="Record button"><i></i></div>
+    </div>
+    <p>Controls are 48 point capsules. The record button is the one circle. Focus is a 4 point ring at 30 percent accent. Motion is 0.2 s ease and honours reduced motion.</p>
+    <div class="spec" style="margin-top:24px"><p class="demo-t">we are talking for a while so the live transcript keeps up with every <b>sentence</b></p><p style="font-size:13px;color:var(--sub);margin:12px 0 0">While recording, the word being heard right now is highlighted in the accent.</p></div>
+  </section>
+
+  <section aria-labelledby="files"><h2 id="files">Files</h2>
+    <p class="files"><a href="icon.svg">icon.svg</a><a href="mark.svg">mark.svg</a><a href="https://github.com/nulljosh/notate/tree/main/fonts">Notate Sans fonts</a><a href="https://github.com/nulljosh/notate/blob/main/brand/tokens.css">tokens.css</a><a href="https://github.com/nulljosh/notate/blob/main/brand/BRAND.md">BRAND.md</a></p>
+  </section>
+</main>
+<footer><div class="bar"><p>Notate &middot; MIT License &middot; &copy; 2026 Joshua Trommel &middot; Made with <span aria-hidden="true">&hearts;</span> in Vancouver, BC</p></div></footer>
+</body>
+</html>

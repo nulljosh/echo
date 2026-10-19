@@ -10,10 +10,10 @@ struct HistoryView: View {
             if entries.isEmpty {
                 VStack(spacing: 8) {
                     Image(systemName: "waveform")
-                        .font(.system(size: 28))
+                        .font(.notate(28))
                         .foregroundStyle(.tertiary)
                     Text("No transcriptions yet")
-                        .font(.system(size: 13))
+                        .font(.notate(13))
                         .foregroundStyle(.tertiary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -42,24 +42,24 @@ struct HistoryRow: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text(entry.formattedDate)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.notate(11, .medium))
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(entry.formattedDuration)
-                    .font(.system(size: 11))
+                    .font(.notate(11))
                     .foregroundStyle(.tertiary)
                 Button {
                     speech.toggle(id: entry.id, text: entry.text, languageCode: nil)
                 } label: {
                     Image(systemName: speech.speakingID == entry.id ? "stop.circle.fill" : "speaker.wave.2.circle")
-                        .font(.system(size: 14))
+                        .font(.notate(14))
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
             }
 
             Text(entry.text)
-                .font(.system(size: 13))
+                .font(.notate(13))
                 .foregroundStyle(.primary)
                 .lineLimit(expanded ? nil : 2)
 
@@ -67,7 +67,7 @@ struct HistoryRow: View {
                 Button(expanded ? "Less" : "More") {
                     expanded.toggle()
                 }
-                .font(.system(size: 11, weight: .medium))
+                .font(.notate(11, .medium))
                 .foregroundStyle(.tint)
                 .buttonStyle(.plain)
             }

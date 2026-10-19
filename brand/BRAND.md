@@ -24,7 +24,7 @@ The mark is a sound wave that turns into two lines of text: speech in, writing o
 The accent is for actions, links and the icon. Never brown, beige, purple or teal.
 
 ## Type
-**Notate Sans** (`../fonts`), a proportional sans serif derived from Inter 4.1 under the OFL. Tailed `l`, serifed `I`, round quotes and single-storey `a` are on by default, so `Il1` never blur in a transcript. Regular, Medium, SemiBold, Bold. It is for the landing page, the brand kit and print. The apps keep the system font.
+**Notate Sans** (`../fonts`), a proportional sans serif derived from Inter 4.1 under the OFL. Tailed `l`, serifed `I`, round quotes and single-storey `a` are on by default, so `Il1` never blur in a transcript. Regular, Medium, SemiBold, Bold. The apps, the landing page and the brand kit all use it. See it live at notate.jaybulb.com/brand.html.
 
 `"Notate Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif`. Scale 34/41 bold, 22/28, 17/24, 15/20, 13/18. Headlines track -0.045em.
 

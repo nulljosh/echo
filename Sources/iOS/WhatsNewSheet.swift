@@ -21,7 +21,7 @@ struct WhatsNewSheet: View {
             .sheet(isPresented: $isPresented) {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("What's New in v\(whatsNewVersion)")
-                        .font(.title2.bold())
+                        .font(.notate(22, .bold))
 
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach(whatsNewBullets, id: \.self) { bullet in
@@ -31,7 +31,7 @@ struct WhatsNewSheet: View {
                             }
                         }
                     }
-                    .font(.body)
+                    .font(.notate(17))
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 

@@ -18,6 +18,8 @@ enum ModelState: Equatable {
     case loading(progress: Double = 0)
     case ready
     case error(String)
+
+    var isError: Bool { if case .error = self { return true } else { return false } }
 }
 
 @MainActor
@@ -51,6 +53,8 @@ class TranscriptionEngine: ObservableObject {
     /// A better model that finished loading while a recording was running. Swapped in at the next idle moment.
     private var pending: (kit: WhisperKit, model: String)?
     private var upgradeTask: Task<Void, Never>?
+    // ponytail: test switch so the QA gate never pulls a 600 MB model
+    static var downloadsEnabled = true
     private(set) var activeModel = ""
     static let tinyModel = "openai_whisper-tiny"
     /// Models that ship inside the app (tiny, base, small), so nothing ever has to download.
@@ -59,11 +63,20 @@ class TranscriptionEngine: ObservableObject {
         return url.flatMap { FileManager.default.fileExists(atPath: $0.appendingPathComponent("AudioEncoder.mlmodelc").path) ? $0 : nil }
     }
     static var bundledTiny: URL? { bundled(tinyModel) }
+    /// Loads a model that ships in the app. The tokenizer comes from the same folder, so no network at all.
+    /// `fast` runs on the GPU: ready in seconds on first launch, where the Neural Engine first compiles for minutes.
+    static func loadBundled(_ folder: URL, fast: Bool = false) async throws -> WhisperKit {
+        let gpu = ModelComputeOptions(melCompute: .cpuAndGPU, audioEncoderCompute: .cpuAndGPU, textDecoderCompute: .cpuAndGPU, prefillCompute: .cpuOnly)
+        return try await WhisperKit(modelFolder: folder.path, tokenizerFolder: folder, computeOptions: fast ? gpu : nil, verbose: false, download: false)
+    }
     private let capture = AudioCapture()
     private let bufferLock = NSLock()
     private var audioBuffer: [Float] = []
     private var recordingTask: Task<Void, Never>?
     private var recordingStart: Date?
+    private var committedText = ""
+    private var committedSamples = 0
+    private static let commitAfterSamples = 16_000 * 15
 
     private static let historyURL: URL = {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -81,8 +94,6 @@ class TranscriptionEngine: ObservableObject {
     private static let modelFolderKey = "echo.modelFolders"
     // Cap live transcription at 30s (Whisper max context); full buffer used on stop
     private static let liveWindowSamples = 16_000 * 30
-    // Live preview only re-decodes a short trailing window so cost stays flat as recording grows
-    private static let livePreviewSamples = 16_000 * 8
 
     init() {
         let args = CommandLine.arguments
@@ -136,36 +147,43 @@ class TranscriptionEngine: ObservableObject {
         await blockingLoad(model)
     }
 
-    /// Ready with no network: the chosen model from the app bundle (or a good cached copy for a model that
-    /// does not ship), else tiny while the chosen one downloads in the background. False only with no bundled models.
+    /// Ready in seconds with no network. Tiny ships inside the app and compiles in seconds, so it goes first.
+    /// The chosen model (bundled, or downloaded once for large) loads in the background and swaps in between
+    /// recordings: a bundled small model still takes the Neural Engine a minute or more to compile on first launch.
+    /// False only with no bundled models.
     private func loadFastPath(_ model: String) async -> Bool {
-        let fm = FileManager.default
-        if let folder = Self.bundled(model)?.path ?? cachedFolder(for: model) {
-            if let kit = try? await WhisperKit(modelFolder: folder) {
-                whisperKit = kit; activeModel = model; modelState = .ready
-                return true
-            }
-            if Self.bundled(model) == nil {
-                // The cached copy is broken. Drop it and fall back to tiny, then fetch it again.
-                clearCachedFolder(for: model)
-                try? fm.removeItem(at: Self.modelCacheURL.appendingPathComponent(model))
-            }
-        }
-        guard let tiny = Self.bundledTiny, let kit = try? await WhisperKit(modelFolder: tiny.path) else { return false }
+        guard let tiny = Self.bundledTiny, let kit = try? await Self.loadBundled(tiny, fast: true) else { return false }
         whisperKit = kit; activeModel = Self.tinyModel; modelState = .ready
-        // Only a model that does not ship (large) ever downloads, and tiny keeps working meanwhile.
-        if model != Self.tinyModel, Self.bundled(model) == nil {
+        if model != Self.tinyModel {
             upgradeTask = Task { [weak self] in await self?.upgrade(to: model) }
         }
         return true
     }
 
-    /// Downloads and loads the better model without touching the UI state, then swaps it in between recordings.
+    /// Loads the better model without touching the UI state, then swaps it in between recordings.
+    /// Bundled models never touch the network. Only a model that does not ship (large) downloads, once.
     private func upgrade(to model: String) async {
-        upgradeProgress = 0
-        defer { upgradeProgress = nil }
+        if let bundled = Self.bundled(model) {
+            guard let kit = try? await Self.loadBundled(bundled), !Task.isCancelled else { return }
+            pending = (kit, model)
+            applyPendingUpgrade()
+            return
+        }
         let fm = FileManager.default
         let stable = Self.modelCacheURL.appendingPathComponent(model)
+        if let folder = cachedFolder(for: model) {
+            if let kit = try? await WhisperKit(modelFolder: folder), !Task.isCancelled {
+                pending = (kit, model)
+                applyPendingUpgrade()
+                return
+            }
+            // The cached copy is broken. Drop it and fetch it again.
+            clearCachedFolder(for: model)
+            try? fm.removeItem(at: stable)
+        }
+        guard Self.downloadsEnabled, !Task.isCancelled else { return }
+        upgradeProgress = 0
+        defer { upgradeProgress = nil }
         do {
             let downloaded = try await downloadWithRetry(model) { [weak self] f in self?.upgradeProgress = f }
             if Task.isCancelled { return }
@@ -281,6 +299,22 @@ class TranscriptionEngine: ObservableObject {
         func update(_ fraction: Double) { lock.withLock { _date = Date() } }
     }
 
+    /// Feeds audio through the live path 2 s at a time, exactly as the mic would (tests).
+    func simulateLive(_ samples: [Float]) async {
+        committedText = ""; committedSamples = 0; transcribedText = ""
+        bufferLock.withLock { audioBuffer = [] }
+        var i = 0
+        while i < samples.count {
+            let next = min(samples.count, i + 32_000)
+            bufferLock.withLock { audioBuffer.append(contentsOf: samples[i..<next]) }
+            i = next
+            await transcribeCurrentBuffer()
+        }
+    }
+
+    /// Waits for the background model swap to finish (tests).
+    func waitForUpgrade() async { await upgradeTask?.value }
+
     func cancelUpgrade() {
         upgradeTask?.cancel(); upgradeTask = nil; pending = nil; upgradeProgress = nil
     }
@@ -293,10 +327,14 @@ class TranscriptionEngine: ObservableObject {
     }
 
     func startRecording() {
-        guard modelState == .ready, !isRecording else { return }
+        // Recording never waits on a model: audio buffers and is transcribed the moment one is ready.
+        guard !isRecording else { return }
+        if case .error = modelState { return }
         applyPendingUpgrade()
         isRecording = true
         transcribedText = ""
+        committedText = ""
+        committedSamples = 0
         bufferLock.withLock { audioBuffer = [] }
         recordingStart = Date()
 
@@ -329,6 +367,8 @@ class TranscriptionEngine: ObservableObject {
         recordingTask?.cancel()
         recordingTask = nil
         capture.stopCapture()
+        // Stopped before any model finished loading: wait for it so nothing said is lost.
+        while whisperKit == nil, case .loading = modelState { try? await Task.sleep(for: .milliseconds(200)) }
         await transcribeCurrentBuffer(full: true)
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
@@ -403,16 +443,15 @@ class TranscriptionEngine: ObservableObject {
 
     // MARK: - Private
 
+    /// Live: decodes only the audio after the last committed segment, and once that runs past 15 s, commits every
+    /// finished segment and moves on. Cost stays flat however long you talk, and nothing said is ever dropped.
+    /// Final (`full`): one accurate pass over the whole recording.
     private func transcribeCurrentBuffer(full: Bool = false) async {
+        let start = full ? 0 : committedSamples
         let samples: [Float] = bufferLock.withLock {
             let total = audioBuffer.count
-            if !full {
-                let window = min(Self.liveWindowSamples, Self.livePreviewSamples)
-                if total > window {
-                    return Array(audioBuffer[(total - window)...])
-                }
-            }
-            return audioBuffer
+            guard total > start else { return [] }
+            return Array(audioBuffer[start..<min(total, full ? total : start + Self.liveWindowSamples)])
         }
         guard samples.count > 16_000, let whisperKit else { return }
 
@@ -420,15 +459,36 @@ class TranscriptionEngine: ObservableObject {
         defer { isTranscribing = false }
 
         do {
-            let opts = full ? decodingOptions() : liveDecodingOptions()
-            let results = try await whisperKit.transcribe(audioArray: samples, decodeOptions: opts)
-            let text = results.text()
-            if !text.isEmpty { transcribedText = text }
+            let results = try await whisperKit.transcribe(audioArray: samples, decodeOptions: full ? decodingOptions() : liveDecodingOptions())
             if selectedLanguage == "auto", let lang = results.first?.language {
                 detectedLanguage = lang
                 isUnusualLanguage = !Self.expectedLanguages.contains(lang)
             }
+            if full {
+                let text = results.text()
+                if !text.isEmpty { transcribedText = text }
+                return
+            }
+            var segments = results.flatMap(\.segments)
+            if samples.count > Self.commitAfterSamples, segments.count > 1 {
+                let done = segments.dropLast()
+                committedText = Self.join(committedText, Self.clean(done.map(\.text).joined(separator: " ")))
+                committedSamples = start + Int((done.last?.end ?? 0) * 16_000)
+                segments = Array(segments.suffix(1))
+            }
+            let live = Self.join(committedText, Self.clean(segments.map(\.text).joined(separator: " ")))
+            if !live.isEmpty { transcribedText = live }
         } catch {}
+    }
+
+    /// Strips Whisper's timestamp and special tokens from segment text.
+    static func clean(_ text: String) -> String {
+        text.replacingOccurrences(of: "<\\|[^|]*\\|>", with: "", options: .regularExpression)
+            .split(whereSeparator: \.isWhitespace).joined(separator: " ")
+    }
+
+    private static func join(_ a: String, _ b: String) -> String {
+        a.isEmpty ? b : b.isEmpty ? a : a + " " + b
     }
 
     // Accurate options for final pass and file transcription
@@ -467,7 +527,7 @@ class TranscriptionEngine: ObservableObject {
             usePrefillPrompt: false,
             usePrefillCache: false,
             skipSpecialTokens: true,
-            withoutTimestamps: true
+            withoutTimestamps: false
         )
     }
 
@@ -499,8 +559,7 @@ class TranscriptionEngine: ObservableObject {
     // MARK: - History
 
     private func addEntry(_ entry: TranscriptionEntry) {
-        entries.insert(entry, at: 0)
-        if entries.count > 50 { entries = Array(entries.prefix(50)) }
+        entries.insert(entry, at: 0) // every transcript is kept, no cap
         saveHistory()
     }
 
