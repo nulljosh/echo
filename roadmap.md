@@ -140,9 +140,6 @@ not before.
   1.3.6 READY_FOR_SALE, and deleting an app record does not unregister the bundle ID.
 - [ ] Do the 'remove from sale in all territories' step via Claude in Chrome rather than by hand, Joshua OK'd browser automation for this on 2026-08-19. It is the one genuinely dashboard-only step: `asc web apps availability` exposes only `create`, so there is no CLI path. Once availability is cleared the delete command above works.
 
-## Ingested 2026-08-22
-- [x] Remove the "downloading model" step on first launch, bundle the model with the app instead. From Notes: "Opening the app and waiting for the model to download is infuriatingly wasting time." Check the model's on-disk size against App Store limits before committing to bundling.
-
 ## 2026-08-23, delete the Transcriptly ASC record
 Transcriptly (ASC 6783015101, com.nulljosh.echo.mac) is the old Voxprint-for-Mac record,
 superseded by Voxprint macOS 1.3.6 (Ready for Distribution). It is stuck at 9.9.9 Rejected
@@ -201,25 +198,8 @@ Worth wiring the Pages project to build from this repo so a push is enough.
 ## Ingested 2026-10-02
 - [ ] Stale name: something still says Voxprint; it should say Notate (note said "now it's notify, I think"). Which surface?
 
-## Ingested 2026-10-16
-- [x] Still messing around with "Downloading model". The model should just be packed with the app. It doesn't even load (stuck at 0%). (screenshot: notes/attachments/2026-10-16/notate-1.png)
-
-## Next (2026-10-18)
-
-- [ ] Apple's own speech model on iOS 26 and macOS 26 (SpeechAnalyzer and SpeechTranscriber): starts instantly, adds no app size, and the OS keeps the model fresh. The OS may still fetch a language pack the first time, so bundled Whisper stays the guaranteed offline path. Use Apple's as an option when the language pack is already on the device, Whisper otherwise. Deployment target is still iOS 17 and macOS 14, so gate it with `#available`.
-- [ ] Meetings on the Mac with no bot: mic plus system audio (ScreenCaptureKit), transcribed locally. See MONEY.md.
-- [ ] On-device summary and action items over a whole transcript (Apple Foundation Models), speaker labels, search across history.
-- [ ] Share extension, Action button and Shortcuts so Notate is one tap away.
-
 ## Road to v2.0 (2026-10-19)
 
 v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 
-- [x] 1. Speaker labels in meeting mode: "You" and "Them", from which stream (mic or call) carries the voice
-- [x] 2. On-device summary and action items for any transcript (Apple Foundation Models, where available)
-- [x] 3. Search across history
-- [x] 4. Export: plain text, Markdown, subtitles (SRT)
-- [x] 5. Shortcuts and the Action button (App Intents: start recording, transcribe a file)
-- [x] 6. Apple's speech model (SpeechAnalyzer) as an option on iOS 26 and macOS 26
-- [x] 7. Fresh App Store screenshots (new icon, Notate Sans, Watch)
 - [ ] 8. Ship 2.0 on iPhone, Watch and Mac (iPhone + Watch live 2026-10-19, landing deployed; Mac waiting for review)

@@ -74,4 +74,4 @@ npx wrangler pages deploy docs/ --project-name=voxprint --branch=main
 
 ## The loop
 
-App Store fix loop lives at docs/LOOP-HANDOFF.md. Phase 2 fleet audit starts after 22:00 usage reset.
+The road-to-v2.0 loop is handed off in docs/LOOP-HANDOFF.md: current state, the next steps in order, and the restart prompt. Read it before restarting the loop. Roadmap item 8 (Mac 2.0 review) is the only open one.
