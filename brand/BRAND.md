@@ -10,6 +10,9 @@ One bold flat white glyph on an accent gradient tile. No text, no outline, no em
 - `mark.svg` is the glyph alone in `currentColor` for your own background.
 - Clear space equal to the width of the glyph's thickest stroke. Smallest size 16 px.
 
+## Mascot
+Dot (`mascot.svg`): a little blue page with the icon's sound wave for hair and two lines of text on its body. The icon, come to life. Flat two-tone blue, black eyes, no outline. Dot shows up on the landing and in empty states, never inside the app icon.
+
 ## Colour
 | Role | Value |
 |---|---|

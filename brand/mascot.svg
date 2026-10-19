@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Dot, the Notate mascot: a little blue page with a sound wave for hair">
+  <path d="M72 46Q84 22 96 46T120 46T144 46T168 46" fill="none" stroke="#0074D9" stroke-width="9" stroke-linecap="round"/>
+  <rect x="52" y="62" width="136" height="148" rx="32" fill="#4da6ff"/>
+  <path d="M188 104V94Q188 62 156 62H146Z" fill="#0074D9"/>
+  <circle cx="96" cy="118" r="10" fill="#1d1d1f"/><circle cx="144" cy="118" r="10" fill="#1d1d1f"/>
+  <circle cx="99.5" cy="114.5" r="3.5" fill="#fff"/><circle cx="147.5" cy="114.5" r="3.5" fill="#fff"/>
+  <path d="M104 142Q120 156 136 142" fill="none" stroke="#1d1d1f" stroke-width="7" stroke-linecap="round"/>
+  <g stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M80 176H160M80 194H128"/></g>
+  <g stroke="#0074D9" stroke-width="9" stroke-linecap="round"><path d="M96 212V226M144 212V226"/></g>
+</svg>
