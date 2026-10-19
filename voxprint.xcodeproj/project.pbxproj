@@ -19,6 +19,7 @@
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
 		2832DADDF47FA44F395696FB /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
+		2F7001D18D171FB2209C910B /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
 		321BA2B956B47155D3742DAD /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
@@ -37,6 +38,7 @@
 		5CF0001411512057DD498879 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
 		5E48CDE6483A7380758E1582 /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		6008A6F03726FCE4DCD847F6 /* TranscriptionEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */; };
+		6224E88B3EC8437CAC19B451 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
 		6246A5C95493EC12FAE75ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18FC30F7E8146158BCC235D9 /* Assets.xcassets */; };
 		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
@@ -154,6 +156,7 @@
 		7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCapture.swift; sourceTree = "<group>"; };
 		7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voxprint-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8329AF7B7DC828095931C95E /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingEntry.swift; sourceTree = "<group>"; };
@@ -273,6 +276,7 @@
 				3A6E7245B1913F78E4416A3C /* RecordButton.swift */,
 				72702A5CFAC0AD1F611CE747 /* SettingsView.swift */,
 				CF83663B541B3469842D0224 /* SplashView.swift */,
+				8329AF7B7DC828095931C95E /* SummaryView.swift */,
 				4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */,
 				67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */,
 			);
@@ -660,6 +664,7 @@
 				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
 				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
 				598C602752E19BA975B31B64 /* SplashView.swift in Sources */,
+				6224E88B3EC8437CAC19B451 /* SummaryView.swift in Sources */,
 				CCBAE84235C620BE056852DD /* SystemAudioCapture.swift in Sources */,
 				3EA36301F0DF4FE61B5D6501 /* TranscriptionEngine.swift in Sources */,
 				206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */,
@@ -682,6 +687,7 @@
 				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
 				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,
 				58727EA565C57496808CEDE6 /* SplashView.swift in Sources */,
+				2F7001D18D171FB2209C910B /* SummaryView.swift in Sources */,
 				8BF5417D6137FC56F2EF1A55 /* SystemAudioCapture.swift in Sources */,
 				155F69C43BFEFAAC1A2F0144 /* TranscriptionEngine.swift in Sources */,
 				382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */,
@@ -882,7 +888,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -948,7 +954,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

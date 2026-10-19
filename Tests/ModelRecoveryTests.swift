@@ -1,4 +1,5 @@
 import XCTest
+import SwiftUI
 import AVFoundation
 @testable import Voxprint_macOS
 
@@ -212,5 +213,28 @@ final class ModelRecoveryTests: XCTestCase {
         let out = try await Cleanup.clean("um so this is uh a test of the cleanup you know")
         XCTAssertTrue(out.lowercased().contains("test"), "lost the words: \(out)")
         XCTAssertFalse(out.lowercased().contains(" uh "), "filler kept: \(out)")
+    }
+
+    /// Live: summary keeps to what was said and finds the task someone agreed to.
+    func testSummaryLive() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        try XCTSkipUnless(Cleanup.isAvailable, "no system model on this machine")
+        let transcript = "You: Can you send me the quarterly budget by Friday?\nThem: Sure, I will email the budget tomorrow morning. Also the office is closed on Monday."
+        let result = try await Summarizer.summarize(transcript)
+        let s = try XCTUnwrap(result)
+        XCTAssertFalse(s.summary.isEmpty)
+        XCTAssertTrue(s.actionItems.contains { $0.lowercased().contains("budget") }, "missed the task: \(s.actionItems)")
+    }
+
+    /// The summary sheet renders; the PNG lands in the temp folder for a look.
+    @MainActor
+    func testSummaryViewRenders() throws {
+        let view = SummaryView(summary: TranscriptSummary(summary: "You asked for the quarterly budget by Friday. They will email it tomorrow morning, and the office is closed Monday.", actionItems: ["Them: email the quarterly budget tomorrow morning", "You: check the budget before Friday"]))
+            .frame(width: 480).background(Color.white)
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 2
+        let image = try XCTUnwrap(renderer.nsImage, "summary sheet did not render")
+        let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
+        try rep.representation(using: .png, properties: [:])!.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("notate-summary.png"))
     }
 }

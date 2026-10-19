@@ -28,6 +28,9 @@ class TranscriptionEngine: ObservableObject {
     @Published var isRecording = false
     @Published var isTranscribing = false
     @Published var isCleaning = false
+    @Published var isSummarizing = false
+    /// The summary of the transcript on screen, shown in a sheet.
+    @Published var summary: TranscriptSummary?
     @Published var audioLevel: Float = 0
     @Published var modelState: ModelState = .unloaded
     /// Progress of the background download of a better model. nil when nothing is upgrading.
@@ -499,6 +502,21 @@ class TranscriptionEngine: ObservableObject {
         transcribedText = cleaned
         if let i = entries.firstIndex(where: { $0.text == original }) {
             entries[i].text = cleaned  // same entry, same date
+            saveHistory()
+        }
+    }
+
+    /// Summary and action items for the transcript on screen, on device. Saved with its history entry.
+    func summarize() async {
+        let text = transcribedText
+        guard !text.isEmpty, !isSummarizing, !isRecording, !isTranscribing else { return }
+        if let i = entries.firstIndex(where: { $0.text == text }), let saved = entries[i].summary { summary = saved; return }
+        isSummarizing = true
+        defer { isSummarizing = false }
+        guard let result = try? await Summarizer.summarize(text) else { return }
+        summary = result
+        if let i = entries.firstIndex(where: { $0.text == text }) {
+            entries[i].summary = result
             saveHistory()
         }
     }

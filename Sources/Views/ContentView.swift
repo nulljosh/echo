@@ -34,6 +34,9 @@ struct ContentView: View {
                 SplashView { showSplash = false }
             }
         }
+        .sheet(item: Binding(get: { engine.summary.map(SummaryBox.init) }, set: { if $0 == nil { engine.summary = nil } })) { box in
+            SummaryView(summary: box.summary)
+        }
         .alert("Can't hear the call yet", isPresented: Binding(get: { engine.meetingError != nil }, set: { if !$0 { engine.meetingError = nil } })) {
             Button("OK") {}
         } message: {
@@ -327,6 +330,22 @@ struct ContentView: View {
                 .disabled(engine.transcribedText.isEmpty || engine.isRecording || engine.isTranscribing || engine.isCleaning)
                 .help("Clean up punctuation, grammar and filler words, on device")
                 .accessibilityLabel("Clean up transcript")
+            }
+
+            if Cleanup.isAvailable {
+                Button { Task { await engine.summarize() } } label: {
+                    if engine.isSummarizing {
+                        ProgressView().scaleEffect(0.8).frame(width: 22, height: 22)
+                    } else {
+                        Image(systemName: "list.bullet.rectangle")
+                            .font(.notate(20))
+                            .foregroundStyle(engine.transcribedText.isEmpty ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
+                    }
+                }
+                .buttonStyle(.plain)
+                .disabled(engine.transcribedText.isEmpty || engine.isRecording || engine.isTranscribing || engine.isSummarizing)
+                .help("Summary and action items, on device")
+                .accessibilityLabel("Summarize transcript")
             }
 
             ShareLink(item: engine.transcribedText) {

@@ -6,6 +6,8 @@ struct TranscriptionEntry: Identifiable, Codable {
     let date: Date
     let duration: TimeInterval
     let model: String
+    /// On-device summary and action items, once asked for.
+    var summary: TranscriptSummary?
 
     init(text: String, duration: TimeInterval, model: String) {
         self.id = UUID()
