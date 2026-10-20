@@ -2,10 +2,6 @@
 
 History lives in git log. This file only holds what is still open. Repo versions follow shipped batches; the App Store follows when Joshua says ship.
 
-## v2.3.x: still open from v2.3
-
-- [ ] Benchmarks: find why Whisper small (16.9%) and Apple (15.1%) trail base (5.1%) on the LibriVox clip. Print their text, normalize numbers and compounds, rerun. Only then reconsider Auto's model choices.
-
 ## v2.5: Apple first, part 2
 
 - Custom words stay on Whisper. Tested 2026-10-20 with made-up names: SpeechTranscriber ignores contextual strings (heard "J. Balvin" for Jaybulb with or without them), DictationTranscriber got one of two. Whisper's prompt gets both. Retest each new OS.
