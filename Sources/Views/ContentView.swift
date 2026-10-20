@@ -71,15 +71,27 @@ struct ContentView: View {
     private var layout: some View {
         NavigationStack {
             transcript
-                .safeAreaInset(edge: .bottom) { recordButton.padding(.vertical, 16) }
+                .safeAreaInset(edge: .bottom) {
+                    // Record is dead centre; Settings sits at the leading edge of the same row.
+                    recordButton
+                        .frame(maxWidth: .infinity)
+                        .overlay(alignment: .leading) {
+                            Button { showSettings = true } label: {
+                                Image(systemName: "gearshape").font(.echo(22)).frame(width: 32, height: 32).fallbackCircle()
+                            }
+                            .glassCircle()
+                            .accessibilityLabel("Settings")
+                            .accessibilityIdentifier("settings-button")
+                        }
+                        .padding(.horizontal, 20).padding(.vertical, 16)
+                }
                 .navigationTitle("Echo")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItemGroup(placement: .topBarLeading) {
+                    ToolbarItem(placement: .topBarLeading) {
                         Button { showHistory = true } label: { Label("History", systemImage: "clock") }
                             .disabled(engine.entries.isEmpty)
                             .accessibilityIdentifier("history-button")
-                        settingsButton
                     }
                     ToolbarItemGroup(placement: .topBarTrailing) {
                         upgradeRing
@@ -162,7 +174,7 @@ struct ContentView: View {
         }
     }
 
-    /// The one thing on screen to press. Everything else lives in the bar.
+    /// The main thing on screen to press. Share and More live in the bar.
     private var recordButton: some View {
         RecordButton(isRecording: engine.isRecording, isTranscribing: engine.isTranscribing) {
             if engine.isRecording { Task { await engine.stopRecording() } }
@@ -232,7 +244,8 @@ struct ContentView: View {
         guard let provider = providers.first else { return false }
         provider.loadFileRepresentation(forTypeIdentifier: UTType.audio.identifier) { url, _ in
             guard let url else { return }
-            let local = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+            // A fresh name each drop: a reused name would fail to copy and transcribe the older file.
+            let local = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + "-" + url.lastPathComponent)
             try? FileManager.default.copyItem(at: url, to: local)
             Task { @MainActor in transcribe(local) }
         }

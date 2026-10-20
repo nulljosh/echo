@@ -1,14 +1,9 @@
 # Echo - App Store Connect submission package
 
-v1.4.0 is in review on iOS and Mac as of 2026-09-21. Price flips to $0.99 upfront after approval. No more Pro tier or in-app purchases.
+Status lives in `asc versions list --app 6782604262`. As of 2026-10-20: iPhone and Watch 2.0 live, Mac 2.0 in review. The listing name still reads Notate; it changes to Echo on the next editable app info (docs/roadmap.md). If the optional account ships, the privacy answers below change in the same release.
 
-## Status (2026-09-21)
-- iOS and Mac: v1.4.0 **in review**.
-- Everything is now included for the one-time $0.99 purchase. No IAP, no paywall.
-- All languages Whisper knows (about 99) are now in the picker, with auto-detect.
-- Model is auto-picked by device; manual override in Settings > Advanced.
-- Privacy policy live target: **https://echo.jaybulb.com/privacy.html**.
-- Privacy manifest bundled, `ITSAppUsesNonExemptEncryption=false` set.
+- Privacy policy: https://echo.jaybulb.com/privacy.html
+- Privacy manifest bundled, `ITSAppUsesNonExemptEncryption=false`.
 
 ---
 
@@ -71,9 +66,9 @@ Test transcription:
 1. Live microphone transcription: tap record and speak, text appears as you talk.
 2. File import: drag or select an audio file, it transcribes the whole thing.
 3. Any of the 99+ languages Whisper supports, with auto-detect.
-4. Settings > Advanced lets you manually pick a model, but Auto is recommended.
+4. Settings > Model lets you pick a model by hand, but Auto is recommended.
 
-The first model download requires network once; after that the app is fully offline. Microphone permission is requested only when the user taps record.
+The models ship inside the app, so it works offline from the first launch. Microphone permission is requested only when the user taps record.
 ```
 
 ## Screenshots needed (iPhone 6.7" / 6.9", use the `screenshot` skill)
@@ -90,12 +85,3 @@ The first model download requires network once; after that the app is fully offl
 - Result: **Data Not Collected** (matches PrivacyInfo.xcprivacy and privacy.html)
 
 ---
-
-## v1.4.0 shipping changes (2026-09-21)
-- All transcription features now included in the base $0.99 purchase.
-- Removed Echo Pro in-app purchase (`com.nulljosh.echo.unlock`).
-- Removed paywall UI entirely.
-- Expanded language picker to all 99+ languages Whisper supports.
-- Model selection moved to Settings > Advanced (Auto still default).
-- Simplified settings screen.
-- Fixed model loading bug that could prevent app launch.

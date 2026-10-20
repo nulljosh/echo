@@ -1,6 +1,6 @@
 # Echo (was Notate, was Voxprint, was Echo), CLAUDE.md
 
-On-device Whisper transcription. iOS 17 + macOS 14, one unified ASC record (6782604262, Universal Purchase). WhisperKit via SPM. `roadmap.md` is the queue. `MONEY.md` is the price. `asc versions list --app 6782604262` is the truth on versions, never write them here.
+On-device Whisper transcription. iOS 17 + macOS 14, one unified ASC record (6782604262, Universal Purchase). WhisperKit via SPM. `docs/roadmap.md` is the queue. `docs/MONEY.md` is the price. Every other markdown file lives in `docs/`. `asc versions list --app 6782604262` is the truth on versions, never write them here.
 
 ## Frozen forever
 
@@ -35,9 +35,9 @@ Since 1.4.2 the app ships tiny, base and small inside `BundledModels/` (fetched 
 
 **SettingsView**: one Form. Appearance, speak-back voice, language (own page on iOS, every Whisper language), custom words, model and its status. The model list sits one level down on purpose. Users should not need it.
 
-**ContentView** keeps one thing on screen to press, the record button. Share, More (clean up, summarize, read aloud, transcribe a file) and Settings live in the native nav bar (the Mac toolbar, with the meeting toggle), History on the left (the Mac sidebar). No splash, no cards around the transcript, no mode switch: files come in through More, drag and drop on the Mac, or Open With.
+**ContentView**: on iPhone the bottom row is the record button, dead centre, with Settings at its leading edge (Joshua's call), both in Apple's glass button styles on iOS 26. Share and More (clean up, summarize, read aloud, transcribe a file) live in the native nav bar, History on its left. On the Mac all of it sits in the toolbar with the meeting toggle, History in the sidebar. No splash, no cards around the transcript, no mode switch: files come in through More, drag and drop on the Mac, or Open With.
 
-Accent color is the asset catalog blue. Buttons use `Color.accentColor`, not `Color.primary`. Type is the system font: every view uses `Font.echo(size, weight)`, which is SF Pro (Notate Sans was dropped 2026-10-20). Icon is a white voice wave that rings out, fades like an echo and settles into a written line, over a shorter line, on a #0074D9 gradient, built from `Echo.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Echo`), there is no AppIcon.appiconset. Products are named Echo.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
+Accent color is the asset catalog blue. The record button is tinted with `Color.accentColor`; icon buttons follow the system (primary in bars and glass). Type is the system font: every view uses `Font.echo(size, weight)`, which is SF Pro (Notate Sans was dropped 2026-10-20). Icon is a white voice wave that rings out, fades like an echo and settles into a written line, over a shorter line, on a #0074D9 gradient, built from `Echo.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Echo`), there is no AppIcon.appiconset. Products are named Echo.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
 
 ## Build, test, ship
 

@@ -1,5 +1,5 @@
 Echo is already on the App Store and Product Hunt (Joshua, 2026-09-11). Do not schedule a duplicate launch.
 
-Current status: 1.4.0 is in App Store review on iOS and Mac as of 2026-09-21. When approved, the store name changes to Echo and the price flips to $0.99 upfront. Version 1.4.1 will bundle store naming updates.
+Now: iPhone and Watch 2.0 are live, Mac 2.0 is in review. The store listing still says Notate until Apple takes the name Echo on the next editable version. Hold every post until the listing says Echo.
 
-After approval: verify mic transcription, file transcription, and settings navigation. All features are free, no in-app purchase to test.
+Reddit: check karma and account standing first for r/SideProject, r/iOSProgramming, r/macapps and r/privacy. r/iOSProgramming and r/macapps have pinned weekly self-promo threads; post there when one is active. One sub at a time, spaced out, each with its own body.

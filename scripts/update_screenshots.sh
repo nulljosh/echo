@@ -16,6 +16,7 @@ xcodegen generate
 DEVICE="iPhone 18 Pro Max"      # 6.9 inch, the size App Store Connect asks for first
 SIM_UDID="DBBE86E4-2B2D-4B76-B1A4-F2C01D586811"
 SRC_DIR="$HOME/Library/Caches/tools.fastlane/screenshots"
+mkdir -p "$SRC_DIR" # SnapshotHelper never creates it; a disk cleanup once deleted it and every shot went missing
 SHOTS=("1-finished-transcript" "2-history" "3-summary" "4-settings" "5-live-recording")
 
 # Capture is only trustworthy if every PNG is newer than this marker -- a partial
@@ -57,7 +58,7 @@ for shot in "${SHOTS[@]}"; do
 done
 if (( stale )); then
   echo "==> FAILED: the UI test did not produce a fresh set of screenshots." >&2
-  echo "    Nothing was copied or committed. See roadmap.md." >&2
+  echo "    Nothing was copied or committed. See docs/roadmap.md." >&2
   exit 1
 fi
 

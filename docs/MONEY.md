@@ -27,7 +27,7 @@ At a dollar, the revenue is volume. A million sales is about 840 thousand dollar
 3. **Summary and action items on the device.** Apple's on-device model already runs the cleanup. Point it at the whole transcript and the Otter summary comes for free. Add speaker labels and search across every saved transcript.
 4. **Be one tap away everywhere.** Share extension, Action button, Shortcuts, Siri, the Watch recorder that already exists, voice memos import. The easiest app to reach wins the default slot.
 5. **Rank for the words people type.** App Store keywords: transcribe, voice to text, offline, private, meeting notes. Screenshots that show airplane mode.
-6. **Let the web demo sell it.** The landing runs the app live, no sign-up. Every visitor can try before they pay a dollar.
+6. **Let the web app sell it.** echo.jaybulb.com/app.html runs in the browser, no sign-up. Every visitor can try before they pay a dollar.
 
 ## The one decision that is Joshua's
 

@@ -1,15 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" style="background:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif" viewBox="0 0 640 420">
-<text x="320" y="28" fill="#333" font-size="16" font-weight="600" text-anchor="middle">Echo Architecture</text>
-<rect width="166" height="40" x="41" y="55" fill="#f5f5f7" stroke="#d1d1d6" rx="8"/>
-<text x="124" y="79" fill="#333" font-size="12" text-anchor="middle">iOS app</text>
-<rect width="166" height="40" x="237" y="55" fill="#f5f5f7" stroke="#d1d1d6" rx="8"/>
-<text x="320" y="79" fill="#333" font-size="12" text-anchor="middle">macOS app</text>
-<rect width="166" height="40" x="433" y="55" fill="#f5f5f7" stroke="#d1d1d6" rx="8"/>
-<text x="516" y="79" fill="#333" font-size="12" text-anchor="middle">echo.jaybulb.com</text>
-<rect width="200" height="40" x="220" y="145" fill="#8c2f4a" fill-opacity=".15" stroke="#8c2f4a" rx="8"/>
-<text x="320" y="164" fill="#333" font-size="9" font-weight="500" text-anchor="middle">WhisperKit</text>
-<text x="320" y="174" fill="#333" font-size="9" font-weight="500" text-anchor="middle">on-device transcription, no network</text>
-<rect width="200" height="40" x="220" y="325" fill="#8c2f4a" fill-opacity=".15" stroke="#8c2f4a" rx="8"/>
-<text x="320" y="349" fill="#333" font-size="12" font-weight="500" text-anchor="middle">Local transcript history</text>
-<path stroke="#d1d1d6" fill="none" d="M124 95v25M320 95v25M516 95v25M124 120H516M320 120V145M320 185V235M320 265V325"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440">
+<style>
+  .bg { fill: #ffffff; }
+  text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif; fill: #1d1d1f; }
+  .t { font-size: 13px; font-weight: 600; }
+  .s, .h { font-size: 11px; fill: #6e6e73; }
+  .h { font-weight: 600; letter-spacing: .08em; }
+  .box { fill: #f5f5f7; stroke: #d2d2d7; }
+  .core { fill: #e6f1fb; stroke: #0074D9; stroke-width: 1.5; }
+  .ln { stroke: #d2d2d7; stroke-width: 1.5; fill: none; }
+  @media (prefers-color-scheme: dark) {
+    .bg { fill: #000000; } text { fill: #f5f5f7; } .s, .h { fill: #a1a1a6; }
+    .box { fill: #1c1c1e; stroke: #3a3a3c; } .core { fill: #0b2238; stroke: #4da6ff; } .ln { stroke: #3a3a3c; }
+  }
+</style>
+<rect class="bg" width="720" height="440"/>
+<text class="h" x="24" y="32">WHERE YOU TALK</text>
+<rect class="box" x="24" y="44" width="156" height="56" rx="12"/><text class="t" x="40" y="68">iPhone</text><text class="s" x="40" y="86">mic, files, Action button</text>
+<rect class="box" x="196" y="44" width="156" height="56" rx="12"/><text class="t" x="212" y="68">Mac</text><text class="s" x="212" y="86">mic plus the call audio</text>
+<rect class="box" x="368" y="44" width="156" height="56" rx="12"/><text class="t" x="384" y="68">Apple Watch</text><text class="s" x="384" y="86">records, iPhone writes</text>
+<rect class="box" x="540" y="44" width="156" height="56" rx="12"/><text class="t" x="556" y="68">Shortcuts and Siri</text><text class="s" x="556" y="86">start, transcribe a file</text>
+<path class="ln" d="M102 100v24M274 100v24M446 100v24M618 100v24M102 124H618M360 124v20"/>
+<rect class="box" x="200" y="144" width="320" height="48" rx="12"/><text class="t" x="216" y="166">AudioCapture</text><text class="s" x="216" y="182">16 kHz mono, meeting mode labels You and Them</text>
+<path class="ln" d="M360 192v20"/>
+<rect class="core" x="140" y="212" width="440" height="72" rx="14"/>
+<text class="t" x="160" y="238">TranscriptionEngine, WhisperKit on the device</text>
+<text class="s" x="160" y="256">tiny, base and small ship inside the app. Live 2 second batches,</text>
+<text class="s" x="160" y="272">the word being heard is lit. A broken model heals itself.</text>
+<path class="ln" d="M250 284v24M470 284v24"/>
+<rect class="box" x="140" y="308" width="210" height="56" rx="12"/><text class="t" x="156" y="332">Apple Intelligence</text><text class="s" x="156" y="350">clean up and summarize</text>
+<rect class="box" x="370" y="308" width="210" height="56" rx="12"/><text class="t" x="386" y="332">History</text><text class="s" x="386" y="350">echo-history.json, search</text>
+<path class="ln" d="M475 364v20"/>
+<rect class="box" x="370" y="384" width="210" height="40" rx="12"/><text class="t" x="386" y="409">Share or export TXT, MD, SRT</text>
+<text class="s" x="24" y="420">Nothing leaves the device.</text>
 </svg>

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The one circle in the app. Blue to start, red with a square to stop.
+/// The record button: tinted glass, blue to start, red with a square to stop.
 struct RecordButton: View {
     let isRecording: Bool
     let isTranscribing: Bool
@@ -9,9 +9,6 @@ struct RecordButton: View {
     var body: some View {
         Button(action: action) {
             ZStack {
-                Circle()
-                    .fill(isRecording ? Color.red : Color.accentColor)
-                    .frame(width: 64, height: 64)
                 if isTranscribing && isRecording {
                     ProgressView().tint(.white)
                 } else if isRecording {
@@ -20,9 +17,12 @@ struct RecordButton: View {
                     Image(systemName: "mic.fill").font(.echo(22, .medium)).foregroundStyle(.white)
                 }
             }
+            .frame(width: 48, height: 48)
+            .fallbackCircle(isRecording ? .red : .accentColor)
             .animation(.easeOut(duration: 0.2), value: isRecording)
         }
-        .buttonStyle(PressButtonStyle())
+        .glassCircle(tint: isRecording ? .red : .accentColor)
+        .controlSize(.large)
         .accessibilityLabel(isRecording ? "Stop recording" : "Record")
     }
 }
@@ -32,5 +32,30 @@ struct PressButtonStyle: ButtonStyle {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.94 : 1.0)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+
+extension View {
+    /// Apple's glass button styles on iOS 26 and macOS 26, tinted for the one prominent control.
+    @ViewBuilder
+    func glassCircle(tint: Color? = nil) -> some View {
+        if #available(iOS 26, macOS 26, *) {
+            if let tint { buttonStyle(.glassProminent).buttonBorderShape(.circle).tint(tint) }
+            else { buttonStyle(.glass).buttonBorderShape(.circle) }
+        } else {
+            buttonStyle(PressButtonStyle())
+        }
+    }
+
+    /// The flat circle older systems draw behind a glassCircle label, padded to the same size.
+    @ViewBuilder
+    func fallbackCircle(_ fill: Color? = nil) -> some View {
+        if #available(iOS 26, macOS 26, *) {
+            self
+        } else if let fill {
+            padding(8).background(fill, in: Circle())
+        } else {
+            padding(8).background(.quaternary, in: Circle())
+        }
     }
 }

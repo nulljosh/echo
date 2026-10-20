@@ -55,9 +55,9 @@ struct TranscriptionView: View {
                     let lastWord = isRecording ? words.last.map(String.init) ?? "" : ""
                     let leading = isRecording && !lastWord.isEmpty ? words.dropLast().joined(separator: " ") : text
 
-                    // The word being heard right now is lit in the accent; speaker names are bold.
-                    (Self.styled(leading) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ")
-                        + Text(lastWord).foregroundStyle(Color.accentColor).fontWeight(.semibold))
+                    // The word being heard right now is lit in the accent and pops in; speaker names are bold.
+                    (Self.styled(leading) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ") + Self.live(lastWord))
+                        .modifier(PopIn(trigger: words.count))
                         .font(.echo(17))
                         .lineSpacing(2)
                         .textSelection(.enabled)
@@ -85,6 +85,12 @@ struct TranscriptionView: View {
         .animation(.easeOut(duration: 0.2), value: unusualLanguage)
     }
 
+    private static func live(_ word: String) -> Text {
+        let t = Text(word).foregroundStyle(Color.accentColor).fontWeight(.semibold)
+        if #available(iOS 18, macOS 15, *) { return t.customAttribute(LiveWord()) }
+        return t
+    }
+
     /// Bolds the "You:" and "Them:" that start meeting lines.
     static func styled(_ text: String) -> Text {
         var out = Text("")
@@ -97,5 +103,48 @@ struct TranscriptionView: View {
             }
         }
         return out.foregroundStyle(.primary)
+    }
+}
+
+@available(iOS 18, macOS 15, *)
+private struct LiveWord: TextAttribute {}
+
+/// Draws the live word growing in from 85 percent, faded and soft, with a little spring past full size.
+@available(iOS 18, macOS 15, *)
+private struct PopRenderer: TextRenderer {
+    var progress: Double
+
+    func draw(layout: Text.Layout, in ctx: inout GraphicsContext) {
+        for run in layout.flatMap({ $0 }) {
+            guard run[LiveWord.self] != nil, progress != 1 else { ctx.draw(run); continue }
+            let box = run.typographicBounds.rect
+            var c = ctx
+            c.opacity = min(1, max(0, progress))
+            if progress < 1 { c.addFilter(.blur(radius: (1 - progress) * 3)) }
+            let scale = 0.85 + 0.15 * progress // raw, so the spring's overshoot shows
+            c.translateBy(x: box.midX, y: box.midY)
+            c.scaleBy(x: scale, y: scale)
+            c.translateBy(x: -box.midX, y: -box.midY)
+            c.draw(run)
+        }
+    }
+}
+
+// ponytail: redraws every run of the transcript for 0.35 s per new word; draw only the tail if hour-long meetings stutter
+private struct PopIn: ViewModifier {
+    let trigger: Int
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18, macOS 15, *), !reduceMotion {
+            content.keyframeAnimator(initialValue: 1.0, trigger: trigger) { view, p in
+                view.textRenderer(PopRenderer(progress: p))
+            } keyframes: { _ in
+                MoveKeyframe(0.0)
+                SpringKeyframe(1.0, duration: 0.35, spring: .bouncy)
+            }
+        } else {
+            content
+        }
     }
 }
