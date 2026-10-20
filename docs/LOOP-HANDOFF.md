@@ -13,10 +13,10 @@ Rules for every tick:
 - Stop rule: read the usage hook every tick. At about 88% weekly, run /checkpoint, stop the loop, send one line.
 
 ## Where things stand
-- v3.0.0 is the newest release: the Echo keyboard dictates into any app. Keyboards cannot use the mic, so its dictate key opens Echo, which records in the background, and the text comes back through `DictationBridge` (Darwin signals plus a shared Keychain group). Not yet walked on a real iPhone.
+- v3.0.0 is the newest release: the Echo keyboard dictates into any app. Keyboards cannot use the mic, so its dictate key opens Echo, which records in the background, and the text comes back through `DictationBridge` (Darwin signals plus a shared Keychain group). Not yet walked on a real iPhone; the simulator cannot add the keyboard through iOS 27 Settings, so the walk has to be on a device. `allowBluetoothHFP` is set for dictation over Bluetooth headsets.
 - v2.5.0: meetings on Apple with You and Them, Whisper base no longer ships (143 MB saved). v2.4.0: the bars, saved settings, the human voice benchmark (Apple 1.5% word error rate, small 1.9%, base 2.2%, tiny 6.0%).
 - Signing: `com.nulljosh.echo.keyboard` registered; "Notate iOS App Store", "Notate Watch App Store" and "Echo Keyboard App Store" profiles regenerated in `signing/`. The ExportOptions plist must name all three.
-- iPhone and Watch 2.0 live. Mac 2.0 waiting for review. The store listing still says Notate.
+- iPhone and Watch 2.0 live. Mac 2.0 is IN_REVIEW in App Store Connect (checked 2026-10-20). The store listing still says Notate.
 - Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com (Pages project voxprint).
 - Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
 
