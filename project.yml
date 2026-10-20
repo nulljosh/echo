@@ -92,6 +92,7 @@ targets:
           - "*.plist"
           - "*.entitlements"
       - path: Sources/Services/DictationBridge.swift
+      - path: Sources/Services/Keychain.swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.keyboard

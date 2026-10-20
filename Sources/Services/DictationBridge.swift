@@ -1,10 +1,10 @@
 import Foundation
 
 /// The Echo keyboard (v3.0) cannot use the microphone: iOS keeps keyboards off it. So the app records and writes,
-/// and the keyboard only asks. They talk through the shared App Group: Darwin notifications for stop and "text ready",
-/// and the group's defaults for the state and the finished text. The keyboard opens `url` to start a dictation.
+/// and the keyboard only asks. Darwin notifications carry stop and "text ready"; the state and the finished text sit in
+/// a Keychain group both targets hold, which needs no App Group. The keyboard opens `url` to start a dictation.
 enum DictationBridge {
-    static let group = "group.com.nulljosh.echo"
+    static let group = "QMM486NPYC.com.nulljosh.echo.shared"
     static let url = URL(string: "com.nulljosh.echo://dictate")!
 
     enum Signal: String {
@@ -14,25 +14,30 @@ enum DictationBridge {
 
     enum State: String { case idle, listening, writing }
 
-    /// Swapped for a throwaway suite in tests, so they never touch the real app's state.
-    static var defaults = UserDefaults(suiteName: group) ?? .standard
+    /// Where the state and text live. Tests swap in a dictionary, so they never touch the real Keychain.
+    static var store: (read: (String) -> String?, write: (String, String?) -> Void) = (
+        { Keychain.read($0, group: group) },
+        { key, value in
+            if let value { Keychain.write(key, value, group: group) } else { Keychain.delete(key, group: group) }
+        }
+    )
 
     static var state: State {
-        get { State(rawValue: defaults.string(forKey: "dictation.state") ?? "") ?? .idle }
-        set { defaults.set(newValue.rawValue, forKey: "dictation.state") }
+        get { State(rawValue: store.read("dictation.state") ?? "") ?? .idle }
+        set { store.write("dictation.state", newValue.rawValue) }
     }
 
     /// App side: hands the finished text to the keyboard and tells it to look.
     static func publish(_ text: String) {
-        defaults.set(text, forKey: "dictation.result")
+        store.write("dictation.result", text)
         state = .idle
         post(.result)
     }
 
     /// Keyboard side: the finished text, once. A second call gets nil, so nothing is typed twice.
     static func takeResult() -> String? {
-        guard let text = defaults.string(forKey: "dictation.result") else { return nil }
-        defaults.removeObject(forKey: "dictation.result")
+        guard let text = store.read("dictation.result") else { return nil }
+        store.write("dictation.result", nil)
         return text
     }
 

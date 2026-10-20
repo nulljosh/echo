@@ -62,6 +62,7 @@
 		89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7948E5D32A49F30A1748199 /* WhisperKit */; };
 		8BF5417D6137FC56F2EF1A55 /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
 		95922DA5A378E329165C356C /* EchoWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5E9DBA19188A5C557A56DF12 /* EchoWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9E933F7B3CF68611D8631805 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254D6B6C032E8A468A84FC40 /* Keychain.swift */; };
 		9E9B6C5559A41B64A4B15460 /* TranscriptionEngine+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983F0325D9844A308132B2B4 /* TranscriptionEngine+Files.swift */; };
 		A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
 		A3DD0582B47888A5F6C67F9E /* Echo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1E9A03612EC850CCC1802773 /* Echo.icon */; };
@@ -79,12 +80,14 @@
 		CD60842F9E83B5C9C317DA9B /* BenchmarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE6B12EEAA8D534303AF1D /* BenchmarkTests.swift */; };
 		D5A1E5D77E733B361BDE80E3 /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
 		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
+		DA16942858B1BA10896AA196 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254D6B6C032E8A468A84FC40 /* Keychain.swift */; };
 		DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
 		DFBCFF12340FBCF5B814D4BB /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879E532FDD328278DA08BAA8 /* EchoFont.swift */; };
 		E11A31F20B2FAB08C1FA4900 /* TranscriptionEngine+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1E28837E5C3CA60FF88B8 /* TranscriptionEngine+Apple.swift */; };
 		E3D317090ABC13C560BD6E7D /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
 		E6F642998699828C4407198F /* AppleSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */; };
+		ECD7DA0D2D6FA7C7228E333E /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254D6B6C032E8A468A84FC40 /* Keychain.swift */; };
 		EF76D3A37A646E7316724796 /* TranscriptionEngine+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA77D9D12AD0F5EBDB849EF /* TranscriptionEngine+Live.swift */; };
 		F374538E0B00484742031E5F /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
 		F374B23DCE5045B8D9E2ACDD /* TranscriptionEngine+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD19D60A14980AE0D07824 /* TranscriptionEngine+Models.swift */; };
@@ -171,6 +174,7 @@
 		205971A2150EF27872918531 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		21754790BAE958E7E032FAB4 /* DictationBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationBridge.swift; sourceTree = "<group>"; };
 		248C97534740EDB317B6FB5A /* WatchBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchBridge.swift; sourceTree = "<group>"; };
+		254D6B6C032E8A468A84FC40 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		2979D9C3680EC57594490295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF9D1E91E59C9DCDB46932E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		332A910F82F4863EBB411432 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 				21754790BAE958E7E032FAB4 /* DictationBridge.swift */,
 				534E2DEDC49E843805A98F8E /* Exporter.swift */,
 				F44C167A820312C688D60BFD /* Intents.swift */,
+				254D6B6C032E8A468A84FC40 /* Keychain.swift */,
 				332A910F82F4863EBB411432 /* SpeechManager.swift */,
 				BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */,
 				1824C0226572018B4E269CFF /* TranscriptionEngine.swift */,
@@ -729,6 +734,7 @@
 			files = (
 				F374538E0B00484742031E5F /* DictationBridge.swift in Sources */,
 				4F7278057096558393A2C730 /* KeyboardViewController.swift in Sources */,
+				ECD7DA0D2D6FA7C7228E333E /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +762,7 @@
 				A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
 				71295971CB141A76D36C5EE9 /* Intents.swift in Sources */,
+				DA16942858B1BA10896AA196 /* Keychain.swift in Sources */,
 				781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */,
 				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
 				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
@@ -788,6 +795,7 @@
 				B745577C3F5A674412161D99 /* Exporter.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
 				62A286C7CE754548CD2D359A /* Intents.swift in Sources */,
+				9E933F7B3CF68611D8631805 /* Keychain.swift in Sources */,
 				7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */,
 				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
 				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,

@@ -21,7 +21,8 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Services/TranscriptionEngine+Files.swift` | Files, clean up, summary, copy and delete |
 | `Sources/Services/AudioCapture.swift` | AVAudioEngine tap, 16 kHz mono Float32, level for the waveform |
 | `Sources/Services/SystemAudioCapture.swift` | Mac meeting mode: what the Mac plays, through ScreenCaptureKit |
-| `Sources/Services/DictationBridge.swift` | The keyboard handoff: App Group state and finished text, Darwin signals for stop and text ready |
+| `Sources/Services/DictationBridge.swift` | The keyboard handoff: state and finished text in a shared Keychain group, Darwin signals for stop and text ready |
+| `Sources/Services/Keychain.swift` | Small Keychain strings: the account refresh token, and the shared group for the keyboard |
 | `Sources/Services/AppleSpeech.swift` | Apple SpeechAnalyzer on iOS 26 and macOS 26: installs the language model, live sessions and files |
 | `Sources/Services/Cleanup.swift` | Apple Foundation Models: clean up and summary, on device |
 | `Sources/Services/Exporter.swift` | Text, Markdown and SRT export |

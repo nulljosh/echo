@@ -3,15 +3,17 @@ import XCTest
 
 /// The keyboard handoff (v3.0): the text arrives once, the state round-trips, and a Darwin signal reaches the other side.
 final class DictationBridgeTests: XCTestCase {
-    private var saved: UserDefaults!
+    private var saved = DictationBridge.store
 
     override func setUp() {
-        saved = DictationBridge.defaults
-        DictationBridge.defaults = UserDefaults(suiteName: "echo-tests-dictation")!
-        DictationBridge.defaults.removePersistentDomain(forName: "echo-tests-dictation")
+        saved = DictationBridge.store
+        let box = Box()
+        DictationBridge.store = ({ box.values[$0] }, { box.values[$0] = $1 })
     }
 
-    override func tearDown() { DictationBridge.defaults = saved }
+    override func tearDown() { DictationBridge.store = saved }
+
+    private final class Box { var values: [String: String] = [:] }
 
     func testResultIsTypedOnceAndStateResets() {
         XCTAssertEqual(DictationBridge.state, .idle)

@@ -10,7 +10,6 @@ History lives in git log. This file only holds what is still open. Repo versions
 ## v3.0: dictate into any app
 
 - The Echo keyboard is built (`Keyboard/`, `DictationBridge`). Keyboards cannot use the mic, so the dictate key opens Echo, which records in the background (audio background mode) while you go back; stop comes from the keyboard and the text is typed at the cursor. Opening Echo from a keyboard walks the responder chain, the route every dictation keyboard takes, with some review risk.
-- [ ] Apple side, needs Joshua's yes: register the App Group `group.com.nulljosh.echo` and the bundle ID `com.nulljosh.echo.keyboard`, then regenerate the "Notate iOS App Store" profile and make a keyboard profile. The iOS archive fails until then.
 - [ ] Walk it on a real iPhone: add the keyboard, allow Full Access, dictate into Messages, stop from the keyboard.
 - [ ] Next: keep the session warm for a few minutes after a dictation so the next one starts without opening Echo.
 
