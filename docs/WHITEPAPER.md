@@ -27,6 +27,6 @@ No audio or text leaves the device, and there are no analytics. An account is op
 
 ## Platforms
 
-iOS 17 and macOS 14 in SwiftUI from one source tree, one App Store record with Universal Purchase. watchOS records on its own. Versions live only in `project.yml`.
+iOS 17 and macOS 14 in SwiftUI from one source tree, one App Store record with Universal Purchase. watchOS records on its own. On iPhone, the Echo keyboard dictates into any app: iOS keeps keyboards off the microphone, so its dictate key opens Echo, which records in the background while you go back, and the finished text is typed where your cursor was. Versions live only in `project.yml`.
 
 Apache 2.0. Copyright 2026 Joshua Trommel.

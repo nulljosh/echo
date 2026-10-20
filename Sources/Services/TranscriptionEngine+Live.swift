@@ -146,6 +146,9 @@ extension TranscriptionEngine {
             addEntry(entry)
         }
         recordingStart = nil
+        #if os(iOS)
+        if DictationBridge.state == .listening { DictationBridge.publish(trimmed) } // the Echo keyboard asked for this one
+        #endif
         applyPendingUpgrade()
     }
 

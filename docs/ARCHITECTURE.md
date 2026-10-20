@@ -21,6 +21,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Services/TranscriptionEngine+Files.swift` | Files, clean up, summary, copy and delete |
 | `Sources/Services/AudioCapture.swift` | AVAudioEngine tap, 16 kHz mono Float32, level for the waveform |
 | `Sources/Services/SystemAudioCapture.swift` | Mac meeting mode: what the Mac plays, through ScreenCaptureKit |
+| `Sources/Services/DictationBridge.swift` | The keyboard handoff: App Group state and finished text, Darwin signals for stop and text ready |
 | `Sources/Services/AppleSpeech.swift` | Apple SpeechAnalyzer on iOS 26 and macOS 26: installs the language model, live sessions and files |
 | `Sources/Services/Cleanup.swift` | Apple Foundation Models: clean up and summary, on device |
 | `Sources/Services/Exporter.swift` | Text, Markdown and SRT export |
@@ -36,11 +37,13 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Views/SummaryView.swift` | Summary and action items sheet |
 | `Sources/Views/WaveformBarsView.swift` | Five bars driven by the mic level |
 | `Sources/Views/EchoFont.swift` | `Font.echo`, the system font |
+| `Keyboard/` | The Echo keyboard: a dictate key that opens Echo to record, plus space, delete, return and globe. Never touches the mic |
 | `watchos/` | Standalone Watch recorder: record, history, playback, send to iPhone |
 | `Tests/ModelRecoveryTests.swift` | The QA gate: corrupt model heals, fallback works, custom words, real speech |
 | `Tests/TranscriptionEntryTests.swift` | Entry formatting |
 | `Tests/BenchmarkTests.swift` | Opt-in benchmark of every engine (load, speed, word error rate) and the WER check |
 | `Tests/AccountTests.swift` | Account errors read as plain sentences |
+| `Tests/DictationBridgeTests.swift` | The keyboard handoff: text arrives once, state round-trips, a Darwin signal lands |
 | `Tests/AppleSpeechTests.swift` | Apple first: when it runs, real speech through the live session and the engine, a stop while starting, and files |
 | `UITests/`, `UITests-mac/` | App Store screenshots from mock data (`UITEST_*` launch flags) |
 | `scripts/update_screenshots.sh` | Runs the iPhone screenshot test and copies the set into `screenshots/appstore` |

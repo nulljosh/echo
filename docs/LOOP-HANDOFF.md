@@ -20,7 +20,7 @@ Rules for every tick:
 - Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
 
 ## Next, in order
-1. v2.5 is ready to tag: meetings on Apple, base no longer bundled.
+1. v2.5.0: tag once CI is green. v3.0 keyboard is built and unit tested; it needs the Apple side (Joshua's yes) and a real iPhone walk before the v3.0.0 tag.
 2. v3.0: the keyboard extension on iPhone, audio handed to the app to transcribe.
 3. After Mac 2.0 clears: store rename to Echo, read back 3 times. Sign in with Apple and the App Store video header need Joshua's yes.
 

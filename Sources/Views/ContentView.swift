@@ -1,3 +1,4 @@
+import AVFoundation
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -52,6 +53,8 @@ struct ContentView: View {
             .task {
                 #if os(iOS)
                 WatchBridge.shared.engine = engine
+                // A dictation the app never finished (it was killed while listening) must not leave the keyboard stuck.
+                if !engine.isRecording { DictationBridge.state = .idle }
                 #endif
                 if IntentInbox.takePendingStart() { engine.startRecording() } // launched by Shortcuts or the Action button
                 await engine.loadModel()
@@ -64,8 +67,30 @@ struct ContentView: View {
             .onReceive(NotificationCenter.default.publisher(for: IntentInbox.startRecording)) { _ in
                 if IntentInbox.takePendingStart(), !engine.isRecording { engine.startRecording() }
             }
-            .onOpenURL { transcribe($0) }
+            .onOpenURL { url in
+                #if os(iOS)
+                if url == DictationBridge.url { dictateForKeyboard(); return }
+                #endif
+                transcribe(url)
+            }
     }
+
+    #if os(iOS)
+    /// The Echo keyboard opened us to dictate: record now and keep recording in the background while the person goes
+    /// back to their app. The keyboard's stop (or the record button here) ends it, and stopRecording hands the text back.
+    private func dictateForKeyboard() {
+        DictationBridge.observe(.stop) { [engine] in
+            guard engine.isRecording, DictationBridge.state == .listening else { return }
+            Task { await engine.stopRecording() }
+        }
+        guard !engine.isRecording else { DictationBridge.state = .listening; return }
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playAndRecord, options: [.mixWithOthers, .defaultToSpeaker, .allowBluetooth])
+        try? session.setActive(true)
+        engine.startRecording()
+        DictationBridge.state = engine.isRecording ? .listening : .idle
+    }
+    #endif
 
     private func transcribe(_ url: URL) {
         Task {

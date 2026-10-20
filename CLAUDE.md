@@ -22,6 +22,7 @@ Sources/
                 HistoryView, SettingsView
 Tests/          unit tests + ModelRecoveryTests (the end-to-end gate)
 UITests/        fastlane snapshot screenshots
+Keyboard/       the Echo keyboard extension (v3.0), see DictationBridge
 watchos/        standalone voice memo recorder, own xcodegen project
 docs/           landing (index.html + landing.css + tokens.css, Hermes-style, 1-bit ordered-dither art in docs/art) + web demo (app.html)
 brand/          icon, tokens.css, BRAND.md
@@ -34,6 +35,8 @@ brand/          icon, tokens.css, BRAND.md
 **Model loading, read before touching it.** WhisperKit downloads into a cache iOS can purge, so the engine copies the model to `Application Support/echo-models/<model>` (temp name, then move, so a kill mid-copy cannot leave half a model). `cachedFolder` checks that stable folder by name first, because the absolute path stored in UserDefaults dies on every app update. If a load throws, every local copy is wiped and it tries once more clean. 1.3.9 shipped without this and bricked phones.
 
 Since 1.4.2 the app ships tiny and small inside (base stopped shipping in 2.5: small is more accurate, and it saved 143 MB) `BundledModels/` (fetched by `scripts/fetch-tiny-model.sh`, gitignored, Release builds fail without it), with their tokenizers (without tokenizer.json WhisperKit fetches it from the internet), so nothing downloads and first launch works offline. Tiny loads first on the GPU (ready in seconds, the Neural Engine compiles small for minutes on first launch), small swaps in from the bundle in the background. Record works before any model is ready; audio buffers and catches up. `loadModel` loads the chosen model straight from the bundle (`bundled(_:)`). Auto only ever picks a model that ships. Only one that does not (base or large turbo, picked under Model in Settings) uses a cached copy, or runs tiny while `upgrade(to:)` downloads it. A broken model falls back to bundled tiny. The new kit waits in `pending` and swaps in through `applyPendingUpgrade()` when nothing is recording. `blockingLoad` only runs when no model is bundled. Custom words (`customWords`, UserDefaults `notate.customWords`) become Whisper `promptTokens`. `Cleanup.swift` wraps Apple Foundation Models and is only shown where the system model is available.
+
+**Keyboard** (v3.0): iOS keeps keyboards off the microphone, so `Keyboard/` never records. Its dictate key opens `com.nulljosh.echo://dictate`; ContentView starts recording with a `.playAndRecord` session and the `audio` background mode keeps it going while the person goes back. The keyboard posts stop through `DictationBridge` (App Group `group.com.nulljosh.echo` defaults plus Darwin notifications), `stopRecording` publishes the text, and the keyboard types it at the cursor. Space, delete, return and globe keep it a real keyboard without Full Access (guideline 4.4.1). Never link WhisperKit into the extension.
 
 **SettingsView**: one Form. Appearance, speak-back voice, language (own page on iOS, every Whisper language), custom words, model and its status. The model list sits one level down on purpose. Users should not need it.
 

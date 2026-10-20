@@ -19,6 +19,17 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.nulljosh.echo.dictate</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.nulljosh.echo</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -37,6 +48,10 @@
 	<false/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Echo transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

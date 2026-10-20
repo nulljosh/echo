@@ -39,10 +39,12 @@ targets:
       - package: WhisperKit
         product: WhisperKit
       - target: EchoWatch
+      - target: EchoKeyboard
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo
         INFOPLIST_FILE: Sources/iOS/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Sources/iOS/Echo.entitlements
         GENERATE_INFOPLIST_FILE: NO
         # Universal: iPad was never excluded for a design reason, only never enabled.
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -79,6 +81,26 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: Echo
         PRODUCT_NAME: Echo
         PRODUCT_MODULE_NAME: Voxprint_macOS
+
+  # v3.0: dictate into any app. The keyboard never records; Echo does, see Sources/Services/DictationBridge.swift.
+  EchoKeyboard:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Keyboard
+        excludes:
+          - "*.plist"
+          - "*.entitlements"
+      - path: Sources/Services/DictationBridge.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.echo.keyboard
+        PRODUCT_NAME: EchoKeyboard
+        INFOPLIST_FILE: Keyboard/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        CODE_SIGN_ENTITLEMENTS: Keyboard/EchoKeyboard.entitlements
+        TARGETED_DEVICE_FAMILY: "1,2"
+        APPLICATION_EXTENSION_API_ONLY: YES
 
   EchoWatch:
     type: application

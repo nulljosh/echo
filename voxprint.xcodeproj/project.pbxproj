@@ -21,11 +21,13 @@
 		1BDB2D147DF5E76C692F50E6 /* TranscriptionEngine+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1E28837E5C3CA60FF88B8 /* TranscriptionEngine+Apple.swift */; };
 		1C7C6EDA4D46A8AC31CF0E3C /* AppleSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */; };
 		1CA3469DA3A1EED0DD4EB194 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205971A2150EF27872918531 /* AccountView.swift */; };
+		1EA4AFC88E9A1D0927188595 /* DictationBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43836EA6BE7928211D10901C /* DictationBridgeTests.swift */; };
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
 		2EF8D237206A1D20DB050BAD /* TranscriptionEngine+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983F0325D9844A308132B2B4 /* TranscriptionEngine+Files.swift */; };
 		2F7001D18D171FB2209C910B /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
 		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
+		362AED33662D821717C3C6E7 /* EchoKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 91AE9B3B6B071E567B03BCEE /* EchoKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		363FEE4D050BA4BB182F8825 /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */; };
 		36522EEA7923C0D2C40CC775 /* TranscriptionEngine+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD19D60A14980AE0D07824 /* TranscriptionEngine+Models.swift */; };
 		382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
@@ -36,6 +38,7 @@
 		45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2979D9C3680EC57594490295 /* Assets.xcassets */; };
 		495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */; };
+		4F7278057096558393A2C730 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75220DADEAFED783B91A5A14 /* KeyboardViewController.swift */; };
 		50669903927FEFAA4E9CD379 /* RecordingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */; };
 		51348E34CFD65DADE9FEF1D7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57905786F6A895BB1CA7384 /* HistoryView.swift */; };
 		5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
@@ -45,6 +48,7 @@
 		635A9AFCD7186CA498770652 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2636395EB60539732FDB19 /* Account.swift */; };
 		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
+		6CAAF1F0A73AE11B62295994 /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
 		71295971CB141A76D36C5EE9 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44C167A820312C688D60BFD /* Intents.swift */; };
 		74218D803503D53F033D9FAC /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB1197D8075E00C0C78F3 /* WaveformBarsView.swift */; };
 		758ACAE55CD89BE08D7090CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A93C1BD632A004057A4D13 /* ContentView.swift */; };
@@ -73,6 +77,7 @@
 		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		CCBAE84235C620BE056852DD /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
 		CD60842F9E83B5C9C317DA9B /* BenchmarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE6B12EEAA8D534303AF1D /* BenchmarkTests.swift */; };
+		D5A1E5D77E733B361BDE80E3 /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
 		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
 		DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
@@ -81,6 +86,7 @@
 		E3D317090ABC13C560BD6E7D /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
 		E6F642998699828C4407198F /* AppleSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */; };
 		EF76D3A37A646E7316724796 /* TranscriptionEngine+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA77D9D12AD0F5EBDB849EF /* TranscriptionEngine+Live.swift */; };
+		F374538E0B00484742031E5F /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
 		F374B23DCE5045B8D9E2ACDD /* TranscriptionEngine+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD19D60A14980AE0D07824 /* TranscriptionEngine+Models.swift */; };
 		F53122CC80636C8AD894260C /* PreviewScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */; };
 		FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
@@ -110,6 +116,13 @@
 			remoteGlobalIDString = DCFA617113565E7ABE6FB52D;
 			remoteInfo = "Voxprint-iOS";
 		};
+		D66D40ED888A756071FE5BB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02F067BCC5E8FC1519AA158E;
+			remoteInfo = EchoKeyboard;
+		};
 		FF937589D9295AF7F752A462 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
@@ -120,6 +133,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6025E7BD412E716140A79916 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				362AED33662D821717C3C6E7 /* EchoKeyboard.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAB3C9759FB203043BB7E6FF /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -145,6 +169,7 @@
 		1E3C83FFB9437708C5B3184B /* voxprint-mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "voxprint-mac.entitlements"; sourceTree = "<group>"; };
 		1E9A03612EC850CCC1802773 /* Echo.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Echo.icon; sourceTree = "<group>"; };
 		205971A2150EF27872918531 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		21754790BAE958E7E032FAB4 /* DictationBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationBridge.swift; sourceTree = "<group>"; };
 		248C97534740EDB317B6FB5A /* WatchBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchBridge.swift; sourceTree = "<group>"; };
 		2979D9C3680EC57594490295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF9D1E91E59C9DCDB46932E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -152,6 +177,7 @@
 		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		3ADD19D60A14980AE0D07824 /* TranscriptionEngine+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptionEngine+Models.swift"; sourceTree = "<group>"; };
 		3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeech.swift; sourceTree = "<group>"; };
+		43836EA6BE7928211D10901C /* DictationBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationBridgeTests.swift; sourceTree = "<group>"; };
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4AF0AA13A088140931D63873 /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,11 +193,14 @@
 		7349640877D9FF7A297ECA96 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		739827B542A84C837CAD7966 /* Cleanup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cleanup.swift; sourceTree = "<group>"; };
 		7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCapture.swift; sourceTree = "<group>"; };
+		75220DADEAFED783B91A5A14 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voxprint-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8329AF7B7DC828095931C95E /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		83E1E28837E5C3CA60FF88B8 /* TranscriptionEngine+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptionEngine+Apple.swift"; sourceTree = "<group>"; };
 		879E532FDD328278DA08BAA8 /* EchoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoFont.swift; sourceTree = "<group>"; };
+		8D77DD1275ECFAF9BEAE0F08 /* Echo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Echo.entitlements; sourceTree = "<group>"; };
+		91AE9B3B6B071E567B03BCEE /* EchoKeyboard.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = EchoKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		983F0325D9844A308132B2B4 /* TranscriptionEngine+Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptionEngine+Files.swift"; sourceTree = "<group>"; };
 		A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingEntry.swift; sourceTree = "<group>"; };
@@ -217,6 +246,7 @@
 		1AAA0A4B07AE48B28CFEB4A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				91AE9B3B6B071E567B03BCEE /* EchoKeyboard.appex */,
 				5E9DBA19188A5C557A56DF12 /* EchoWatch.app */,
 				04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */,
 				7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */,
@@ -240,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				ABCE0C09F8A34129F5803E83 /* Assets.xcassets */,
+				8D77DD1275ECFAF9BEAE0F08 /* Echo.entitlements */,
 				7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */,
 				16C3FD038F68389C5E660B5C /* VoxprintApp.swift */,
 				248C97534740EDB317B6FB5A /* WatchBridge.swift */,
@@ -254,6 +285,7 @@
 				4AF0AA13A088140931D63873 /* AccountTests.swift */,
 				5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */,
 				FEEE6B12EEAA8D534303AF1D /* BenchmarkTests.swift */,
+				43836EA6BE7928211D10901C /* DictationBridgeTests.swift */,
 				A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */,
 				1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */,
 			);
@@ -296,6 +328,7 @@
 				3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */,
 				7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */,
 				739827B542A84C837CAD7966 /* Cleanup.swift */,
+				21754790BAE958E7E032FAB4 /* DictationBridge.swift */,
 				534E2DEDC49E843805A98F8E /* Exporter.swift */,
 				F44C167A820312C688D60BFD /* Intents.swift */,
 				332A910F82F4863EBB411432 /* SpeechManager.swift */,
@@ -336,6 +369,7 @@
 			children = (
 				F31EAC7D6224E7BB2BDECB12 /* BundledModels */,
 				1E9A03612EC850CCC1802773 /* Echo.icon */,
+				D805A21974670E09DB77462E /* Keyboard */,
 				7A12FC2CCEF7B3DC268F0916 /* Sources */,
 				5B37322E28927AD2315C07E6 /* Tests */,
 				A7522B3576E680E43D787643 /* UITests */,
@@ -363,6 +397,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D805A21974670E09DB77462E /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				75220DADEAFED783B91A5A14 /* KeyboardViewController.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 		EB54CA9D4E38FABD051F92FF /* macOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +427,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		02F067BCC5E8FC1519AA158E /* EchoKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5F10D30F607E2C2E21F06B8 /* Build configuration list for PBXNativeTarget "EchoKeyboard" */;
+			buildPhases = (
+				36F93A9738E6511DF0973D7B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EchoKeyboard;
+			packageProductDependencies = (
+			);
+			productName = EchoKeyboard;
+			productReference = 91AE9B3B6B071E567B03BCEE /* EchoKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		05C174F4F7C035326BFB4D1D /* VoxprintMacUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2563EBF7650B35FA785A944D /* Build configuration list for PBXNativeTarget "VoxprintMacUITests" */;
@@ -465,12 +524,14 @@
 				70D50C8E9C2B10D3CD96CA4A /* Sources */,
 				81162214C8A7E01AD991C863 /* Resources */,
 				F9AE64109AECD148DCDA1BC4 /* Frameworks */,
+				6025E7BD412E716140A79916 /* Embed Foundation Extensions */,
 				FAB3C9759FB203043BB7E6FF /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FC41B9524FFAADFD35904F3A /* PBXTargetDependency */,
+				39FDBB68C4658F183FE830F8 /* PBXTargetDependency */,
 			);
 			name = "Voxprint-iOS";
 			packageProductDependencies = (
@@ -510,6 +571,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					02F067BCC5E8FC1519AA158E = {
+						DevelopmentTeam = QMM486NPYC;
+					};
 					05C174F4F7C035326BFB4D1D = {
 						DevelopmentTeam = QMM486NPYC;
 						TestTargetID = E91DCA098026ECD5A24A7092;
@@ -551,6 +615,7 @@
 			targets = (
 				DCFA617113565E7ABE6FB52D /* Voxprint-iOS */,
 				E91DCA098026ECD5A24A7092 /* Voxprint-macOS */,
+				02F067BCC5E8FC1519AA158E /* EchoKeyboard */,
 				693DC92FB583013A4E0C8A35 /* EchoWatch */,
 				D5AE97ED14D1A4811990EAAF /* VoxprintTests */,
 				49493D04EC624D522DD3630C /* VoxprintUITests */,
@@ -658,6 +723,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		36F93A9738E6511DF0973D7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F374538E0B00484742031E5F /* DictationBridge.swift in Sources */,
+				4F7278057096558393A2C730 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37FCABB7B2E14F51E12A2A40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -677,6 +751,7 @@
 				DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */,
 				B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */,
 				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
+				6CAAF1F0A73AE11B62295994 /* DictationBridge.swift in Sources */,
 				363FEE4D050BA4BB182F8825 /* EchoFont.swift in Sources */,
 				A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
@@ -708,6 +783,7 @@
 				663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */,
 				04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */,
 				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,
+				D5A1E5D77E733B361BDE80E3 /* DictationBridge.swift in Sources */,
 				4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */,
 				B745577C3F5A674412161D99 /* Exporter.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
@@ -738,6 +814,7 @@
 				1AF51BF69D45546833BFE442 /* AccountTests.swift in Sources */,
 				E6F642998699828C4407198F /* AppleSpeechTests.swift in Sources */,
 				CD60842F9E83B5C9C317DA9B /* BenchmarkTests.swift in Sources */,
+				1EA4AFC88E9A1D0927188595 /* DictationBridgeTests.swift in Sources */,
 				795C233A63214E0A4196E6EA /* ModelRecoveryTests.swift in Sources */,
 				6008A6F03726FCE4DCD847F6 /* TranscriptionEntryTests.swift in Sources */,
 			);
@@ -746,6 +823,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		39FDBB68C4658F183FE830F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02F067BCC5E8FC1519AA158E /* EchoKeyboard */;
+			targetProxy = D66D40ED888A756071FE5BB0 /* PBXContainerItemProxy */;
+		};
 		7A007627B06A74B2378A5C55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DCFA617113565E7ABE6FB52D /* Voxprint-iOS */;
@@ -908,7 +990,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -974,7 +1056,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -999,6 +1081,25 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Voxprint-iOS";
+			};
+			name = Debug;
+		};
+		BCF63A57EBFFFDB5EED70A16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Keyboard/EchoKeyboard.entitlements;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.keyboard;
+				PRODUCT_NAME = EchoKeyboard;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1045,6 +1146,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/Echo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -1096,6 +1198,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/Echo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -1109,6 +1212,25 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		FE9BFF1F8B906FBCA0A2AA14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Keyboard/EchoKeyboard.entitlements;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.keyboard;
+				PRODUCT_NAME = EchoKeyboard;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1172,6 +1294,15 @@
 			buildConfigurations = (
 				CC2BBFE1EAB9D2075153BB53 /* Debug */,
 				3C24BE4A49C5BF154B68CBE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E5F10D30F607E2C2E21F06B8 /* Build configuration list for PBXNativeTarget "EchoKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF63A57EBFFFDB5EED70A16 /* Debug */,
+				FE9BFF1F8B906FBCA0A2AA14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
