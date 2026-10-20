@@ -1,32 +1,37 @@
 # Echo roadmap
 
-History lives in git log. This file only holds what is still open.
+History lives in git log. This file only holds what is still open. Repo versions follow shipped batches; the App Store follows when Joshua says ship.
 
-## Road to v2.0 (2026-10-19)
+## v2.3: Joshua's notes and hardening
 
-v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
+- [ ] What's New sheet overflows the screen (notes/attachments/2026-10-19/echo-4.png, the bottom of the sheet is cut off).
+- [ ] Speak-Back Voice shows duplicate names (Eddy, Flo, Sandy, Shelley). Show the quality or drop the lower one.
+- [ ] Make the model list readable (echo-5.png: Auto, Tiny, Base, Small_216Mb, Large, Apple).
+- [ ] Refresh token Keychain item becomes this-device-only, so it never rides along in a backup.
+- [ ] Engine-level test for Apple first: start, pump and finish, and stop pressed while the Apple session is still starting.
+- [ ] Benchmarks: docs/BENCHMARKS.md with the real-time factor of tiny, base, small and Apple on the same clip.
+- [ ] Split TranscriptionEngine into extension files by area (model loading, live, files, Apple, history), no logic changes.
 
-- [ ] 9. Store name to Echo (renamed 2026-10-20). The moment Mac 2.0 clears review and an app info is editable: `asc apps info list --app 6782604262`, then `asc apps rename --app 6782604262 --app-info <editable id> --locale en-US --name Echo` (fallback Calliope), read back 3 times, then ship the next build so the binary says Echo too.
-- [ ] 8. Ship 2.0 on iPhone, Watch and Mac (iPhone + Watch live 2026-10-19, landing deployed; Mac waiting for review)
+## v2.4: Apple first, part 2
 
-## Blocked on Joshua
+- [ ] Custom words through SpeechAnalyzer's contextual strings, so they no longer force Whisper.
+- [ ] Meeting mode on Apple: two sessions, mic and call, labelled You and Them.
+- [ ] Stop bundling base and small once Apple covers the common languages, to shrink the app.
 
-- [ ] One real call in meeting mode on the Mac (the screen-audio permission prompt needs a person).
+## v3.0: dictate into any app
 
-## Next (decided 2026-10-20)
+- [ ] Keyboard extension on iPhone. Keyboards get very little memory, so it hands the audio to the app to transcribe. The gap Willow ($19 a month, cloud) and Otter leave open.
 
-- [ ] Apple first, part 2. Live Apple speech shipped in the repo 2026-10-20 (Auto uses it on iOS and macOS 26 when Apple's model is installed; Echo requests the install). Next: custom words through SpeechAnalyzer's contextual strings and meeting mode on Apple, so Whisper is only the fallback; then stop bundling base and small to shrink the app.
-- [ ] Optional account, part 2. Email accounts shipped in the repo 2026-10-20 (sign up, confirm, sign in, forgot password, profile name, delete, privacy policy). Next: Sign in with Apple (enable the capability on com.nulljosh.echo, add the bundle IDs to APPLE_AUDIENCES on jaybulb-api, the id_token grant already exists), then history sync if wanted. Before the next submission: update the ASC privacy answers and PrivacyInfo.xcprivacy per docs/APPSTORE.md.
+## Store and account (needs Joshua or Apple)
 
-## After 2.0
+- [ ] Store name to Echo the moment Mac 2.0 clears review and an app info is editable: `asc apps info list --app 6782604262`, then `asc apps rename --app 6782604262 --app-info <editable id> --locale en-US --name Echo` (fallback Calliope), read back 3 times, then ship a build that says Echo.
+- [ ] Ship 2.0 on Mac (waiting for review). iPhone and Watch 2.0 are live.
+- [ ] Before the next submission: update the ASC privacy answers and PrivacyInfo.xcprivacy per docs/APPSTORE.md, and run one real sign up, confirm, sign in, rename and delete with an inbox Joshua owns.
+- [ ] Sign in with Apple: enable the capability on com.nulljosh.echo, regenerate the iOS and Watch profiles, add the bundle IDs to APPLE_AUDIENCES on jaybulb-api (the id_token grant already exists). Needs Joshua's yes.
+- [ ] One real call in meeting mode on the Mac (the screen audio permission prompt needs a person).
+- [ ] ElevenLabs playback (Joshua's note). It would send transcript text to a cloud service, so it breaks "nothing leaves the device" unless it is opt-in. His call.
 
-- [ ] Keyboard: dictate into any app. The big one, and the gap Willow ($19/month, cloud) and Otter leave open. Keyboard extensions get very little memory, so the keyboard hands off to the main app to transcribe. Own project.
-- [ ] Native (kmp) port. Sibling apps have one, this doesn't.
+## Later
+
+- [ ] Native (KMP) port. Sibling apps have one, this one does not.
 - Skip: required accounts, SOC 2. Transcription never touches a server. That is the pitch.
-
-## Ingested 2026-10-19
-Source: Apple Note, screenshots in `notes/attachments/2026-10-19/echo-1..5.png`.
-- [ ] "What's new" sheet overflows the screen (echo-4.png, the bottom sheet is cut off).
-- [ ] Speak-Back Voice: duplicate names (Eddy, Flo, Sandy, Shelley) show twice in the picker. Show quality or drop the lower one.
-- [ ] Add ElevenLabs integration for better playback.
-- [ ] Simplify the model list and make it more readable (echo-5.png: Auto, Tiny, Base, Small_216Mb, Large, Apple).

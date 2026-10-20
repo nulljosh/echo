@@ -79,4 +79,4 @@ npx wrangler pages deploy docs/ --project-name=voxprint --branch=main
 
 ## The loop
 
-The road-to-v2.0 loop is handed off in docs/LOOP-HANDOFF.md: current state, the next steps in order, and the restart prompt. Read it before restarting the loop. Roadmap item 8 (Mac 2.0 review) is the only open one.
+docs/LOOP-HANDOFF.md holds Joshua's brief, the rules every tick follows, where things stand and the restart prompt. Read it before restarting the loop. docs/roadmap.md is versioned (v2.3, v2.4, v3.0) and its items have no leading numbers, so the issue sync gets real titles.

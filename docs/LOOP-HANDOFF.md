@@ -1,28 +1,32 @@
-# Echo loop handoff (2026-10-20, 11:25)
+# Echo loop handoff (2026-10-20, midday)
 
 ## What the loop is
-The loop works Echo's ship path in this repo (ex-Notate, now nulljosh/echo at ~/Documents/Code/echo). Each tick does the next open step below, runs the QA gate and a cold-launch check before each commit, and pushes once QA is green. It stops when the landing, icon, brand kit and apps are A+ and the store name is Echo.
+Joshua's brief, in his words: "to v4, 5-10 etc. Keep building roadmap. Keep updating benchmarks, improve efficiency and security and stability. Keep documentation 100%. Break up big god files." Subagents are allowed: one at a time, Haiku, in a worktree, on files the main loop is not touching.
 
-Always say Echo, never Voxprint or Notate, except where the store still says Notate. Replies short, TLDR, no em dashes.
+Rules for every tick:
+- One item from docs/roadmap.md per tick. QA gate green (`TEST_RUNNER_VOXPRINT_QA=1 xcodebuild test -scheme VoxprintTests ...`) before every push. Mac and iOS both build.
+- A batch of shipped items is a minor bump in `project.yml`, a tag and a GitHub release after CI is green. A major (v3.0) only for something keyboard-sized. Never filler versions.
+- No App Store submission while Mac 2.0 is in review, and none without Joshua's yes.
+- Build only what the roadmap holds. New ideas go to Joshua as one line, not into code.
+- Docs stay 100%: every source file and doc has a row in docs/ARCHITECTURE.md, numbers are measured, never remembered.
+- Stop rule: read the usage hook every tick. At about 88% weekly, run /checkpoint, stop the loop, send one line.
 
 ## Where things stand
-- v2.1.0 is tagged and released on GitHub after QA and a green CI run. Pushed. No App Store submission for it: Mac 2.0 is still WAITING_FOR_REVIEW.
-- The repo and folder are nulljosh/echo and ~/Documents/Code/echo. Homepage is https://echo.jaybulb.com.
-- Jony Ive pass on iPhone and Mac: native nav bar, record button in the centre, Settings beside it bottom-left, Liquid Glass button styles, the live word pops in, history uses native search, Settings is one Form. The splash and the record and file mode switch are gone.
-- The landing demo iframe is removed and the site is redeployed at echo.jaybulb.com. notate.jaybulb.com still serves.
-- License is Apache 2.0. Markdown except README and CLAUDE.md lives in docs/. README shortened, architecture.svg redrawn, LOC chart dropped.
-- iPhone 2.0 with the Apple Watch companion is live. The store listing still says Notate until Mac 2.0 clears; the rename is roadmap item 9.
-- Decided 2026-10-20 with Joshua, in docs/roadmap.md "Next": Apple SpeechTranscriber becomes the default engine with WhisperKit as the fallback; accounts become optional (Sign in with Apple or email via jaybulb-api, and the app works without one).
-- GitHub issue sync for this repo is skipped on purpose. Its numbered roadmap items would be titled "8" and "9", and the UI items would duplicate existing issues under the new echo-*.png names.
+- v2.2.0 is tagged and released: Apple SpeechAnalyzer first with Whisper as fallback, optional accounts on jaybulb-api, new privacy policy and reset page. CI green, QA 19 tests green.
+- iPhone and Watch 2.0 live. Mac 2.0 waiting for review. The store listing still says Notate.
+- Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com.
 
 ## Next, in order
-1. Build the two decided items from docs/roadmap.md "Next (decided 2026-10-20)": SpeechTranscriber first with WhisperKit fallback, then optional accounts. QA gate and cold launch before each commit.
-2. Phone-width QA of echo.jaybulb.com: no horizontal scroll, 16px gutters, real tap targets.
-3. Verify the Watch build (EchoWatch) still matches the new iPhone and Mac UI.
-4. After Mac 2.0 clears review: asc rename the store listing to Echo (fallback Calliope). Read it back 3 times, then ship the Echo builds.
-5. Joshua, not the loop: one real call in meeting mode on the Mac (roadmap item 28), and his grade for Dot v2 (roadmap item 29).
+1. Joshua's notes: What's New sheet overflow, duplicate voice names, a readable model list.
+2. Hardening: refresh token Keychain item to ThisDeviceOnly; engine-level Apple test (stop while starting); Release cold launch now that launch requests Apple's model.
+3. docs/BENCHMARKS.md: real-time factor for tiny, base, small and Apple on one `say` clip, opt-in test, machine and date.
+4. Split TranscriptionEngine into extension files by area, no logic changes, QA between each.
+5. Apple part 2: custom words through contextual strings, then meeting mode on Apple.
+6. After Mac 2.0 clears: store rename to Echo, read back 3 times. Sign in with Apple needs Joshua's yes (Apple-side capability and new profiles).
 
 ## Restart prompt
 ```
-/loop until A+ landing page, icon and apps for Echo (ex-Notate): Hermes-style 1-bit ordered-dither landing in ~/Documents/Code/echo/docs, Echo icon, brand kit, rename sweep, builds green, deployed to echo.jaybulb.com
+/loop to v4,5-10 etc ultrathink 
+Feel free to spawn subagents
+Keep building roadmap etc
 ```
