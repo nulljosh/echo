@@ -76,7 +76,7 @@ final class ModelRecoveryTests: XCTestCase {
     /// (also bundled) swaps in from the bundle. Nothing downloads at any point.
     func testOpensReadyAndSwapsToBundledModelWithoutDownload() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
-        for m in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small_216MB"] {
+        for m in ["openai_whisper-tiny", "openai_whisper-small_216MB"] {
             XCTAssertNotNil(TranscriptionEngine.bundled(m), "\(m) must ship inside the app (run scripts/fetch-tiny-model.sh)")
         }
         TranscriptionEngine.downloadsEnabled = false // any download attempt would leave the chosen model unloaded

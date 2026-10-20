@@ -4,7 +4,7 @@
 set -u
 ROOT="${SRCROOT:-$(cd "$(dirname "$0")/.." && pwd)}/BundledModels"
 status=0
-for M in openai_whisper-tiny openai_whisper-base openai_whisper-small_216MB; do
+for M in openai_whisper-tiny openai_whisper-small_216MB; do
 DEST="$ROOT/$M"
 [ -f "$DEST/.complete" ] && [ -f "$DEST/tokenizer.json" ] && continue
 echo "Fetching $M into $DEST"

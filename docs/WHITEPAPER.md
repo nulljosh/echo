@@ -10,7 +10,7 @@ Cloud transcription sends every recording through someone else's server before i
 
 `TranscriptionEngine` owns everything. It runs WhisperKit on the device, batching live audio every 2 seconds and decoding only what came after the last finished segment, so a one hour recording stays as quick as a short one and nothing said is ever dropped. The word being heard right now is lit in the accent. When you stop, it goes over the recording once more for the final text.
 
-Tiny, base and small ship inside the app, so the first launch works offline in seconds. Tiny loads first and small swaps in between recordings. A broken model is wiped and Echo falls back to tiny instead of showing an error. The 1.3.9 release bricked phones without this, and the QA test now breaks a model on purpose to prove it heals.
+Tiny and small ship inside the app, so the first launch works offline in seconds. Tiny loads first and small swaps in between recordings. A broken model is wiped and Echo falls back to tiny instead of showing an error. The 1.3.9 release bricked phones without this, and the QA test now breaks a model on purpose to prove it heals.
 
 On iOS 26 and macOS 26, Apple's own SpeechAnalyzer comes first. Echo asks the system to install Apple's model for your language in the background, and once it is there, live speech and files run through it: faster, long-form, and kept up to date by Apple. Mac meetings run on Apple too, each line labelled You or Them from which side was loud. Whisper takes over on older systems, when you have custom words (it is the model that takes a prompt), for the languages Apple does not know, and whenever Apple's session fails to start.
 

@@ -71,7 +71,7 @@ class TranscriptionEngine: ObservableObject {
     static var downloadsEnabled = true
     var activeModel = ""
     static let tinyModel = "openai_whisper-tiny"
-    /// Models that ship inside the app (tiny, base, small), so nothing ever has to download.
+    /// Models that ship inside the app (tiny, small), so nothing ever has to download.
     static func bundled(_ model: String) -> URL? {
         let url = Bundle.main.resourceURL?.appendingPathComponent("BundledModels/\(model)")
         return url.flatMap { FileManager.default.fileExists(atPath: $0.appendingPathComponent("AudioEncoder.mlmodelc").path) ? $0 : nil }
@@ -170,13 +170,11 @@ class TranscriptionEngine: ObservableObject {
         guard selectedModel == "auto" || selectedModel == AppleSpeech.modelID else { return selectedModel }
         let gb = Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824
         #if os(iOS)
-        // ponytail: small on any 6GB+ phone (iPhone 12 and up); base was noticeably worse than Siri dictation
-        if gb >= 6 { return "openai_whisper-small_216MB" }
-        return gb >= 4 ? "openai_whisper-base" : "openai_whisper-tiny"
+        // ponytail: small on any 6GB+ phone (iPhone 12 and up), tiny below. Auto only picks what ships in the app;
+        // base (143 MB) stopped shipping in 2.5 because small is more accurate. It is still a download in Settings.
+        return gb >= 6 ? "openai_whisper-small_216MB" : "openai_whisper-tiny"
         #else
-        if gb >= 8 { return "openai_whisper-small_216MB" }
-        if gb >= 4 { return "openai_whisper-base" }
-        return "openai_whisper-tiny"
+        return gb >= 8 ? "openai_whisper-small_216MB" : "openai_whisper-tiny"
         #endif
     }
 

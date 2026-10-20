@@ -24,7 +24,7 @@
 <path class="ln" d="M360 192v20"/>
 <rect class="core" x="140" y="212" width="440" height="72" rx="14"/>
 <text class="t" x="160" y="238">TranscriptionEngine, WhisperKit on the device</text>
-<text class="s" x="160" y="256">tiny, base and small ship inside the app. Live 2 second batches,</text>
+<text class="s" x="160" y="256">tiny and small ship inside the app. Live 2 second batches,</text>
 <text class="s" x="160" y="272">the word being heard is lit. A broken model heals itself.</text>
 <path class="ln" d="M250 284v24M470 284v24"/>
 <rect class="box" x="140" y="308" width="210" height="56" rx="12"/><text class="t" x="156" y="332">Apple Intelligence</text><text class="s" x="156" y="350">clean up and summarize</text>

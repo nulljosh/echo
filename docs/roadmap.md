@@ -5,7 +5,7 @@ History lives in git log. This file only holds what is still open. Repo versions
 ## v2.5: Apple first, part 2
 
 - Custom words stay on Whisper. Tested 2026-10-20 with made-up names: SpeechTranscriber ignores contextual strings (heard "J. Balvin" for Jaybulb with or without them), DictationTranscriber got one of two. Whisper's prompt gets both. Retest each new OS.
-- [ ] Stop bundling base and small once Apple covers the common languages, to shrink the app.
+- Base stopped shipping (2.5, 143 MB saved). Small stays: Whisper still runs on iOS and macOS before 26, with custom words and for languages Apple lacks.
 
 ## v3.0: dictate into any app
 

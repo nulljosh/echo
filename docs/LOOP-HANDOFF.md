@@ -20,7 +20,7 @@ Rules for every tick:
 - Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
 
 ## Next, in order
-1. v2.5, Apple part 2: meeting mode on Apple is done; next stop bundling base and small.
+1. v2.5 is ready to tag: meetings on Apple, base no longer bundled.
 2. v3.0: the keyboard extension on iPhone, audio handed to the app to transcribe.
 3. After Mac 2.0 clears: store rename to Echo, read back 3 times. Sign in with Apple and the App Store video header need Joshua's yes.
 

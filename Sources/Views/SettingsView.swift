@@ -152,7 +152,7 @@ struct SettingsView: View {
         case "auto": return AppleSpeech.isSupported ? "Apple's speech model first, Whisper \(resolved) for the rest" : "Picks best for this device (currently \(resolved))"
         case "apple": return "Apple's on-device speech model"
         case "openai_whisper-tiny": return "Fastest · built in"
-        case "openai_whisper-base": return "Balanced · built in"
+        case "openai_whisper-base": return "Balanced · ~145 MB"
         case "openai_whisper-small_216MB": return "Accurate · built in"
         case "openai_whisper-large-v3-v20240930_turbo_632MB": return "Most accurate · ~630 MB"
         default: return ""
