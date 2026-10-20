@@ -85,7 +85,7 @@ struct ContentView: View {
         }
         guard !engine.isRecording else { DictationBridge.state = .listening; return }
         let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.playAndRecord, options: [.mixWithOthers, .defaultToSpeaker, .allowBluetooth])
+        try? session.setCategory(.playAndRecord, options: [.mixWithOthers, .defaultToSpeaker, .allowBluetoothHFP])
         try? session.setActive(true)
         engine.startRecording()
         DictationBridge.state = engine.isRecording ? .listening : .idle
