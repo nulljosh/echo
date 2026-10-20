@@ -17,7 +17,7 @@ No Pro, no IAP, no paywall code. Removed in 1.4.0. The app goes $0.99 upfront, b
 Sources/
   iOS/ macOS/   VoxprintApp.swift, Info.plist, Assets.xcassets (WhatsNewSheet is iOS)
   Models/       TranscriptionEntry
-  Services/     TranscriptionEngine, AudioCapture, SpeechManager
+  Services/     TranscriptionEngine (+Models, +Live, +Apple, +Files), AppleSpeech, AudioCapture, Account, SpeechManager
   Views/        ContentView, RecordButton, TranscriptionView, WaveformBarsView,
                 HistoryView, SettingsView
 Tests/          unit tests + ModelRecoveryTests (the end-to-end gate)
@@ -27,7 +27,7 @@ docs/           landing (index.html + landing.css + tokens.css, Hermes-style, 1-
 brand/          icon, tokens.css, BRAND.md
 ```
 
-**TranscriptionEngine** owns everything: model load, 2s live batches (greedy, decodes only audio after the last committed segment and commits finished segments past 15 s, so the live text keeps everything said), file transcription, history (no cap). The word being heard is highlighted in the accent. Auto picks the model from device RAM.
+**TranscriptionEngine** owns everything, split by area into `TranscriptionEngine+Models/+Live/+Apple/+Files.swift` (stored state stays in the main file, so members are internal, not private): model load, 2s live batches (greedy, decodes only audio after the last committed segment and commits finished segments past 15 s, so the live text keeps everything said), file transcription, history (no cap). The word being heard is highlighted in the accent. Auto picks the model from device RAM.
 
 **Apple first** (2026-10-20): on iOS 26 and macOS 26, Auto records through `AppleSpeech.Live` (SpeechAnalyzer) when Apple's model for the language is installed; `loadModel` asks the system to install it. The engine still fills `audioBuffer`; `pumpApple` drains it into Apple every 200 ms and `finishApple` takes the final text and timed lines. Whisper runs instead in Mac meetings, with custom words, on older systems, for other languages, or if the Apple session fails to start. Whisper still loads in the background so the fallback is instant. `testAppleLiveTranscribesRealSpeech` is the gate.
 

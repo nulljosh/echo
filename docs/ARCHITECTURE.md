@@ -14,7 +14,11 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/macOS/VoxprintApp.swift` | Mac entry, theme, 800 by 560 minimum window |
 | `Sources/macOS/voxprint-mac.entitlements` | Sandbox: microphone, user-selected files, network for the large model |
 | `Sources/Models/TranscriptionEntry.swift` | Codable entry: text, date, duration, model, summary, timed lines |
-| `Sources/Services/TranscriptionEngine.swift` | Model load and healing, live batches, files, history, cleanup, summary |
+| `Sources/Services/TranscriptionEngine.swift` | The engine's state, settings, history and saving |
+| `Sources/Services/TranscriptionEngine+Models.swift` | Loading, upgrading, healing and caching Whisper models |
+| `Sources/Services/TranscriptionEngine+Live.swift` | Recording: mic and meeting capture, 2 second batches, You and Them, decoding options |
+| `Sources/Services/TranscriptionEngine+Apple.swift` | Apple first: when it runs, the live session, the early-stop path |
+| `Sources/Services/TranscriptionEngine+Files.swift` | Files, clean up, summary, copy and delete |
 | `Sources/Services/AudioCapture.swift` | AVAudioEngine tap, 16 kHz mono Float32, level for the waveform |
 | `Sources/Services/SystemAudioCapture.swift` | Mac meeting mode: what the Mac plays, through ScreenCaptureKit |
 | `Sources/Services/AppleSpeech.swift` | Apple SpeechAnalyzer on iOS 26 and macOS 26: installs the language model, live sessions and files |
