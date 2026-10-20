@@ -14,13 +14,13 @@ Rules for every tick:
 
 ## Where things stand
 - v2.4.0 is the newest release: Mac bottom bar in one glass capsule, iPhone native bottom bar with same size icons (`BarIcon`), record button in the main view, saved model and language, the `-ECHO_DEMO 1` flag, and the human voice benchmark in docs/BENCHMARKS.md (Apple 1.5% word error rate, small 1.9%, base 2.2%, tiny 6.0%).
-- Engine: Apple SpeechAnalyzer first, Whisper for meetings, custom words, older systems and other languages. TranscriptionEngine is split into +Models, +Live, +Apple, +Files.
+- Engine: Apple SpeechAnalyzer first (meetings too, labelled You and Them), Whisper for custom words, older systems and other languages. TranscriptionEngine is split into +Models, +Live, +Apple, +Files.
 - iPhone and Watch 2.0 live. Mac 2.0 waiting for review. The store listing still says Notate.
 - Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com (Pages project voxprint).
 - Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
 
 ## Next, in order
-1. v2.5, Apple part 2: meeting mode on Apple (two sessions, You and Them), then stop bundling base and small.
+1. v2.5, Apple part 2: meeting mode on Apple is done; next stop bundling base and small.
 2. v3.0: the keyboard extension on iPhone, audio handed to the app to transcribe.
 3. After Mac 2.0 clears: store rename to Echo, read back 3 times. Sign in with Apple and the App Store video header need Joshua's yes.
 

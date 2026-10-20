@@ -26,7 +26,7 @@ final class AppleSpeechTests: XCTestCase {
         let session = await AppleSpeech.Live(locale: locale!)
         let live = try XCTUnwrap(session)
         var updates = 0
-        try await live.start { _ in updates += 1 }
+        try await live.start { _, _ in updates += 1 }
         for start in stride(from: 0, to: samples.count, by: 3_200) { // 200 ms chunks, like the recorder
             live.feed(Array(samples[start..<min(start + 3_200, samples.count)]))
         }
@@ -63,11 +63,10 @@ final class AppleSpeechTests: XCTestCase {
 
     /// The rule for when Apple runs. Pure, so it never touches the real app's saved custom words.
     func testAppleFitsOnlyWhenItCan() {
-        XCTAssertTrue(TranscriptionEngine.appleFits(model: "auto", meeting: false, customWords: ""))
-        XCTAssertTrue(TranscriptionEngine.appleFits(model: AppleSpeech.modelID, meeting: false, customWords: "  "))
-        XCTAssertFalse(TranscriptionEngine.appleFits(model: "auto", meeting: true, customWords: ""), "meetings need Whisper's You and Them")
-        XCTAssertFalse(TranscriptionEngine.appleFits(model: "auto", meeting: false, customWords: "Jaybulb"), "custom words need Whisper's prompt")
-        XCTAssertFalse(TranscriptionEngine.appleFits(model: "openai_whisper-tiny", meeting: false, customWords: ""))
+        XCTAssertTrue(TranscriptionEngine.appleFits(model: "auto", customWords: ""))
+        XCTAssertTrue(TranscriptionEngine.appleFits(model: AppleSpeech.modelID, customWords: "  "))
+        XCTAssertFalse(TranscriptionEngine.appleFits(model: "auto", customWords: "Jaybulb"), "custom words need Whisper's prompt")
+        XCTAssertFalse(TranscriptionEngine.appleFits(model: "openai_whisper-tiny", customWords: ""))
     }
 
     /// The engine's own Apple path: start, pump, finish. Then stop pressed while the session is still starting.
@@ -89,7 +88,7 @@ final class AppleSpeechTests: XCTestCase {
 
         let engine = TranscriptionEngine()
         engine.selectedModel = "auto"
-        try XCTSkipIf(!TranscriptionEngine.appleFits(model: "auto", meeting: false, customWords: engine.customWords), "this Mac has custom words saved, so Whisper runs")
+        try XCTSkipIf(!TranscriptionEngine.appleFits(model: "auto", customWords: engine.customWords), "this Mac has custom words saved, so Whisper runs")
         let used = await engine.simulateAppleLive(samples)
         XCTAssertTrue(used, "Auto should record through Apple here")
         XCTAssertTrue(engine.transcribedText.lowercased().contains("pineapple"), "lost the end: \(engine.transcribedText)")
@@ -98,5 +97,47 @@ final class AppleSpeechTests: XCTestCase {
         // Stop the instant recording starts: it must finish, and anything Apple heard must be complete.
         let early = await engine.simulateAppleLive(samples, listen: .zero)
         if early { XCTAssertTrue(engine.transcribedText.lowercased().contains("pineapple"), "early stop lost words: \(engine.transcribedText)") }
+    }
+
+    /// Meetings on Apple: the mixed mic and call audio through SpeechAnalyzer, each line labelled You or Them.
+    func testAppleMeetingSpeakerLabels() async throws {
+        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
+        guard #available(macOS 26.0, *) else { throw XCTSkip("SpeechAnalyzer needs macOS 26") }
+        await AppleSpeech.prepare(for: Locale.current.language.languageCode?.identifier ?? "en")
+        let installed = await AppleSpeech.installedLocale(for: "auto")
+        try XCTSkipIf(installed == nil, "Apple's model for this Mac's language is not installed")
+        func speech(_ text: String, voice: String) throws -> [Float] {
+            let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-apple-\(voice).wav")
+            let say = Process()
+            say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+            say.arguments = ["-v", voice, "-o", wav.path, "--data-format=LEF32@16000", text]
+            try say.run(); say.waitUntilExit()
+            let file = try AVAudioFile(forReading: wav)
+            let buf = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))!
+            try file.read(into: buf)
+            return Array(UnsafeBufferPointer(start: buf.floatChannelData![0], count: Int(buf.frameLength)))
+        }
+        let mine = try speech("Can you send me the quarterly budget by Friday.", voice: "Samantha")
+        let theirs = try speech("Sure, I will email the budget tomorrow morning.", voice: "Daniel")
+        let gap = [Float](repeating: 0, count: 32_000)
+        let mic = mine + gap + [Float](repeating: 0, count: theirs.count)
+        let call = [Float](repeating: 0, count: mine.count) + gap + theirs
+        var mixer = AudioMixer(), mixed: [Float] = []
+        for i in stride(from: 0, to: mic.count, by: 32_000) { // 2 s at a time, as the two captures arrive
+            mixed += mixer.pushMic(Array(mic[i..<min(mic.count, i + 32_000)]))
+            mixed += mixer.pushSystem(Array(call[i..<min(call.count, i + 32_000)]))
+        }
+
+        let engine = TranscriptionEngine()
+        engine.selectedModel = "auto"
+        try XCTSkipIf(!TranscriptionEngine.appleFits(model: "auto", customWords: engine.customWords), "this Mac has custom words saved, so Whisper runs")
+        engine.bufferLock.withLock { engine.speakerFrames = mixer.takeFrames() }
+        let used = await engine.simulateAppleLive(mixed)
+        XCTAssertTrue(used, "Auto should record the meeting through Apple here")
+        let text = engine.transcribedText
+        let lines = text.split(separator: "\n").map { $0.lowercased() }
+        XCTAssertTrue(lines.contains { $0.hasPrefix("you:") && $0.contains("friday") }, "mic line not labelled You: \(text)")
+        XCTAssertTrue(lines.contains { $0.hasPrefix("them:") && $0.contains("tomorrow") }, "call line not labelled Them: \(text)")
+        XCTAssertEqual(Set(engine.finalLines.compactMap(\.speaker)), ["You", "Them"])
     }
 }

@@ -4,7 +4,7 @@ import Speech
 #endif
 
 /// Apple's own on-device speech model (SpeechAnalyzer, iOS 26 and macOS 26). On Auto it is the first choice for live
-/// speech whenever Apple has the language; Whisper covers older systems, meetings, custom words and every other language.
+/// speech whenever Apple has the language; Whisper covers older systems, custom words and every other language.
 enum AppleSpeech {
     static let modelID = "apple"
 
@@ -96,8 +96,8 @@ enum AppleSpeech {
             (stream, input) = AsyncStream.makeStream(of: AnalyzerInput.self)
         }
 
-        /// Starts listening. `onUpdate` gets everything said so far, finished words first, the word being heard last.
-        func start(onUpdate: @escaping @MainActor (String) -> Void) async throws {
+        /// Starts listening. `onUpdate` gets the finished lines so far and the words still being heard.
+        func start(onUpdate: @escaping @MainActor ([TimedLine], String) -> Void) async throws {
             results = Task { [transcriber] in
                 var heard = ""
                 for try await result in transcriber.results {
@@ -111,7 +111,7 @@ enum AppleSpeech {
                     } else {
                         heard = text
                     }
-                    await onUpdate(AppleSpeech.join(finalText, heard))
+                    await onUpdate(lines, heard)
                 }
             }
             do {
