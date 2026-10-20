@@ -24,6 +24,10 @@ enum ModelState: Equatable {
 
 @MainActor
 class TranscriptionEngine: ObservableObject {
+    /// Where the engine's settings live. Under XCTest they go to their own suite, so a test run never rewrites
+    /// the real app's model, language, custom words or meeting mode on this Mac.
+    static let settings = NSClassFromString("XCTestCase") == nil ? UserDefaults.standard : UserDefaults(suiteName: "echo-tests")!
+
     @Published var transcribedText = ""
     @Published var isRecording = false
     @Published var isTranscribing = false
@@ -38,11 +42,15 @@ class TranscriptionEngine: ObservableObject {
     /// A problem worth telling the person about (no microphone, no call audio permission). Shown as an alert.
     @Published var notice: String?
     @Published var fileProgress: Double = 0
-    @Published var selectedModel = "auto"
-    @Published var selectedLanguage = "auto"
+    @Published var selectedModel = TranscriptionEngine.settings.string(forKey: "echo.selectedModel") ?? "auto" {
+        didSet { TranscriptionEngine.settings.set(selectedModel, forKey: "echo.selectedModel") }
+    }
+    @Published var selectedLanguage = TranscriptionEngine.settings.string(forKey: "echo.selectedLanguage") ?? "auto" {
+        didSet { TranscriptionEngine.settings.set(selectedLanguage, forKey: "echo.selectedLanguage") }
+    }
     /// Names and terms the person wants spelled their way, comma or line separated. Fed to Whisper as a prompt.
-    @Published var customWords: String = UserDefaults.standard.string(forKey: "notate.customWords") ?? "" {
-        didSet { UserDefaults.standard.set(customWords, forKey: "notate.customWords") }
+    @Published var customWords: String = TranscriptionEngine.settings.string(forKey: "notate.customWords") ?? "" {
+        didSet { TranscriptionEngine.settings.set(customWords, forKey: "notate.customWords") }
     }
     @Published var entries: [TranscriptionEntry] = []
     @Published var detectedLanguage: String?
@@ -80,8 +88,8 @@ class TranscriptionEngine: ObservableObject {
     let systemCapture = SystemAudioCapture()
     var mixer = AudioMixer()
     /// Meeting mode (Mac): also hear what the Mac plays, so both sides of a call are written down. No bot joins.
-    @Published var meetingMode = UserDefaults.standard.bool(forKey: "notate.meetingMode") {
-        didSet { UserDefaults.standard.set(meetingMode, forKey: "notate.meetingMode") }
+    @Published var meetingMode = TranscriptionEngine.settings.bool(forKey: "notate.meetingMode") {
+        didSet { TranscriptionEngine.settings.set(meetingMode, forKey: "notate.meetingMode") }
     }
     #endif
     let bufferLock = NSLock()

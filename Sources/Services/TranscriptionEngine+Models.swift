@@ -202,22 +202,22 @@ extension TranscriptionEngine {
         // so check the stable App Support copy by name first.
         let stable = Self.modelCacheURL.appendingPathComponent(model).path
         if FileManager.default.fileExists(atPath: stable) { return stable }
-        guard let dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String],
+        guard let dict = TranscriptionEngine.settings.dictionary(forKey: Self.modelFolderKey) as? [String: String],
               let folder = dict[model],
               FileManager.default.fileExists(atPath: folder) else { return nil }
         return folder
     }
 
     func cacheFolder(_ folder: String, for model: String) {
-        var dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
+        var dict = TranscriptionEngine.settings.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
         dict[model] = folder
-        UserDefaults.standard.set(dict, forKey: Self.modelFolderKey)
+        TranscriptionEngine.settings.set(dict, forKey: Self.modelFolderKey)
     }
 
     func clearCachedFolder(for model: String) {
-        var dict = UserDefaults.standard.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
+        var dict = TranscriptionEngine.settings.dictionary(forKey: Self.modelFolderKey) as? [String: String] ?? [:]
         dict.removeValue(forKey: model)
-        UserDefaults.standard.set(dict, forKey: Self.modelFolderKey)
+        TranscriptionEngine.settings.set(dict, forKey: Self.modelFolderKey)
     }
 
 }

@@ -39,7 +39,7 @@ Since 1.4.2 the app ships tiny, base and small inside `BundledModels/` (fetched 
 
 **Account** (optional, 2026-10-20): `Services/Account.swift` talks to jaybulb-api (api.jaybulb.com) for sign up, sign in, forgot password, rename and delete; the refresh token is in the Keychain. Confirm and reset emails come from authmail with the Echo theme and land on `docs/account.html`. Transcripts never go to the server. Never make the account required: "works fully without one" is the pitch.
 
-**ContentView**: on iPhone the bottom row is the record button, dead centre, with Settings at its leading edge (Joshua's call), both in Apple's glass button styles on iOS 26. Share and More (clean up, summarize, read aloud, transcribe a file) live in the native nav bar, History on its left. On the Mac all of it sits in the toolbar with the meeting toggle, History in the sidebar. No splash, no cards around the transcript, no mode switch: files come in through More, drag and drop on the Mac, or Open With.
+**ContentView**: on iPhone the bottom row is the record button, dead centre, with Settings at its leading edge (Joshua's call), both in Apple's glass button styles on iOS 26. Share and More (clean up, summarize, read aloud, transcribe a file) live in the native nav bar, History on its left. On the Mac the same bottom bar (Joshua's call): Settings and the meeting toggle left, record centre, Share and More right, all glass; the toolbar only shows the model download ring, History is the sidebar. No splash, no cards around the transcript, no mode switch: files come in through More, drag and drop on the Mac, or Open With.
 
 Accent color is the asset catalog blue. The record button is tinted with `Color.accentColor`; icon buttons follow the system (primary in bars and glass). Type is the system font: every view uses `Font.echo(size, weight)`, which is SF Pro (Notate Sans was dropped 2026-10-20). Icon is a white voice wave that rings out, fades like an echo and settles into a written line, over a shorter line, on a #0074D9 gradient, built from `Echo.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Echo`), there is no AppIcon.appiconset. Products are named Echo.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
 
@@ -60,6 +60,10 @@ Ship gotchas, all seen for real:
 - Versions live only in `project.yml`. `asc xcode version edit` bumps the generated xcodeproj, so never run `xcodegen generate` between the bump and the archive or the build number resets to project.yml's.
 - The Watch app needs manual export: `signing/` holds the "Notate iOS App Store" and "Notate Watch App Store" profiles (gitignored); export with an ExportOptions plist naming both, then `asc builds upload --ipa`. A build with a Watch app needs an APP_WATCH_ULTRA screenshot or review refuses it. Info.plists use `$(...)`.
 - Do not edit Sources while an archive is running.
+
+## Promo
+
+`launch/echo-promo.mp4` (15 s vertical) is cut from real footage: the `-ECHO_DEMO 1` launch flag plays `Documents/demo.wav` through the live engine in real time, so the screen shows Echo genuinely transcribing the voiceover (Joshua's ElevenLabs v3 clone). Record the Mac app for live scenes (Apple's engine; the simulator only has Whisper and lags). Demo runs never save to history. The music bed is original, synthesized in numpy (the ElevenLabs keys have no music permission). On macOS put `-ApplePersistenceIgnoreState YES` before `-ECHO_DEMO 1`, or the bare YES opens as a document and no window shows.
 
 ## Landing
 

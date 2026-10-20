@@ -13,6 +13,9 @@ struct ContentView: View {
     @State private var importing = false
     @State private var isDropTargeted = false
     @State private var exportFormat: Exporter.Format?
+    #if os(macOS)
+    @State private var columns: NavigationSplitViewVisibility = .detailOnly // History starts tucked away; the toolbar button opens it
+    #endif
 
     var body: some View {
         layout
@@ -52,6 +55,11 @@ struct ContentView: View {
                 #endif
                 if IntentInbox.takePendingStart() { engine.startRecording() } // launched by Shortcuts or the Action button
                 await engine.loadModel()
+                if CommandLine.arguments.contains("-ECHO_DEMO"), // promo footage, see TranscriptionEngine.runDemo
+                   let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    await engine.runDemo(docs.appendingPathComponent("demo.wav"))
+                }
             }
             .onReceive(NotificationCenter.default.publisher(for: IntentInbox.startRecording)) { _ in
                 if IntentInbox.takePendingStart(), !engine.isRecording { engine.startRecording() }
@@ -114,31 +122,67 @@ struct ContentView: View {
     }
     #else
     private var layout: some View {
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $columns) {
             HistoryView(entries: engine.entries, onDelete: engine.deleteEntry, speech: speech)
                 .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
             transcript
-                .safeAreaInset(edge: .bottom) { recordButton.padding(.vertical, 16) }
+                .safeAreaInset(edge: .bottom) { macBar }
                 .overlay {
                     if isDropTargeted {
                         RoundedRectangle(cornerRadius: 20).stroke(Color.accentColor, lineWidth: 2).padding(8)
                     }
                 }
                 .onDrop(of: Self.audioTypes, isTargeted: $isDropTargeted) { handleDrop(providers: $0) }
-                .toolbar {
-                    ToolbarItemGroup(placement: .primaryAction) {
-                        upgradeRing
-                        // Meeting: also hear the call (what the Mac plays). No bot joins, nothing leaves the Mac.
-                        Toggle(isOn: $engine.meetingMode) { Label("Meeting", systemImage: "person.2.wave.2") }
-                            .disabled(engine.isRecording)
-                            .help(engine.meetingMode ? "Meeting on: hears your mic and the call" : "Meeting off: hears your mic only")
-                        shareMenu
-                        moreMenu
-                        settingsButton
-                    }
-                }
+                .toolbar { ToolbarItem(placement: .primaryAction) { upgradeRing } }
         }
+    }
+
+    /// The Mac's bottom bar, same shape as the iPhone's: Settings and Meeting left, record dead centre, Share and More right.
+    private var macBar: some View {
+        recordButton
+            .frame(maxWidth: .infinity)
+            .overlay(alignment: .leading) {
+                HStack(spacing: 12) {
+                    barButton("gearshape", label: "Settings") { showSettings = true }
+                        .accessibilityIdentifier("settings-button")
+                    // Meeting: also hear the call (what the Mac plays). No bot joins, nothing leaves the Mac.
+                    barButton(engine.meetingMode ? "person.2.wave.2.fill" : "person.2.wave.2", label: engine.meetingMode ? "Meeting on" : "Meeting off") {
+                        engine.meetingMode.toggle()
+                    }
+                    .foregroundStyle(engine.meetingMode ? Color.accentColor : Color.primary)
+                    .disabled(engine.isRecording)
+                    .help(engine.meetingMode ? "Meeting on: hears your mic and the call" : "Meeting off: hears your mic only")
+                }
+            }
+            .overlay(alignment: .trailing) {
+                HStack(spacing: 12) {
+                    barMenu("square.and.arrow.up", label: "Share or export") { shareItems }
+                        .disabled(engine.transcribedText.isEmpty)
+                    barMenu(engine.isCleaning || engine.isSummarizing ? "hourglass" : "ellipsis", label: "More") { moreItems }
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+    }
+
+    /// A menu that looks exactly like a bar button (menus take a button style only as a button-style menu).
+    private func barMenu<Items: View>(_ symbol: String, label: String, @ViewBuilder items: () -> Items) -> some View {
+        Menu(content: items) {
+            Image(systemName: symbol).font(.echo(17)).frame(width: 32, height: 32).fallbackCircle()
+        }
+        .menuStyle(.button)
+        .menuIndicator(.hidden)
+        .glassCircle()
+        .accessibilityLabel(label)
+    }
+
+    private func barButton(_ symbol: String, label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol).font(.echo(17)).frame(width: 32, height: 32).fallbackCircle()
+        }
+        .glassCircle()
+        .accessibilityLabel(label)
     }
     #endif
 
@@ -190,41 +234,45 @@ struct ContentView: View {
 
     private var busy: Bool { engine.isRecording || importing || engine.isCleaning || engine.isSummarizing }
 
-    private var shareMenu: some View {
-        Menu {
-            ShareLink("Share", item: engine.transcribedText)
-            Divider()
-            ForEach(Exporter.Format.allCases) { format in
-                Button("Export \(format.rawValue)") { exportFormat = format }
-            }
-        } label: {
-            Label("Share", systemImage: "square.and.arrow.up")
+    @ViewBuilder
+    private var shareItems: some View {
+        ShareLink("Share", item: engine.transcribedText)
+        Divider()
+        ForEach(Exporter.Format.allCases) { format in
+            Button("Export \(format.rawValue)") { exportFormat = format }
         }
-        .menuIndicator(.hidden)
-        .disabled(engine.transcribedText.isEmpty)
+    }
+
+    private var shareMenu: some View {
+        Menu { shareItems } label: { Label("Share", systemImage: "square.and.arrow.up") }
+            .menuIndicator(.hidden)
+            .disabled(engine.transcribedText.isEmpty)
+    }
+
+    @ViewBuilder
+    private var moreItems: some View {
+        let empty = engine.transcribedText.isEmpty
+        if Cleanup.isAvailable {
+            Button { Task { await engine.cleanUp() } } label: { Label("Clean Up", systemImage: "wand.and.stars") }
+                .disabled(empty || busy)
+            Button { Task { await engine.summarize() } } label: { Label("Summarize", systemImage: "list.bullet.rectangle") }
+                .disabled(empty || busy)
+        }
+        Button {
+            speech.toggle(id: Self.liveID, text: engine.transcribedText, languageCode: engine.isUnusualLanguage ? engine.detectedLanguage : nil)
+        } label: {
+            speech.speakingID == Self.liveID
+                ? Label("Stop Reading", systemImage: "stop")
+                : Label("Read Aloud", systemImage: "speaker.wave.2")
+        }
+        .disabled(empty)
+        Divider()
+        Button { showFilePicker = true } label: { Label("Transcribe a File", systemImage: "doc") }
+            .disabled(engine.modelState != .ready || busy)
     }
 
     private var moreMenu: some View {
-        let empty = engine.transcribedText.isEmpty
-        return Menu {
-            if Cleanup.isAvailable {
-                Button { Task { await engine.cleanUp() } } label: { Label("Clean Up", systemImage: "wand.and.stars") }
-                    .disabled(empty || busy)
-                Button { Task { await engine.summarize() } } label: { Label("Summarize", systemImage: "list.bullet.rectangle") }
-                    .disabled(empty || busy)
-            }
-            Button {
-                speech.toggle(id: Self.liveID, text: engine.transcribedText, languageCode: engine.isUnusualLanguage ? engine.detectedLanguage : nil)
-            } label: {
-                speech.speakingID == Self.liveID
-                    ? Label("Stop Reading", systemImage: "stop")
-                    : Label("Read Aloud", systemImage: "speaker.wave.2")
-            }
-            .disabled(empty)
-            Divider()
-            Button { showFilePicker = true } label: { Label("Transcribe a File", systemImage: "doc") }
-                .disabled(engine.modelState != .ready || busy)
-        } label: {
+        Menu { moreItems } label: {
             if engine.isCleaning || engine.isSummarizing {
                 ProgressView().controlSize(.small)
             } else {

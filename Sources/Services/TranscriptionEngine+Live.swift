@@ -140,7 +140,7 @@ extension TranscriptionEngine {
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
         let trimmed = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmed.isEmpty {
+        if !trimmed.isEmpty, !CommandLine.arguments.contains("-ECHO_DEMO") { // promo footage never lands in real history
             var entry = TranscriptionEntry(text: trimmed, duration: duration, model: selectedModel)
             entry.lines = finalLines.isEmpty ? nil : finalLines
             addEntry(entry)
@@ -273,4 +273,35 @@ extension TranscriptionEngine {
         )
     }
 
+
+    /// Promo footage (`-ECHO_DEMO` launch flag): plays a 16 kHz mono file into the live pipeline in real time, as if
+    /// someone were talking into the mic, through the same engine path a recording takes. The commercial's voiceover
+    /// is what the app hears, so the screen is real transcription, not a mock.
+    func runDemo(_ url: URL) async {
+        guard let file = try? AVAudioFile(forReading: url),
+              let buffer = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length)),
+              (try? file.read(into: buffer)) != nil, let channel = buffer.floatChannelData?[0] else { return }
+        let samples = Array(UnsafeBufferPointer(start: channel, count: Int(buffer.frameLength)))
+        isRecording = true
+        transcribedText = ""; committedText = ""; lastSpeaker = nil
+        committedLines = []; finalLines = []; bufferOffset = 0
+        bufferLock.withLock { audioBuffer = []; speakerFrames = [] }
+        recordingStart = Date()
+        appleSession = nil
+        recordingTask = Task {
+            if await startApple() { await pumpApple(); return }
+            while !Task.isCancelled {
+                await transcribeCurrentBuffer()
+                if Task.isCancelled { break }
+                try? await Task.sleep(for: .seconds(2))
+            }
+        }
+        let chunk = Int(file.processingFormat.sampleRate / 10)
+        for start in stride(from: 0, to: samples.count, by: chunk) {
+            bufferLock.withLock { audioBuffer.append(contentsOf: samples[start..<min(start + chunk, samples.count)]) }
+            audioLevel = min(1, samples[start..<min(start + chunk, samples.count)].map(abs).max() ?? 0)
+            try? await Task.sleep(for: .milliseconds(100))
+        }
+        await stopRecording()
+    }
 }

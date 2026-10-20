@@ -27,7 +27,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Services/Intents.swift` | Shortcuts and the Action button: start recording, transcribe audio |
 | `Sources/Services/Account.swift` | The optional account on jaybulb-api: sign up, sign in, reset, rename, delete; refresh token in the Keychain |
 | `Sources/Services/SpeechManager.swift` | Reads a transcript aloud with the chosen system voice |
-| `Sources/Views/ContentView.swift` | The screen: transcript, record, nav bar (Share, More, History, Settings), Mac toolbar and drop |
+| `Sources/Views/ContentView.swift` | The screen: transcript, record, the bottom bar (Settings, Meeting on Mac, Share, More), History, Mac drop, the `-ECHO_DEMO` promo hook |
 | `Sources/Views/TranscriptionView.swift` | Transcript, live word with its pop, errors, unusual language badge |
 | `Sources/Views/RecordButton.swift` | Record button and the Liquid Glass helpers |
 | `Sources/Views/HistoryView.swift` | History with native search, swipe and context menu |
@@ -65,13 +65,13 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `docs/CONTRIBUTING.md` | Setup, tests, reporting a security issue |
 | `docs/LOOP-HANDOFF.md` | Where the build loop stands |
 | `brand/BRAND.md` | Brand kit |
-| `launch/` | Launch kit: Product Hunt, HN, Reddit, X, directories |
+| `launch/` | Launch kit: Product Hunt, HN, Reddit, X, directories, and `echo-promo.mp4` |
 
 ## Storage
 
 - `Documents/echo-history.json`: every transcript, no cap.
 - `Application Support/echo-models/`: a downloaded large model, kept where iOS cannot purge it.
-- UserDefaults: settings. The keys keep their old `echo.*` and `notate.*` names on purpose.
+- UserDefaults: settings, including the chosen model and language (`echo.selectedModel`, `echo.selectedLanguage`). The keys keep their old `echo.*` and `notate.*` names on purpose. Under XCTest the engine writes to the `echo-tests` suite instead, so tests never touch the real app's settings.
 
 ## Gotchas
 
