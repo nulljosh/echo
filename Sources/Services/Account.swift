@@ -172,7 +172,7 @@ enum Keychain {
         delete(key)
         var q = query(key)
         q[kSecValueData as String] = Data(value.utf8)
-        q[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        q[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly // never rides along in a backup
         SecItemAdd(q as CFDictionary, nil)
     }
 

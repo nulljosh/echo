@@ -16,11 +16,23 @@ struct SettingsView: View {
 
     @AppStorage(SpeechManager.voiceIdentifierKey) private var voiceID = ""
 
-    private var voices: [AVSpeechSynthesisVoice] {
-        AVSpeechSynthesisVoice.speechVoices()
-            .filter { $0.language.hasPrefix(Locale.current.language.languageCode?.identifier ?? "en") }
-            .filter { !$0.voiceTraits.contains(.isNoveltyVoice) } // no Bahh, Boing or Bad News
-            .sorted { $0.name < $1.name }
+    /// One row per voice and accent, at the best quality installed. A name that exists in two accents gets its region.
+    private var voices: [(id: String, label: String)] {
+        let language = Locale.current.language.languageCode?.identifier ?? "en"
+        var best: [String: AVSpeechSynthesisVoice] = [:]
+        for voice in AVSpeechSynthesisVoice.speechVoices()
+        where voice.language.hasPrefix(language) && !voice.voiceTraits.contains(.isNoveltyVoice) { // no Bahh, Boing or Bad News
+            let key = voice.name + "|" + voice.language
+            if (best[key]?.quality.rawValue ?? 0) < voice.quality.rawValue { best[key] = voice }
+        }
+        let picked = best.values.sorted { ($0.name, $0.language) < ($1.name, $1.language) }
+        let counts = Dictionary(grouping: picked, by: \.name).mapValues(\.count)
+        return picked.map { voice in
+            guard counts[voice.name, default: 1] > 1,
+                  let region = Locale(identifier: voice.language).region?.identifier,
+                  let place = Locale.current.localizedString(forRegionCode: region) else { return (voice.identifier, voice.name) }
+            return (voice.identifier, "\(voice.name) (\(place))")
+        }
     }
 
     var body: some View {
@@ -36,7 +48,7 @@ struct SettingsView: View {
                     }
                     Picker("Speak-Back Voice", selection: $voiceID) {
                         Text("Default").tag("")
-                        ForEach(voices, id: \.identifier) { Text($0.name).tag($0.identifier) }
+                        ForEach(voices, id: \.id) { Text($0.label).tag($0.id) }
                     }
                     Picker("Language", selection: $selectedLanguage) {
                         ForEach(["auto"] + languages.filter { $0 != "auto" }.sorted { languageLabel($0) < languageLabel($1) }, id: \.self) {
@@ -123,9 +135,15 @@ struct SettingsView: View {
     }
 
     private func modelLabel(_ model: String) -> String {
-        if model == "auto" { return "Auto" }
-        if model.contains("large") { return "Large" }
-        return model.replacingOccurrences(of: "openai_whisper-", with: "").capitalized
+        switch model {
+        case "auto": return "Auto"
+        case AppleSpeech.modelID: return "Apple"
+        case let m where m.contains("large"): return "Large"
+        case let m where m.contains("small"): return "Small"
+        case let m where m.contains("base"): return "Base"
+        case let m where m.contains("tiny"): return "Tiny"
+        default: return model
+        }
     }
 
     private func modelDescription(_ model: String) -> String {

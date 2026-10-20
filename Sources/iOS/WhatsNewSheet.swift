@@ -1,17 +1,16 @@
 import SwiftUI
 
-private let whatsNewVersion = "2.0"
+private let whatsNewVersion = "2.2"
 private let whatsNewBullets = [
-    "Summary and action items for any transcript, made on your device",
-    "Search everything you've ever said, and export as text, Markdown or subtitles",
-    "Shortcuts, Siri and the Action button: start recording or transcribe a file in one tap",
-    "An Apple Watch app: record on your wrist, your iPhone writes it out",
+    "A cleaner look: one record button, Liquid Glass, and the word you're saying pops in as you talk",
+    "Apple's own speech model on iOS 26, with Whisper as the backup, so it's faster and stays offline",
+    "An optional account. Echo works fully without one, and your transcripts never leave your iPhone",
+    "Summaries, search across everything said, Shortcuts, and the Apple Watch app",
 ]
 
 struct WhatsNewSheet: View {
     @AppStorage("whats_new_seen_version") private var seenVersion = ""
     @State private var isPresented = false
-    @State private var contentHeight: CGFloat = 220
 
     var body: some View {
         Color.clear
@@ -20,50 +19,40 @@ struct WhatsNewSheet: View {
                 isPresented = seenVersion != whatsNewVersion
             }
             .sheet(isPresented: $isPresented) {
-                VStack(alignment: .leading, spacing: 24) {
-                    Text("What's New in v\(whatsNewVersion)")
-                        .font(.echo(22, .bold))
-
-                    VStack(alignment: .leading, spacing: 16) {
-                        ForEach(whatsNewBullets, id: \.self) { bullet in
-                            HStack(alignment: .firstTextBaseline, spacing: 12) {
-                                Circle().fill(Color.accentColor).frame(width: 6, height: 6).alignmentGuide(.firstTextBaseline) { $0[.bottom] + 2 }
-                                Text(bullet).lineSpacing(3)
+                // Standard detents plus a scroll view: the sheet can never clip, whatever the text size.
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 24) {
+                        Text("What's New in Echo \(whatsNewVersion)")
+                            .font(.echo(22, .bold))
+                        VStack(alignment: .leading, spacing: 16) {
+                            ForEach(whatsNewBullets, id: \.self) { bullet in
+                                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                                    Circle().fill(Color.accentColor).frame(width: 6, height: 6).alignmentGuide(.firstTextBaseline) { $0[.bottom] + 2 }
+                                    Text(bullet).fixedSize(horizontal: false, vertical: true)
+                                }
                             }
                         }
+                        .font(.echo(17))
+                        .foregroundStyle(.secondary)
                     }
-                    .font(.echo(17))
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 32)
+                }
+                .safeAreaInset(edge: .bottom) {
                     Button {
                         seenVersion = whatsNewVersion
                         isPresented = false
                     } label: {
-                        Text("Got it")
-                            .font(.echo(17, .semibold))
-                            .frame(maxWidth: .infinity, minHeight: 48)
+                        Text("Got it").font(.echo(17, .semibold)).frame(maxWidth: .infinity, minHeight: 48)
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.capsule)
-                    .padding(.top, 8)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
                 }
-                // Measure the ideal height, not the height the sheet squeezes it to, or the detent shrinks and clips the top.
-                .fixedSize(horizontal: false, vertical: true)
-                // The detent is the content height, so the bottom padding has to clear the home indicator and the sheet's rounded corners too.
-                .padding(.horizontal, 24)
-                .padding(.top, 40)
-                .padding(.bottom, 44)
-                .background(GeometryReader { geo in
-                    Color.clear.preference(key: SheetHeightKey.self, value: geo.size.height)
-                })
-                .onPreferenceChange(SheetHeightKey.self) { contentHeight = $0 }
-                .presentationDetents([.height(contentHeight)])
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
             }
     }
-}
-
-private struct SheetHeightKey: PreferenceKey {
-    nonisolated(unsafe) static var defaultValue: CGFloat = 220
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = nextValue() }
 }

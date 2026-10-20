@@ -4,10 +4,6 @@ History lives in git log. This file only holds what is still open. Repo versions
 
 ## v2.3: Joshua's notes and hardening
 
-- [ ] What's New sheet overflows the screen (notes/attachments/2026-10-19/echo-4.png, the bottom of the sheet is cut off).
-- [ ] Speak-Back Voice shows duplicate names (Eddy, Flo, Sandy, Shelley). Show the quality or drop the lower one.
-- [ ] Make the model list readable (echo-5.png: Auto, Tiny, Base, Small_216Mb, Large, Apple).
-- [ ] Refresh token Keychain item becomes this-device-only, so it never rides along in a backup.
 - [ ] Engine-level test for Apple first: start, pump and finish, and stop pressed while the Apple session is still starting.
 - [ ] Benchmarks: docs/BENCHMARKS.md with the real-time factor of tiny, base, small and Apple on the same clip.
 - [ ] Split TranscriptionEngine into extension files by area (model loading, live, files, Apple, history), no logic changes.
