@@ -2,15 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>NotateSans-Regular.ttf</string>
-		<string>NotateSans-Medium.ttf</string>
-		<string>NotateSans-SemiBold.ttf</string>
-		<string>NotateSans-Bold.ttf</string>
-	</array>
 	<key>CFBundleDisplayName</key>
-	<string>Notate</string>
+	<string>Echo</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -31,7 +24,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.nulljosh.echo</string>
 	<key>CFBundleName</key>
-	<string>Notate</string>
+	<string>Echo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -43,7 +36,7 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Notate transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
+	<string>Echo transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

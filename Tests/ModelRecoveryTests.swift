@@ -91,7 +91,7 @@ final class ModelRecoveryTests: XCTestCase {
         await engine.waitForUpgrade()
         XCTAssertEqual(engine.activeModel, engine.resolvedModel, "the chosen bundled model must swap in")
         // The swapped-in model (the quantized small on a Mac) must still hear real speech right.
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-accuracy.wav")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-accuracy.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "The quick brown fox jumps over the lazy dog near the river bank."]
@@ -110,7 +110,7 @@ final class ModelRecoveryTests: XCTestCase {
     /// Live transcript keeps everything said, not just the last few seconds: 40 s of speech through the live path.
     func testLiveTranscriptKeepsEverythingSaid() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-long.wav")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-long.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEF32@16000", "-r", "150",
@@ -150,7 +150,7 @@ final class ModelRecoveryTests: XCTestCase {
     func testMeetingSpeakerLabels() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
         func speech(_ text: String, voice: String) throws -> [Float] {
-            let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-\(voice).wav")
+            let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-\(voice).wav")
             let say = Process()
             say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
             say.arguments = ["-v", voice, "-o", wav.path, "--data-format=LEF32@16000", text]
@@ -180,16 +180,16 @@ final class ModelRecoveryTests: XCTestCase {
     /// Custom words: clean prompt text, and a prompt must never blank real speech.
     func testCustomWordsPromptTextAndNoBlankOutput() async throws {
         XCTAssertNil(TranscriptionEngine.promptText(from: " , \n "))
-        XCTAssertEqual(TranscriptionEngine.promptText(from: "Notate, LEC\nnotate, Jaybulb"), " Notate, LEC, Jaybulb.")
+        XCTAssertEqual(TranscriptionEngine.promptText(from: "Echo, LEC\necho, Jaybulb"), " Echo, LEC, Jaybulb.")
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
         try XCTSkipIf(TranscriptionEngine.bundledTiny == nil, "tiny model not bundled")
         let engine = TranscriptionEngine()
         engine.selectedModel = TranscriptionEngine.tinyModel
         let saved = engine.customWords
-        engine.customWords = "Notate, Jaybulb, Healstack, LEC"
+        engine.customWords = "Echo, Jaybulb, Healstack, LEC"
         defer { engine.customWords = saved }
         await engine.loadModel()
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-words.wav")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-words.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "Hello, this is a transcription test for the quality check."]
@@ -236,7 +236,7 @@ final class ModelRecoveryTests: XCTestCase {
         renderer.scale = 2
         let image = try XCTUnwrap(renderer.nsImage, "summary sheet did not render")
         let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
-        try rep.representation(using: .png, properties: [:])!.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("notate-summary.png"))
+        try rep.representation(using: .png, properties: [:])!.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("echo-summary.png"))
     }
 
     /// History search: every word must match, any case or accent, transcript or summary.
@@ -268,7 +268,7 @@ final class ModelRecoveryTests: XCTestCase {
     @MainActor
     func testShortcutIntents() async throws {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-intent.wav")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-intent.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "Remember to water the plants on Sunday."]
@@ -295,7 +295,7 @@ final class ModelRecoveryTests: XCTestCase {
         try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
         let locale = await AppleSpeech.installedLocale(for: "en")
         try XCTSkipIf(locale == nil, "Apple's English model is not installed here")
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("notate-apple.wav")
+        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-apple.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "The quick brown fox jumps over the lazy dog near the river bank."]

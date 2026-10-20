@@ -1,11 +1,21 @@
-/* Variables & Theme, portfolio vibe (jaybulb.com/tokens.css) */
-@import url("https://jaybulb.com/tokens.css");
+/* Variables & Theme: Echo tokens (tokens.css), the same ones the landing uses */
+@import url("tokens.css");
 
 :root {
+    --text2: var(--sub);
+    --bg2: var(--surface);
+    --border: var(--line);
+    --blue-light: var(--accent-light);
+    --navy: var(--accent-deep);
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, .14);
+    --dur: .2s;
     --font: var(--font-body, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif);
-    /* ponytail: Notate's own blue instead of the portfolio yellow, the bright
+    /* ponytail: Echo's own blue instead of the portfolio yellow, the bright
        accent reads wrong here and fails contrast under white button text. */
-    --primary: #2E6BE6;
+    --primary: #0067c7;
     --primary-ink: #ffffff;
     --accent-soft: #eef3fd;
     --primary-light: var(--blue-light);
@@ -22,9 +32,9 @@
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #111111;
+        --bg: #07111d;
         --bg2: #1a1a1a;
-        --bg-secondary: #1a1a1a;
+        --bg-secondary: #0f1b2b;
         --text: #e8e8f0;
         --text2: rgba(232,232,240,0.60);
         --border: rgba(232,232,240,0.10);
@@ -36,9 +46,9 @@
 }
 
 html.dark-mode {
-    --bg: #111111;
+    --bg: #07111d;
     --bg2: #1a1a1a;
-    --bg-secondary: #1a1a1a;
+    --bg-secondary: #0f1b2b;
     --text: #e8e8f0;
     --text2: rgba(232,232,240,0.60);
     --border: rgba(232,232,240,0.10);

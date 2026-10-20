@@ -42,7 +42,7 @@ struct RecordButton: View {
                         .frame(width: 16, height: 16)
                 } else {
                     Image(systemName: "mic.fill")
-                        .font(.notate(22, .medium))
+                        .font(.echo(22, .medium))
                         .foregroundStyle(iconColor)
                 }
             }

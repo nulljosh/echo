@@ -1,0 +1,55 @@
+/* Echo design tokens. One source for the landing, the brand page and the kit (brand/tokens.css links here).
+   Shared system: 8 point grid, one radius set, 48 point capsule controls, system font. The blue is the only colour Echo owns. */
+:root {
+  /* colour */
+  --accent: #0067c7;          /* links and focus on paper, AA */
+  --btn: #0067c7;             /* solid buttons, white label */
+  --frame: #0074D9;           /* the thin frame down the window edges */
+  --band: #0062bd;            /* full-bleed blue sections, white text AA */
+  --band-sub: #d4e7fb;        /* secondary text on the band */
+  --band-art: #8fc3f7;        /* the 1-bit art on the band */
+  --band-line: rgba(255, 255, 255, .22);
+  --accent-light: #4da6ff;    /* icon gradient top */
+  --accent-deep: #0074D9;     /* icon gradient bottom */
+  --ring: color-mix(in srgb, var(--accent) 30%, transparent);
+  --bg: #fdfdfd;
+  --surface: #f2f4f7;
+  --line: #dcdfe5;
+  --text: #1a1a1a;
+  --sub: #5a5f6b;
+
+  /* type: the system font, thinnest weight in caps for display */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --size-body: 17px;          /* 24 line */
+  --size-footnote: 13px;      /* 16 line */
+
+  /* space: the 8 point grid */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --wrap: 1120px;
+
+  /* shape */
+  --control: 48px;
+  --r-card: 28px;
+  --r-group: 20px;
+  --r-pill: 999px;
+  --r-sq: 2px;                /* landing buttons and panels */
+  --r-icon: 22.5%;
+  --motion: .2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #5aaeff;
+    --btn: #0b6fd6;
+    --frame: #0b6fd6;
+    --band: #00509c;
+    --band-sub: #c7def7;
+    --band-art: #6aaef0;
+    --bg: #07111d;            /* navy black */
+    --surface: #0f1b2b;
+    --line: #1f2d42;
+    --text: #f2f4f7;
+    --sub: #a0abbd;
+  }
+}

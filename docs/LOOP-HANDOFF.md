@@ -1,18 +1,18 @@
-# Notate loop handoff (2026-10-19, afternoon)
+# Echo loop handoff (2026-10-19, afternoon)
 
 ## What the loop is
 One loop works the road to v2.0 in this repo, one roadmap item per tick. It reads `roadmap.md` ("Road to v2.0"), does the next open item, runs the QA gate and a cold-launch check before each commit, and pushes. It ships builds only when App Review allows. It stops at v2.0.
 
-Always say Notate, never Voxprint. Replies short, TLDR, no em dashes.
+Always say Echo, never Voxprint. Replies short, TLDR, no em dashes.
 
 ## Where things stand
 - iPhone 2.0 with the Apple Watch companion is live (READY_FOR_SALE, 2026-10-19). The app ships its models inside the bundle, so it opens and works offline. The download is 386 MB.
 - Mac 2.0.0 is WAITING_FOR_REVIEW.
-- The 2.0 landing is deployed to notate.jaybulb.com.
+- The 2.0 landing is deployed to echo.jaybulb.com.
 - Roadmap items 1 to 7 of "Road to v2.0" are checked off. Item 8 ("Ship 2.0 on iPhone, Watch and Mac") stays open until Mac clears.
 - CI is green. The runner moved to macos-26 so the SpeechAnalyzer API is in the SDK. Cleanup keeps the text when Apple Intelligence is off, instead of throwing.
-- The roadmap is cut to open items (20 lines). The Notate rename is done and the orphan Mac record is gone.
-- Launch: 2.0 is posted on X and r/iosapps. Product Hunt shows Notate, and a 2.0 relaunch is under review there. The old Voxprint post gets deleted once the relaunch is approved.
+- The roadmap is cut to open items (20 lines). The Echo rename is done and the orphan Mac record is gone.
+- Launch: 2.0 is posted on X and r/iosapps. Product Hunt shows Echo, and a 2.0 relaunch is under review there. The old Voxprint post gets deleted once the relaunch is approved.
 - Check App Store state before acting on it: `asc versions list --app 6782604262`.
 
 ## Next, in order
@@ -22,5 +22,5 @@ Always say Notate, never Voxprint. Replies short, TLDR, no em dashes.
 
 ## Restart prompt
 ```
-/loop Notate: work the road to v2.0 one item per tick (roadmap.md "Road to v2.0"), QA gate green + cold-launch check before each commit, ship builds when App Review allows, stop at v2.0
+/loop Echo: work the road to v2.0 one item per tick (roadmap.md "Road to v2.0"), QA gate green + cold-launch check before each commit, ship builds when App Review allows, stop at v2.0
 ```

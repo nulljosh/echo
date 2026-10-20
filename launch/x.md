@@ -1,4 +1,4 @@
-1/ Notate is live. Speech to text that never leaves your device. Whisper runs on your iPhone or Mac, nothing is uploaded, no account needed. notate.jaybulb.com
+1/ Echo is live. Speech to text that never leaves your device. Whisper runs on your iPhone or Mac, nothing is uploaded, no account needed. echo.jaybulb.com
 
 2/ Everything is included in one $0.99 payment. Live dictation, file transcription, every language Whisper knows, all unlimited. No in-app purchases, no subscriptions, just one purchase forever.
 

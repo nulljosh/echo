@@ -3,7 +3,7 @@
 ## Setup
 
 ```
-git clone https://github.com/nulljosh/notate.git
+git clone https://github.com/nulljosh/echo.git
 cd voxprint
 ```
 

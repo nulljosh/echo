@@ -1,40 +1,40 @@
-# Notate brand kit and design system
+# Echo brand kit and design system
 
-speech becoming written lines
+Named for the nymph who repeats every word. The app hears you and gives it back written down, on your device.
+
+See it live at echo.jaybulb.com/brand.html.
 
 ## The mark
-One bold flat white glyph on an accent gradient tile. No text, no outline, no emblem.
+A voice wave rings out, fades like an echo, and settles into a written line, over a shorter line. One bold flat white glyph on a blue gradient tile. No text, no outline, no emblem.
 
-- `../Notate.icon` is the source of truth (Icon Composer). Light and dark fills are set in it.
+- `../Echo.icon` is the source of truth (Icon Composer). Light and dark fills are set in it.
 - `../icon.svg` is the flat copy for READMEs (shown at 80 px). `icon-1024.png` is the App Store icon, no alpha.
 - `mark.svg` is the glyph alone in `currentColor` for your own background.
-- Clear space equal to the width of the glyph's thickest stroke. Smallest size 16 px.
+- Clear space equals the stroke width. Smallest size 16 px. Always blue, never red.
+- Rebuild all of it with the brand generator: `make_brand.py <repo> Echo "#4da6ff" "#0074D9" <glyph.svg> "<idea>"`.
 
-## Mascot
-Dot (`mascot.svg`): a little blue page with the icon's sound wave for hair and two lines of text on its body. The icon, come to life. Flat two-tone blue, black eyes, no outline. Dot shows up on the landing and in empty states, never inside the app icon.
+## 1-bit art
+Public domain paintings of Echo, the Muses and memory, ordered-dithered to one bit (4x4 Bayer) and stored in the alpha channel of `../docs/art/*.png`. The site uses them as masks, tinted with the band's light blue over film grain. Each image is used once. Credits sit in a comment in `../docs/index.html`.
 
 ## Colour
 | Role | Value |
 |---|---|
-| Accent | `#0074D9` |
-| Gradient top | `#4da6ff` |
-| Text | `#1d1d1f` light, `#f5f5f7` dark |
-| Background | `#ffffff` light, `#000000` dark |
-| Surface | `#f5f5f7` light, `#1c1c1e` dark |
+| Accent, icon bottom | `#0074D9` |
+| Icon top | `#4da6ff` |
+| Band (white text on it) | `#0062bd` |
+| Action on paper | `#0067c7` |
+| Art dots | `#8fc3f7` |
+| Paper | `#fdfdfd` light, `#07111d` dark |
+| Ink | `#1a1a1a` light, `#f2f4f7` dark |
 
-The mark is a sound wave that turns into two lines of text: speech in, writing out. Always blue, never red.
-
-The accent is for actions, links and the icon. Never brown, beige, purple or teal.
+Never brown, beige, purple or teal.
 
 ## Type
-**Notate Sans** (`../fonts`), a proportional sans serif derived from Inter 4.1 under the OFL. Tailed `l`, serifed `I`, round quotes and single-storey `a` are on by default, so `Il1` never blur in a transcript. Regular, Medium, SemiBold, Bold. The apps, the landing page and the brand kit all use it. See it live at notate.jaybulb.com/brand.html.
-
-`"Notate Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif`. Scale 34/41 bold, 22/28, 17/24, 15/20, 13/18. Headlines track -0.045em.
+The system font (SF Pro) everywhere. The apps call `Font.echo(size, weight)`, which is `.system`. Display is the thinnest weight in caps, tracked tight. Labels are 13 px caps at 600, tracked .12em. Scale 34/41, 22/28, 17/24, 15/20, 13/16.
 
 ## Space and shape
-- Space on the 8 point grid: 4, 8, 12, 16, 24, 32, 48. Side margin 20. Reading column 680.
-- Radii: cards 28, grouped lists 20, controls fully round, icon 22 percent.
-- Controls are 48 points tall capsules, one height in a row. Focus is a 4 point ring at 30 percent accent.
-- Motion is 0.2 s ease and honours reduced motion.
+- 8 point grid: 4, 8, 12, 16, 24, 32, 48, 64, 96. Reading column 680.
+- Radii: web buttons and panels 2, rows 8, lists 20, cards 28, icon 22.5 percent, app controls fully round.
+- App controls are 48 point capsules; the record button is the one circle. Focus ring at 30 percent accent. Motion 0.2 s ease, honours reduced motion.
 
-`tokens.css` holds the app's accent. Everything else comes from the shared token file.
+`../docs/tokens.css` holds every token; `tokens.css` here links to it.

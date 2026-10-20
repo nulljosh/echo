@@ -21,10 +21,10 @@ struct HistoryView: View {
             if entries.isEmpty {
                 VStack(spacing: 8) {
                     Image(systemName: "waveform")
-                        .font(.notate(28))
+                        .font(.echo(28))
                         .foregroundStyle(.tertiary)
                     Text("No transcriptions yet")
-                        .font(.notate(13))
+                        .font(.echo(13))
                         .foregroundStyle(.tertiary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -34,7 +34,7 @@ struct HistoryView: View {
                         Image(systemName: "magnifyingglass").foregroundStyle(.tertiary)
                         TextField("Search everything said", text: $query)
                             .textFieldStyle(.plain)
-                            .font(.notate(15))
+                            .font(.echo(15))
                         if !query.isEmpty {
                             Button { query = "" } label: { Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary) }
                                 .buttonStyle(.plain)
@@ -48,7 +48,7 @@ struct HistoryView: View {
 
                     if shown.isEmpty {
                         Text("Nothing matches")
-                            .font(.notate(13))
+                            .font(.echo(13))
                             .foregroundStyle(.tertiary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
@@ -79,24 +79,24 @@ struct HistoryRow: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text(entry.formattedDate)
-                    .font(.notate(11, .medium))
+                    .font(.echo(11, .medium))
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(entry.formattedDuration)
-                    .font(.notate(11))
+                    .font(.echo(11))
                     .foregroundStyle(.tertiary)
                 Button {
                     speech.toggle(id: entry.id, text: entry.text, languageCode: nil)
                 } label: {
                     Image(systemName: speech.speakingID == entry.id ? "stop.circle.fill" : "speaker.wave.2.circle")
-                        .font(.notate(14))
+                        .font(.echo(14))
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
             }
 
             Text(entry.text)
-                .font(.notate(13))
+                .font(.echo(13))
                 .foregroundStyle(.primary)
                 .lineLimit(expanded ? nil : 2)
 
@@ -104,7 +104,7 @@ struct HistoryRow: View {
                 Button(expanded ? "Less" : "More") {
                     expanded.toggle()
                 }
-                .font(.notate(11, .medium))
+                .font(.echo(11, .medium))
                 .foregroundStyle(.tint)
                 .buttonStyle(.plain)
             }

@@ -1,60 +1,141 @@
-/* Notate landing. Brand tokens from ../brand/tokens.css, one accent, Notate Sans, 8 point grid. */
-@font-face{font-family:"Notate Sans";src:url(fonts/NotateSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Notate Sans";src:url(fonts/NotateSans-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Notate Sans";src:url(fonts/NotateSans-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Notate Sans";src:url(fonts/NotateSans-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
-:root{--accent:#0074D9;--accent-light:#4da6ff;--ring:color-mix(in srgb,#0074D9 30%,transparent);
---bg:#fff;--fg:#1d1d1f;--sub:#6e6e73;--surface:#f5f5f7;--line:#d2d2d7;
---font:"Notate Sans",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
-@media(prefers-color-scheme:dark){:root{--bg:#000;--fg:#f5f5f7;--sub:#a1a1a6;--surface:#1c1c1e;--line:#38383a;--accent:#4da6ff}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/24px var(--font);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-a{color:var(--accent)}
-.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;background:var(--bg);padding:8px 16px;border-radius:999px;z-index:9}
-.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
-.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--fg);text-decoration:none}
-.brand img{width:32px;height:32px;border-radius:7px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:999px;font:600 17px var(--font);text-decoration:none;border:1px solid transparent;transition:.2s ease}
-.btn:focus-visible{outline:4px solid var(--ring);outline-offset:2px}
-.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{filter:brightness(1.08)}
-.btn-quiet{background:var(--surface);color:var(--fg)}.btn-quiet:hover{border-color:var(--line)}
-.hero{text-align:center;padding:48px 0 32px}
-.hero h1{font-size:clamp(40px,7vw,72px);line-height:1.04;letter-spacing:-.045em;font-weight:700;margin:0 auto 24px;max-width:14ch}
-.hero p.lead{font-size:21px;line-height:28px;color:var(--sub);max-width:36ch;margin:0 auto 32px}
-.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.price{margin:16px 0 0;font-size:13px;line-height:18px;color:var(--sub)}
-.live{margin:48px auto 0;max-width:1024px}
-.live iframe{display:block;width:100%;height:min(760px,88vh);border:1px solid var(--line);border-radius:28px;background:#fff}
-.live p{font-size:13px;line-height:18px;color:var(--sub);margin:16px 0 0;text-align:center}
-section.block{padding:96px 0 0}
-h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.035em;font-weight:700;margin:0 0 32px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.card{background:var(--surface);border-radius:28px;padding:32px}
-.card h3{margin:0 0 8px;font-size:22px;line-height:28px;letter-spacing:-.02em;font-weight:600}
-.card p{margin:0;color:var(--sub);font-size:17px;line-height:24px}
-.card.wide{grid-column:1/-1;background:#0074D9;color:#fff}.card.wide p{color:rgba(255,255,255,.88)}
-.where{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.where div{border-top:1px solid var(--line);padding-top:16px}
-.where h3{margin:0 0 8px;font-size:17px;font-weight:600}.where p{margin:0;font-size:15px;line-height:20px;color:var(--sub)}
-/* Footer, the Joshua Tree layout: story, rule, four columns, bar, then a drawn band. */
-footer{margin-top:128px;color:var(--sub);font-size:13px;line-height:18px;background:var(--bg)}
-.story{display:grid;grid-template-columns:120px 1fr;gap:48px;max-width:1120px;margin:0 auto;padding:0 32px 64px;align-items:start}
-.story img{width:120px;height:120px;border-radius:27px}
-.story h2{font-size:clamp(36px,5.2vw,64px);line-height:1.08;letter-spacing:-.045em;color:var(--fg);margin:0 0 24px}
-.story p{font-size:17px;line-height:24px;max-width:60ch;margin:0}
-.rule{display:flex;justify-content:space-between;gap:16px;max-width:1120px;margin:0 auto;padding:14px 32px 40px;font-variant:small-caps;letter-spacing:.06em}
-.dir{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px;max-width:1120px;margin:0 auto;padding:0 32px 40px}
-.dir h3{margin:0 0 8px;font-size:13px;font-weight:600;color:var(--fg);letter-spacing:.02em}
-.dir ul{list-style:none;margin:0;padding:0}
-.dir a{display:inline-block;min-height:44px;padding:12px 0;color:var(--sub);text-decoration:none;font-size:15px;line-height:20px}
-.dir a:hover{color:var(--fg);text-decoration:underline}
-.bar{max-width:1056px;margin:0 32px;padding:24px 0 0;border-top:1px solid var(--line)}
-@media(min-width:1120px){.bar{margin-inline:auto}}
-.bar p{margin:0}
-.waves{display:block;width:100%;height:clamp(120px,16vw,220px);margin-top:32px;color:var(--accent)}
-@media(max-width:700px){.wrap,.story,.rule,.dir{padding-inline:24px}.story{grid-template-columns:1fr;gap:24px;padding-bottom:40px}.story img{width:80px;height:80px;border-radius:18px}.dir{grid-template-columns:repeat(2,1fr)}.bar{margin:0 24px}.card{padding:24px}}
-@media(max-width:520px){.rule{flex-direction:column;align-items:center;text-align:center;gap:8px}.hero{padding-top:24px}}
-.embed nav,.embed footer{display:none}
+/* Echo landing, cut from the same cloth as Hermes: a paper page in a thin blue frame, giant thin caps, tiny caps labels,
+   square buttons, and one full-bleed blue band where old paintings of Echo sit in 1-bit ordered dither.
+   Every colour, the type and the radii come from tokens.css. */
+:root {
+  /* film grain: white fractal noise over every blue surface */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* 1-bit art: each image is an ordered-dither mask (art/*.png, from public domain paintings), tinted with --band-art */
+.art { position: relative; overflow: hidden; background: var(--grain), var(--band); }
+.art::before { content: ""; position: absolute; inset: 0; background: var(--band-art); -webkit-mask: var(--img) center / cover no-repeat; mask: var(--img) center / cover no-repeat; image-rendering: pixelated; }
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); font-size: var(--size-body); line-height: 24px; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--sp-5); }
+.center { text-align: center; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 40; padding: var(--sp-2) var(--sp-4); background: var(--bg); }
+.skip:focus { left: 8px; }
+
+h1, h2, h3, .label { font-family: var(--display); }
+h1, h2, h3 { text-wrap: balance; }
+h1 { font-size: clamp(120px, 21vw, 300px); line-height: .86; font-weight: 100; text-transform: uppercase; letter-spacing: -.04em; }
+h2 { font-size: clamp(48px, 7vw, 104px); line-height: .92; font-weight: 100; text-transform: uppercase; letter-spacing: -.03em; }
+h3 { font-size: 28px; line-height: 32px; font-weight: 300; letter-spacing: -.01em; }
+.label { font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: var(--sp-4); }
+
+.btn { height: 44px; padding: 0 var(--sp-5); border-radius: var(--r-sq); display: inline-flex; align-items: center; font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; transition: background var(--motion), border-color var(--motion); }
+.btn-solid { background: var(--btn); color: #fff; }
+.btn-solid:hover { background: color-mix(in srgb, var(--btn) 82%, #fff); }
+.btn-ghost { background: var(--surface); color: var(--text); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--text); }
+a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+.nav { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sp-5); height: 56px; padding: 0 var(--sp-5); background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+.nav-brand { grid-column: 2; display: flex; align-items: center; gap: var(--sp-2); font-family: var(--display); font-weight: 300; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+.nav-brand img { width: 28px; height: 28px; border-radius: var(--r-icon); }
+.nav-links { display: flex; gap: var(--sp-5); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.nav-links a { text-decoration: none; color: var(--sub); }
+.nav-links a:hover { color: var(--text); }
+.nav-end { grid-column: 3; justify-self: end; }
+.nav-end .btn { height: 36px; padding: 0 var(--sp-4); }
+/* the thin blue frame down both edges of the window */
+@media (min-width: 900px) { body::after { content: ""; position: fixed; inset: 0; border-inline: 4px solid var(--frame); pointer-events: none; z-index: 30; } }
+
+.hero { padding: var(--sp-9) 0 var(--sp-8); }
+.lead { max-width: 560px; margin: var(--sp-6) auto 0; color: var(--sub); font-size: 20px; line-height: 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-6); }
+.center .cta { justify-content: center; }
+.fine { margin-top: var(--sp-3); font-size: var(--size-footnote); line-height: 16px; color: var(--sub); }
+
+/* the live app, straight on the blue stage: no window, no device */
+.demo-wrap { margin: var(--sp-8) clamp(0px, 3vw, 44px) 0; }
+.stage { position: relative; overflow: hidden; background: var(--grain), var(--band); padding: clamp(24px, 6vw, 96px) clamp(12px, 7vw, 128px); }
+.stage-art { position: absolute; inset: 0; }
+.live { position: relative; display: block; width: 100%; max-width: 760px; height: 640px; margin: 0 auto; border: 0; border-radius: var(--r-group); background: var(--bg); box-shadow: 0 24px 64px rgba(0, 20, 60, .35); }
+.demo-hint { margin-top: var(--sp-3); font-size: var(--size-footnote); color: var(--sub); text-align: center; }
+
+/* The blue band: Echo herself above the section head, three feature rows, then six ruled cells */
+.band { margin: 0 clamp(0px, 3vw, 44px); background: var(--grain), var(--band); color: #fff; overflow: hidden; }
+.band .label { color: var(--band-sub); }
+.band-head { text-align: center; }
+.band-art { aspect-ratio: 19 / 10; max-height: 86vh; width: 100%; background: none; }
+.band-copy { position: relative; margin-top: -10vw; padding: 0 var(--sp-5) var(--sp-9); }
+.band-copy h2 { font-size: clamp(56px, 9.5vw, 160px); text-shadow: 0 0 48px var(--band); }
+.band-copy p:last-child { margin: var(--sp-6) auto 0; max-width: 480px; color: var(--band-sub); }
+.frows { border-top: 1px solid var(--band-line); }
+.frow { display: grid; grid-template-columns: 1fr 1fr; align-items: center; border-bottom: 1px solid var(--band-line); }
+.frow .art { aspect-ratio: 3 / 2; background: var(--grain), color-mix(in srgb, #fff 6%, var(--band)); }
+.frow:nth-child(even) .art { order: 2; }
+.frow > div:not(.art) { padding: var(--sp-7) clamp(24px, 6vw, 96px); max-width: 560px; }
+.frow h3 { font-size: clamp(36px, 3.6vw, 52px); line-height: 1; font-weight: 200; }
+.frow p:last-child { margin-top: var(--sp-4); color: var(--band-sub); }
+.cells { display: grid; grid-template-columns: repeat(3, 1fr); }
+.cell { padding: var(--sp-6) var(--sp-6) var(--sp-7); border-right: 1px solid var(--band-line); border-bottom: 1px solid var(--band-line); }
+.cell:nth-child(3n) { border-right: 0; }
+.cell:nth-last-child(-n+3) { border-bottom: 0; }
+.cell .label { margin-bottom: var(--sp-5); }
+.cell h3 { font-size: 24px; line-height: 28px; }
+.cell p:last-child { margin-top: var(--sp-3); color: var(--band-sub); font-size: 15px; line-height: 22px; }
+
+.sec { padding: var(--sp-9) 0; }
+.body { color: var(--sub); margin: var(--sp-5) auto 0; max-width: 560px; }
+/* three ways to get it, each card with its own painting */
+.prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); margin-top: var(--sp-8); text-align: left; }
+.prod { display: grid; align-content: start; gap: var(--sp-2); }
+.prod-art { margin: 0 0 var(--sp-3); aspect-ratio: 3 / 2; }
+.prod .label { margin-bottom: 0; }
+.prod p:not(.label) { color: var(--sub); font-size: 15px; line-height: 22px; }
+.prod a { color: var(--accent); font-size: 15px; text-decoration: none; }
+.prod a:hover { text-decoration: underline; }
+
+/* Footer: brand and link columns, then the name echoing away in 1-bit dots, then one fine line */
+.foot { padding: var(--sp-8) var(--sp-4) var(--sp-5); border-top: 1px solid var(--line); overflow: hidden; }
+.foot-top { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--sp-4); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-7); }
+.foot-brand { display: grid; gap: var(--sp-2); align-content: start; }
+.foot-brand img { border-radius: var(--r-icon); }
+.foot-brand b { font-family: var(--display); font-weight: 200; font-size: 40px; line-height: 40px; letter-spacing: .06em; text-transform: uppercase; }
+.foot-brand p { color: var(--sub); font-size: 15px; }
+.foot-cols { display: flex; flex-wrap: wrap; gap: var(--sp-8); }
+.foot-cols div { display: grid; gap: var(--sp-2); align-content: start; }
+.foot-cols .label { margin-bottom: var(--sp-2); }
+.foot-cols a { text-decoration: none; font-size: 15px; }
+.foot-cols a:hover { color: var(--accent); }
+/* each repeat is fainter: the dot grid gets sparser, like a voice fading off a cliff */
+.echoes { display: flex; justify-content: center; align-items: baseline; gap: .04em; margin-top: var(--sp-8); font-family: var(--display); font-weight: 800; font-size: clamp(36px, 11vw, 190px); line-height: .9; letter-spacing: -.03em; text-transform: uppercase; color: var(--accent); white-space: nowrap; user-select: none; }
+.echoes span { -webkit-mask: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px)) 0 0 / 5px 5px; mask: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px)) 0 0 / 5px 5px; }
+.echoes span:nth-child(1) { --dot: 2.4px; }
+.echoes span:nth-child(2) { --dot: 1.6px; font-size: .78em; }
+.echoes span:nth-child(3) { --dot: 1.1px; font-size: .6em; }
+.echoes span:nth-child(4) { --dot: .8px; font-size: .46em; }
+.legal { margin-top: var(--sp-6); font-size: var(--size-footnote); line-height: 16px; color: var(--sub); text-align: center; text-wrap: balance; }
+.legal a { color: inherit; }
+
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .js .reveal { opacity: 1; transform: none; transition: none; } }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav { grid-template-columns: auto 1fr; }
+  .nav-brand { grid-column: 1; }
+  .nav-end { grid-column: 2; }
+  .frow { grid-template-columns: 1fr; }
+  .frow:nth-child(even) .art { order: 0; }
+  .frow > div:not(.art) { padding: var(--sp-6) var(--sp-5) var(--sp-7); }
+  .band-copy { margin-top: -14vw; }
+  .cells { grid-template-columns: 1fr 1fr; }
+  .cell, .cell:nth-child(3n), .cell:nth-last-child(-n+3) { border-right: 1px solid var(--band-line); border-bottom: 1px solid var(--band-line); }
+  .cell:nth-child(2n) { border-right: 0; }
+  .cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .prods { grid-template-columns: 1fr; gap: var(--sp-7); }
+  .live { height: 580px; }
+}
+@media (max-width: 560px) {
+  .cells { grid-template-columns: 1fr; }
+  .cell, .cell:nth-child(2n) { border-right: 0; }
+  .cell:nth-last-child(2) { border-bottom: 1px solid var(--band-line); }
+  .stage { padding: var(--sp-4) var(--sp-2); }
+  .live { height: 560px; border-radius: var(--r-row, 12px); }
+}
+.band-copy .label { color: #fff; text-shadow: 0 0 12px var(--band), 0 0 24px var(--band), 0 0 40px var(--band); }

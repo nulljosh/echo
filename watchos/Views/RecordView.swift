@@ -5,8 +5,8 @@ struct RecordView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("Notate")
-                .font(.notate(17, .semibold))
+            Text("Echo")
+                .font(.echo(17, .semibold))
                 .foregroundStyle(.secondary)
 
             if store.isRecording {
@@ -19,7 +19,7 @@ struct RecordView: View {
                     .font(.system(size: 28))
                     .foregroundStyle(.tertiary)
                 Text("Your iPhone writes it out")
-                    .font(.notate(13))
+                    .font(.echo(13))
                     .lineLimit(2)
                     .minimumScaleFactor(0.8)
                     .multilineTextAlignment(.center)
@@ -46,7 +46,7 @@ struct RecordView: View {
         }
         .padding(.horizontal, 4)
         .alert(
-            "Notate",
+            "Echo",
             isPresented: Binding(
                 get: { store.errorMessage != nil },
                 set: { if !$0 { store.errorMessage = nil } }

@@ -4,7 +4,7 @@ import Speech
 #endif
 
 /// Apple's own on-device speech model (SpeechAnalyzer, iOS 26 and macOS 26), as an alternative to Whisper for files.
-/// Only used when Apple's model for the language is already on the device: Notate never triggers a download.
+/// Only used when Apple's model for the language is already on the device: Echo never triggers a download.
 enum AppleSpeech {
     static let modelID = "apple"
 

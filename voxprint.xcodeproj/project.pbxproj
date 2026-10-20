@@ -9,81 +9,69 @@
 /* Begin PBXBuildFile section */
 		04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
 		05CDE64D959FF0E4CD1DDE1A /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4EDF0EB36D3605787E476DEA /* WhisperKit */; };
+		07261906F3EE1E5DAAC0A80D /* VoxprintWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682B20533C1FEB6414135623 /* VoxprintWatchApp.swift */; };
 		07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
 		0D6C8F4E8C13ECE6EF48CF55 /* BundledModels in Resources */ = {isa = PBXBuildFile; fileRef = F31EAC7D6224E7BB2BDECB12 /* BundledModels */; };
-		0DED87D5E8A6661DB74135E4 /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		155F69C43BFEFAAC1A2F0144 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0226572018B4E269CFF /* TranscriptionEngine.swift */; };
+		16F8655D56D7106D07D4F1F9 /* Echo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1E9A03612EC850CCC1802773 /* Echo.icon */; };
 		18EF8256C42F6D83F856C3F9 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
 		1913C43ADD4B73DE8569EB06 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3FD038F68389C5E660B5C /* VoxprintApp.swift */; };
-		1A351A7D83BF800C2E258B25 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
 		1C7C6EDA4D46A8AC31CF0E3C /* AppleSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */; };
 		206FED7047EAE2840CB806CC /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
-		2832DADDF47FA44F395696FB /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
-		2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
 		2F7001D18D171FB2209C910B /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
-		321BA2B956B47155D3742DAD /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
 		34FB22147603023D4335CA60 /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
 		35DCC54F0EC3A318AE0195CD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */; };
+		363FEE4D050BA4BB182F8825 /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */; };
 		382C3FAEB08961992B1E856C /* TranscriptionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */; };
-		3C36897380AC0A625FDDF3AD /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB1197D8075E00C0C78F3 /* WaveformBarsView.swift */; };
 		3EA36301F0DF4FE61B5D6501 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0226572018B4E269CFF /* TranscriptionEngine.swift */; };
 		3FFD02E0AF33F663591DD17A /* BundledModels in Resources */ = {isa = PBXBuildFile; fileRef = F31EAC7D6224E7BB2BDECB12 /* BundledModels */; };
 		429DCFF98A3F8142596B9158 /* MacScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */; };
 		45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2979D9C3680EC57594490295 /* Assets.xcassets */; };
 		495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
+		4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */; };
+		50669903927FEFAA4E9CD379 /* RecordingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */; };
+		51348E34CFD65DADE9FEF1D7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57905786F6A895BB1CA7384 /* HistoryView.swift */; };
 		5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
-		560B87870388B60D8E484DD7 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
 		58727EA565C57496808CEDE6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
 		598C602752E19BA975B31B64 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF83663B541B3469842D0224 /* SplashView.swift */; };
-		5C591883B2246C96C3949F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A93C1BD632A004057A4D13 /* ContentView.swift */; };
-		5CF0001411512057DD498879 /* NotateSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */; };
-		5E48CDE6483A7380758E1582 /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
 		6008A6F03726FCE4DCD847F6 /* TranscriptionEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */; };
 		6224E88B3EC8437CAC19B451 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
-		6246A5C95493EC12FAE75ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18FC30F7E8146158BCC235D9 /* Assets.xcassets */; };
 		62A286C7CE754548CD2D359A /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44C167A820312C688D60BFD /* Intents.swift */; };
 		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
-		6938696A3F1BC03B9280F179 /* RecordingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */; };
 		71295971CB141A76D36C5EE9 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44C167A820312C688D60BFD /* Intents.swift */; };
-		753EA5D94D92B6B3E514F8EC /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
+		74218D803503D53F033D9FAC /* WaveformBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB1197D8075E00C0C78F3 /* WaveformBarsView.swift */; };
+		758ACAE55CD89BE08D7090CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A93C1BD632A004057A4D13 /* ContentView.swift */; };
 		781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
 		795C233A63214E0A4196E6EA /* ModelRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */; };
-		79D89B959DECD23850BD6D00 /* VoxprintWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682B20533C1FEB6414135623 /* VoxprintWatchApp.swift */; };
 		7A3EA8A0D5519DA67C1B3E35 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */; };
+		7DE2A63B31B490E358E8E4CD /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A1FC4F3A7AEEAFA90BC6AD /* RecordView.swift */; };
 		7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7245B1913F78E4416A3C /* RecordButton.swift */; };
 		87C0F61F5F14B589286725CD /* WatchBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C97534740EDB317B6FB5A /* WatchBridge.swift */; };
 		89ED8A745126FA3AE250DAE4 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7948E5D32A49F30A1748199 /* WhisperKit */; };
 		8BF5417D6137FC56F2EF1A55 /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
-		8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
-		90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
-		943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */; };
+		95922DA5A378E329165C356C /* EchoWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5E9DBA19188A5C557A56DF12 /* EchoWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D1E91E59C9DCDB46932E /* ContentView.swift */; };
+		A3DD0582B47888A5F6C67F9E /* Echo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1E9A03612EC850CCC1802773 /* Echo.icon */; };
 		A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
 		A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCE0C09F8A34129F5803E83 /* Assets.xcassets */; };
 		B0D6FEBA96849AD4E0A6797F /* AppleSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */; };
-		B26B43C9C7C3AEBF60EFCEC7 /* NotateWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 25BE114BCA11D958A324FCDC /* NotateWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739827B542A84C837CAD7966 /* Cleanup.swift */; };
 		B745577C3F5A674412161D99 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E2DEDC49E843805A98F8E /* Exporter.swift */; };
-		B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E724D484A18D90D552A35245 /* NotateFont.swift */; };
 		BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
-		C1D81FEFBE5873E7EE7F0EAA /* NotateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D5104677907CD79CDEE02B /* NotateFont.swift */; };
-		C77CB642FA2948A428B741F1 /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
+		C35388E2D129552B6A1D30B6 /* Echo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1E9A03612EC850CCC1802773 /* Echo.icon */; };
+		C713B135D6AFF41B2D661C36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18FC30F7E8146158BCC235D9 /* Assets.xcassets */; };
 		C8BB95B70EE72462C2E20A54 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */; };
-		CA2CDBE70E2221C1F6089D78 /* Notate.icon in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */; };
-		CC4F348CEB40C6EFD076B6B7 /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
 		CCBAE84235C620BE056852DD /* SystemAudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */; };
-		D64692E97ACB3D3A6E3A123B /* NotateSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */; };
-		D64803515132F1A8C234AC5B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57905786F6A895BB1CA7384 /* HistoryView.swift */; };
 		D9D736EF1B27BCE2CB52A6FF /* WhatsNewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */; };
 		DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
-		EB225DBF02DE799AE4D28012 /* NotateSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */; };
+		DFBCFF12340FBCF5B814D4BB /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879E532FDD328278DA08BAA8 /* EchoFont.swift */; };
+		E3D317090ABC13C560BD6E7D /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
 		F53122CC80636C8AD894260C /* PreviewScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */; };
 		FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
 		FB9F94334B2C9733A080BF89 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */; };
-		FD1613873F33D362184A6A80 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A1FC4F3A7AEEAFA90BC6AD /* RecordView.swift */; };
 		FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,19 +83,19 @@
 			remoteGlobalIDString = E91DCA098026ECD5A24A7092;
 			remoteInfo = "Voxprint-macOS";
 		};
+		A1355467BB337EEEA402A887 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 693DC92FB583013A4E0C8A35;
+			remoteInfo = EchoWatch;
+		};
 		A6CF831DF77238FE991B99A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DCFA617113565E7ABE6FB52D;
 			remoteInfo = "Voxprint-iOS";
-		};
-		EE4E82320125916212584AB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE114ED96FEC7AFCBAB95598 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 07F6ABED0D8CE7A8C038F39B;
-			remoteInfo = NotateWatch;
 		};
 		FF937589D9295AF7F752A462 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -125,7 +113,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				B26B43C9C7C3AEBF60EFCEC7 /* NotateWatch.app in Embed Watch Content */,
+				95922DA5A378E329165C356C /* EchoWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,25 +123,24 @@
 /* Begin PBXFileReference section */
 		0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacScreenshot.swift; sourceTree = "<group>"; };
 		04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Voxprint-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Bold.ttf"; sourceTree = "<group>"; };
 		1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntryTests.swift; sourceTree = "<group>"; };
+		14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoFont.swift; sourceTree = "<group>"; };
 		16C3FD038F68389C5E660B5C /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
 		1824C0226572018B4E269CFF /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
 		18FC30F7E8146158BCC235D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E3C83FFB9437708C5B3184B /* voxprint-mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "voxprint-mac.entitlements"; sourceTree = "<group>"; };
+		1E9A03612EC850CCC1802773 /* Echo.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Echo.icon; sourceTree = "<group>"; };
 		248C97534740EDB317B6FB5A /* WatchBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchBridge.swift; sourceTree = "<group>"; };
-		25BE114BCA11D958A324FCDC /* NotateWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotateWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2979D9C3680EC57594490295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF9D1E91E59C9DCDB46932E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		332A910F82F4863EBB411432 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
-		33D5104677907CD79CDEE02B /* NotateFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotateFont.swift; sourceTree = "<group>"; };
 		3A6E7245B1913F78E4416A3C /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		3D317A46657B22D7AE9A9F1D /* AppleSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeech.swift; sourceTree = "<group>"; };
 		4A25EFE8E023889ABCA07D05 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Medium.ttf"; sourceTree = "<group>"; };
 		534E2DEDC49E843805A98F8E /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
+		5E9DBA19188A5C557A56DF12 /* EchoWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EchoWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DEC2A0D702908EFEE6EAEF /* VoxprintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsView.swift; sourceTree = "<group>"; };
 		682B20533C1FEB6414135623 /* VoxprintWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintWatchApp.swift; sourceTree = "<group>"; };
@@ -165,24 +152,21 @@
 		7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voxprint-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4FCA9CBB964EBCFF6DCFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8329AF7B7DC828095931C95E /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		879E532FDD328278DA08BAA8 /* EchoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoFont.swift; sourceTree = "<group>"; };
 		93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A306786A337EBB5D1DA068D0 /* RecordingEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingEntry.swift; sourceTree = "<group>"; };
 		A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRecoveryTests.swift; sourceTree = "<group>"; };
 		ABCE0C09F8A34129F5803E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotateSans-Regular.ttf"; sourceTree = "<group>"; };
 		B6C509CCA329A09FD24BD990 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
 		BD20968374CBB741BF7CBFB5 /* SystemAudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioCapture.swift; sourceTree = "<group>"; };
 		C1CD62E702B4CEAC42E30688 /* TranscriptionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEntry.swift; sourceTree = "<group>"; };
 		CF83663B541B3469842D0224 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = Notate.icon; sourceTree = "<group>"; };
 		D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
 		D4A1FC4F3A7AEEAFA90BC6AD /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VoxprintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E4A93C1BD632A004057A4D13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E57905786F6A895BB1CA7384 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		E724D484A18D90D552A35245 /* NotateFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotateFont.swift; sourceTree = "<group>"; };
 		EA4EFE3E213916AF613C4034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31EAC7D6224E7BB2BDECB12 /* BundledModels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundledModels; sourceTree = SOURCE_ROOT; };
 		F44C167A820312C688D60BFD /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
@@ -212,7 +196,7 @@
 		1AAA0A4B07AE48B28CFEB4A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				25BE114BCA11D958A324FCDC /* NotateWatch.app */,
+				5E9DBA19188A5C557A56DF12 /* EchoWatch.app */,
 				04AAAEC8C84344FF57966FFE /* Voxprint-iOS.app */,
 				7B90C2CEA29D662F995B97EE /* Voxprint-macOS.app */,
 				4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */,
@@ -265,23 +249,12 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		9DFE2D71DFF33D4308F3790F /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				0BA23708F1F27B0118CA0703 /* NotateSans-Bold.ttf */,
-				4F96458167B0A6C97455A0B3 /* NotateSans-Medium.ttf */,
-				AF7C7FA68C65284B4EEF9894 /* NotateSans-Regular.ttf */,
-				9C32DB700D50D4A17DFC3FD6 /* NotateSans-SemiBold.ttf */,
-			);
-			path = fonts;
-			sourceTree = "<group>";
-		};
 		9EEAADF59F404D8B4504B5A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				2FF9D1E91E59C9DCDB46932E /* ContentView.swift */,
+				14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */,
 				7349640877D9FF7A297ECA96 /* HistoryView.swift */,
-				E724D484A18D90D552A35245 /* NotateFont.swift */,
 				3A6E7245B1913F78E4416A3C /* RecordButton.swift */,
 				72702A5CFAC0AD1F611CE747 /* SettingsView.swift */,
 				CF83663B541B3469842D0224 /* SplashView.swift */,
@@ -321,7 +294,7 @@
 			children = (
 				18FC30F7E8146158BCC235D9 /* Assets.xcassets */,
 				E4A93C1BD632A004057A4D13 /* ContentView.swift */,
-				33D5104677907CD79CDEE02B /* NotateFont.swift */,
+				879E532FDD328278DA08BAA8 /* EchoFont.swift */,
 				682B20533C1FEB6414135623 /* VoxprintWatchApp.swift */,
 				1EA12A54A819A446FF06B0ED /* Models */,
 				C59668D2E1F5506BDBEFD67C /* Views */,
@@ -333,8 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				F31EAC7D6224E7BB2BDECB12 /* BundledModels */,
-				CFFDB61AE08DAEA79B63E1C4 /* Notate.icon */,
-				9DFE2D71DFF33D4308F3790F /* fonts */,
+				1E9A03612EC850CCC1802773 /* Echo.icon */,
 				7A12FC2CCEF7B3DC268F0916 /* Sources */,
 				5B37322E28927AD2315C07E6 /* Tests */,
 				A7522B3576E680E43D787643 /* UITests */,
@@ -402,24 +374,6 @@
 			productReference = 4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		07F6ABED0D8CE7A8C038F39B /* NotateWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A4605AF6290A2BBB14164280 /* Build configuration list for PBXNativeTarget "NotateWatch" */;
-			buildPhases = (
-				9D124C424B247F0C9E2227BF /* Sources */,
-				CB016C9A73D00F1DC0D2CEED /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotateWatch;
-			packageProductDependencies = (
-			);
-			productName = NotateWatch;
-			productReference = 25BE114BCA11D958A324FCDC /* NotateWatch.app */;
-			productType = "com.apple.product-type.application";
-		};
 		49493D04EC624D522DD3630C /* VoxprintUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EFA19BAE21BCE57FAA57409 /* Build configuration list for PBXNativeTarget "VoxprintUITests" */;
@@ -437,6 +391,24 @@
 			productName = VoxprintUITests;
 			productReference = DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		693DC92FB583013A4E0C8A35 /* EchoWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56AE0996FAB83080D067AF19 /* Build configuration list for PBXNativeTarget "EchoWatch" */;
+			buildPhases = (
+				2E5DDA0E2E3417A652AB3825 /* Sources */,
+				E9793C37AC024B1159FC9BEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EchoWatch;
+			packageProductDependencies = (
+			);
+			productName = EchoWatch;
+			productReference = 5E9DBA19188A5C557A56DF12 /* EchoWatch.app */;
+			productType = "com.apple.product-type.application";
 		};
 		D5AE97ED14D1A4811990EAAF /* VoxprintTests */ = {
 			isa = PBXNativeTarget;
@@ -469,7 +441,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				0D3ADAB64F9B9D72CE8F6206 /* PBXTargetDependency */,
+				FC41B9524FFAADFD35904F3A /* PBXTargetDependency */,
 			);
 			name = "Voxprint-iOS";
 			packageProductDependencies = (
@@ -513,12 +485,12 @@
 						DevelopmentTeam = QMM486NPYC;
 						TestTargetID = E91DCA098026ECD5A24A7092;
 					};
-					07F6ABED0D8CE7A8C038F39B = {
-						DevelopmentTeam = QMM486NPYC;
-					};
 					49493D04EC624D522DD3630C = {
 						DevelopmentTeam = QMM486NPYC;
 						TestTargetID = DCFA617113565E7ABE6FB52D;
+					};
+					693DC92FB583013A4E0C8A35 = {
+						DevelopmentTeam = QMM486NPYC;
 					};
 					D5AE97ED14D1A4811990EAAF = {
 						DevelopmentTeam = QMM486NPYC;
@@ -550,7 +522,7 @@
 			targets = (
 				DCFA617113565E7ABE6FB52D /* Voxprint-iOS */,
 				E91DCA098026ECD5A24A7092 /* Voxprint-macOS */,
-				07F6ABED0D8CE7A8C038F39B /* NotateWatch */,
+				693DC92FB583013A4E0C8A35 /* EchoWatch */,
 				D5AE97ED14D1A4811990EAAF /* VoxprintTests */,
 				49493D04EC624D522DD3630C /* VoxprintUITests */,
 				05C174F4F7C035326BFB4D1D /* VoxprintMacUITests */,
@@ -565,11 +537,7 @@
 			files = (
 				45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */,
 				3FFD02E0AF33F663591DD17A /* BundledModels in Resources */,
-				2832DADDF47FA44F395696FB /* Notate.icon in Resources */,
-				90CB2DDACF3126F856F354EE /* NotateSans-Bold.ttf in Resources */,
-				D64692E97ACB3D3A6E3A123B /* NotateSans-Medium.ttf in Resources */,
-				753EA5D94D92B6B3E514F8EC /* NotateSans-Regular.ttf in Resources */,
-				5CF0001411512057DD498879 /* NotateSans-SemiBold.ttf in Resources */,
+				A3DD0582B47888A5F6C67F9E /* Echo.icon in Resources */,
 				DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,25 +548,17 @@
 			files = (
 				ADF56B0B50FF05E8F6AA9318 /* Assets.xcassets in Resources */,
 				0D6C8F4E8C13ECE6EF48CF55 /* BundledModels in Resources */,
-				321BA2B956B47155D3742DAD /* Notate.icon in Resources */,
-				943870814A7FD96A6E3A5554 /* NotateSans-Bold.ttf in Resources */,
-				5E48CDE6483A7380758E1582 /* NotateSans-Medium.ttf in Resources */,
-				CC4F348CEB40C6EFD076B6B7 /* NotateSans-Regular.ttf in Resources */,
-				2C84885276FE899F8D830860 /* NotateSans-SemiBold.ttf in Resources */,
+				16F8655D56D7106D07D4F1F9 /* Echo.icon in Resources */,
 				BB6FE98433FB4700C4FF754A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CB016C9A73D00F1DC0D2CEED /* Resources */ = {
+		E9793C37AC024B1159FC9BEB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6246A5C95493EC12FAE75ADA /* Assets.xcassets in Resources */,
-				CA2CDBE70E2221C1F6089D78 /* Notate.icon in Resources */,
-				1A351A7D83BF800C2E258B25 /* NotateSans-Bold.ttf in Resources */,
-				0DED87D5E8A6661DB74135E4 /* NotateSans-Medium.ttf in Resources */,
-				EB225DBF02DE799AE4D28012 /* NotateSans-Regular.ttf in Resources */,
-				560B87870388B60D8E484DD7 /* NotateSans-SemiBold.ttf in Resources */,
+				C713B135D6AFF41B2D661C36 /* Assets.xcassets in Resources */,
+				C35388E2D129552B6A1D30B6 /* Echo.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +614,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2E5DDA0E2E3417A652AB3825 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				758ACAE55CD89BE08D7090CA /* ContentView.swift in Sources */,
+				DFBCFF12340FBCF5B814D4BB /* EchoFont.swift in Sources */,
+				51348E34CFD65DADE9FEF1D7 /* HistoryView.swift in Sources */,
+				7DE2A63B31B490E358E8E4CD /* RecordView.swift in Sources */,
+				50669903927FEFAA4E9CD379 /* RecordingEntry.swift in Sources */,
+				E3D317090ABC13C560BD6E7D /* RecordingStore.swift in Sources */,
+				07261906F3EE1E5DAAC0A80D /* VoxprintWatchApp.swift in Sources */,
+				74218D803503D53F033D9FAC /* WaveformBarsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37FCABB7B2E14F51E12A2A40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,10 +646,10 @@
 				DA60DEA23CFE71C57BD2C234 /* AudioCapture.swift in Sources */,
 				B2F8167A5E60A287135C2F93 /* Cleanup.swift in Sources */,
 				A312DA1B4CA988406F65D34A /* ContentView.swift in Sources */,
+				363FEE4D050BA4BB182F8825 /* EchoFont.swift in Sources */,
 				A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
 				71295971CB141A76D36C5EE9 /* Intents.swift in Sources */,
-				B9B6EF4514DC4C44304E7496 /* NotateFont.swift in Sources */,
 				781BBE69905286DE0C2A45D1 /* RecordButton.swift in Sources */,
 				FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */,
 				07494958D71AE8F6F03C0A25 /* SpeechManager.swift in Sources */,
@@ -697,10 +672,10 @@
 				663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */,
 				04C7AD121A2379BFFDCDCF72 /* Cleanup.swift in Sources */,
 				5147E8ED85517E1C2EB0E2EE /* ContentView.swift in Sources */,
+				4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */,
 				B745577C3F5A674412161D99 /* Exporter.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
 				62A286C7CE754548CD2D359A /* Intents.swift in Sources */,
-				8F7AD39CDBC36CC1DBD4FCEF /* NotateFont.swift in Sources */,
 				7FA8CB74509004420F36EAE3 /* RecordButton.swift in Sources */,
 				FEF58AFAFEF74768A08E91F7 /* SettingsView.swift in Sources */,
 				66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */,
@@ -726,29 +701,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D124C424B247F0C9E2227BF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C591883B2246C96C3949F9A /* ContentView.swift in Sources */,
-				D64803515132F1A8C234AC5B /* HistoryView.swift in Sources */,
-				C1D81FEFBE5873E7EE7F0EAA /* NotateFont.swift in Sources */,
-				FD1613873F33D362184A6A80 /* RecordView.swift in Sources */,
-				6938696A3F1BC03B9280F179 /* RecordingEntry.swift in Sources */,
-				C77CB642FA2948A428B741F1 /* RecordingStore.swift in Sources */,
-				79D89B959DECD23850BD6D00 /* VoxprintWatchApp.swift in Sources */,
-				3C36897380AC0A625FDDF3AD /* WaveformBarsView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0D3ADAB64F9B9D72CE8F6206 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 07F6ABED0D8CE7A8C038F39B /* NotateWatch */;
-			targetProxy = EE4E82320125916212584AB2 /* PBXContainerItemProxy */;
-		};
 		7A007627B06A74B2378A5C55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DCFA617113565E7ABE6FB52D /* Voxprint-iOS */;
@@ -764,9 +719,33 @@
 			target = E91DCA098026ECD5A24A7092 /* Voxprint-macOS */;
 			targetProxy = FF937589D9295AF7F752A462 /* PBXContainerItemProxy */;
 		};
+		FC41B9524FFAADFD35904F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 693DC92FB583013A4E0C8A35 /* EchoWatch */;
+			targetProxy = A1355467BB337EEEA402A887 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		22C525FC2679C13A45401865 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Echo;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Echo records on your watch and your iPhone writes it out on device. Your audio never goes to a server.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.nulljosh.echo;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.watchkitapp;
+				PRODUCT_NAME = Echo;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		29D3D8B2605363464349CC85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -796,14 +775,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.VoxprintTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notate.app/Contents/MacOS/Notate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Echo.app/Contents/MacOS/Echo";
 			};
 			name = Release;
 		};
 		3C24BE4A49C5BF154B68CBE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
 				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -815,7 +794,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
 				PRODUCT_MODULE_NAME = Voxprint_macOS;
-				PRODUCT_NAME = Notate;
+				PRODUCT_NAME = Echo;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -836,25 +815,6 @@
 				TEST_TARGET_NAME = "Voxprint-iOS";
 			};
 			name = Release;
-		};
-		5913DA62FAAADA3BF3776C4D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Notate;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Notate records on your watch and your iPhone writes it out on device. Your audio never goes to a server.";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.nulljosh.echo;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.watchkitapp;
-				PRODUCT_NAME = Notate;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Debug;
 		};
 		918313BA0C4E120DE6F30749 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -890,7 +850,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 202610190300;
+				CURRENT_PROJECT_VERSION = 202610032040;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -950,7 +910,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 202610190300;
+				CURRENT_PROJECT_VERSION = 202610032040;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = QMM486NPYC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1000,10 +960,29 @@
 			};
 			name = Debug;
 		};
+		C07F3BBE7B50D8AEB986356F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Echo;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Echo records on your watch and your iPhone writes it out on device. Your audio never goes to a server.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.nulljosh.echo;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.watchkitapp;
+				PRODUCT_NAME = Echo;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
 		CC2BBFE1EAB9D2075153BB53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
 				CODE_SIGN_ENTITLEMENTS = "Sources/macOS/voxprint-mac.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1015,7 +994,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
 				PRODUCT_MODULE_NAME = Voxprint_macOS;
-				PRODUCT_NAME = Notate;
+				PRODUCT_NAME = Echo;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1023,7 +1002,7 @@
 		D395485C101050DE6BDA45BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -1032,7 +1011,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
-				PRODUCT_NAME = Notate;
+				PRODUCT_NAME = Echo;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1050,7 +1029,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.VoxprintTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notate.app/Contents/MacOS/Notate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Echo.app/Contents/MacOS/Echo";
 			};
 			name = Debug;
 		};
@@ -1071,29 +1050,10 @@
 			};
 			name = Release;
 		};
-		FB027BFC8E77F048D70A7516 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Notate;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Notate records on your watch and your iPhone writes it out on device. Your audio never goes to a server.";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.nulljosh.echo;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo.watchkitapp;
-				PRODUCT_NAME = Notate;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Release;
-		};
 		FE7AAF1AE5388A18F687249B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Notate;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Echo;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/iOS/Info.plist;
@@ -1102,7 +1062,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.echo;
-				PRODUCT_NAME = Notate;
+				PRODUCT_NAME = Echo;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1147,20 +1107,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		56AE0996FAB83080D067AF19 /* Build configuration list for PBXNativeTarget "EchoWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C07F3BBE7B50D8AEB986356F /* Debug */,
+				22C525FC2679C13A45401865 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		68C12FCF3042C22CBECC2988 /* Build configuration list for PBXNativeTarget "Voxprint-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FE7AAF1AE5388A18F687249B /* Debug */,
 				D395485C101050DE6BDA45BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		A4605AF6290A2BBB14164280 /* Build configuration list for PBXNativeTarget "NotateWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5913DA62FAAADA3BF3776C4D /* Debug */,
-				FB027BFC8E77F048D70A7516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

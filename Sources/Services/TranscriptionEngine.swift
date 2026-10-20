@@ -413,7 +413,7 @@ class TranscriptionEngine: ObservableObject {
                     if !self.isRecording { self.systemCapture.stop() }
                 } catch {
                     // No permission yet: keep recording the mic alone rather than failing the recording.
-                    await MainActor.run { self.notice = "Allow Notate under Screen and System Audio Recording in System Settings to hear the call." }
+                    await MainActor.run { self.notice = "Allow Echo under Screen and System Audio Recording in System Settings to hear the call." }
                 }
             }
         }
@@ -700,7 +700,7 @@ class TranscriptionEngine: ObservableObject {
         return tokens.isEmpty ? nil : tokens
     }
 
-    /// "Jos, LEC\nNotate" becomes " Jos, LEC, Notate." Trimmed, deduplicated, capped so it never crowds out speech.
+    /// "Jos, LEC\nEcho" becomes " Jos, LEC, Echo." Trimmed, deduplicated, capped so it never crowds out speech.
     static func promptText(from raw: String) -> String? {
         var seen = Set<String>()
         let words = raw.split(whereSeparator: { $0 == "," || $0 == "\n" })

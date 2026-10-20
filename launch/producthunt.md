@@ -1,6 +1,6 @@
 # Product Hunt
 
-Name: Notate
+Name: Echo
 
 Tagline (52): Speech to text that never leaves your device
 
@@ -11,17 +11,17 @@ Topics: Productivity, Privacy, iOS
 Pricing: $0.99 one-time purchase, everything included. No in-app purchases, no subscriptions.
 
 Links
-Web: https://notate.jaybulb.com
+Web: https://echo.jaybulb.com
 App Store: https://apps.apple.com/app/id6782604262
-GitHub: https://github.com/nulljosh/notate
+GitHub: https://github.com/nulljosh/echo
 
 ## First comment
 
-Hi, I'm Josh, I built Notate.
+Hi, I'm Josh, I built Echo.
 
 I wanted dictation on my phone that I could trust with anything. Every app I tried sent the audio somewhere, asked for an account, or wanted eight dollars a month for what is really a model running on hardware I already own. So I put Whisper on the device itself.
 
-Notate runs WhisperKit locally on iPhone and Mac. Audio is decoded in two second windows as you speak, so words show up while you are still talking rather than after you stop. It picks a model that fits your device's memory, caches it somewhere iOS will not purge, and works on a plane or in a basement because there is no network call to make. Nothing you say is uploaded, ever. There is no sign-up and no tracking.
+Echo runs WhisperKit locally on iPhone and Mac. Audio is decoded in two second windows as you speak, so words show up while you are still talking rather than after you stop. It picks a model that fits your device's memory, caches it somewhere iOS will not purge, and works on a plane or in a basement because there is no network call to make. Nothing you say is uploaded, ever. There is no sign-up and no tracking.
 
 It handles more than voice. Drop in a podcast, a lecture, or a song and it writes out the words, with auto-detect across every language Whisper knows.
 

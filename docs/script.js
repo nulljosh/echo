@@ -1,4 +1,4 @@
-// Notate Web App - Main JavaScript
+// Echo Web App - Main JavaScript
 // Transcription, recording, file upload, and history management
 
 // Initialize Web Speech API

@@ -24,11 +24,11 @@
         {
           "glass": false,
           "image-name": "glyph.png",
-          "name": "Notate"
+          "name": "Echo"
         }
       ],
       "lighting": "individual",
-      "name": "Notate",
+      "name": "Echo",
       "shadow": {
         "kind": "neutral",
         "opacity": 0.3

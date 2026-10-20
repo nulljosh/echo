@@ -1,6 +1,6 @@
-Notate transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
+Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Powered by an on-device Whisper model, Notate transcribes live from the microphone or from audio files you import. Whether it's your voice, song lyrics, podcasts, or lectures, everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
+Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import. Whether it's your voice, song lyrics, podcasts, or lectures, everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
 ONE PAYMENT, EVERYTHING INCLUDED
 - Unlimited live microphone transcription
@@ -10,9 +10,9 @@ ONE PAYMENT, EVERYTHING INCLUDED
 - Full history, copy, and share
 - Speak back with system voice
 
-WHY NOTATE
+WHY ECHO
 - On device. Your voice stays yours.
 - No account, no sign-up, no tracking.
 - No subscription, no recurring charge.
 
-Notate is built for people who want their words, music, and audio transcribed without uploading to a server.
+Echo is built for people who want their words, music, and audio transcribed without uploading to a server.

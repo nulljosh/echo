@@ -1,14 +1,14 @@
 <img src="icon.svg" width="80" style="border-radius:18px">
 
-# Notate
+# Echo
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fnotate-black?logo=github)](https://github.com/nulljosh/notate) [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-Notate-da552f?logo=producthunt&logoColor=white)](https://www.producthunt.com/products/voxprint?launch=voxprint)
+![Version](https://img.shields.io/badge/version-2.0.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fecho-black?logo=github)](https://github.com/nulljosh/echo) [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-Echo-da552f?logo=producthunt&logoColor=white)](https://www.producthunt.com/products/voxprint?launch=voxprint)
 
 Speech to text that never leaves your device.
 
 Native transcription on iPhone and Mac with [WhisperKit](https://github.com/argmaxinc/WhisperKit). No cloud. No API keys. Nothing uploaded, ever.
 
-Live at [notate.jaybulb.com](https://notate.jaybulb.com) · [App Store](https://apps.apple.com/app/id6782604262)
+Live at [echo.jaybulb.com](https://echo.jaybulb.com) · [App Store](https://apps.apple.com/app/id6782604262)
 
 <p align="center">
   <img src="screenshots/appstore/1-finished-transcript.png" width="180">
@@ -29,7 +29,7 @@ Live at [notate.jaybulb.com](https://notate.jaybulb.com) · [App Store](https://
 - One-tap cleanup with Apple's on-device model: punctuation, grammar, no more ums (1.4.2, needs Apple Intelligence)
 - History, the last 50
 - Export, share, copy
-- Heals itself. A broken model gets wiped, Notate drops back to the built-in model, and the good one is fetched again. No error wall
+- Heals itself. A broken model gets wiped, Echo drops back to the built-in model, and the good one is fetched again. No error wall
 - One dollar, once. No Pro tier, no in-app purchases, no subscription
 - Cmd+R on Mac
 - Light and dark

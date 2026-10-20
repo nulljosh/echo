@@ -28,10 +28,10 @@ struct TranscriptionView: View {
             case .error(let msg):
                 VStack(spacing: 10) {
                     Image(systemName: "exclamationmark.triangle")
-                        .font(.notate(28))
+                        .font(.echo(28))
                         .foregroundStyle(.orange)
                     Text(msg)
-                        .font(.notate(13))
+                        .font(.echo(13))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                     if let onRetry {
@@ -48,7 +48,7 @@ struct TranscriptionView: View {
                         VStack(spacing: 10) {
                             WaveformBarsView(level: audioLevel)
                             Text("Listening...")
-                                .font(.notate(14))
+                                .font(.echo(14))
                                 .foregroundStyle(.secondary)
                         }
                     } else if !placeholder.isEmpty {
@@ -64,7 +64,7 @@ struct TranscriptionView: View {
                         // The word being heard right now is highlighted in the accent colour; speaker names are bold.
                         (Self.styled(leading) + Text(leading.isEmpty || lastWord.isEmpty ? "" : " ")
                             + Text(lastWord).foregroundStyle(Color.accentColor).fontWeight(.semibold))
-                            .font(.notate(18, .regular))
+                            .font(.echo(18, .regular))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(20)
                             .padding(.top, 28)
@@ -79,7 +79,7 @@ struct TranscriptionView: View {
                             speech.toggle(id: Self.liveID, text: text, languageCode: unusualLanguage)
                         } label: {
                             Image(systemName: speech.speakingID == Self.liveID ? "stop.circle.fill" : "speaker.wave.2.circle.fill")
-                                .font(.notate(22))
+                                .font(.echo(22))
                                 .foregroundStyle(.secondary)
                         }
                         .buttonStyle(.plain)
@@ -100,7 +100,7 @@ struct TranscriptionView: View {
         .overlay(alignment: .top) {
             if let unusualLanguage {
                 Text("Unusual language detected: \(languageLabel(unusualLanguage))")
-                    .font(.notate(12, .medium))
+                    .font(.echo(12, .medium))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .background(.orange.opacity(0.15), in: Capsule())
@@ -128,7 +128,7 @@ struct TranscriptionView: View {
 
     private func statusLabel(_ message: String) -> some View {
         Text(message)
-            .font(.notate(15))
+            .font(.echo(15))
             .foregroundStyle(.tertiary)
             .multilineTextAlignment(.center)
             .padding()

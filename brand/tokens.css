@@ -1,8 +1,1 @@
-/* Notate brand tokens. The accent is the only colour this app owns; spacing, radii and type come from the shared system. */
-:root {
-  --accent: #0074D9;
-  --accent-light: #4da6ff;
-  --accent-deep: #0074D9;
-  --accent-ring: color-mix(in srgb, #0074D9 30%, transparent);
-  --font: "Notate Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+../docs/tokens.css

@@ -16,26 +16,26 @@ struct SummaryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Summary").font(.notate(22, .bold))
-            Text(summary.summary).font(.notate(17)).lineSpacing(3).textSelection(.enabled)
+            Text("Summary").font(.echo(22, .bold))
+            Text(summary.summary).font(.echo(17)).lineSpacing(3).textSelection(.enabled)
             if !summary.actionItems.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Action items").font(.notate(15, .semibold)).foregroundStyle(.secondary)
+                    Text("Action items").font(.echo(15, .semibold)).foregroundStyle(.secondary)
                     ForEach(summary.actionItems, id: \.self) { item in
                         HStack(alignment: .firstTextBaseline, spacing: 12) {
-                            Image(systemName: "circle").font(.notate(13)).foregroundStyle(Color.accentColor)
-                            Text(item).font(.notate(17)).textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
+                            Image(systemName: "circle").font(.echo(13)).foregroundStyle(Color.accentColor)
+                            Text(item).font(.echo(17)).textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
                         }
                     }
                 }
             }
             HStack(spacing: 16) {
                 ShareLink(item: asText) {
-                    Text("Share").font(.notate(17, .semibold)).frame(maxWidth: .infinity, minHeight: 48)
+                    Text("Share").font(.echo(17, .semibold)).frame(maxWidth: .infinity, minHeight: 48)
                 }
                 .buttonStyle(.borderedProminent).buttonBorderShape(.capsule)
                 Button { dismiss() } label: {
-                    Text("Done").font(.notate(17, .semibold)).frame(maxWidth: .infinity, minHeight: 48)
+                    Text("Done").font(.echo(17, .semibold)).frame(maxWidth: .infinity, minHeight: 48)
                 }
                 .buttonStyle(.bordered).buttonBorderShape(.capsule)
             }

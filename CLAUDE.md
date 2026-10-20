@@ -1,11 +1,11 @@
-# Notate (was Voxprint, was Echo), CLAUDE.md
+# Echo (was Notate, was Voxprint, was Echo), CLAUDE.md
 
 On-device Whisper transcription. iOS 17 + macOS 14, one unified ASC record (6782604262, Universal Purchase). WhisperKit via SPM. `roadmap.md` is the queue. `MONEY.md` is the price. `asc versions list --app 6782604262` is the truth on versions, never write them here.
 
 ## Frozen forever
 
-Renamed Echo → Voxprint 2026-07-29, Voxprint → Notate 2026-09-21. The Notate store listing name applies with 1.4.1, when the binary says Notate too (re-probe with `asc apps rename` on the pending app info first). Xcode targets, schemes and the Pages project keep the name Voxprint, renaming them buys nothing. These keep the old name on purpose. Renaming any of them orphans existing installs:
-`com.nulljosh.echo*` bundle IDs, `echo.*` UserDefaults keys, the `echo-models` model folder, `echo-history.json`.
+Renamed Echo → Voxprint 2026-07-29, Voxprint → Notate 2026-09-21, Notate → Echo 2026-10-20 (back to the first name). The repo, site, display name and in-app strings say Echo. The App Store listing still says Notate until Apple accepts "Echo" on the next editable app info: both app infos were locked on 2026-10-20 (one live, Mac 2.0 in review). Probe Echo first, then Calliope, with `asc apps rename --app-info <editable id>`. The store and site names differ on purpose until then; Joshua chose this knowing the risk, so do not "fix" it back. Xcode targets, schemes and the Pages project keep the name Voxprint, renaming them buys nothing. These keep old names on purpose. Renaming any of them orphans existing installs or saved settings:
+`com.nulljosh.echo*` bundle IDs, `echo.*` UserDefaults keys, the `echo-models` model folder, `echo-history.json`, and the Notate-era keys `notate.customWords`, `notate.meetingMode`, `notate.startRecording`. The signing profiles are still named "Notate iOS App Store" and "Notate Watch App Store" on Apple's side. notate.jaybulb.com keeps serving the site.
 
 ## Money
 
@@ -23,8 +23,7 @@ Sources/
 Tests/          unit tests + ModelRecoveryTests (the end-to-end gate)
 UITests/        fastlane snapshot screenshots
 watchos/        standalone voice memo recorder, own xcodegen project
-docs/           landing (index.html + landing.css, Notate Sans, footer like joshuatree) + web demo (app.html)
-fonts/          Notate Sans, derived from Inter under the OFL, build.py rebuilds it. Bundled in both apps (UIAppFonts / ATSApplicationFontsPath), every view uses `Font.notate(size, weight)`
+docs/           landing (index.html + landing.css + tokens.css, Hermes-style, 1-bit ordered-dither art in docs/art) + web demo (app.html)
 brand/          icon, tokens.css, BRAND.md
 ```
 
@@ -36,7 +35,7 @@ Since 1.4.2 the app ships tiny, base and small inside `BundledModels/` (fetched 
 
 **SettingsView**: appearance, speak-back voice, language (own page, every Whisper language), custom words, status. The model picker is under Advanced on purpose. Users should not need it.
 
-Accent color is the asset catalog blue. Buttons and splash use `Color.accentColor`, not `Color.primary`. Icon is a white sound wave turning into two lines of text on a #0074D9 gradient, built from `Notate.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Notate`), there is no AppIcon.appiconset. Products are named Notate.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
+Accent color is the asset catalog blue. Buttons and splash use `Color.accentColor`, not `Color.primary`. Type is the system font: every view uses `Font.echo(size, weight)`, which is SF Pro (Notate Sans was dropped 2026-10-20). Icon is a white voice wave that rings out, fades like an echo and settles into a written line, over a shorter line, on a #0074D9 gradient, built from `Echo.icon` (Icon Composer) by the brand skill. Always blue, never red. The Mac and iOS targets both use it (`ASSETCATALOG_COMPILER_APPICON_NAME: Echo`), there is no AppIcon.appiconset. Products are named Echo.app; only the Xcode target and module names still say Voxprint (`PRODUCT_MODULE_NAME: Voxprint_macOS`, the tests import it).
 
 ## Build, test, ship
 
@@ -58,7 +57,7 @@ Ship gotchas, all seen for real:
 
 ## Landing
 
-`docs/` on Cloudflare Pages, project `voxprint`, domain notate.jaybulb.com. A push deploys nothing:
+`docs/` on Cloudflare Pages, project `voxprint`, domain echo.jaybulb.com. A push deploys nothing:
 
 ```bash
 npx wrangler pages deploy docs/ --project-name=voxprint --branch=main

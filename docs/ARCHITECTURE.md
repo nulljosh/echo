@@ -1,6 +1,6 @@
 # Architecture
 
-Notate turns speech into text without any of it leaving the device. Record straight from the mic or drop in an audio file, and the words appear as it listens, updated live rather than dumped all at once at the end.
+Echo turns speech into text without any of it leaving the device. Record straight from the mic or drop in an audio file, and the words appear as it listens, updated live rather than dumped all at once at the end.
 
 WhisperKit does the actual listening, running the model on the phone or Mac itself. There is no server call, so it works with no network connection, and the model downloads once and stays put for next time.
 

@@ -16,10 +16,10 @@ enum IntentInbox {
     static func takePendingStart() -> Bool { defer { pendingStart = false }; return pendingStart }
 }
 
-/// Opens Notate already recording. Pin it to the Action button, a Shortcut or ask Siri.
+/// Opens Echo already recording. Pin it to the Action button, a Shortcut or ask Siri.
 struct StartRecordingIntent: AppIntent {
     static let title: LocalizedStringResource = "Start Recording"
-    static let description = IntentDescription("Opens Notate and starts transcribing what you say, on device.")
+    static let description = IntentDescription("Opens Echo and starts transcribing what you say, on device.")
     static let openAppWhenRun = true
 
     @MainActor
@@ -32,7 +32,7 @@ struct StartRecordingIntent: AppIntent {
 /// Transcribes an audio file on device and returns the text, without opening the app.
 struct TranscribeAudioIntent: AppIntent {
     static let title: LocalizedStringResource = "Transcribe Audio"
-    static let description = IntentDescription("Turns an audio file into text with Notate's built-in model. Nothing leaves your device.")
+    static let description = IntentDescription("Turns an audio file into text with Echo's built-in model. Nothing leaves your device.")
 
     @Parameter(title: "Audio")
     var audio: IntentFile
@@ -48,13 +48,13 @@ struct TranscribeAudioIntent: AppIntent {
         await engine.transcribeFile(url: url)
         let text = engine.transcribedText
         guard !text.isEmpty, !text.hasPrefix("Transcription failed") else {
-            throw NSError(domain: "Notate", code: 1, userInfo: [NSLocalizedDescriptionKey: "Couldn't hear any speech in that audio."])
+            throw NSError(domain: "Echo", code: 1, userInfo: [NSLocalizedDescriptionKey: "Couldn't hear any speech in that audio."])
         }
         return .result(value: text)
     }
 }
 
-struct NotateShortcuts: AppShortcutsProvider {
+struct EchoShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(intent: StartRecordingIntent(), phrases: ["Start a recording in \(.applicationName)", "Transcribe with \(.applicationName)"],
                     shortTitle: "Start Recording", systemImageName: "mic.fill")

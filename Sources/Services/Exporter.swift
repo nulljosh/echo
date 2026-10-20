@@ -19,7 +19,7 @@ enum Exporter {
     }
 
     static func markdown(_ entry: TranscriptionEntry) -> String {
-        var out = "# Notate transcript\n\n\(entry.formattedDate)" + (entry.duration > 0 ? " · \(entry.formattedDuration)" : "") + "\n"
+        var out = "# Echo transcript\n\n\(entry.formattedDate)" + (entry.duration > 0 ? " · \(entry.formattedDuration)" : "") + "\n"
         if let s = entry.summary {
             out += "\n## Summary\n\n\(s.summary)\n"
             if !s.actionItems.isEmpty { out += "\n## Action items\n\n" + s.actionItems.map { "- [ ] \($0)" }.joined(separator: "\n") + "\n" }

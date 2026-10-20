@@ -2,16 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ATSApplicationFontsPath</key>
-	<string>.</string>
 	<key>CFBundleDisplayName</key>
-	<string>Notate</string>
+	<string>Echo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.nulljosh.echo</string>
 	<key>CFBundleName</key>
-	<string>Notate</string>
+	<string>Echo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -25,6 +23,6 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>14.0</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Notate transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
+	<string>Echo transcribes speech locally on your device using Whisper AI. Your audio never leaves your device.</string>
 </dict>
 </plist>

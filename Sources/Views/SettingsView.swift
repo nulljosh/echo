@@ -45,7 +45,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Custom Words")
                 } footer: {
-                    Text("Notate spells these your way. Separate them with commas.")
+                    Text("Echo spells these your way. Separate them with commas.")
                 }
 
                 Section {
@@ -109,7 +109,7 @@ struct SettingsView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(modelLabel(model)).foregroundStyle(.primary)
                                 Text(modelDescription(model))
-                                    .font(.notate(12))
+                                    .font(.echo(12))
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
@@ -214,7 +214,7 @@ private struct AppearancePicker: View {
                                     .stroke(rawTheme == id ? Color.accentColor : Color.primary.opacity(0.12), lineWidth: 2)
                             )
                         Text(label)
-                            .font(.notate(12, .medium))
+                            .font(.echo(12, .medium))
                             .foregroundStyle(rawTheme == id ? Color.accentColor : Color.secondary)
                     }
                 }

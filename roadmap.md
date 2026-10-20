@@ -1,4 +1,4 @@
-# Notate roadmap
+# Echo roadmap
 
 History lives in git log. This file only holds what is still open.
 
@@ -20,10 +20,10 @@ v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 - Skip: accounts, sync, SOC 2. We have no server. That is the pitch.
 
 ## Ingested 2026-10-19
-Source: Apple Note, screenshots in `notes/attachments/2026-10-19/notate-1..5.png`.
-- [ ] "What's new" sheet overflows the screen (notate-4.png, the bottom sheet is cut off).
-- [ ] Settings and the other top-right icons should be a nav bar at the bottom, not small icons in the top right (notate-2.png).
-- [ ] Settings: Speak-Back Voice is way too long. Make it a collapsible list or similar (notate-1.png, notate-3.png). Duplicate names (Eddy, Flo, Sandy, Shelley) show twice.
+Source: Apple Note, screenshots in `notes/attachments/2026-10-19/echo-1..5.png`.
+- [ ] "What's new" sheet overflows the screen (echo-4.png, the bottom sheet is cut off).
+- [ ] Settings and the other top-right icons should be a nav bar at the bottom, not small icons in the top right (echo-2.png).
+- [ ] Settings: Speak-Back Voice is way too long. Make it a collapsible list or similar (echo-1.png, echo-3.png). Duplicate names (Eddy, Flo, Sandy, Shelley) show twice.
 - [ ] Add ElevenLabs integration for better playback.
-- [ ] Simplify the model list and make it more readable (notate-5.png: Auto, Tiny, Base, Small_216Mb, Large, Apple).
-- [ ] Remove the Status row from Settings (notate-3.png). His words: get rid of it.
+- [ ] Simplify the model list and make it more readable (echo-5.png: Auto, Tiny, Base, Small_216Mb, Large, Apple).
+- [ ] Remove the Status row from Settings (echo-3.png). His words: get rid of it.

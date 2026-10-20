@@ -18,7 +18,7 @@ final class SystemAudioCapture: NSObject, SCStreamOutput, @unchecked Sendable {
         guard let display = content.displays.first else { throw AudioCaptureError.formatUnavailable }
         let config = SCStreamConfiguration()
         config.capturesAudio = true
-        config.excludesCurrentProcessAudio = true // never hear Notate's own speak-back
+        config.excludesCurrentProcessAudio = true // never hear Echo's own speak-back
         config.sampleRate = 48_000
         config.channelCount = 1
         // Video is required but unused: keep it tiny and slow.

@@ -1,4 +1,4 @@
-# Notate - App Store Connect submission package
+# Echo - App Store Connect submission package
 
 v1.4.0 is in review on iOS and Mac as of 2026-09-21. Price flips to $0.99 upfront after approval. No more Pro tier or in-app purchases.
 
@@ -15,7 +15,7 @@ v1.4.0 is in review on iOS and Mac as of 2026-09-21. Price flips to $0.99 upfron
 ## Listing metadata (copy-paste)
 
 **App Name** (30 char max)
-`Notate: On-Device Transcribe`
+`Echo: On-Device Transcribe`
 
 **Subtitle** (30 char max)
 `Voice to text, nothing leaves`
@@ -30,9 +30,9 @@ v1.4.0 is in review on iOS and Mac as of 2026-09-21. Price flips to $0.99 upfron
 
 **Description**
 ```
-Notate transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
+Echo transcribes speech, music, and audio files entirely on your iPhone. No account, no cloud, no subscription. Your audio never leaves the device.
 
-Powered by an on-device Whisper model, Notate transcribes live from the microphone or from audio files you import. Whether it's your voice, song lyrics, podcasts, or lectures, everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
+Powered by an on-device Whisper model, Echo transcribes live from the microphone or from audio files you import. Whether it's your voice, song lyrics, podcasts, or lectures, everything runs locally, so it works on a plane, in a basement, anywhere, and nothing you say is ever uploaded.
 
 ONE PAYMENT, EVERYTHING INCLUDED
 - Unlimited live microphone transcription
@@ -42,12 +42,12 @@ ONE PAYMENT, EVERYTHING INCLUDED
 - Full history, copy, and share
 - Speak back with system voice
 
-WHY NOTATE
+WHY ECHO
 - On device. Your voice stays yours.
 - No account, no sign-up, no tracking.
 - No subscription, no recurring charge.
 
-Notate is built for people who want their words, music, and audio transcribed without uploading to a server.
+Echo is built for people who want their words, music, and audio transcribed without uploading to a server.
 ```
 
 **What's New** (version 1.4.0)
@@ -63,7 +63,7 @@ Fixed a model error that could stop the app from loading. Everything is unlocked
 
 ## App Review notes (paste into Review Information)
 ```
-Notate transcribes speech entirely on-device using a Whisper model (WhisperKit). No account or login is required and no data leaves the device, so there are no demo credentials needed.
+Echo transcribes speech entirely on-device using a Whisper model (WhisperKit). No account or login is required and no data leaves the device, so there are no demo credentials needed.
 
 All features are included with the app purchase. No in-app purchases, no paywalls, no paywall screenshots. Everything is unlocked.
 
@@ -93,7 +93,7 @@ The first model download requires network once; after that the app is fully offl
 
 ## v1.4.0 shipping changes (2026-09-21)
 - All transcription features now included in the base $0.99 purchase.
-- Removed Notate Pro in-app purchase (`com.nulljosh.echo.unlock`).
+- Removed Echo Pro in-app purchase (`com.nulljosh.echo.unlock`).
 - Removed paywall UI entirely.
 - Expanded language picker to all 99+ languages Whisper supports.
 - Model selection moved to Settings > Advanced (Auto still default).
