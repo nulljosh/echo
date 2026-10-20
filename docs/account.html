@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Echo Account</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 20px; background: var(--bg); color: var(--text); font-family: var(--font, -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif); }
+  main { width: 100%; max-width: 380px; display: grid; gap: 16px; text-align: center; }
+  img { justify-self: center; border-radius: 22.5%; }
+  h1 { margin: 0; font-size: 28px; line-height: 34px; letter-spacing: -.02em; }
+  p { margin: 0; font-size: 17px; line-height: 24px; color: var(--sub); }
+  form { display: grid; gap: 12px; }
+  input, button { height: 48px; border-radius: 999px; font: inherit; font-size: 17px; padding: 0 20px; }
+  input { border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+  input:focus { outline: 4px solid color-mix(in srgb, var(--accent) 30%, transparent); outline-offset: 0; }
+  button { border: 0; background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .5; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <img src="apple-touch-icon.png" width="64" height="64" alt="">
+  <h1 id="title">Echo account</h1>
+  <p id="note">Open Echo and sign in from Settings.</p>
+  <form id="reset" hidden>
+    <input id="pw" type="password" autocomplete="new-password" minlength="8" placeholder="New password, at least 8 characters" required aria-label="New password">
+    <button id="go" type="submit">Set Password</button>
+  </form>
+</main>
+<script>
+// Lands here from the confirm and reset emails. A reset link carries ?recovery_token=...; a confirm link arrives with none.
+(function () {
+  var token = new URLSearchParams(location.search).get('recovery_token');
+  var title = document.getElementById('title'), note = document.getElementById('note'), form = document.getElementById('reset');
+  if (!token) {
+    title.textContent = 'Email confirmed';
+    note.textContent = 'Open Echo, go to Settings, then Account, and sign in.';
+    return;
+  }
+  history.replaceState(null, '', location.pathname); // keep the one-time token out of history and screenshots
+  title.textContent = 'Choose a new password';
+  note.textContent = 'Then sign in to Echo with it.';
+  form.hidden = false;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var go = document.getElementById('go');
+    go.disabled = true;
+    fetch('https://api.jaybulb.com/auth/reset', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token, password: document.getElementById('pw').value })
+    }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Something went wrong'); }); })
+      .then(function () {
+        form.hidden = true;
+        title.textContent = 'Password changed';
+        note.textContent = 'Open Echo, go to Settings, then Account, and sign in with your new password.';
+      })
+      .catch(function (err) {
+        go.disabled = false;
+        note.textContent = err.message === 'link expired or already used'
+          ? 'This link has expired or was already used. Ask Echo for a new one with Forgot Password.'
+          : err.message.charAt(0).toUpperCase() + err.message.slice(1) + '.';
+      });
+  });
+})();
+</script>
+</body>
+</html>

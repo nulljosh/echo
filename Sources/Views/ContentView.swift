@@ -6,6 +6,7 @@ struct ContentView: View {
 
     @StateObject private var engine = TranscriptionEngine()
     @StateObject private var speech = SpeechManager()
+    @StateObject private var account = Account()
     @State private var showHistory = false
     @State private var showSettings = false
     @State private var showFilePicker = false
@@ -36,7 +37,8 @@ struct ContentView: View {
                     languages: engine.availableLanguages,
                     modelState: engine.modelState,
                     resolvedModel: engine.resolvedModel,
-                    onReload: { await engine.reloadModel() }
+                    onReload: { await engine.reloadModel() },
+                    account: account
                 )
             }
             .alert("Echo", isPresented: Binding(get: { engine.notice != nil }, set: { if !$0 { engine.notice = nil } })) {

@@ -16,7 +16,7 @@ v2.0 ships when every item below is done, QA'd and live. One item per loop tick.
 ## Next (decided 2026-10-20)
 
 - [ ] Apple first, Whisper fallback. SpeechTranscriber (iOS 26, macOS 26) becomes the default for live speech and files wherever Apple has the language; WhisperKit stays for older systems and the rest of the 99 languages. Then stop bundling base and small to cut the app by most of its size.
-- [ ] Optional account. Sign in with Apple or email through jaybulb-api, profile, history sync, forgot password through authmail, delete account in Settings. The app keeps working fully without one; the pitch stays "no account needed". Refresh privacy.html and the App Store privacy answers in the same change.
+- [ ] Optional account, part 2. Email accounts shipped in the repo 2026-10-20 (sign up, confirm, sign in, forgot password, profile name, delete, privacy policy). Next: Sign in with Apple (enable the capability on com.nulljosh.echo, add the bundle IDs to APPLE_AUDIENCES on jaybulb-api, the id_token grant already exists), then history sync if wanted. Before the next submission: update the ASC privacy answers and PrivacyInfo.xcprivacy per docs/APPSTORE.md.
 
 ## After 2.0
 

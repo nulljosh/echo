@@ -10,6 +10,7 @@ struct SettingsView: View {
     let modelState: ModelState
     let resolvedModel: String
     let onReload: () async -> Void
+    @ObservedObject var account: Account
     @Environment(\.dismiss) private var dismiss
     @AppStorage("app_theme") private var rawTheme = "system"
 
@@ -25,6 +26,8 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                AccountSection(account: account)
+
                 Section {
                     Picker("Appearance", selection: $rawTheme) {
                         Text("System").tag("system")

@@ -12,7 +12,7 @@
     --p-text: #1a1a1a;
     --p-soft: #4a4a4a;
     --p-dim: #6a6864;
-    --p-accent: #2E6BE6;
+    --p-accent: #0067c7;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -20,7 +20,7 @@
       --p-text: #e8e6e3;
       --p-soft: #c4c2be;
       --p-dim: #8a8884;
-      --p-accent: #7FB0FF;
+      --p-accent: #4da6ff;
     }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,34 +54,54 @@
 </head>
 <body>
   <h1>Echo Privacy Policy</h1>
-  <div class="sub">On-device transcription. Last updated May 30, 2026.</div>
+  <div class="sub">Last updated October 20, 2026.</div>
 
-  <p class="lede">Echo collects nothing. There is no account, no server, no analytics, and no tracking. Every transcription runs entirely on your device and never leaves it.</p>
+  <p class="lede">Your audio and your transcripts never leave your device. An account is optional. If you make one, we keep your name, your email and a scrambled copy of your password, and nothing else.</p>
 
-  <h2>What Echo does with your audio</h2>
-  <p>Echo transcribes speech using a Whisper model that runs locally on your iPhone or Mac. Audio you record or import is processed on-device and is never uploaded, transmitted, or shared. Transcripts are stored only in Echo's local storage on your device.</p>
+  <h2>Your audio and transcripts</h2>
+  <p>Echo turns speech into text on your iPhone, iPad, Mac or Apple Watch. The speech model runs on the device, and so do clean up and summaries, which use Apple's on-device model. Audio and transcripts are stored only in Echo's storage on your device. They are never uploaded to us or to anyone else.</p>
+  <p>Recordings made on Apple Watch go straight to your own iPhone to be transcribed, over Apple's connection between the two. They do not pass through our server.</p>
 
-  <h2>Data we collect</h2>
-  <p><strong>None.</strong> Echo does not collect, store, or transmit any personal data. It contains no analytics SDKs, no advertising identifiers, and no third-party trackers. We never see your audio, your transcripts, or how you use the app.</p>
+  <h2>The optional account</h2>
+  <p>You never need an account to use Echo. If you create one, we store:</p>
+  <ul>
+    <li><strong>Your email</strong>, to sign you in and to send the confirm and password reset emails you ask for.</li>
+    <li><strong>Your name</strong>, shown on your profile.</li>
+    <li><strong>A hash of your password</strong> (salted PBKDF2). We never store or see the password itself.</li>
+    <li><strong>When you last signed in</strong>, and a sign-in token kept in your device's Keychain.</li>
+  </ul>
+  <p>This lives on our server at api.jaybulb.com, which runs on Cloudflare. Account emails are sent through Resend. We do not sell or share account data, show ads, or use it to track you.</p>
+
+  <h2>Deleting your account</h2>
+  <p>In Echo, open Settings, then Account, then Delete Account. Your account, name and email are removed from our server right away. Your transcripts stay on your device until you delete them or the app. You can also ask by email below.</p>
+
+  <h2>Things Echo downloads</h2>
+  <p>The speech models ship inside the app. If you pick the large model in Settings, Echo downloads it once from Hugging Face. That request carries no personal data.</p>
+
+  <h2>The web app</h2>
+  <p>The web version at echo.jaybulb.com uses your browser's speech service, which some browsers run in the cloud (Chrome sends audio to Google). Use the iPhone or Mac app if you want everything on your device. The web app keeps its history in your browser.</p>
 
   <h2>Permissions</h2>
   <ul>
-    <li><strong>Microphone</strong> is used only to capture audio for live transcription, at the moment you press record. Echo does not listen in the background.</li>
-    <li><strong>File access</strong> is used only for audio files you explicitly choose to import.</li>
+    <li><strong>Microphone</strong>, only while you record. Echo does not listen in the background.</li>
+    <li><strong>Files</strong>, only the audio files you choose.</li>
+    <li><strong>Screen and system audio</strong> on the Mac, only in meeting mode, to hear the other side of a call. The picture is never used or saved.</li>
   </ul>
 
   <h2>Purchases</h2>
-  <p>Echo costs one dollar, once. The payment is handled entirely by Apple's App Store. Echo never sees your payment details. Ownership is verified locally; no purchase data is sent anywhere else.</p>
+  <p>Echo costs one dollar, once. Apple handles the payment. We never see your payment details.</p>
+
+  <h2>Analytics</h2>
+  <p>None. No analytics, no advertising identifiers, no third-party trackers.</p>
 
   <h2>Children</h2>
-  <p>Echo does not collect data from anyone, including children, and contains no ads or external links to unverified content.</p>
+  <p>Echo is not directed at children under 13, and we do not knowingly create accounts for them. Without an account, Echo collects nothing from anyone.</p>
 
   <h2>Changes</h2>
-  <p>If this policy ever changes, the updated version will be posted at this URL with a new date. Since Echo collects nothing, material changes are unlikely.</p>
+  <p>If this policy changes, the new version will be posted here with a new date.</p>
 
   <h2>Contact</h2>
-  <p>Questions: <a href="mailto:jatrommel@gmail.com">jatrommel@gmail.com</a></p>
-
-  <footer>Echo is built by Joshua Trommel. Nothing leaves your device.</footer>
+  <p>Questions or deletion requests: <a href="mailto:jatrommel@gmail.com">jatrommel@gmail.com</a></p>
+  <footer>Echo is built by Joshua Trommel.</footer>
 </body>
 </html>

@@ -44,6 +44,12 @@ final class PreviewScreenshot: XCTestCase {
         settingsButton.tap()
         sleep(2)
         snapshot("4-settings")
+        let signIn = app.buttons["account-sign-in"]
+        if signIn.waitForExistence(timeout: 5) {
+            signIn.tap()
+            sleep(2)
+            snapshot("6-account") // QA only, not in the App Store set
+        }
         app.terminate()
 
         app = launch(extraArgs: ["UITEST_RECORDING"])

@@ -78,10 +78,11 @@ The models ship inside the app, so it works offline from the first launch. Micro
 4. Settings showing model + language pickers
 5. Optional: file import in progress
 
-## Privacy nutrition label answers
+## Privacy nutrition label answers (from the release that ships the optional account)
 - Data used to track you: **None**
-- Data linked to you: **None**
+- Data linked to you: **Contact Info: Name, Email Address**, for App Functionality only, and only when someone creates the optional account.
 - Data not linked to you: **None**
-- Result: **Data Not Collected** (matches PrivacyInfo.xcprivacy and privacy.html)
+- Audio and transcripts: never collected, they stay on the device.
+- Update the ASC privacy answers, `PrivacyInfo.xcprivacy` (NSPrivacyCollectedDataTypes: name, email, linked, app functionality) and review notes in that same submission. Account deletion is in Settings > Account (guideline 5.1.1(v)). Review notes need a demo account or a line that the app works fully without one.
 
 ---

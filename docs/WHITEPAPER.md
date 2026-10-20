@@ -23,7 +23,7 @@ On iOS 26 and macOS 26, Apple's own SpeechAnalyzer can transcribe files when its
 
 ## Privacy
 
-No audio or text leaves the device. No account, no analytics. `PrivacyInfo.xcprivacy` ships in every target, the Mac app runs in the App Sandbox, and `ITSAppUsesNonExemptEncryption` is false.
+No audio or text leaves the device, and there are no analytics. An account is optional: it keeps a name, an email and a password hash on jaybulb-api (Cloudflare), with sign out and delete in Settings. `PrivacyInfo.xcprivacy` ships in every target, the Mac app runs in the App Sandbox, and `ITSAppUsesNonExemptEncryption` is false.
 
 ## Platforms
 

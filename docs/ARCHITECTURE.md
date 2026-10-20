@@ -21,18 +21,21 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Services/Cleanup.swift` | Apple Foundation Models: clean up and summary, on device |
 | `Sources/Services/Exporter.swift` | Text, Markdown and SRT export |
 | `Sources/Services/Intents.swift` | Shortcuts and the Action button: start recording, transcribe audio |
+| `Sources/Services/Account.swift` | The optional account on jaybulb-api: sign up, sign in, reset, rename, delete; refresh token in the Keychain |
 | `Sources/Services/SpeechManager.swift` | Reads a transcript aloud with the chosen system voice |
 | `Sources/Views/ContentView.swift` | The screen: transcript, record, nav bar (Share, More, History, Settings), Mac toolbar and drop |
 | `Sources/Views/TranscriptionView.swift` | Transcript, live word with its pop, errors, unusual language badge |
 | `Sources/Views/RecordButton.swift` | Record button and the Liquid Glass helpers |
 | `Sources/Views/HistoryView.swift` | History with native search, swipe and context menu |
 | `Sources/Views/SettingsView.swift` | One Form: appearance, voice, language, custom words, model |
+| `Sources/Views/AccountView.swift` | Settings > Account: sign in or create, forgot password, profile, sign out, delete |
 | `Sources/Views/SummaryView.swift` | Summary and action items sheet |
 | `Sources/Views/WaveformBarsView.swift` | Five bars driven by the mic level |
 | `Sources/Views/EchoFont.swift` | `Font.echo`, the system font |
 | `watchos/` | Standalone Watch recorder: record, history, playback, send to iPhone |
 | `Tests/ModelRecoveryTests.swift` | The QA gate: corrupt model heals, fallback works, custom words, real speech |
 | `Tests/TranscriptionEntryTests.swift` | Entry formatting |
+| `Tests/AccountTests.swift` | Account errors read as plain sentences |
 | `UITests/`, `UITests-mac/` | App Store screenshots from mock data (`UITEST_*` launch flags) |
 | `scripts/update_screenshots.sh` | Runs the iPhone screenshot test and copies the set into `screenshots/appstore` |
 | `scripts/fetch-tiny-model.sh` | Fetches the bundled models before a Release build |
@@ -40,6 +43,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `docs/app.html`, `styles.css`, `script.js`, `devices.css` | The web app |
 | `docs/brand.html`, `brand/` | Brand kit and design system |
 | `docs/privacy.html` | Privacy policy |
+| `docs/account.html` | Where confirm and reset emails land; sets the new password |
 
 ## Docs
 
