@@ -7,7 +7,7 @@ v1.4.0 is in review on iOS and Mac as of 2026-09-21. Price flips to $0.99 upfron
 - Everything is now included for the one-time $0.99 purchase. No IAP, no paywall.
 - All languages Whisper knows (about 99) are now in the picker, with auto-detect.
 - Model is auto-picked by device; manual override in Settings > Advanced.
-- Privacy policy live target: **https://notate.heyitsmejosh.com/privacy.html**.
+- Privacy policy live target: **https://echo.jaybulb.com/privacy.html**.
 - Privacy manifest bundled, `ITSAppUsesNonExemptEncryption=false` set.
 
 ---
@@ -56,8 +56,8 @@ Fixed a model error that could stop the app from loading. Everything is unlocked
 ```
 
 **Support URL**: `https://heyitsmejosh.com`
-**Marketing URL** (optional): `https://notate.heyitsmejosh.com/`
-**Privacy Policy URL**: `https://notate.heyitsmejosh.com/privacy.html`
+**Marketing URL** (optional): `https://echo.jaybulb.com/`
+**Privacy Policy URL**: `https://echo.jaybulb.com/privacy.html`
 
 ---
 

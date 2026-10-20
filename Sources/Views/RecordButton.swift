@@ -1,62 +1,36 @@
 import SwiftUI
 
+/// The one circle in the app. Blue to start, red with a square to stop.
 struct RecordButton: View {
     let isRecording: Bool
     let isTranscribing: Bool
     let action: () -> Void
 
-    @State private var pulse = false
-
-    private let iconColor = Color.white
-
     var body: some View {
         Button(action: action) {
             ZStack {
-                if isRecording {
-                    ForEach(0..<3, id: \.self) { i in
-                        Circle()
-                            .stroke(Color.red.opacity(0.25), lineWidth: 1.5)
-                            .frame(width: 56 + CGFloat(i * 18), height: 56 + CGFloat(i * 18))
-                            .scaleEffect(pulse ? 1.0 : 0.85)
-                            .opacity(pulse ? 0.0 : 1.0)
-                            .animation(
-                                .easeOut(duration: 1.4)
-                                    .repeatForever(autoreverses: false)
-                                    .delay(Double(i) * 0.35),
-                                value: pulse
-                            )
-                    }
-                }
-
                 Circle()
                     .fill(isRecording ? Color.red : Color.accentColor)
-                    .frame(width: 56, height: 56)
-
+                    .frame(width: 64, height: 64)
                 if isTranscribing && isRecording {
-                    ProgressView()
-                        .tint(iconColor)
-                        .scaleEffect(0.85)
+                    ProgressView().tint(.white)
                 } else if isRecording {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(iconColor)
-                        .frame(width: 16, height: 16)
+                    RoundedRectangle(cornerRadius: 4).fill(.white).frame(width: 20, height: 20)
                 } else {
-                    Image(systemName: "mic.fill")
-                        .font(.echo(22, .medium))
-                        .foregroundStyle(iconColor)
+                    Image(systemName: "mic.fill").font(.echo(22, .medium)).foregroundStyle(.white)
                 }
             }
+            .animation(.easeOut(duration: 0.2), value: isRecording)
         }
-        .buttonStyle(SpringButtonStyle())
-        .onAppear { pulse = isRecording }
-        .onChange(of: isRecording) { _, newValue in pulse = newValue }
+        .buttonStyle(PressButtonStyle())
+        .accessibilityLabel(isRecording ? "Stop recording" : "Record")
     }
 }
 
-struct SpringButtonStyle: ButtonStyle {
+struct PressButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.93 : 1.0)
-            .animation(.interpolatingSpring(stiffness: 300, damping: 15), value: configuration.isPressed)
+            .scaleEffect(configuration.isPressed ? 0.94 : 1.0)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 }

@@ -48,13 +48,6 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .center .cta { justify-content: center; }
 .fine { margin-top: var(--sp-3); font-size: var(--size-footnote); line-height: 16px; color: var(--sub); }
 
-/* the live app, straight on the blue stage: no window, no device */
-.demo-wrap { margin: var(--sp-8) clamp(0px, 3vw, 44px) 0; }
-.stage { position: relative; overflow: hidden; background: var(--grain), var(--band); padding: clamp(24px, 6vw, 96px) clamp(12px, 7vw, 128px); }
-.stage-art { position: absolute; inset: 0; }
-.live { position: relative; display: block; width: 100%; max-width: 760px; height: 640px; margin: 0 auto; border: 0; border-radius: var(--r-group); background: var(--bg); box-shadow: 0 24px 64px rgba(0, 20, 60, .35); }
-.demo-hint { margin-top: var(--sp-3); font-size: var(--size-footnote); color: var(--sub); text-align: center; }
-
 /* The blue band: Echo herself above the section head, three feature rows, then six ruled cells */
 .band { margin: 0 clamp(0px, 3vw, 44px); background: var(--grain), var(--band); color: #fff; overflow: hidden; }
 .band .label { color: var(--band-sub); }
@@ -135,7 +128,6 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
   .cells { grid-template-columns: 1fr; }
   .cell, .cell:nth-child(2n) { border-right: 0; }
   .cell:nth-last-child(2) { border-bottom: 1px solid var(--band-line); }
-  .stage { padding: var(--sp-4) var(--sp-2); }
   .live { height: 560px; border-radius: var(--r-row, 12px); }
 }
 .band-copy .label { color: #fff; text-shadow: 0 0 12px var(--band), 0 0 24px var(--band), 0 0 40px var(--band); }
