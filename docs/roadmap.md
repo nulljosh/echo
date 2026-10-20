@@ -4,7 +4,7 @@ History lives in git log. This file only holds what is still open. Repo versions
 
 ## v2.3.x: still open from v2.3
 
-- [ ] Benchmarks with a real human voice clip (noise, accent) so the word error column separates the engines.
+- [ ] Benchmarks: find why Whisper small (16.9%) and Apple (15.1%) trail base (5.1%) on the LibriVox clip. Print their text, normalize numbers and compounds, rerun. Only then reconsider Auto's model choices.
 
 ## v2.5: Apple first, part 2
 

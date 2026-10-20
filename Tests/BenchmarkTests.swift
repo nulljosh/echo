@@ -37,49 +37,89 @@ final class BenchmarkTests: XCTestCase {
         XCTAssertEqual(Self.wordErrorRate("a dog sat down", "the cat sat"), 1.0, accuracy: 1e-9)
     }
 
+    static let gettysburg = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate, we can not consecrate, we can not hallow this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us, that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion, that we here highly resolve that these dead shall not have died in vain, that this nation, under God, shall have a new birth of freedom, and that government of the people, by the people, for the people, shall not perish from the earth."
+
+    /// Keeps only the speech itself: LibriVox readings open and close with a credit that is not in the text.
+    static func trimToSpeech(_ text: String) -> String {
+        let lower = text.lowercased()
+        let start = lower.range(of: "four score")?.lowerBound ?? lower.startIndex
+        let end = lower.range(of: "from the earth", options: .backwards)?.upperBound ?? lower.endIndex
+        return start < end ? String(text[start..<end]) : text
+    }
+
+    /// 16 kHz mono samples from any audio file AVFoundation reads.
+    static func samples16k(_ url: URL) throws -> [Float] {
+        let file = try AVAudioFile(forReading: url)
+        let target = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 16_000, channels: 1, interleaved: false)!
+        let input = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))!
+        try file.read(into: input)
+        let converter = AVAudioConverter(from: file.processingFormat, to: target)!
+        let out = AVAudioPCMBuffer(pcmFormat: target, frameCapacity: AVAudioFrameCount(Double(file.length) * 16_000 / file.processingFormat.sampleRate) + 1024)!
+        var given = false
+        _ = converter.convert(to: out, error: nil) { _, status in
+            if given { status.pointee = .endOfStream; return nil }
+            given = true; status.pointee = .haveData; return input
+        }
+        return Array(UnsafeBufferPointer(start: out.floatChannelData![0], count: Int(out.frameLength)))
+    }
+
     func testBenchmarkEveryEngine() async throws {
         let env = ProcessInfo.processInfo.environment
         try XCTSkipIf(env["VOXPRINT_BENCH"] == nil, "opt-in benchmark")
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-bench.wav")
+        let tmp = FileManager.default.temporaryDirectory
+        let wav = tmp.appendingPathComponent("echo-bench.wav")
         let say = Process()
         say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
         say.arguments = ["-o", wav.path, "--data-format=LEF32@16000", Self.script]
         try say.run(); say.waitUntilExit()
-        let file = try AVAudioFile(forReading: wav)
-        let buf = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))!
-        try file.read(into: buf)
-        let samples = Array(UnsafeBufferPointer(start: buf.floatChannelData![0], count: Int(buf.frameLength)))
-        let seconds = Double(samples.count) / 16_000
+        // A real voice: a public domain LibriVox reading of the Gettysburg Address, fetched once.
+        let human = tmp.appendingPathComponent("echo-bench-gettysburg.mp3")
+        if !FileManager.default.fileExists(atPath: human.path) {
+            let (data, _) = try await URLSession.shared.data(from: URL(string: "https://archive.org/download/gettysburg_address4_librivox/lincoln_gettysburg_address_64kb.mp3")!)
+            try data.write(to: human)
+        }
+        let clips: [(name: String, url: URL, reference: String, trim: Bool)] = [
+            ("`say` voice", wav, Self.script, false),
+            ("Human, LibriVox", human, Self.gettysburg, true),
+        ]
 
         var rows: [String] = []
-        func row(_ name: String, load: Double, run: Double, text: String) {
-            let wer = Self.wordErrorRate(text, Self.script)
-            rows.append(String(format: "| %@ | %.1f s | %.2f s | %.0fx | %.0f%% |", name, load, run, seconds / run, wer * 100))
-        }
-
+        var kits: [(String, WhisperKit, Double)] = []
         for model in ["openai_whisper-tiny", "openai_whisper-base", "openai_whisper-small_216MB"] {
             guard let folder = TranscriptionEngine.bundled(model) else { continue }
             let loadStart = Date()
             let kit = try await TranscriptionEngine.loadBundled(folder)
-            let load = Date().timeIntervalSince(loadStart)
-            _ = try await kit.transcribe(audioArray: Array(samples.prefix(16_000))) // warm up
-            var best = Double.infinity, text = ""
-            for _ in 0..<2 {
-                let start = Date()
-                let results = try await kit.transcribe(audioArray: samples)
-                best = min(best, Date().timeIntervalSince(start))
-                text = results.map(\.text).joined(separator: " ")
-            }
-            row(model.replacingOccurrences(of: "openai_whisper-", with: "Whisper ").replacingOccurrences(of: "_216MB", with: ""), load: load, run: best, text: text)
+            kits.append((model.replacingOccurrences(of: "openai_whisper-", with: "Whisper ").replacingOccurrences(of: "_216MB", with: ""), kit, Date().timeIntervalSince(loadStart)))
         }
-
+        var appleLocale: Locale?
         if #available(macOS 26.0, *) {
             await AppleSpeech.prepare(for: "en")
-            if let locale = await AppleSpeech.installedLocale(for: "en") {
+            appleLocale = await AppleSpeech.installedLocale(for: "en")
+        }
+
+        for clip in clips {
+            let samples = try Self.samples16k(clip.url)
+            let seconds = Double(samples.count) / 16_000
+            func row(_ name: String, load: Double, run: Double, text: String) {
+                let wer = Self.wordErrorRate(clip.trim ? Self.trimToSpeech(text) : text, clip.reference)
+                rows.append(String(format: "| %@ | %@ (%.0f s) | %.1f s | %.2f s | %.0fx | %.1f%% |", name, clip.name, seconds, load, run, seconds / run, wer * 100))
+            }
+            for (name, kit, load) in kits {
+                _ = try await kit.transcribe(audioArray: Array(samples.prefix(16_000))) // warm up
                 var best = Double.infinity, text = ""
                 for _ in 0..<2 {
                     let start = Date()
-                    let lines = try await AppleSpeech.transcribe(url: wav, locale: locale)
+                    let results = try await kit.transcribe(audioArray: samples)
+                    best = min(best, Date().timeIntervalSince(start))
+                    text = results.map(\.text).joined(separator: " ")
+                }
+                row(name, load: load, run: best, text: text)
+            }
+            if #available(macOS 26.0, *), let locale = appleLocale {
+                var best = Double.infinity, text = ""
+                for _ in 0..<2 {
+                    let start = Date()
+                    let lines = try await AppleSpeech.transcribe(url: clip.url, locale: locale)
                     best = min(best, Date().timeIntervalSince(start))
                     text = lines.map(\.text).joined(separator: " ")
                 }
@@ -89,11 +129,11 @@ final class BenchmarkTests: XCTestCase {
 
         let host = ProcessInfo.processInfo
         let report = """
-        | Engine | Load | Transcribe | Faster than real time | Word error rate |
-        |---|---|---|---|---|
+        | Engine | Clip | Load | Transcribe | Faster than real time | Word error rate |
+        |---|---|---|---|---|---|
         \(rows.joined(separator: "\n"))
 
-        Clip: \(String(format: "%.1f", seconds)) s of `say` speech, 16 kHz. Best of two runs after a warm-up. \(host.processorCount) cores, \(host.physicalMemory / 1_073_741_824) GB, macOS \(host.operatingSystemVersionString).
+        Best of two runs after a warm-up. Word error rate ignores case and punctuation; the LibriVox credit is trimmed off. \(host.processorCount) cores, \(host.physicalMemory / 1_073_741_824) GB, macOS \(host.operatingSystemVersionString).
         """
         print(report)
         if let out = env["VOXPRINT_BENCH_OUT"] { try report.write(toFile: out, atomically: true, encoding: .utf8) }

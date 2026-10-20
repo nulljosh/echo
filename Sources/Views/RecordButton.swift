@@ -58,4 +58,24 @@ extension View {
             padding(8).background(.quaternary, in: Circle())
         }
     }
+
+    /// A real bottom bar: Apple's safeAreaBar on iOS and macOS 26 (glass, scroll edge effect), the system bar material before.
+    @ViewBuilder
+    func nativeBottomBar<Bar: View>(@ViewBuilder _ bar: () -> Bar) -> some View {
+        if #available(iOS 26, macOS 26, *) {
+            safeAreaBar(edge: .bottom) { bar() }
+        } else {
+            safeAreaInset(edge: .bottom, spacing: 0) { bar().background(.bar) }
+        }
+    }
+
+    /// A glass capsule behind a row of controls (a plain bar material before iOS and macOS 26).
+    @ViewBuilder
+    func glassCapsule() -> some View {
+        if #available(iOS 26, macOS 26, *) {
+            glassEffect(.regular.interactive(), in: .capsule)
+        } else {
+            background(.bar, in: Capsule())
+        }
+    }
 }

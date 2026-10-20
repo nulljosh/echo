@@ -81,32 +81,20 @@ struct ContentView: View {
     private var layout: some View {
         NavigationStack {
             transcript
-                .safeAreaInset(edge: .bottom) {
-                    // Record is dead centre; Settings sits at the leading edge of the same row.
-                    recordButton
-                        .frame(maxWidth: .infinity)
-                        .overlay(alignment: .leading) {
-                            Button { showSettings = true } label: {
-                                Image(systemName: "gearshape").font(.echo(22)).frame(width: 32, height: 32).fallbackCircle()
-                            }
-                            .glassCircle()
-                            .accessibilityLabel("Settings")
-                            .accessibilityIdentifier("settings-button")
-                        }
-                        .padding(.horizontal, 20).padding(.vertical, 16)
-                }
+                // Record lives in the page itself, centred above the bar; the bar holds everything else.
+                .safeAreaInset(edge: .bottom) { recordButton.padding(.vertical, 12) }
                 .navigationTitle("Echo")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button { showHistory = true } label: { Label("History", systemImage: "clock") }
+                    ToolbarItem(placement: .topBarTrailing) { upgradeRing }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        // One group, no spacers: the four buttons share one connected bar.
+                        Button { showHistory = true } label: { Label { Text("History") } icon: { BarIcon("clock") } }
                             .disabled(engine.entries.isEmpty)
                             .accessibilityIdentifier("history-button")
-                    }
-                    ToolbarItemGroup(placement: .topBarTrailing) {
-                        upgradeRing
                         shareMenu
                         moreMenu
+                        settingsButton
                     }
                 }
         }
@@ -127,7 +115,8 @@ struct ContentView: View {
                 .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
             transcript
-                .safeAreaInset(edge: .bottom) { macBar }
+                .safeAreaInset(edge: .bottom) { recordButton.padding(.vertical, 12) }
+                .safeAreaInset(edge: .bottom, spacing: 0) { macBar }
                 .overlay {
                     if isDropTargeted {
                         RoundedRectangle(cornerRadius: 20).stroke(Color.accentColor, lineWidth: 2).padding(8)
@@ -138,51 +127,29 @@ struct ContentView: View {
         }
     }
 
-    /// The Mac's bottom bar, same shape as the iPhone's: Settings and Meeting left, record dead centre, Share and More right.
+    /// The Mac's bottom bar: Settings and Meeting on the left, Share and More on the right. Record sits in the page above it.
     private var macBar: some View {
-        recordButton
-            .frame(maxWidth: .infinity)
-            .overlay(alignment: .leading) {
-                HStack(spacing: 12) {
-                    barButton("gearshape", label: "Settings") { showSettings = true }
-                        .accessibilityIdentifier("settings-button")
-                    // Meeting: also hear the call (what the Mac plays). No bot joins, nothing leaves the Mac.
-                    barButton(engine.meetingMode ? "person.2.wave.2.fill" : "person.2.wave.2", label: engine.meetingMode ? "Meeting on" : "Meeting off") {
-                        engine.meetingMode.toggle()
-                    }
-                    .foregroundStyle(engine.meetingMode ? Color.accentColor : Color.primary)
-                    .disabled(engine.isRecording)
-                    .help(engine.meetingMode ? "Meeting on: hears your mic and the call" : "Meeting off: hears your mic only")
-                }
-            }
-            .overlay(alignment: .trailing) {
-                HStack(spacing: 12) {
-                    barMenu("square.and.arrow.up", label: "Share or export") { shareItems }
-                        .disabled(engine.transcribedText.isEmpty)
-                    barMenu(engine.isCleaning || engine.isSummarizing ? "hourglass" : "ellipsis", label: "More") { moreItems }
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
-    }
-
-    /// A menu that looks exactly like a bar button (menus take a button style only as a button-style menu).
-    private func barMenu<Items: View>(_ symbol: String, label: String, @ViewBuilder items: () -> Items) -> some View {
-        Menu(content: items) {
-            Image(systemName: symbol).font(.echo(17)).frame(width: 32, height: 32).fallbackCircle()
+        // One connected capsule, like the iPhone's bottom bar.
+        HStack(spacing: 20) {
+            settingsButton
+            // Meeting: also hear the call (what the Mac plays). No bot joins, nothing leaves the Mac.
+            Toggle(isOn: $engine.meetingMode) { Label { Text("Meeting") } icon: { BarIcon("person.2.wave.2") } }
+                .toggleStyle(.button)
+                .disabled(engine.isRecording)
+                .help(engine.meetingMode ? "Meeting on: hears your mic and the call" : "Meeting off: hears your mic only")
+            shareMenu
+            moreMenu
         }
-        .menuStyle(.button)
+        .labelStyle(.iconOnly)
+        .buttonStyle(.borderless)
+        .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
-        .glassCircle()
-        .accessibilityLabel(label)
-    }
-
-    private func barButton(_ symbol: String, label: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: symbol).font(.echo(17)).frame(width: 32, height: 32).fallbackCircle()
-        }
-        .glassCircle()
-        .accessibilityLabel(label)
+        .font(.echo(17))
+        .controlSize(.large)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .glassCapsule()
+        .padding(.bottom, 12)
     }
     #endif
 
@@ -244,7 +211,7 @@ struct ContentView: View {
     }
 
     private var shareMenu: some View {
-        Menu { shareItems } label: { Label("Share", systemImage: "square.and.arrow.up") }
+        Menu { shareItems } label: { Label { Text("Share") } icon: { BarIcon("square.and.arrow.up") } }
             .menuIndicator(.hidden)
             .disabled(engine.transcribedText.isEmpty)
     }
@@ -276,14 +243,14 @@ struct ContentView: View {
             if engine.isCleaning || engine.isSummarizing {
                 ProgressView().controlSize(.small)
             } else {
-                Label("More", systemImage: "ellipsis.circle")
+                Label { Text("More") } icon: { BarIcon("ellipsis") }
             }
         }
         .menuIndicator(.hidden)
     }
 
     private var settingsButton: some View {
-        Button { showSettings = true } label: { Label("Settings", systemImage: "gearshape") }
+        Button { showSettings = true } label: { Label { Text("Settings") } icon: { BarIcon("gearshape") } }
             .accessibilityIdentifier("settings-button")
     }
 
@@ -302,4 +269,13 @@ struct ContentView: View {
         return true
     }
     #endif
+}
+
+/// Every bar icon at one weight in one square frame, so the bar's buttons read the same size and space evenly.
+struct BarIcon: View {
+    let symbol: String
+    init(_ symbol: String) { self.symbol = symbol }
+    var body: some View {
+        Image(systemName: symbol).font(.echo(17, .medium)).frame(width: 28, height: 28)
+    }
 }
