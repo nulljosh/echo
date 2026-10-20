@@ -2,7 +2,7 @@
 
 History lives in git log. This file only holds what is still open. Repo versions follow shipped batches; the App Store follows when Joshua says ship.
 
-## v2.3: Joshua's notes and hardening
+## v2.3.x: still open from v2.3
 
 - [ ] Benchmarks with a real human voice clip (noise, accent) so the word error column separates the engines.
 
