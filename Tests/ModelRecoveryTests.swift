@@ -288,27 +288,4 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertFalse(IntentInbox.takePendingStart(), "and be taken once")
     }
 
-
-    /// Apple's speech model transcribes a file with timings, when it is installed for English on this machine.
-    @MainActor
-    func testAppleSpeechFile() async throws {
-        try XCTSkipIf(ProcessInfo.processInfo.environment["VOXPRINT_QA"] == nil, "opt-in")
-        let locale = await AppleSpeech.installedLocale(for: "en")
-        try XCTSkipIf(locale == nil, "Apple's English model is not installed here")
-        let wav = FileManager.default.temporaryDirectory.appendingPathComponent("echo-apple.wav")
-        let say = Process()
-        say.executableURL = URL(fileURLWithPath: "/usr/bin/say")
-        say.arguments = ["-o", wav.path, "--data-format=LEI16@16000", "The quick brown fox jumps over the lazy dog near the river bank."]
-        try say.run(); say.waitUntilExit()
-        let engine = TranscriptionEngine()
-        engine.selectedModel = AppleSpeech.modelID
-        engine.selectedLanguage = "en"
-        await engine.transcribeFile(url: wav)
-        let heard = engine.transcribedText.lowercased()
-        for word in ["quick", "fox", "lazy", "river"] { XCTAssertTrue(heard.contains(word), "Apple missed \"\(word)\": \(heard)") }
-        let entry = try XCTUnwrap(engine.entries.first)
-        XCTAssertEqual(entry.model, AppleSpeech.modelID)
-        XCTAssertFalse(entry.lines?.isEmpty ?? true, "timed lines for subtitles")
-        engine.deleteEntry(entry)
-    }
 }

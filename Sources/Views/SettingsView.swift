@@ -131,8 +131,8 @@ struct SettingsView: View {
     private func modelDescription(_ model: String) -> String {
         let resolved = resolvedModel.replacingOccurrences(of: "openai_whisper-", with: "").lowercased()
         switch model {
-        case "auto": return "Picks best for this device (currently \(resolved))"
-        case "apple": return "Apple · files and Shortcuts, when installed"
+        case "auto": return AppleSpeech.isSupported ? "Apple's speech model first, Whisper \(resolved) for the rest" : "Picks best for this device (currently \(resolved))"
+        case "apple": return "Apple's on-device speech model"
         case "openai_whisper-tiny": return "Fastest · built in"
         case "openai_whisper-base": return "Balanced · built in"
         case "openai_whisper-small_216MB": return "Accurate · built in"

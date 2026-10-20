@@ -17,7 +17,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Sources/Services/TranscriptionEngine.swift` | Model load and healing, live batches, files, history, cleanup, summary |
 | `Sources/Services/AudioCapture.swift` | AVAudioEngine tap, 16 kHz mono Float32, level for the waveform |
 | `Sources/Services/SystemAudioCapture.swift` | Mac meeting mode: what the Mac plays, through ScreenCaptureKit |
-| `Sources/Services/AppleSpeech.swift` | Apple SpeechAnalyzer for files on iOS 26 and macOS 26 |
+| `Sources/Services/AppleSpeech.swift` | Apple SpeechAnalyzer on iOS 26 and macOS 26: installs the language model, live sessions and files |
 | `Sources/Services/Cleanup.swift` | Apple Foundation Models: clean up and summary, on device |
 | `Sources/Services/Exporter.swift` | Text, Markdown and SRT export |
 | `Sources/Services/Intents.swift` | Shortcuts and the Action button: start recording, transcribe audio |

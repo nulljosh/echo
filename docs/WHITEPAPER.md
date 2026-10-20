@@ -12,7 +12,7 @@ Cloud transcription sends every recording through someone else's server before i
 
 Tiny, base and small ship inside the app, so the first launch works offline in seconds. Tiny loads first and small swaps in between recordings. A broken model is wiped and Echo falls back to tiny instead of showing an error. The 1.3.9 release bricked phones without this, and the QA test now breaks a model on purpose to prove it heals.
 
-On iOS 26 and macOS 26, Apple's own SpeechAnalyzer can transcribe files when its model for the language is installed. Making it the default for live speech, with Whisper as the fallback, is the next engine step (see the roadmap).
+On iOS 26 and macOS 26, Apple's own SpeechAnalyzer comes first. Echo asks the system to install Apple's model for your language in the background, and once it is there, live speech and files run through it: faster, long-form, and kept up to date by Apple. Whisper takes over on older systems, in Mac meetings (it labels You and Them), when you have custom words (it is the model that takes a prompt), for the languages Apple does not know, and whenever Apple's session fails to start.
 
 ## What it adds
 

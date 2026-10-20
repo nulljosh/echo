@@ -72,6 +72,7 @@
 		DF2DC174B53B96AD3A89BFB9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93FCB8AABA751B85277EF677 /* PrivacyInfo.xcprivacy */; };
 		DFBCFF12340FBCF5B814D4BB /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879E532FDD328278DA08BAA8 /* EchoFont.swift */; };
 		E3D317090ABC13C560BD6E7D /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C509CCA329A09FD24BD990 /* RecordingStore.swift */; };
+		E6F642998699828C4407198F /* AppleSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */; };
 		F53122CC80636C8AD894260C /* PreviewScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59A0168192E42A1F29EF0 /* PreviewScreenshot.swift */; };
 		FA24B95C123A2DFA5493A884 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702A5CFAC0AD1F611CE747 /* SettingsView.swift */; };
 		FB9F94334B2C9733A080BF89 /* VoxprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */; };
@@ -145,6 +146,7 @@
 		4D6F253829A7D450264E4828 /* VoxprintMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		534E2DEDC49E843805A98F8E /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		5973D2B96D0B869D7CD87E6E /* VoxprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxprintApp.swift; sourceTree = "<group>"; };
+		5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechTests.swift; sourceTree = "<group>"; };
 		5E9DBA19188A5C557A56DF12 /* EchoWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EchoWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DEC2A0D702908EFEE6EAEF /* VoxprintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoxprintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FF37B36EDBACBACC37F93D /* WaveformBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				4AF0AA13A088140931D63873 /* AccountTests.swift */,
+				5D110FCEC12794126D9669CD /* AppleSpeechTests.swift */,
 				A5B8D0482AE22299B867BC1A /* ModelRecoveryTests.swift */,
 				1367EEA75FB85DFB1CED7CC5 /* TranscriptionEntryTests.swift */,
 			);
@@ -706,6 +709,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF51BF69D45546833BFE442 /* AccountTests.swift in Sources */,
+				E6F642998699828C4407198F /* AppleSpeechTests.swift in Sources */,
 				795C233A63214E0A4196E6EA /* ModelRecoveryTests.swift in Sources */,
 				6008A6F03726FCE4DCD847F6 /* TranscriptionEntryTests.swift in Sources */,
 			);

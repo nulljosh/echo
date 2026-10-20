@@ -89,6 +89,8 @@ class TranscriptionEngine: ObservableObject {
     private var recordingTask: Task<Void, Never>?
     private var recordingStart: Date?
     private var committedText = ""
+    /// The live Apple session while one is recording (an AppleSpeech.Live, typed loosely for iOS 17).
+    private var appleSession: AnyObject?
     /// Meeting mode: loudness frames (mic, call) aligned with `audioBuffer`, 100 ms each, for You/Them labels.
     private var speakerFrames: [(mic: Float, system: Float)] = []
     private var lastSpeaker: String?
@@ -174,6 +176,10 @@ class TranscriptionEngine: ObservableObject {
         if CommandLine.arguments.contains(where: { $0.hasPrefix("UITEST_") || $0.hasPrefix("-UITEST_") }) {
             modelState = .ready
             return
+        }
+        if selectedModel == "auto" || selectedModel == AppleSpeech.modelID {
+            let language = selectedLanguage
+            Task.detached(priority: .background) { await AppleSpeech.prepare(for: language) }
         }
         if case .loading = modelState { return }
         guard modelState != .ready else { return }
@@ -448,7 +454,9 @@ class TranscriptionEngine: ObservableObject {
             return
         }
 
+        appleSession = nil
         recordingTask = Task {
+            if await startApple() { await pumpApple(); return }
             while !Task.isCancelled {
                 await transcribeCurrentBuffer()
                 if Task.isCancelled { break }
@@ -467,10 +475,12 @@ class TranscriptionEngine: ObservableObject {
         #if os(macOS)
         systemCapture.stop()
         #endif
-        // Stopped before any model finished loading: wait for it so nothing said is lost.
-        while whisperKit == nil, case .loading = modelState { try? await Task.sleep(for: .milliseconds(200)) }
         await live?.value // the live pass in flight finishes first, then the final pass runs alone
-        await transcribeCurrentBuffer(full: true)
+        if await !finishApple() {
+            // Stopped before any model finished loading: wait for it so nothing said is lost.
+            while whisperKit == nil, case .loading = modelState { try? await Task.sleep(for: .milliseconds(200)) }
+            await transcribeCurrentBuffer(full: true)
+        }
 
         let duration = Date().timeIntervalSince(recordingStart ?? Date())
         let trimmed = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -481,6 +491,71 @@ class TranscriptionEngine: ObservableObject {
         }
         recordingStart = nil
         applyPendingUpgrade()
+    }
+
+    // MARK: - Apple first
+
+    /// Starts Apple's live model when it fits: Auto or Apple picked, iOS or macOS 26, Apple has the language installed,
+    /// no meeting (Whisper labels You and Them) and no custom words (Apple's live model has no prompt to steer it).
+    private func startApple() async -> Bool {
+        #if canImport(Speech)
+        #if os(macOS)
+        let meeting = meetingMode
+        #else
+        let meeting = false
+        #endif
+        guard #available(iOS 26.0, macOS 26.0, *),
+              selectedModel == "auto" || selectedModel == AppleSpeech.modelID,
+              !meeting, Self.promptText(from: customWords) == nil,
+              let locale = await AppleSpeech.installedLocale(for: selectedLanguage),
+              let live = await AppleSpeech.Live(locale: locale) else { return false }
+        do {
+            try await live.start { [weak self] text in
+                guard let self, self.isRecording else { return }
+                self.transcribedText = text
+            }
+        } catch {
+            return false // Whisper takes over with everything buffered so far
+        }
+        appleSession = live
+        return true
+        #else
+        return false
+        #endif
+    }
+
+    /// Hands the mic audio to Apple's model every 200 ms. The buffer is drained as it goes.
+    private func pumpApple() async {
+        #if canImport(Speech)
+        guard #available(iOS 26.0, macOS 26.0, *), let live = appleSession as? AppleSpeech.Live else { return }
+        while !Task.isCancelled {
+            live.feed(bufferLock.withLock { () -> [Float] in
+                let chunk = audioBuffer
+                audioBuffer.removeAll(keepingCapacity: true)
+                return chunk
+            })
+            try? await Task.sleep(for: .milliseconds(200))
+        }
+        #endif
+    }
+
+    /// Feeds the last audio, waits for the final words and keeps them. False when this recording ran on Whisper.
+    private func finishApple() async -> Bool {
+        #if canImport(Speech)
+        guard #available(iOS 26.0, macOS 26.0, *), let live = appleSession as? AppleSpeech.Live else { return false }
+        appleSession = nil
+        live.feed(bufferLock.withLock { () -> [Float] in
+            let rest = audioBuffer
+            audioBuffer = []
+            return rest
+        })
+        await live.finish()
+        transcribedText = live.finalText
+        finalLines = live.lines
+        return true
+        #else
+        return false
+        #endif
     }
 
     func transcribeFile(url: URL) async {
