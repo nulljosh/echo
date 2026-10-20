@@ -1,6 +1,6 @@
 # Echo whitepaper
 
-**v2.1.0** · October 2026
+**v2.2.0** · October 2026
 
 Speech to text that never leaves your device.
 

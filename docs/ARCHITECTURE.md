@@ -36,6 +36,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `Tests/ModelRecoveryTests.swift` | The QA gate: corrupt model heals, fallback works, custom words, real speech |
 | `Tests/TranscriptionEntryTests.swift` | Entry formatting |
 | `Tests/AccountTests.swift` | Account errors read as plain sentences |
+| `Tests/AppleSpeechTests.swift` | Apple first: real speech through the live SpeechAnalyzer session, and files |
 | `UITests/`, `UITests-mac/` | App Store screenshots from mock data (`UITEST_*` launch flags) |
 | `scripts/update_screenshots.sh` | Runs the iPhone screenshot test and copies the set into `screenshots/appstore` |
 | `scripts/fetch-tiny-model.sh` | Fetches the bundled models before a Release build |

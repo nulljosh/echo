@@ -2,7 +2,7 @@
 
 # Echo
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014%20%7C%20watchOS-lightgrey) ![License](https://img.shields.io/badge/license-Apache%202.0-blue) [![Tests](https://github.com/nulljosh/echo/actions/workflows/test.yml/badge.svg)](https://github.com/nulljosh/echo/actions/workflows/test.yml)
+![Version](https://img.shields.io/badge/version-2.2.0-blue) ![Platform](https://img.shields.io/badge/platform-iOS%2017%20%7C%20macOS%2014%20%7C%20watchOS-lightgrey) ![License](https://img.shields.io/badge/license-Apache%202.0-blue) [![Tests](https://github.com/nulljosh/echo/actions/workflows/test.yml/badge.svg)](https://github.com/nulljosh/echo/actions/workflows/test.yml)
 
 Say it once. It comes back written down, on your iPhone, Mac or Watch. Nothing leaves the device.
 
