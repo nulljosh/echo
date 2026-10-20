@@ -1,26 +1,29 @@
-# Echo loop handoff (2026-10-19, afternoon)
+# Echo loop handoff (2026-10-20, 11:00)
 
 ## What the loop is
-One loop works the road to v2.0 in this repo, one roadmap item per tick. It reads `roadmap.md` ("Road to v2.0"), does the next open item, runs the QA gate and a cold-launch check before each commit, and pushes. It ships builds only when App Review allows. It stops at v2.0.
+The loop works the Echo rename and its ship path in this repo (ex-Notate). Each tick does the next open step below, runs the QA gate and a cold-launch check before each commit, and pushes only once QA is green. It stops when the landing, icon, brand kit and apps are A+ and the store name is Echo.
 
-Always say Echo, never Voxprint. Replies short, TLDR, no em dashes.
+Always say Echo, never Voxprint or Notate, except where the store still says Notate. Replies short, TLDR, no em dashes.
 
 ## Where things stand
-- iPhone 2.0 with the Apple Watch companion is live (READY_FOR_SALE, 2026-10-19). The app ships its models inside the bundle, so it opens and works offline. The download is 386 MB.
-- Mac 2.0.0 is WAITING_FOR_REVIEW.
-- The 2.0 landing is deployed to echo.jaybulb.com.
-- Roadmap items 1 to 7 of "Road to v2.0" are checked off. Item 8 ("Ship 2.0 on iPhone, Watch and Mac") stays open until Mac clears.
-- CI is green. The runner moved to macos-26 so the SpeechAnalyzer API is in the SDK. Cleanup keeps the text when Apple Intelligence is off, instead of throwing.
-- The roadmap is cut to open items (20 lines). The Echo rename is done and the orphan Mac record is gone.
-- Launch: 2.0 is posted on X and r/iosapps. Product Hunt shows Echo, and a 2.0 relaunch is under review there. The old Voxprint post gets deleted once the relaunch is approved.
-- Check App Store state before acting on it: `asc versions list --app 6782604262`.
+- The Echo landing is live at echo.jaybulb.com: Hermes-style page, black and white ordered-dither art from public domain paintings, system font. notate.jaybulb.com still serves.
+- The icon is a voice wave that settles into a written line, in blue #0074D9. Brand kit: brand/BRAND.md and docs/brand.html.
+- Mac and iOS builds are green on the current tree.
+- iPhone 2.0 with the Apple Watch companion is live. Mac 2.0.0 is WAITING_FOR_REVIEW.
+- The store listing still says Notate. Both app infos are locked (the live one and the Mac 2.0 review), so the store rename waits. It is roadmap item 9.
+- The rename commits (618669e, ab2c825) are on GitHub. The handoff commit above the roadmap queue is local only; hold it until the QA test suite is green, then push.
+- The checkpoint skipped the GitHub issue sync for this repo. The numbered roadmap items 8 and 9 would have been titled "8" and "9", and the UI items would have duplicated issues 31, 32 and 35 under their new echo-*.png names.
 
 ## Next, in order
-1. Wait for Mac 2.0.0 approval.
-2. When Mac 2.0.0 is READY_FOR_SALE, check item 8 off in `roadmap.md`, commit, push, and stop the loop.
-3. Still open with Joshua, not the loop: one real call test of meeting mode (Mac, mic plus call audio, speaker labels), and his grade for Dot v2. These are roadmap items 13 and 14.
+1. QA tests green, then push the local handoff commit.
+2. gh repo rename echo; git remote set-url origin to the new repo URL; gh repo edit --homepage https://echo.jaybulb.com.
+3. Move the folder from notate to echo under ~/Documents/Code and fix every path that points at notate (Xcode project paths, scripts, docs).
+4. Verify the Watch build (EchoWatch).
+5. Phone-width QA of echo.jaybulb.com: no horizontal scroll, 16px gutters, real tap targets.
+6. After Mac 2.0 clears review: asc rename the store listing to Echo (fallback Calliope). Read it back 3 times, then ship the Echo builds.
+7. Still with Joshua, not the loop: one real call in meeting mode on the Mac (roadmap item 28), and his grade for Dot v2 (roadmap item 29).
 
 ## Restart prompt
 ```
-/loop Echo: work the road to v2.0 one item per tick (roadmap.md "Road to v2.0"), QA gate green + cold-launch check before each commit, ship builds when App Review allows, stop at v2.0
+/loop until A+ landing page, icon and apps for Echo (ex-Notate): Hermes-style 1-bit ordered-dither landing in ~/Documents/Code/notate/docs, Echo icon, brand kit, rename sweep, builds green, deployed to echo.jaybulb.com
 ```
