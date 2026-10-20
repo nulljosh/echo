@@ -35,6 +35,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `watchos/` | Standalone Watch recorder: record, history, playback, send to iPhone |
 | `Tests/ModelRecoveryTests.swift` | The QA gate: corrupt model heals, fallback works, custom words, real speech |
 | `Tests/TranscriptionEntryTests.swift` | Entry formatting |
+| `Tests/BenchmarkTests.swift` | Opt-in benchmark of every engine (load, speed, word error rate) and the WER check |
 | `Tests/AccountTests.swift` | Account errors read as plain sentences |
 | `Tests/AppleSpeechTests.swift` | Apple first: when it runs, real speech through the live session and the engine, a stop while starting, and files |
 | `UITests/`, `UITests-mac/` | App Store screenshots from mock data (`UITEST_*` launch flags) |
@@ -54,6 +55,7 @@ You tap record. `AudioCapture` hands 16 kHz mono audio to `TranscriptionEngine`,
 | `CLAUDE.md` | How to work on Echo (AGENTS.md links to it) |
 | `docs/WHITEPAPER.md` | How it works, in one page |
 | `docs/roadmap.md` | What is still open |
+| `docs/BENCHMARKS.md` | Measured speed and accuracy of every engine |
 | `docs/MONEY.md` | Price and how Echo makes money |
 | `docs/APPSTORE.md` | Store listing, review notes, privacy answers |
 | `docs/CONTRIBUTING.md` | Setup, tests, reporting a security issue |

@@ -4,7 +4,7 @@ History lives in git log. This file only holds what is still open. Repo versions
 
 ## v2.3: Joshua's notes and hardening
 
-- [ ] Benchmarks: docs/BENCHMARKS.md with the real-time factor of tiny, base, small and Apple on the same clip.
+- [ ] Benchmarks with a real human voice clip (noise, accent) so the word error column separates the engines.
 - [ ] Split TranscriptionEngine into extension files by area (model loading, live, files, Apple, history), no logic changes.
 
 ## v2.4: Apple first, part 2

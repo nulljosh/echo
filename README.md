@@ -37,6 +37,6 @@ The QA run breaks the model on purpose and checks Echo heals, then transcribes r
 
 ## Docs
 
-[Whitepaper](docs/WHITEPAPER.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/roadmap.md) · [Contributing and security](docs/CONTRIBUTING.md)
+[Whitepaper](docs/WHITEPAPER.md) · [Benchmarks](docs/BENCHMARKS.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/roadmap.md) · [Contributing and security](docs/CONTRIBUTING.md)
 
 Apache 2.0. Copyright 2026 Joshua Trommel.
