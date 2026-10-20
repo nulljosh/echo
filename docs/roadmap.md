@@ -4,7 +4,6 @@ History lives in git log. This file only holds what is still open. Repo versions
 
 ## v2.3: Joshua's notes and hardening
 
-- [ ] Engine-level test for Apple first: start, pump and finish, and stop pressed while the Apple session is still starting.
 - [ ] Benchmarks: docs/BENCHMARKS.md with the real-time factor of tiny, base, small and Apple on the same clip.
 - [ ] Split TranscriptionEngine into extension files by area (model loading, live, files, Apple, history), no logic changes.
 

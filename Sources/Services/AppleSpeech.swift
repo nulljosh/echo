@@ -114,7 +114,12 @@ enum AppleSpeech {
                     await onUpdate(AppleSpeech.join(finalText, heard))
                 }
             }
-            try await analyzer.start(inputSequence: stream)
+            do {
+                try await analyzer.start(inputSequence: stream)
+            } catch {
+                results?.cancel() // nothing will ever arrive; do not leave the listener waiting forever
+                throw error
+            }
         }
 
         func feed(_ samples: [Float]) {

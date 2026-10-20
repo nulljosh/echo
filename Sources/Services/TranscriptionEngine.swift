@@ -97,7 +97,7 @@ class TranscriptionEngine: ObservableObject {
     /// Timed lines already committed this recording, and how many seconds of audio were dropped before the buffer.
     private var committedLines: [TimedLine] = []
     private var bufferOffset: Double = 0
-    private var finalLines: [TimedLine] = []
+    private(set) var finalLines: [TimedLine] = []
     private static let commitAfterSamples = 16_000 * 15
 
     private static let historyURL: URL = {
@@ -505,8 +505,7 @@ class TranscriptionEngine: ObservableObject {
         let meeting = false
         #endif
         guard #available(iOS 26.0, macOS 26.0, *),
-              selectedModel == "auto" || selectedModel == AppleSpeech.modelID,
-              !meeting, Self.promptText(from: customWords) == nil,
+              Self.appleFits(model: selectedModel, meeting: meeting, customWords: customWords),
               let locale = await AppleSpeech.installedLocale(for: selectedLanguage),
               let live = await AppleSpeech.Live(locale: locale) else { return false }
         do {
@@ -522,6 +521,29 @@ class TranscriptionEngine: ObservableObject {
         #else
         return false
         #endif
+    }
+
+    /// Whether a recording may run on Apple: Auto or Apple picked, not a meeting, no custom words.
+    static func appleFits(model: String, meeting: Bool, customWords: String) -> Bool {
+        (model == "auto" || model == AppleSpeech.modelID) && !meeting && promptText(from: customWords) == nil
+    }
+
+    /// Test hook: one recording through Apple first with these samples, stopped after `listen` (zero stops it while
+    /// the Apple session is still starting). True when Apple handled it; false means Whisper would have.
+    func simulateAppleLive(_ samples: [Float], listen: Duration = .milliseconds(600)) async -> Bool {
+        transcribedText = ""; finalLines = []
+        bufferLock.withLock { audioBuffer = samples }
+        isRecording = true
+        let run = Task { () -> Bool in
+            guard await startApple() else { return false }
+            await pumpApple()
+            return true
+        }
+        if listen > .zero { try? await Task.sleep(for: listen) }
+        run.cancel()
+        let started = await run.value
+        isRecording = false
+        return await finishApple() && started
     }
 
     /// Hands the mic audio to Apple's model every 200 ms. The buffer is drained as it goes.
