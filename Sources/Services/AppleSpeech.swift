@@ -1,5 +1,5 @@
 import AVFoundation
-#if canImport(Speech)
+#if canImport(Speech) && compiler(>=6.2)
 import Speech
 #endif
 
@@ -8,15 +8,17 @@ import Speech
 enum AppleSpeech {
     static let modelID = "apple"
 
-    /// Whether this OS has SpeechAnalyzer at all (the picker shows the option only then).
+    /// Whether this OS has (and this build's SDK knows, Swift 6.2 is Xcode 26; older SDKs lack the symbols) SpeechAnalyzer at all (the picker shows the option only then).
     static var isSupported: Bool {
+        #if canImport(Speech) && compiler(>=6.2)
         if #available(iOS 26.0, macOS 26.0, *) { return true }
+        #endif
         return false
     }
 
     /// The installed locale matching `language` ("auto" means the device language), or nil when none is installed.
     static func installedLocale(for language: String) async -> Locale? {
-        #if canImport(Speech)
+        #if canImport(Speech) && compiler(>=6.2)
         if #available(iOS 26.0, macOS 26.0, *) {
             let wanted = language == "auto" ? Locale.current : Locale(identifier: language)
             guard let supported = await SpeechTranscriber.supportedLocale(equivalentTo: wanted) else { return nil }
@@ -48,7 +50,7 @@ enum AppleSpeech {
 
     /// Transcribes a file into timed lines with Apple's model.
     static func transcribe(url: URL, locale: Locale) async throws -> [TimedLine] {
-        #if canImport(Speech)
+        #if canImport(Speech) && compiler(>=6.2)
         if #available(iOS 26.0, macOS 26.0, *) {
             let transcriber = SpeechTranscriber(locale: locale, transcriptionOptions: [], reportingOptions: [], attributeOptions: [.audioTimeRange])
             let collect = Task {
