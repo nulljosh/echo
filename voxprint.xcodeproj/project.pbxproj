@@ -36,6 +36,7 @@
 		3FFD02E0AF33F663591DD17A /* BundledModels in Resources */ = {isa = PBXBuildFile; fileRef = F31EAC7D6224E7BB2BDECB12 /* BundledModels */; };
 		429DCFF98A3F8142596B9158 /* MacScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008769FF7D3C7D1C86AA1C6 /* MacScreenshot.swift */; };
 		45FA87330C7E7E0FF580BB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2979D9C3680EC57594490295 /* Assets.xcassets */; };
+		491A4A353A45F0A9EEF4B250 /* Glossary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB02CF1E72E12E4E4C9F212 /* Glossary.swift */; };
 		495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349640877D9FF7A297ECA96 /* HistoryView.swift */; };
 		4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8EA66A3FC5FEA7C955933 /* EchoFont.swift */; };
 		4F7278057096558393A2C730 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75220DADEAFED783B91A5A14 /* KeyboardViewController.swift */; };
@@ -46,6 +47,7 @@
 		6224E88B3EC8437CAC19B451 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329AF7B7DC828095931C95E /* SummaryView.swift */; };
 		62A286C7CE754548CD2D359A /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44C167A820312C688D60BFD /* Intents.swift */; };
 		635A9AFCD7186CA498770652 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2636395EB60539732FDB19 /* Account.swift */; };
+		63BD9BD81A3C4E29F4C484A0 /* Glossary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB02CF1E72E12E4E4C9F212 /* Glossary.swift */; };
 		663B5D509ACC116EFB7AB42D /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7422E6C055A2F0E0327F0A62 /* AudioCapture.swift */; };
 		66669373E715CB79F7748CDD /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A910F82F4863EBB411432 /* SpeechManager.swift */; };
 		6CAAF1F0A73AE11B62295994 /* DictationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21754790BAE958E7E032FAB4 /* DictationBridge.swift */; };
@@ -216,6 +218,7 @@
 		D3A99454A3A13FE624630412 /* WhatsNewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSheet.swift; sourceTree = "<group>"; };
 		D4A1FC4F3A7AEEAFA90BC6AD /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		DC5E88E51568F90D1E5A8CF4 /* VoxprintUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VoxprintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB02CF1E72E12E4E4C9F212 /* Glossary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glossary.swift; sourceTree = "<group>"; };
 		DF5FC2D5F524496EE0AC11DC /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E4A93C1BD632A004057A4D13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E57905786F6A895BB1CA7384 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -334,6 +337,7 @@
 				739827B542A84C837CAD7966 /* Cleanup.swift */,
 				21754790BAE958E7E032FAB4 /* DictationBridge.swift */,
 				534E2DEDC49E843805A98F8E /* Exporter.swift */,
+				DCB02CF1E72E12E4E4C9F212 /* Glossary.swift */,
 				F44C167A820312C688D60BFD /* Intents.swift */,
 				254D6B6C032E8A468A84FC40 /* Keychain.swift */,
 				332A910F82F4863EBB411432 /* SpeechManager.swift */,
@@ -760,6 +764,7 @@
 				6CAAF1F0A73AE11B62295994 /* DictationBridge.swift in Sources */,
 				363FEE4D050BA4BB182F8825 /* EchoFont.swift in Sources */,
 				A5CEC23FB58AD42BBB202AD5 /* Exporter.swift in Sources */,
+				491A4A353A45F0A9EEF4B250 /* Glossary.swift in Sources */,
 				495C4520E85CCDD392E7678A /* HistoryView.swift in Sources */,
 				71295971CB141A76D36C5EE9 /* Intents.swift in Sources */,
 				DA16942858B1BA10896AA196 /* Keychain.swift in Sources */,
@@ -793,6 +798,7 @@
 				D5A1E5D77E733B361BDE80E3 /* DictationBridge.swift in Sources */,
 				4F148B3C86C944F18CC17884 /* EchoFont.swift in Sources */,
 				B745577C3F5A674412161D99 /* Exporter.swift in Sources */,
+				63BD9BD81A3C4E29F4C484A0 /* Glossary.swift in Sources */,
 				A78802055C5BA2E5BA185D3B /* HistoryView.swift in Sources */,
 				62A286C7CE754548CD2D359A /* Intents.swift in Sources */,
 				9E933F7B3CF68611D8631805 /* Keychain.swift in Sources */,
