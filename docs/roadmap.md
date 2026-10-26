@@ -5,6 +5,7 @@ History lives in git log. This file only holds what is still open. Repo versions
 ## v2.5: Apple first, part 2
 
 - Custom words stay on Whisper. Tested 2026-10-20 with made-up names: SpeechTranscriber ignores contextual strings (heard "J. Balvin" for Jaybulb with or without them), DictationTranscriber got one of two. Whisper's prompt gets both. Retest each new OS.
+- Custom words also correct the transcript afterwards (`Glossary.swift`): a heard word one edit from a custom word, or two words run together, becomes the word. It is edit distance on single words, so a name that sounds right but spells far off ("J. Balvin" for Jaybulb) still slips through. Phonetic matching would fix that and could let Apple's engine handle custom words too.
 - Base stopped shipping (2.5, 143 MB saved). Small stays: Whisper still runs on iOS and macOS before 26, with custom words and for languages Apple lacks.
 
 ## v3.0: dictate into any app
@@ -17,8 +18,8 @@ History lives in git log. This file only holds what is still open. Repo versions
 
 - [ ] App Store video header (new in iOS 27, autoplays at the top of the product page). Cut launch/echo-promo.mp4 to Apple's spec and attach it to the next iOS version (a live version cannot take new media). Check the crop on a real device, the ASC preview is reportedly off.
 
-- [ ] Store name to Echo the moment Mac 2.0 clears review and an app info is editable: `asc apps info list --app 6782604262`, then `asc apps rename --app 6782604262 --app-info <editable id> --locale en-US --name Echo` (fallback Calliope), read back 3 times, then ship a build that says Echo.
-- [ ] Ship 2.0 on Mac (waiting for review). iPhone and Watch 2.0 are live.
+- [ ] Store name to Echo once 3.0.0 clears review and an app info is editable (both are locked now: one live, one waiting for review): `asc apps info list --app 6782604262`, then `asc apps rename --app 6782604262 --app-info <editable id> --locale en-US --name Echo` (fallback Calliope), read back 3 times, then ship a build that says Echo.
+- [ ] 3.0.0 on iPhone, Watch and Mac, waiting for review (submitted 2026-10-26). Mac 2.0 and iPhone 2.0 are live. If Apple rejects, read the reason in Resolution Center and fix it.
 - [ ] Before the next submission: update the ASC privacy answers and PrivacyInfo.xcprivacy per docs/APPSTORE.md, and run one real sign up, confirm, sign in, rename and delete with an inbox Joshua owns.
 - [ ] Sign in with Apple: enable the capability on com.nulljosh.echo, regenerate the iOS and Watch profiles, add the bundle IDs to APPLE_AUDIENCES on jaybulb-api (the id_token grant already exists). Needs Joshua's yes.
 - [ ] One real call in meeting mode on the Mac (the screen audio permission prompt needs a person).
