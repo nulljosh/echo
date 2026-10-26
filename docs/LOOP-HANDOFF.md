@@ -14,7 +14,7 @@ Rules for every tick:
 
 ## Where things stand
 - iOS 3.0.0 is WAITING_FOR_REVIEW. It is the Echo keyboard (dictate key opens Echo, which records in the background; the text comes back through `DictationBridge`, Darwin signals plus a shared Keychain group) plus the glossary pass, where custom words also correct the transcript after Whisper. The glossary is commits 2b119bc and c4beb2a on main. The build was exported by hand with the three profiles, because ship-ios export fails on automatic signing.
-- Mac 3.0.0 ship-mac workflow was still running at checkpoint time. It is not confirmed in review; check with asc before saying anything about it.
+- Mac 3.0.0 is submitted too (build 202610260028), waiting for review alongside iOS.
 - The keyboard has not been walked on a real iPhone. The simulator cannot add the keyboard through iOS 27 Settings, so the walk has to be on a device.
 - Mac 2.0 was last seen IN_REVIEW on 2026-10-20. Re-check it, the store listing still says Notate.
 - v2.5.0: meetings on Apple with You and Them, Whisper base no longer ships (143 MB saved). v2.4.0: the bars, saved settings, the human voice benchmark (Apple 1.5% word error rate, small 1.9%, base 2.2%, tiny 6.0%).
