@@ -177,6 +177,15 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertTrue(lines.contains { $0.hasPrefix("them:") && $0.contains("tomorrow") }, "call line not labelled Them: \(text)")
     }
 
+    /// Whisper's prompt bias is weak, so heard words one edit from a custom word are corrected afterwards.
+    func testGlossaryFixesNearMisses() {
+        let words = "Jaybulb, Healstack, LEC, Echo"
+        XCTAssertEqual(Glossary.apply("open jay bulb and heal stack, then lec.", words: words), "open Jaybulb and Healstack, then LEC.")
+        XCTAssertEqual(Glossary.apply("Jaybub wrote this\nThem: heelstack", words: words), "Jaybulb wrote this\nThem: Healstack")
+        XCTAssertEqual(Glossary.apply("eco echo", words: words), "eco Echo", "short terms match exactly only")
+        XCTAssertEqual(Glossary.apply("nothing to fix", words: ""), "nothing to fix")
+    }
+
     /// Custom words: clean prompt text, and a prompt must never blank real speech.
     func testCustomWordsPromptTextAndNoBlankOutput() async throws {
         XCTAssertNil(TranscriptionEngine.promptText(from: " , \n "))

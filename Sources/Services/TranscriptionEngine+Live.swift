@@ -208,7 +208,7 @@ extension TranscriptionEngine {
         let frames = bufferLock.withLock { speakerFrames }
         var out = text
         for seg in segments {
-            let words = Self.clean(seg.text)
+            let words = Glossary.apply(Self.clean(seg.text), words: customWords)
             guard !words.isEmpty else { continue }
             guard let who = Self.speaker(for: seg, in: frames) else { out = Self.join(out, words); continue }
             if who == speaker { out = Self.join(out, words) } else {
@@ -228,7 +228,7 @@ extension TranscriptionEngine {
     func timedLines(_ segments: [TranscriptionSegment], offset: Double) -> [TimedLine] {
         let frames = bufferLock.withLock { speakerFrames }
         return segments.compactMap { seg in
-            let words = Self.clean(seg.text)
+            let words = Glossary.apply(Self.clean(seg.text), words: customWords)
             guard !words.isEmpty else { return nil }
             return TimedLine(start: offset + Double(seg.start), end: offset + Double(seg.end), text: words, speaker: Self.speaker(for: seg, in: frames))
         }

@@ -38,7 +38,7 @@ extension TranscriptionEngine {
                     return true
                 }
             )
-            let text = results.text()
+            let text = Glossary.apply(results.text(), words: customWords)
             transcribedText = text
             if !text.isEmpty {
                 var entry = TranscriptionEntry(text: text, duration: duration, model: selectedModel)
