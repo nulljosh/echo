@@ -51,7 +51,7 @@ struct WhatsNewSheet: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                 }
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
             }
     }
