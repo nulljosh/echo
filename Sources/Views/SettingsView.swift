@@ -16,23 +16,16 @@ struct SettingsView: View {
 
     @AppStorage(SpeechManager.voiceIdentifierKey) private var voiceID = ""
 
-    /// One row per voice and accent, at the best quality installed. A name that exists in two accents gets its region.
+    /// One row per voice name, at the best quality installed. Some voices are offered in more than one accent.
     private var voices: [(id: String, label: String)] {
         let language = Locale.current.language.languageCode?.identifier ?? "en"
         var best: [String: AVSpeechSynthesisVoice] = [:]
         for voice in AVSpeechSynthesisVoice.speechVoices()
         where voice.language.hasPrefix(language) && !voice.voiceTraits.contains(.isNoveltyVoice) { // no Bahh, Boing or Bad News
-            let key = voice.name + "|" + voice.language
-            if (best[key]?.quality.rawValue ?? 0) < voice.quality.rawValue { best[key] = voice }
+            if (best[voice.name]?.quality.rawValue ?? 0) < voice.quality.rawValue { best[voice.name] = voice }
         }
         let picked = best.values.sorted { ($0.name, $0.language) < ($1.name, $1.language) }
-        let counts = Dictionary(grouping: picked, by: \.name).mapValues(\.count)
-        return picked.map { voice in
-            guard counts[voice.name, default: 1] > 1,
-                  let region = Locale(identifier: voice.language).region?.identifier,
-                  let place = Locale.current.localizedString(forRegionCode: region) else { return (voice.identifier, voice.name) }
-            return (voice.identifier, "\(voice.name) (\(place))")
-        }
+        return picked.map { ($0.identifier, $0.name) }
     }
 
     var body: some View {
@@ -50,6 +43,11 @@ struct SettingsView: View {
                         Text("Default").tag("")
                         ForEach(voices, id: \.id) { Text($0.label).tag($0.id) }
                     }
+                    #if os(iOS)
+                    .pickerStyle(.navigationLink)
+                    #else
+                    .pickerStyle(.menu)
+                    #endif
                     Picker("Language", selection: $selectedLanguage) {
                         ForEach(["auto"] + languages.filter { $0 != "auto" }.sorted { languageLabel($0) < languageLabel($1) }, id: \.self) {
                             Text(languageLabel($0)).tag($0)
