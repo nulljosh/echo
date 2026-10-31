@@ -22,6 +22,8 @@ Rules for every tick:
 - Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com (Pages project voxprint).
 - Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
 
+- Tonight (2026-10-30): the What's New sheet fits its text with three points at most, the Status row is gone and the model labels are cleaner. PR #51 (keep the mic session warm after dictation) is held until the keyboard walk on a real iPhone, so step 4 below waits too.
+
 ## Next, in order
 1. Joshua walks the keyboard on a real iPhone: add it, allow Full Access, dictate into Messages, stop from the keyboard. Nothing below should build on the keyboard until this is done.
 2. Check 3.0.0 with `asc versions list --app 6782604262` every tick. If rejected, read the reason and fix it.
