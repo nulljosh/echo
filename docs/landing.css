@@ -83,7 +83,7 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .prod a:hover { text-decoration: underline; }
 
 /* Footer: brand and link columns, then the name echoing away in 1-bit dots, then one fine line */
-.foot { padding: var(--sp-8) var(--sp-4) var(--sp-5); border-top: 1px solid var(--line); overflow: hidden; }
+.foot { padding: var(--sp-7) var(--sp-4) var(--sp-5); border-top: 1px solid var(--line); overflow: hidden; }
 .foot-top { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--sp-4); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-7); }
 .foot-brand { display: grid; gap: var(--sp-2); align-content: start; }
 .foot-brand img { border-radius: var(--r-icon); }
@@ -92,7 +92,16 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .foot-cols { display: flex; flex-wrap: wrap; gap: var(--sp-8); }
 .foot-cols div { display: grid; gap: var(--sp-2); align-content: start; }
 .foot-cols .label { margin-bottom: var(--sp-2); }
-.foot-cols a { text-decoration: none; font-size: 15px; }
+.foot-cols a { position: relative; text-decoration: none; font-size: 15px; line-height: 24px; }
+/* 44px tap target without the extra height: the pseudo-element extends the link's hit area. */
+.foot-cols a::before { content: ""; position: absolute; inset: -10px -6px; }
+/* Phones: the three link groups sit side by side under the brand, and the name gets less air. */
+@media (max-width: 560px) {
+  .foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); width: 100%; }
+  .foot-cols div { gap: var(--sp-1); }
+  .foot-cols .label { margin-bottom: var(--sp-1); }
+  .foot .echoes { margin-top: var(--sp-7); }
+}
 .foot-cols a:hover { color: var(--accent); }
 /* each repeat is fainter: the dot grid gets sparser, like a voice fading off a cliff */
 .echoes { display: flex; justify-content: center; align-items: baseline; gap: .04em; margin-top: var(--sp-8); font-family: var(--display); font-weight: 800; font-size: clamp(36px, 11vw, 190px); line-height: .9; letter-spacing: -.03em; text-transform: uppercase; color: var(--accent); white-space: nowrap; user-select: none; }
