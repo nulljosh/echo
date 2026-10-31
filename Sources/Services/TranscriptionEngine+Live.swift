@@ -110,6 +110,9 @@ extension TranscriptionEngine {
             return
         }
 
+        // Only cancel a dictation warm-up once the new capture is running. If capture failed, its timer still stands.
+        recordingTask?.cancel()
+        recordingTask = nil
         appleSession = nil
         recordingTask = Task {
             if await startApple() { await pumpApple(); return }
@@ -147,13 +150,32 @@ extension TranscriptionEngine {
         }
         recordingStart = nil
         #if os(iOS)
-        if DictationBridge.state == .listening { DictationBridge.publish(trimmed) } // the Echo keyboard asked for this one
+        if DictationBridge.state == .listening {
+            DictationBridge.publish(trimmed) // the Echo keyboard asked for this one
+            keepDictationSessionWarm()
+        }
         #endif
         applyPendingUpgrade()
     }
 
 
     // MARK: - Private
+
+    #if os(iOS)
+    /// Leaves the keyboard's audio session active briefly so the next dictation can start without reopening Echo.
+    /// A new recording cancels the timer, so it can never deactivate a session that is back in use.
+    private func keepDictationSessionWarm() {
+        let session = AVAudioSession.sharedInstance()
+        try? session.setActive(true)
+        recordingTask = Task { [weak self] in
+            try? await Task.sleep(for: .minutes(3))
+            guard !Task.isCancelled else { return }
+            if let self, self.isRecording { return }
+            try? session.setActive(false, options: .notifyOthersOnDeactivation)
+            self?.recordingTask = nil
+        }
+    }
+    #endif
 
     /// Live: decodes only the audio after the last committed segment, and once that runs past 15 s, commits every
     /// finished segment and moves on. Cost stays flat however long you talk, and nothing said is ever dropped.
