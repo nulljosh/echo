@@ -74,7 +74,7 @@ struct SettingsView: View {
                 // ponytail: Auto is right for nearly everyone, so the model list sits one level down
                 Section {
                     NavigationLink { modelPicker } label: {
-                        LabeledContent("Model", value: modelState == .ready ? modelLabel(selectedModel) : statusText)
+                        LabeledContent("Model", value: modelLabel(selectedModel))
                     }
                     if case .error = modelState {
                         Button("Retry") { Task { await onReload() } }
@@ -123,15 +123,6 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Model")
-    }
-
-    private var statusText: String {
-        switch modelState {
-        case .loading: return "Loading model..."
-        case .ready: return "Ready"
-        case .error(let msg): return msg
-        case .unloaded: return "Not loaded"
-        }
     }
 
     private func modelLabel(_ model: String) -> String {
