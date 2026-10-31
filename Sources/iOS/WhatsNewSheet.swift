@@ -11,6 +11,7 @@ private let whatsNewBullets = [
 struct WhatsNewSheet: View {
     @AppStorage("whats_new_seen_version") private var seenVersion = ""
     @State private var isPresented = false
+    @State private var contentHeight: CGFloat = 420
 
     var body: some View {
         Color.clear
@@ -19,7 +20,7 @@ struct WhatsNewSheet: View {
                 isPresented = seenVersion != whatsNewVersion
             }
             .sheet(isPresented: $isPresented) {
-                // Standard detents plus a scroll view: the sheet can never clip, whatever the text size.
+                // Sized to the text, with a scroll view behind it: the sheet fits its content and never clips at big text sizes.
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
                         Text("What's New in Echo \(whatsNewVersion)")
@@ -38,6 +39,7 @@ struct WhatsNewSheet: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 24)
                     .padding(.top, 32)
+                    .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { contentHeight = $0 }
                 }
                 .safeAreaInset(edge: .bottom) {
                     Button {
@@ -51,7 +53,8 @@ struct WhatsNewSheet: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                 }
-                .presentationDetents([.large])
+                // ponytail: text height plus the button bar (48 + 2 x 16) and some breathing room
+                .presentationDetents([.height(contentHeight + 120)])
                 .presentationDragIndicator(.visible)
             }
     }
