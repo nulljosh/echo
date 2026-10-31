@@ -5,7 +5,6 @@ private let whatsNewBullets = [
     "A cleaner look: one record button, Liquid Glass, and the word you're saying pops in as you talk",
     "Apple's own speech model on iOS 26, with Whisper as the backup, so it's faster and stays offline",
     "An optional account. Echo works fully without one, and your transcripts never leave your iPhone",
-    "Summaries, search across everything said, Shortcuts, and the Apple Watch app",
 ]
 
 struct WhatsNewSheet: View {
