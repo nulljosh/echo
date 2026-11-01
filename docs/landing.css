@@ -102,16 +102,9 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
   .foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); width: 100%; }
   .foot-cols div { gap: var(--sp-1); }
   .foot-cols .label { margin-bottom: var(--sp-1); }
-  .foot .echoes { margin-top: var(--sp-7); }
 }
 .foot-cols a:hover { color: var(--accent); }
 /* each repeat is fainter: the dot grid gets sparser, like a voice fading off a cliff */
-.echoes { display: flex; justify-content: center; align-items: baseline; gap: .04em; margin-top: var(--sp-8); font-family: var(--display); font-weight: 800; font-size: clamp(36px, 11vw, 190px); line-height: .9; letter-spacing: -.03em; text-transform: uppercase; color: var(--accent); white-space: nowrap; user-select: none; }
-.echoes span { -webkit-mask: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px)) 0 0 / 5px 5px; mask: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px)) 0 0 / 5px 5px; }
-.echoes span:nth-child(1) { --dot: 2.4px; }
-.echoes span:nth-child(2) { --dot: 1.6px; font-size: .78em; }
-.echoes span:nth-child(3) { --dot: 1.1px; font-size: .6em; }
-.echoes span:nth-child(4) { --dot: .8px; font-size: .46em; }
 .legal { margin-top: var(--sp-6); font-size: var(--size-footnote); line-height: 16px; color: var(--sub); text-align: center; text-wrap: balance; }
 .legal a { color: inherit; }
 
