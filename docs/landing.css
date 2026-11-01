@@ -20,6 +20,8 @@ a { color: inherit; }
 h1, h2, h3, .label { font-family: var(--display); }
 h1, h2, h3 { text-wrap: balance; }
 h1 { font-size: clamp(120px, 21vw, 300px); line-height: .86; font-weight: 100; text-transform: uppercase; letter-spacing: -.04em; }
+/* the hero leads with the line that sells; the nav already carries the name */
+.hero-h1 { font-size: clamp(40px, 7vw, 104px); line-height: .95; max-width: 1000px; margin: 0 auto; }
 h2 { font-size: clamp(48px, 7vw, 104px); line-height: .92; font-weight: 100; text-transform: uppercase; letter-spacing: -.03em; }
 h3 { font-size: 28px; line-height: 32px; font-weight: 300; letter-spacing: -.01em; }
 .label { font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: var(--sp-4); }
