@@ -50,7 +50,6 @@ const waveformCanvas = document.getElementById('waveformCanvas');
 function init() {
     setupSpeechRecognition();
     loadHistory();
-    setupEventListeners();
     applyThemePreference();
     renderHistory();
 }
