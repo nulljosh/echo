@@ -2,9 +2,6 @@
 
 History lives in git log. This file only holds what is still open. Repo versions follow shipped batches; the App Store follows when Joshua says ship.
 
-## Name
-- [ ] Store name locked as Stenograph on the draft app info (2026-11-01, Joshua said handle it; read back three times). Next: the full rename to Stenograph everywhere, repo, folder, landing at stenograph.jaybulb.com, docs, app display name, per the one-name rule, then ship it with the next version.
-
 ## Store name
 
 Blocked on Joshua picking the new name (2026-11-01). Apple refused both "Echo" and "Calliope" on the 3.0.1 app info on 2026-11-01 ("already being used"). By the one-name rule the brand moves to a word Apple takes. Probed free: Stenograph, Stenotype, Logograph, Tachygraph, Locutor, Utterer, Elocution. Taken: Amanuensis Transcript Phonograph Murmur Parlance Diction Scrivener Phoneme Whisper Dictaphone Shorthand Lector Recitation Enunciate Vocable Sonority Timbre Cadence Polyphony Antiphon Euphony Resonance Reverb. iOS and Mac 3.0.1 drafts exist (metadata copied from 3.0.0) and keep the app info editable; the listing is back to Notate.
