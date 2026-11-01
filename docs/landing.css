@@ -19,11 +19,11 @@ a { color: inherit; }
 
 h1, h2, h3, .label { font-family: var(--display); }
 h1, h2, h3 { text-wrap: balance; }
-h1 { font-size: clamp(120px, 21vw, 300px); line-height: .86; font-weight: 100; text-transform: uppercase; letter-spacing: -.04em; }
+h1 { font-size: clamp(120px, 21vw, 300px); line-height: .86; font-weight: 700; letter-spacing: -.045em; }
 /* the hero leads with the line that sells; the nav already carries the name */
 .hero-h1 { font-size: clamp(40px, 7vw, 104px); line-height: .95; max-width: 1000px; margin: 0 auto; }
-h2 { font-size: clamp(48px, 7vw, 104px); line-height: .92; font-weight: 100; text-transform: uppercase; letter-spacing: -.03em; }
-h3 { font-size: 28px; line-height: 32px; font-weight: 300; letter-spacing: -.01em; }
+h2 { font-size: clamp(48px, 7vw, 104px); line-height: .92; font-weight: 700; letter-spacing: -.035em; }
+h3 { font-size: 28px; line-height: 32px; font-weight: 600; letter-spacing: -.01em; }
 .label { font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: var(--sp-4); }
 
 .btn { height: 44px; padding: 0 var(--sp-5); border-radius: var(--r-sq); display: inline-flex; align-items: center; font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; transition: background var(--motion), border-color var(--motion); }
@@ -34,7 +34,7 @@ h3 { font-size: 28px; line-height: 32px; font-weight: 300; letter-spacing: -.01e
 a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
 .nav { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sp-5); height: 56px; padding: 0 var(--sp-5); background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
-.nav-brand { grid-column: 2; display: flex; align-items: center; gap: var(--sp-2); font-family: var(--display); font-weight: 300; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+.nav-brand { grid-column: 2; display: flex; align-items: center; gap: var(--sp-2); font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: -.01em; text-decoration: none; }
 .nav-brand img { width: 28px; height: 28px; border-radius: var(--r-icon); }
 .nav-links { display: flex; gap: var(--sp-5); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 .nav-links a { text-decoration: none; color: var(--sub); }
@@ -63,7 +63,7 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .frow .art { aspect-ratio: 3 / 2; background: var(--grain), color-mix(in srgb, #fff 6%, var(--band)); }
 .frow:nth-child(even) .art { order: 2; }
 .frow > div:not(.art) { padding: var(--sp-7) clamp(24px, 6vw, 96px); max-width: 560px; }
-.frow h3 { font-size: clamp(36px, 3.6vw, 52px); line-height: 1; font-weight: 200; }
+.frow h3 { font-size: clamp(36px, 3.6vw, 52px); line-height: 1; font-weight: 700; letter-spacing: -.03em; }
 .frow p:last-child { margin-top: var(--sp-4); color: var(--band-sub); }
 .cells { display: grid; grid-template-columns: repeat(3, 1fr); }
 .cell { padding: var(--sp-6) var(--sp-6) var(--sp-7); border-right: 1px solid var(--band-line); border-bottom: 1px solid var(--band-line); }
@@ -89,7 +89,7 @@ a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .foot-top { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--sp-4); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-7); }
 .foot-brand { display: grid; gap: var(--sp-2); align-content: start; }
 .foot-brand img { border-radius: var(--r-icon); }
-.foot-brand b { font-family: var(--display); font-weight: 200; font-size: 40px; line-height: 40px; letter-spacing: .06em; text-transform: uppercase; }
+.foot-brand b { font-family: var(--display); font-weight: 700; font-size: 36px; line-height: 40px; letter-spacing: -.03em; }
 .foot-brand p { color: var(--sub); font-size: 15px; }
 .foot-cols { display: flex; flex-wrap: wrap; gap: var(--sp-8); }
 .foot-cols div { display: grid; gap: var(--sp-2); align-content: start; }
