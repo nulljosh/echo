@@ -110,7 +110,7 @@ extension TranscriptionEngine {
             return
         }
 
-        // Only cancel a dictation warm-up once the new capture is running. If capture failed, its timer still stands.
+        // A new recording replaces any dictation warm-up timer, so it can never deactivate a session in use.
         recordingTask?.cancel()
         recordingTask = nil
         appleSession = nil
