@@ -78,6 +78,7 @@ function setupSpeechRecognition() {
         state.isRecording = true;
         state.recordingStartTime = Date.now();
         recordBtn.classList.add('recording');
+        recordBtn.setAttribute('aria-label', 'Stop');
         recordStatus.textContent = 'Listening...';
         startTimer();
     };
@@ -110,7 +111,7 @@ function setupSpeechRecognition() {
 
     recognition.onend = () => {
         state.isRecording = false;
-        recordBtn.classList.remove('recording');
+        recordBtn.classList.remove('recording'); recordBtn.setAttribute('aria-label', 'Record');
         stopTimer();
         if (state.currentTranscription.trim()) {
             displayTranscription(state.currentTranscription.trim(), state.recordingDuration);

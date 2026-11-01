@@ -37,7 +37,7 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="main-content">
+        <main class="main-content">
             <!-- Input Tabs -->
             <div class="tabs">
                 <button class="tab-btn active" data-tab="record">
@@ -73,7 +73,7 @@
 
                     <!-- Record Button -->
                     <div class="record-controls">
-                        <button id="recordBtn" class="btn-record">
+                        <button id="recordBtn" class="btn-record" aria-label="Record">
                             <span class="record-icon"></span>
                         </button>
                         <div class="record-status">
@@ -168,10 +168,10 @@
                 <div id="transcriptionText" class="transcription-text"></div>
                 <p id="transcriptionMeta" class="transcription-meta"></p>
             </div>
-        </div>
+        </main>
 
         <!-- History Panel -->
-        <div id="historyPanel" class="history-panel">
+        <aside id="historyPanel" class="history-panel" aria-label="History">
             <div class="history-header">
                 <h2>History</h2>
                 <button class="btn-icon" id="clearHistoryBtn" title="Clear all history">
@@ -184,7 +184,7 @@
             <div id="historyList" class="history-list">
                 <p class="history-empty">No transcriptions yet</p>
             </div>
-        </div>
+        </aside>
 
         <!-- Settings Modal -->
         <div id="settingsModal" class="modal" style="display:none;">
