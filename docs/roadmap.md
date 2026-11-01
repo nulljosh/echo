@@ -2,6 +2,10 @@
 
 History lives in git log. This file only holds what is still open. Repo versions follow shipped batches; the App Store follows when Joshua says ship.
 
+## Store name
+
+Blocked on Joshua picking the new name (2026-11-01). Apple refused both "Echo" and "Calliope" on the 3.0.1 app info on 2026-11-01 ("already being used"). By the one-name rule the brand moves to a word Apple takes. Probed free: Stenograph, Stenotype, Logograph, Tachygraph, Locutor, Utterer, Elocution. Taken: Amanuensis Transcript Phonograph Murmur Parlance Diction Scrivener Phoneme Whisper Dictaphone Shorthand Lector Recitation Enunciate Vocable Sonority Timbre Cadence Polyphony Antiphon Euphony Resonance Reverb. iOS and Mac 3.0.1 drafts exist (metadata copied from 3.0.0) and keep the app info editable; the listing is back to Notate.
+
 ## v2.5: Apple first, part 2
 
 - Custom words stay on Whisper. Tested 2026-10-20 with made-up names: SpeechTranscriber ignores contextual strings (heard "J. Balvin" for Jaybulb with or without them), DictationTranscriber got one of two. Whisper's prompt gets both. Retest each new OS.
