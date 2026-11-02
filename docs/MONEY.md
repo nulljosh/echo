@@ -1,42 +1,50 @@
 # Echo Money
 
-How Echo makes money. The fleet-wide ledger is `GTM.md` in the Code root.
+How Echo makes money. The company plan is `REVENUE.md` in the Code root; the ledger is `GTM.md`.
 
-## Price
+## Price and rail
 
-$1, once. The App Store tier is $0.99. Everything unlocked, models included. No in-app purchases, no subscription, no trial counter, no tips. The fleet rule is free or a dollar, so the old plan to raise the price toward $9.99 is dead.
+$0.99 upfront on the App Store (ASC 6782604262), one purchase for iPhone and Mac. Apple keeps 15%, so each sale pays about $0.84. There is no unlock, no paywall and no in-app purchase in the code; the unlock was removed in 1.4.0. The store listing still says Notate until Apple accepts the name Echo.
 
-## Rail
+## What is actually sold
 
-The App Store price. Nothing in the code. The old `com.nulljosh.echo.unlock` unlock and its paywall were removed in 1.4.0. Apple keeps 15 percent under the Small Business Program, so a sale nets about 84 cents.
+The app. Transcription runs on the device with Whisper, or with Apple's speech engine where the system has it. The Mac meeting capture and the keyboard are part of it. The models are open source, and nothing sold is someone else's content. The risk is the App Store's rules on keyboards and microphones, not copyright.
 
-## Why it works
+## Who pays and why
 
-Every word is transcribed on the device, so a user costs nothing to serve. Otter pays for cloud compute on every minute and has to rent the product back by the month. Echo can sit at $1 forever and still be profitable. That gap is the moat. Aiko, the closest on-device rival, charges $19.99.
+Someone who needs a transcriber they can trust with private audio: lawyers, therapists, journalists, anyone under NDA. They pay once because the audio never leaves the device. A cloud transcriber has to charge every month to pay for the compute. Echo does not.
 
-## Where Otter's money comes from
+## Cost to serve
 
-Otter is around 100 million a year, and almost none of it is people transcribing a voice memo. It is teams paying monthly for the meeting bot: it joins the call, takes notes, writes a summary, lists action items, and lets the whole company search every meeting. Individuals are the funnel. Teams are the revenue.
+No paid API. Transcription costs nothing to serve because it runs on the phone or the Mac. Accounts are optional and run on jaybulb-api. Reset and confirm mail goes out through authmail, which sends through Resend. Resend bills per email, and its cap is set in authmail, not in this repo. Transcripts never go to the server.
 
-## How Echo takes the market
+## Where we are
 
-At a dollar, the revenue is volume. A million sales is about 840 thousand dollars, so the job is to be the default private transcriber and reach that many people. In order:
+- 2026-10-20: renamed back to Echo. The store still says Notate until Apple accepts the name.
+- 2026-11-01: Apple refused both Echo and Calliope as store names. The free names are listed in `docs/roadmap.md`.
+- Repo notes: 1.4.0 removed the unlock and the paywall, so the price is the only money.
+- Revenue: no verified number (the App Store Connect key cannot read sales yet).
 
-1. **Win the privacy crowd Otter cannot serve.** Lawyers, therapists, doctors, journalists, anyone under NDA. Their meetings cannot go to a cloud, and a bot joining the call is itself a problem. "No bot, no cloud, no account" is the whole pitch.
-2. **Meetings on the Mac, with no bot.** Capture the mic and the system audio on the device (ScreenCaptureKit) and transcribe locally. This is the one feature that makes Echo a replacement for Otter instead of a cheaper Whisper.
-3. **Summary and action items on the device.** Apple's on-device model already runs the cleanup. Point it at the whole transcript and the Otter summary comes for free. Add speaker labels and search across every saved transcript.
-4. **Be one tap away everywhere.** Share extension, Action button, Shortcuts, Siri, the Watch recorder that already exists, voice memos import. The easiest app to reach wins the default slot.
-5. **Rank for the words people type.** App Store keywords: transcribe, voice to text, offline, private, meeting notes. Screenshots that show airplane mode.
-6. **Let the web app sell it.** echo.jaybulb.com/app.html runs in the browser, no sign-up. Every visitor can try before they pay a dollar.
+## Role in the company plan
 
-## The one decision that is Joshua's
+Hero candidate. GTM.md names it as one of the three apps to push. It serves Stage 0 directly: private transcription is a paid category where people already pay a dollar, so the first thousand dollars can come from it. Stage 1 needs it on the store charts.
 
-A dollar app tops out at volume. The only place real money sits is teams, and teams pay monthly. Staying inside the dollar rule means no team plan. Breaking the rule once means a single one-time Mac "meetings" unlock at about $20 for people expensing it, still no subscription. Not built, not priced. Ask before touching it.
+## Next
+
+Give the App Store Connect key the Sales role, so the first sale is a number and not a guess.
+
+## Million, billion, trillion
+
+**A million.** Echo is the private transcriber that lawyers and doctors recommend to each other, paid once, with no bot joining the call.
+
+**A billion.** Echo is the default voice-to-text on every Jaybulb device, and a meeting becomes notes without a cloud.
+
+**A trillion.** Echo is the on-device speech layer under every app on the platform, and it still costs a dollar.
 
 ## Change it
 
-`asc pricing schedule` for the app price.
+`asc pricing schedule create --app 6782604262 --price 0.99 --base-territory USA --start-date YYYY-MM-DD`. Swap `--price 0.99` for `--free` to revert. No build, no review. Only with Joshua's yes in chat.
 
-Anyone who got Echo while it was free keeps it.
+Anyone who got Echo while it was free keeps it free.
 
-*ASC 6782604262. Set 2026-09-21, restated 2026-10-18.*
+*ASC 6782604262. Verified 2026-11-02.*
