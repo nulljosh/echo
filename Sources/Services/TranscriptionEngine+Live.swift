@@ -168,7 +168,7 @@ extension TranscriptionEngine {
         let session = AVAudioSession.sharedInstance()
         try? session.setActive(true)
         recordingTask = Task { [weak self] in
-            try? await Task.sleep(for: .minutes(3))
+            try? await Task.sleep(for: .seconds(180))
             guard !Task.isCancelled else { return }
             if let self, self.isRecording { return }
             try? session.setActive(false, options: .notifyOthersOnDeactivation)
