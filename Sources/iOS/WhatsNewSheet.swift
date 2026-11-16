@@ -1,10 +1,9 @@
 import SwiftUI
 
-private let whatsNewVersion = "2.2"
+private let whatsNewVersion = "3.1"
 private let whatsNewBullets = [
-    "A cleaner look: one record button, Liquid Glass, and the word you're saying pops in as you talk",
-    "Apple's own speech model on iOS 26, with Whisper as the backup, so it's faster and stays offline",
-    "An optional account. Echo works fully without one, and your transcripts never leave your iPhone",
+    "Export any transcript as a Word document",
+    "The Echo keyboard: tap to dictate in any app",
 ]
 
 struct WhatsNewSheet: View {

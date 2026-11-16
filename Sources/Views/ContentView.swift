@@ -70,11 +70,17 @@ struct ContentView: View {
             #if os(macOS)
             .onReceive(NotificationCenter.default.publisher(for: HotKey.pressed)) { _ in
                 // Anywhere on the Mac: first press records, second stops and puts the text on the clipboard.
-                guard engine.isRecording else { engine.startRecording(); return }
+                // A sound each way, since Echo is usually behind the app being typed in.
+                guard engine.isRecording else {
+                    engine.startRecording()
+                    if engine.isRecording { NSSound(named: "Tink")?.play() }
+                    return
+                }
                 Task {
                     await engine.stopRecording()
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(engine.transcribedText, forType: .string)
+                    NSSound(named: "Pop")?.play()
                 }
             }
             #endif
