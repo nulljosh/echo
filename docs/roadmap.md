@@ -22,7 +22,6 @@ Blocked on Joshua picking the new name (2026-11-01). Apple refused both "Echo" a
 
 - Built and tested in the repo (2026-11-15), not on the App Store yet. Echo stays $0.99 with no tiers: a 10 minutes a day free tier plus a Pro subscription was asked for and turned down, because speaker labels, export, custom words and summaries already ship to people who paid.
 - [ ] Press Control-Shift-Space for real in another app: Tink, speak, press again, Pop, paste. The test only sends the Carbon event.
-- [ ] `.asc/artifacts` pointed at the LaCie drive, which is gone. Make it a real folder before the ship workflow runs.
 
 ## Store and account (needs Joshua or Apple)
 
