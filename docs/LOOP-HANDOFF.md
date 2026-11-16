@@ -1,4 +1,4 @@
-# Echo loop handoff (2026-10-26, 00:30)
+# Echo loop handoff (2026-11-15, evening)
 
 ## What the loop is
 Joshua's brief, in his words: "to v4, 5-10 etc. Keep building roadmap. Keep updating benchmarks, improve efficiency and security and stability. Keep documentation 100%. Break up big god files." Subagents are allowed: one at a time, Haiku, in a worktree, on files the main loop is not touching.
@@ -13,22 +13,18 @@ Rules for every tick:
 - Stop rule: read the usage hook every tick. At about 88% weekly, run /checkpoint, stop the loop, send one line.
 
 ## Where things stand
-- iOS 3.0.0 is WAITING_FOR_REVIEW. It is the Echo keyboard (dictate key opens Echo, which records in the background; the text comes back through `DictationBridge`, Darwin signals plus a shared Keychain group) plus the glossary pass, where custom words also correct the transcript after Whisper. The glossary is commits 2b119bc and c4beb2a on main. The build was exported by hand with the three profiles, because ship-ios export fails on automatic signing.
-- Mac 3.0.0 is submitted too (build 202610260028), waiting for review alongside iOS.
-- The keyboard has not been walked on a real iPhone. The simulator cannot add the keyboard through iOS 27 Settings, so the walk has to be on a device.
-- Mac 2.0 and iPhone 2.0 are live. The store listing still says Notate: both app infos are locked (one live, one waiting for review), so the rename to Echo waits for 3.0.0 to clear.
-- v2.5.0: meetings on Apple with You and Them, Whisper base no longer ships (143 MB saved). v2.4.0: the bars, saved settings, the human voice benchmark (Apple 1.5% word error rate, small 1.9%, base 2.2%, tiny 6.0%).
-- Signing: `com.nulljosh.echo.keyboard` registered; "Notate iOS App Store", "Notate Watch App Store" and "Echo Keyboard App Store" profiles regenerated in `signing/`. The ExportOptions plist must name all three.
+- The loop is stopped. The last recorded state is 3.0.0 WAITING_FOR_REVIEW on iPhone and Mac (submitted 2026-10-26); it was not rechecked tonight, so run `asc versions list --app 6782604262` first.
+- 3.1.0 is tagged (2026-11-15): Word (DOCX) export everywhere, and the Mac hot key moved to Control-Shift-Space because Control-Option-Space is macOS's input-source key. Closing the window and pressing the hot key reopens Echo already recording (commit 348e0fe).
+- The keyboard has still not been walked on a real iPhone, so PR #51 stays held.
+- Mac 2.0 and iPhone 2.0 are live. The store listing still says Notate until 3.0.0 clears review and the app info is editable.
+- Landing work in docs/landing.css and docs/landing.js is uncommitted in the working tree; check it before the next push.
 - Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com (Pages project voxprint).
-- Mac launch for demos: `-ApplePersistenceIgnoreState YES` must come before `-ECHO_DEMO 1`.
-
-- Tonight (2026-10-30): the What's New sheet fits its text with three points at most, the Status row is gone and the model labels are cleaner. PR #51 (keep the mic session warm after dictation) is held until the keyboard walk on a real iPhone, so step 4 below waits too.
 
 ## Next, in order
 1. Joshua walks the keyboard on a real iPhone: add it, allow Full Access, dictate into Messages, stop from the keyboard. Nothing below should build on the keyboard until this is done.
-2. Check 3.0.0 with `asc versions list --app 6782604262` every tick. If rejected, read the reason and fix it.
-3. When 3.0.0 clears: store rename to Echo, read back 3 times.
-4. Keep the session warm for a few minutes after a dictation, so the next one starts without opening Echo. Only after the walk in step 1.
+2. Press Control-Shift-Space for real in another app (Tink, speak, press again, Pop, paste). The test only sends the Carbon event.
+3. Check 3.0.0 with `asc versions list --app 6782604262`. If rejected, read the reason and fix it. When it clears: store rename to Echo, read back 3 times.
+4. Keep the session warm for a few minutes after a dictation, so the next one starts without opening Echo. Only after step 1.
 5. Sign in with Apple and the App Store video header need Joshua's yes.
 
 ## Restart prompt
