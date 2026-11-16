@@ -78,8 +78,9 @@ struct ContentView: View {
                 }
                 Task {
                     await engine.stopRecording()
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(engine.transcribedText, forType: .string)
+                    // Nothing heard (silence, a double tap): leave the clipboard alone, and no Pop says so.
+                    guard !engine.transcribedText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+                    engine.copyToClipboard()
                     NSSound(named: "Pop")?.play()
                 }
             }
