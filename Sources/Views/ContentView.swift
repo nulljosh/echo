@@ -25,7 +25,7 @@ struct ContentView: View {
             }
             .fileExporter(
                 isPresented: Binding(get: { exportFormat != nil }, set: { if !$0 { exportFormat = nil } }),
-                document: ExportFile(text: engine.currentEntry.map { Exporter.render($0, as: exportFormat ?? .text) } ?? ""),
+                document: ExportFile(data: engine.currentEntry.map { Exporter.data($0, as: exportFormat ?? .text) } ?? Data()),
                 contentType: (exportFormat ?? .text).contentType,
                 defaultFilename: "Echo \(Date().formatted(date: .abbreviated, time: .omitted)).\((exportFormat ?? .text).fileExtension)"
             ) { _ in exportFormat = nil }
@@ -67,6 +67,17 @@ struct ContentView: View {
             .onReceive(NotificationCenter.default.publisher(for: IntentInbox.startRecording)) { _ in
                 if IntentInbox.takePendingStart(), !engine.isRecording { engine.startRecording() }
             }
+            #if os(macOS)
+            .onReceive(NotificationCenter.default.publisher(for: HotKey.pressed)) { _ in
+                // Anywhere on the Mac: first press records, second stops and puts the text on the clipboard.
+                guard engine.isRecording else { engine.startRecording(); return }
+                Task {
+                    await engine.stopRecording()
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(engine.transcribedText, forType: .string)
+                }
+            }
+            #endif
             .onOpenURL { url in
                 #if os(iOS)
                 if url == DictationBridge.url { dictateForKeyboard(); return }

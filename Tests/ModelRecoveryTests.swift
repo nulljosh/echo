@@ -271,6 +271,16 @@ final class ModelRecoveryTests: XCTestCase {
         XCTAssertTrue(srt.hasPrefix("1\n00:00:00,000 --> 00:00:02,500\nYou: send the budget"), srt)
         XCTAssertTrue(srt.contains("2\n00:00:03,000 --> 00:01:01,250\nThem: tomorrow morning"), srt)
         XCTAssertEqual(Exporter.stamp(3725.5), "01:02:05,500")
+        // DOCX is a real zip Word can open: unzip must pass its CRC check and find the speaker line.
+        let docx = FileManager.default.temporaryDirectory.appendingPathComponent("echo-test.docx")
+        try? Exporter.docx(e).write(to: docx)
+        let unzip = Process()
+        unzip.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
+        unzip.arguments = ["-p", docx.path, "word/document.xml"]
+        let pipe = Pipe(); unzip.standardOutput = pipe
+        try? unzip.run(); unzip.waitUntilExit()
+        XCTAssertEqual(unzip.terminationStatus, 0)
+        XCTAssertTrue(String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self).contains("<w:b/></w:rPr><w:t xml:space=\"preserve\">You: </w:t>"))
     }
 
     /// Shortcuts: "Transcribe Audio" hands back the words; "Start Recording" is never lost if the UI isn't up yet.
