@@ -68,6 +68,8 @@ struct ContentView: View {
                 if IntentInbox.takePendingStart(), !engine.isRecording { engine.startRecording() }
             }
             #if os(macOS)
+            .onAppear { HotKey.isLive = true }
+            .onDisappear { HotKey.isLive = false }
             .onReceive(NotificationCenter.default.publisher(for: HotKey.pressed)) { _ in
                 // Anywhere on the Mac: first press records, second stops and puts the text on the clipboard.
                 // A sound each way, since Echo is usually behind the app being typed in.

@@ -1,4 +1,5 @@
 import XCTest
+import AppKit
 import Carbon.HIToolbox
 @testable import Voxprint_macOS
 
@@ -26,6 +27,12 @@ final class ExportTests: XCTestCase {
         let pipe = Pipe(); unzip.standardOutput = pipe
         try? unzip.run(); unzip.waitUntilExit()
         XCTAssertEqual(unzip.terminationStatus, 0)
+        // Cocoa's own Word reader opens it, with the speaker name in bold.
+        let doc = try? NSAttributedString(data: Exporter.docx(e), options: [.documentType: NSAttributedString.DocumentType.officeOpenXML], documentAttributes: nil)
+        XCTAssertTrue(doc?.string.contains("You: send the budget") == true, doc?.string ?? "unreadable")
+        if let doc, case let r = (doc.string as NSString).range(of: "You:"), r.location != NSNotFound {
+            XCTAssertTrue((doc.attribute(.font, at: r.location, effectiveRange: nil) as? NSFont)?.fontDescriptor.symbolicTraits.contains(.bold) == true)
+        }
         XCTAssertTrue(String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self).contains("<w:b/></w:rPr><w:t xml:space=\"preserve\">You: </w:t>"))
     }
 

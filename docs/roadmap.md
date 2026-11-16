@@ -18,6 +18,13 @@ Blocked on Joshua picking the new name (2026-11-01). Apple refused both "Echo" a
 - [ ] Walk it on a real iPhone: add the keyboard, allow Full Access, dictate into Messages, stop from the keyboard. A simulator UI test could not get through iOS 27 Settings to add the keyboard (2026-10-20), so the device walk is the check.
 - [ ] Next: keep the session warm for a few minutes after a dictation so the next one starts without opening Echo.
 
+## v3.1: Word export and the Mac hot key
+
+- Built and tested in the repo (2026-11-15), not on the App Store yet. Echo stays $0.99 with no tiers: a 10 minutes a day free tier plus a Pro subscription was asked for and turned down, because speaker labels, export, custom words and summaries already ship to people who paid.
+- [ ] Press Control-Shift-Space for real in another app: Tink, speak, press again, Pop, paste. The test only sends the Carbon event.
+- [ ] Close Echo's window, press the hot key: Echo should reopen already recording (relaunching its own bundle is a reopen).
+- [ ] `.asc/artifacts` pointed at the LaCie drive, which is gone. Make it a real folder before the ship workflow runs.
+
 ## Store and account (needs Joshua or Apple)
 
 - [ ] App Store video header (new in iOS 27, autoplays at the top of the product page). Cut launch/echo-promo.mp4 to Apple's spec and attach it to the next iOS version (a live version cannot take new media). Check the crop on a real device, the ASC preview is reportedly off.
