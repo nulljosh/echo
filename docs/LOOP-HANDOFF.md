@@ -14,10 +14,10 @@ Rules for every tick:
 
 ## Where things stand
 - The loop is stopped. The last recorded state is 3.0.0 WAITING_FOR_REVIEW on iPhone and Mac (submitted 2026-10-26); it was not rechecked tonight, so run `asc versions list --app 6782604262` first.
-- 3.1.0 is tagged (2026-11-15): Word (DOCX) export everywhere, and the Mac hot key moved to Control-Shift-Space because Control-Option-Space is macOS's input-source key. Closing the window and pressing the hot key reopens Echo already recording (commit 348e0fe).
+- 3.1.0 is tagged (2026-11-15): Word (DOCX) export everywhere, and the Mac hot key moved to Control-Shift-Space because Control-Option-Space is macOS's input-source key. Closing the window and pressing the hot key reopens Echo already recording (commit 348e0fe). Published as a GitHub release on 2026-11-23.
 - The keyboard has still not been walked on a real iPhone, so PR #51 stays held.
 - Mac 2.0 and iPhone 2.0 are live. The store listing still says Notate until 3.0.0 clears review and the app info is editable.
-- Landing work in docs/landing.css and docs/landing.js is uncommitted in the working tree; check it before the next push.
+- The landing hero was rebuilt Keyrate-style, committed (fe2ea6b), pushed and deployed on 2026-11-23.
 - Repo nulljosh/echo, folder ~/Documents/Code/echo, site https://echo.jaybulb.com (Pages project voxprint).
 
 ## Next, in order
