@@ -1,0 +1,70 @@
+/* Hero, after Keyrate and Plank: one scene in Echo's own objects. Echo's live view lies tilted on the desk under the
+   title and writes real-sounding transcripts word by word, the word being heard in blue, as the app does; when a take
+   ends, the export formats light in turn. Loose chips (You, Them, hello in other languages, .docx, the Mac hot key)
+   drift around it at three depths. The readout under the buttons says the same in one line. hero.js moves every
+   layer at its own scroll speed and leans the scene away from the pointer. */
+.hero { position: relative; isolation: isolate; overflow: hidden; min-height: calc(100svh - 56px); display: flex; flex-direction: column; align-items: center;
+        padding: clamp(72px, 13vh, 144px) 0 calc(var(--line-h) * 11); --line-h: clamp(18px, 2.4vw, 30px); }
+.hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+.hero .hero-h1 { font-size: clamp(44px, 7vw, 92px); letter-spacing: -.035em; line-height: 1.02; max-width: 12.5em; }
+.hero .lead { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; margin-top: 20px; }
+.hero .cta { margin-top: 32px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.hero .btn { height: 46px; padding: 0 22px; font-size: 16px; }
+
+/* the ground: Echo's live view tilted onto the desk, feathered at the edges, a soft clearing behind the title */
+.backdrop { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+            -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+.backdrop::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 46% 40% at 50% 30%, color-mix(in srgb, var(--bg) 94%, transparent),
+                        color-mix(in srgb, var(--bg) 55%, transparent) 70%, color-mix(in srgb, var(--bg) 10%, transparent)); }
+.ground { position: absolute; left: 0; right: 0; bottom: calc(var(--line-h) * -1.5); display: flex; justify-content: center; will-change: transform;
+          -webkit-mask-image: radial-gradient(ellipse 62% 80% at 50% 40%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 62% 80% at 50% 40%, #000 55%, transparent 100%); }
+.take { width: min(1180px, 120vw); transform: perspective(1500px) rotateX(38deg); transform-origin: 50% 100%;
+        background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--line-h) * .6);
+        box-shadow: 0 calc(var(--line-h) * .4) 0 var(--line); overflow: hidden; }
+.take-bar { display: flex; align-items: center; gap: calc(var(--line-h) * .5); padding: calc(var(--line-h) * .5) calc(var(--line-h) * .9); border-bottom: 1px solid var(--line);
+            font: 600 calc(var(--line-h) * .5)/1 var(--font); letter-spacing: .08em; text-transform: uppercase; color: var(--sub); }
+.take-bar i { width: calc(var(--line-h) * .42); height: calc(var(--line-h) * .42); border-radius: 50%; background: var(--line); transition: background-color .25s; }
+.take.rec .take-bar i { background: var(--accent); animation: pulse 1s ease-in-out infinite; }
+.take-bar time { font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.fmts { margin-left: auto; display: flex; gap: calc(var(--line-h) * .25); text-transform: none; letter-spacing: 0; }
+.fmts span { padding: calc(var(--line-h) * .16) calc(var(--line-h) * .4); border-radius: 999px; border: 1px solid var(--line); transition: background-color .25s, color .25s, border-color .25s; }
+.fmts span.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.fmts span.done { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.wave { display: flex; align-items: center; gap: calc(var(--line-h) * .2); height: calc(var(--line-h) * 2); padding: calc(var(--line-h) * .5) calc(var(--line-h) * .9) 0; }
+.wave b { flex: 1; height: 12%; border-radius: 3px; background: var(--accent); opacity: .5; transition: height .14s ease; }
+.words { margin: 0; padding: calc(var(--line-h) * .5) calc(var(--line-h) * .9) calc(var(--line-h) * .8); min-height: calc(var(--line-h) * 9.6);
+         font-size: calc(var(--line-h) * .95); line-height: calc(var(--line-h) * 1.45); letter-spacing: -.01em; color: var(--text); }
+.words em { font-style: normal; font-weight: 600; color: var(--accent); margin-right: .35em; font-size: .55em; letter-spacing: .08em; text-transform: uppercase; }
+.words span { transition: color .3s; }
+.words span.now { color: var(--accent); font-weight: 600; }
+
+/* the sky: loose chips at three depths, each a keycap of something Echo hears or makes */
+.sky { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+       -webkit-mask-image: linear-gradient(#000 58%, transparent); mask-image: linear-gradient(#000 58%, transparent); }
+.sky .layer { position: absolute; inset: 0; will-change: transform; }
+.chip { position: absolute; display: grid; place-items: center; height: var(--s); min-width: var(--s); padding: 0 calc(var(--s) * .3);
+        border-radius: calc(var(--s) * .22); background: var(--surface); border: 1px solid var(--line); box-shadow: 0 calc(var(--s) * .06) 0 var(--line);
+        font: 600 calc(var(--s) * .4)/1 var(--font); color: var(--sub); white-space: nowrap; user-select: none; font-variant-numeric: tabular-nums;
+        animation: drift ease-in-out infinite alternate; }
+.chip.hot { color: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+.sky .far .chip { filter: blur(.8px); }
+@keyframes drift { from { transform: translateY(-10px) rotate(var(--r)); } to { transform: translateY(10px) rotate(calc(var(--r) + 6deg)); } }
+
+/* the readout under the buttons: what kind of take, and the line being written */
+.readout { margin-top: 28px; display: flex; align-items: center; gap: 12px; max-width: min(92vw, 620px); font-size: 15px; line-height: 1.4; color: var(--sub); white-space: nowrap; }
+.readout .mode { flex: none; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600;
+                 background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+.readout .said { overflow: hidden; text-overflow: ellipsis; min-height: 1.4em; }
+.readout .said::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -.18em; background: var(--accent); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes pulse { 50% { opacity: .3; } }
+
+@media (max-width: 560px) {
+  .hero { --line-h: 4.6vw; padding-bottom: calc(var(--line-h) * 12); }
+  .take { width: 150vw; transform: perspective(900px) rotateX(32deg); }
+  .fmts span:nth-child(n+3) { display: none; }
+  .readout { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .chip, .take.rec .take-bar i, .readout .said::after { animation: none; } }
